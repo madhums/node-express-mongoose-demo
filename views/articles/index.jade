@@ -1,0 +1,12 @@
+h1= title
+p #{title}
+a(href="/articles/new") New Article
+hr
+div#articles
+- each article in articles
+  div#article
+    div#article_title
+      a(href='/article/'+article._id) #{article.title}
+    div#article_body
+      =article.body
+    a(href='/article/'+article._id+'/edit') Edit

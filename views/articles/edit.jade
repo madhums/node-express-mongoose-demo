@@ -1,0 +1,19 @@
+h1= title
+
+form(method="post",action="/articles")
+  p
+    label Title
+    br
+    input(type="text", name="article[title]", value=article.title)
+  
+  p
+    label Body
+    br
+    textarea(name="article[body]") #{article.body}
+  
+  input(type="hidden", name="article[_id]", value=article._id)
+  
+  input(type="submit", value="Submit")
+  
+  a(href='/articles') Cancel
+

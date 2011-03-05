@@ -1,0 +1,15 @@
+h1= title
+p Create a new article
+
+form(method="post",action="/articles")
+  p
+    label Title
+    br
+    input(type="text", name="article[title]")
+  
+  p
+    label Body
+    br
+    textarea(name="article[body]")
+  
+  input(type="submit", value="Submit")
