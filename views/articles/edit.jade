@@ -1,6 +1,6 @@
 h1= title
 
-form(method="post",action="/articles")
+form(method="post",action="/article/"+article._id)
   p
     label Title
     br
@@ -12,7 +12,9 @@ form(method="post",action="/articles")
     textarea(name="article[body]") #{article.body}
   
   input(type="hidden", name="article[_id]", value=article._id)
-  
+
+  input(name='_method', value='PUT', type='hidden')
+
   input(type="submit", value="Submit")
   
   a(href='/articles') Cancel
