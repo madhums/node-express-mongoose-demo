@@ -84,8 +84,8 @@ app.post('/articles', function(req, res){
 app.get('/article/:id', function(req, res){
   Article.findOne({_id:req.params.id}, function(err,article){
     res.render('articles/show', {
-      title: article.doc.title,
-      article: article.doc
+      title: article.title,
+      article: article
     });
   });
 });
@@ -94,11 +94,23 @@ app.get('/article/:id', function(req, res){
 app.get('/article/:id/edit', function(req, res){
   Article.findOne({_id:req.params.id}, function(err,article){
     res.render('articles/edit', {
-      title: 'Edit '+article.doc.title,
-      article: article.doc
+      title: 'Edit '+ article.title,
+      article: article
     });
   });
 });
+
+app.put('/article/:id', function(req, res){
+    Article.findOne({_id:req.params.id}, function(err, a) {
+      a.title = req.body.article.title;
+      a.body = req.body.article.body;
+      a.save(function(err) {
+        console.log("updated");
+      })
+    });	
+	res.redirect('/articles');	
+});
+
 
 // Delete an article
 app.del('/article/:id', function(req, res){
@@ -109,10 +121,6 @@ app.del('/article/:id', function(req, res){
   });
   res.redirect('/articles');
 });
-
-
-
-
 
 // Only listen on $ node app.js
 

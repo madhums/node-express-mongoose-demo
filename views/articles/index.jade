@@ -9,4 +9,8 @@ div#articles
       a(href='/article/'+article._id) #{article.title}
     div#article_body
       =article.body
+
     a(href='/article/'+article._id+'/edit') Edit
+    &nbsp;
+    a(class='destroy', href='/article/'+article._id) Delete
+  
