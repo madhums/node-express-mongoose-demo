@@ -1,6 +1,8 @@
 h1= title
 
-form(method="post",action="/articles")
+form(method="post",action="/articles/"+article._id)
+  input(type="hidden", name="csrf", value=csrf)
+  input(name='_method', value='PUT', type='hidden')
   p
     label Title
     br
@@ -15,5 +17,7 @@ form(method="post",action="/articles")
   
   input(type="submit", value="Submit")
   
+  &nbsp;
+  a(class='destroy', href='/article/'+article._id) Delete
+  &nbsp;
   a(href='/articles') Cancel
-
