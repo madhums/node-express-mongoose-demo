@@ -1,0 +1,7 @@
+#error-message-box
+  p Sorry, something went wrong. Probably one of our "genius" programmers made a boo-boo! 
+    b :P
+  #error-stack-trace
+    - if(showStack)
+      pre
+        code!= error.stack
