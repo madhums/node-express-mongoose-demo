@@ -8,9 +8,10 @@ p #{article.body}
 
 p#article_date 
   created on #{month_names[month]} #{day}, #{year}
-  
-p 
-  a(href='/article/'+article._id+'/edit') Edit
-  
+
 p
+  a(href='/article/'+article._id+'/edit') Edit
+  &nbsp;
+  a(class='destroy', href='/article/'+article._id) Delete
+  &nbsp;
   a(href='/articles') Back
