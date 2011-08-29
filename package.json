@@ -1,18 +1,18 @@
 {
-  "name": "noobjs",
-  "description": "A demo app in nodejs illustrating use of express, jade and mogoose",
-  "version": "0.0.1",
-  "homepage": "",
-  "author": "Madhusudhan M S (http://twitter.com/madhums)",
-  "directories": {
-    "public": "./public"
-  },
-  "engines": {
-    "node": ">= 0.4.2"
-  },
-  "dependencies": {
-    "express": "2.0.0beta",
-    "mongoose": "1.1.2",
-    "jade": "0.6.3"
+    "name": "noobjs"
+  , "description": "A demo app in nodejs illustrating use of express, jade and mogoose"
+  , "version": "2.0.0"
+  , "private": true
+  , "author": "Madhusudhan M S (http://twitter.com/madhums)"
+  , "engines": {
+      "node": ">= 0.4.10"
+    }
+  , "dependencies": {
+      "express" : ">= 2.3.12"
+    , "jade"    : ">= 0.12.4"
+    , "mongoose": ">= 1.4.0"
+    , "stylus"   : ">= 0.13.7"
+    , "express-csrf" : ">= 0.3.3"
+    , "gzippo"   : ">= 0.0.4"
   }
 }
