@@ -1,13 +1,4 @@
-h1= title
-a(href="/articles/new") New Article
-hr
+h2= title
+
 div#articles
-- each article in articles
-  div#article
-    div#article_title
-      a(href='/article/'+article._id) #{article.title}
-    div#article_body
-      =article.body
-    a(href='/article/'+article._id+'/edit') Edit
-    &nbsp;
-    a(class='destroy', href='/article/'+article._id) Delete
+  != partial('article_list', {collection : articles, as : 'article'})

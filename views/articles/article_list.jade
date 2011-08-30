@@ -1,0 +1,12 @@
+- if(lastInCollection)
+  - class = 'last'
+- else
+  - class = ''
+div(class="article #{class}")
+  div.article_title
+    a(href='/article/'+article._id, title=article.title) #{article.title}
+  div.article_body
+    =article.body
+  a(href='/article/'+article._id+'/edit', title="edit") Edit
+  &nbsp;
+  a(class='destroy', href='/article/'+article._id, title="delete") Delete
