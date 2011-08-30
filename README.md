@@ -18,3 +18,16 @@ A demo app in node.js illustrating CURD operations using Express, mongodb, mongo
   
 ## Contributors
   [M Fazle Taher](https://github.com/mftaher)
+  
+## Todo demos
+  * <del>MVC architecture using express</del>
+  * <del>Custom error handling in express</del>
+  * <del>Routing in express</del>
+  * <del>CURD operations using mongoose orm and mongodb</del>
+  * <del>Use of [stylus](http://learnboost.github.com/stylus/)</del>
+  * user authentication
+    * [mongoose-auth](https://github.com/bnoguchi/mongoose-auth)
+    * [everyauth](https://github.com/bnoguchi/everyauth)
+  * map-reduce
+  * embedded documents in mongoose
+  * using of middlewares in mongoose
