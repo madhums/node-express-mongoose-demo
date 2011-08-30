@@ -1,4 +1,4 @@
-h1= title
+h2= title
 p Create a new article
 
 form(method="post",action="/articles")
@@ -14,3 +14,5 @@ form(method="post",action="/articles")
     textarea(name="article[body]")
   
   input(type="submit", value="Submit")
+  &nbsp;
+  a(href='/articles', title="cancel") Cancel

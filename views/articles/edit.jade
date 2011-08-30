@@ -1,4 +1,4 @@
-h1= title
+h2= title
 
 form(method="post",action="/articles/"+article._id)
   input(type="hidden", name="csrf", value=csrf)
@@ -18,6 +18,6 @@ form(method="post",action="/articles/"+article._id)
   input(type="submit", value="Submit")
   
   &nbsp;
-  a(class='destroy', href='/article/'+article._id) Delete
+  a(class='destroy', href='/article/'+article._id, title="delete") Delete
   &nbsp;
-  a(href='/articles') Cancel
+  a(href='/articles', title="cancel") Cancel
