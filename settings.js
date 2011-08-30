@@ -220,7 +220,7 @@ function bootErrorConfig(app) {
   // Routes
   
   app.get('/', function(req, res){
-    res.redirect('articles/index');
+    res.redirect('/articles');
   });
 
 }  
