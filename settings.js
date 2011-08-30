@@ -203,7 +203,7 @@ function bootErrorConfig(app) {
     }  
   });
 
-  appName = 'Noobjs'
+  appName = 'node.js express demo'
 
   /**
    * Apply basic auth to all post related routes
