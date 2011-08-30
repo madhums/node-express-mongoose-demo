@@ -1,4 +1,8 @@
 h2= title
 
 div#articles
-  != partial('article_list', {collection : articles, as : 'article'})
+  - if(articles.length)
+    != partial('article_list', {collection : articles, as : 'article'})
+  - else
+    #no-results No articles found. Create one 
+      a(href="/articles/new") here
