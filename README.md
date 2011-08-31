@@ -6,6 +6,7 @@ node.js application illustrating various features used in everyday web developme
   * Install npm : `curl http://npmjs.org/install.sh | sh`
   * `git clone git://github.com/madhums/nodejs-express-mongoose-demo.git noobjs`
   * `cd noobjs`
+  * `cp config.example.json config.json`
   * `npm install`
   * `node app.js`
   * [http://localhost:3000/](http://localhost:3000/)
