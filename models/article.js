@@ -1,6 +1,4 @@
-var mongoose = require('mongoose');
-    mongoose.connect('mongodb://localhost/noobjs');
-    Schema = mongoose.Schema;
+require('./db_connect');
 
 // Article schema
 
@@ -10,5 +8,5 @@ var ArticleSchema = new Schema({
   created_at  : {type : Date, default : Date.now},
   updated_at  : {type : Date, default : Date.now}
 });
-  
+
 var exports = module.exports = mongoose.model('Article', ArticleSchema);
