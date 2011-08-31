@@ -18,6 +18,6 @@ app.dynamicHelpers({
 
 require('./routes/articles')(app)
 
-port = process.env.PORT || app.settings.env.port;
+var port = process.env.PORT || 3000;
 app.listen(port);
 console.log('Express app started on port '+port);
