@@ -11,7 +11,8 @@ app.dynamicHelpers({
     // however if you run the mounting example
     // it adjusts to /blog/post/add
     return '/' == app.route ? '' : app.route;
-  }
+  },
+  appName: function(req, res){ return 'node.js express demo'  }
 });
 
 // Include all routes here
