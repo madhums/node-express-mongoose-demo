@@ -8,16 +8,17 @@ module.exports = function(app){
       title: 'New Article'
     });
   });
-  
+
   // Create an article
   app.post('/articles', function(req, res){
     article = new Article(req.body.article);
     article.save(function(err){
       console.log("Created");
+      req.flash('notice', 'Created successfully');
+      res.redirect('/article/'+article._id);
     });
-    res.redirect('/article/'+article._id);
   });
-  
+
   // Edit an article
   app.get('/article/:id/edit', function(req, res){
     Article.findOne({_id:req.params.id}, function(err,article){
@@ -27,7 +28,7 @@ module.exports = function(app){
       });
     });
   });
-  
+
   // Update article
   app.put('/articles/:id', function(req, res){
     Article.findOne({_id:req.body.article._id}, function(err, a) {
@@ -35,9 +36,10 @@ module.exports = function(app){
       a.body = req.body.article.body;
       a.save(function(err) {
         console.log("Updated");
+        req.flash('notice', 'Updated successfully');
+        res.redirect('/article/'+req.body.article._id);
       })
     });
-    res.redirect('/article/'+req.body.article._id);
   });
 
   // View an article
@@ -55,11 +57,12 @@ module.exports = function(app){
     Article.findOne({_id:req.params.id}, function(err,article){
       article.remove(function(err){
         console.log(err);
+        req.flash('notice', 'Deleted successfully');
+        res.redirect('/articles');
       });
     });
-    res.redirect('/articles');
   });
-  
+
   // Listing of Articles
   app.get('/articles', function(req, res){
     Article.find({}, function(err, articles) {

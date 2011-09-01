@@ -1,8 +1,10 @@
+!= messages()
+
 h2= title
 
 div#articles
   - if(articles.length)
     != partial('article_list', {collection : articles, as : 'article'})
   - else
-    #no-results No articles found. Create one 
+    #no-results No articles found. Create one
       a(href="/articles/new") here

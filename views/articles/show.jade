@@ -1,3 +1,5 @@
+!= messages()
+
 h2= title
 
 p #{article.body}
@@ -6,7 +8,7 @@ p #{article.body}
 - month = article.created_at.getMonth()
 - year = article.created_at.getFullYear()
 
-p#article_date 
+p#article_date
   created on #{month_names[month]} #{day}, #{year}
 
 p
