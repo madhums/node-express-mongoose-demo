@@ -27,6 +27,7 @@ node.js application illustrating various features used in everyday web developme
   * pagination
   * <del>use of flash variables (displaying messaages like "updated successfully" etc)</del>
   * <del>dynamic helpers (use of commonjs date formatting library).</del> Thanks to [commonjs-date-formatting](https://github.com/loopj/commonjs-date-formatting)
+  * validations
   * map-reduce
   * embedded documents in mongoose
   * using of middlewares in mongoose
