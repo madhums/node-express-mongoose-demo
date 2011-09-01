@@ -37,14 +37,12 @@ module.exports = function(app){
 
   // Update article
   app.put('/articles/:id', function(req, res){
-    Article.findOne({_id:req.body.article._id}, function(err, a) {
-      a.title = req.body.article.title;
-      a.body = req.body.article.body;
-      a.save(function(err) {
-        console.log("Updated");
-        req.flash('notice', 'Updated successfully');
-        res.redirect('/article/'+req.body.article._id);
-      })
+    article = req.article;
+    article.title = req.body.article.title;
+    article.body = req.body.article.body;
+    article.save(function(err) {
+      req.flash('notice', 'Updated successfully');
+      res.redirect('/article/'+req.body.article._id);
     });
   });
 
