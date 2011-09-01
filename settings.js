@@ -57,7 +57,13 @@ function bootApplication(app) {
       return Object.keys(req.session.flash || {}).length;
     },
 
+    // flash messages
     messages: require('express-messages'),
+
+    // dateformat helper. Thanks to gh-/loopj/commonjs-date-formatting
+    dateformat: function(req, res) {
+      return require('./lib/dateformat').strftime;
+    },
 
     // generate token using express-csrf module
     csrf: csrf.token
