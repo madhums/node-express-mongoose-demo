@@ -9,11 +9,19 @@ module.exports = function(app){
     });
   });
 
+  app.param('id', function(req, res, next, id){
+    Article.findOne({ _id : req.params.id }, function(err,article) {
+      if (err) return next(err);
+      if (!article) return next(new Error('Failed to load article ' + id));
+      req.article = article;
+      next();
+    });
+  })
+
   // Create an article
   app.post('/articles', function(req, res){
     article = new Article(req.body.article);
     article.save(function(err){
-      console.log("Created");
       req.flash('notice', 'Created successfully');
       res.redirect('/article/'+article._id);
     });
@@ -21,11 +29,9 @@ module.exports = function(app){
 
   // Edit an article
   app.get('/article/:id/edit', function(req, res){
-    Article.findOne({_id:req.params.id}, function(err,article){
-      res.render('articles/edit', {
-        title: 'Edit '+article.title,
-        article: article
-      });
+    res.render('articles/edit', {
+      title: 'Edit '+req.article.title,
+      article: req.article
     });
   });
 
@@ -44,32 +50,31 @@ module.exports = function(app){
 
   // View an article
   app.get('/article/:id', function(req, res){
-    Article.findOne({_id:req.params.id}, function(err,article){
-      res.render('articles/show', {
-        title: article.title,
-        article: article
-      });
+    res.render('articles/show', {
+      title: req.article.title,
+      article: req.article
     });
   });
 
   // Delete an article
   app.del('/article/:id', function(req, res){
-    Article.findOne({_id:req.params.id}, function(err,article){
-      article.remove(function(err){
-        console.log(err);
-        req.flash('notice', 'Deleted successfully');
-        res.redirect('/articles');
-      });
+    article = req.article;
+    article.remove(function(err){
+      req.flash('notice', 'Deleted successfully');
+      res.redirect('/articles');
     });
   });
 
   // Listing of Articles
   app.get('/articles', function(req, res){
-    Article.find({}, function(err, articles) {
-      res.render('articles/index', {
-        title: 'List of Articles',
-        articles: articles
+    Article
+      .find({})
+      .desc('created_at') // sort by date
+      .run(function(err, articles) {
+        res.render('articles/index', {
+          title: 'List of Articles',
+          articles: articles
+        });
       });
-    });
   });
 };
