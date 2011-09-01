@@ -199,7 +199,6 @@ function bootErrorConfig(app) {
     }
   });
 
-  appName = 'node.js express demo'
 
   /**
    * Apply basic auth to all post related routes
@@ -208,7 +207,6 @@ function bootErrorConfig(app) {
   // If you need basic auth, uncomment the below
   /*
   app.all('(/*)?', basicAuth(function(user, pass){
-    appName = 'Noobjs'
     return 'user' == user && 'pass' == pass;
   }));
   */
