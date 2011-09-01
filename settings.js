@@ -57,14 +57,7 @@ function bootApplication(app) {
       return Object.keys(req.session.flash || {}).length;
     },
 
-    messages: function(req){
-      return function(){
-        var msgs = req.flash();
-        return Object.keys(msgs).reduce(function(arr, type){
-          return arr.concat(msgs[type]);
-        }, []);
-      }
-    },
+    messages: require('express-messages'),
 
     // generate token using express-csrf module
     csrf: csrf.token

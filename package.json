@@ -14,5 +14,6 @@
     , "stylus"   : ">= 0.13.7"
     , "express-csrf" : ">= 0.3.3"
     , "gzippo"   : ">= 0.0.4"
+    , "express-messages" : ">= 0.0.2"
   }
 }
