@@ -1,4 +1,5 @@
 var Article = require('../models/article');
+var Comment = require('../models/comment');
 
 module.exports = function(app){
 
@@ -10,13 +11,14 @@ module.exports = function(app){
   });
 
   app.param('id', function(req, res, next, id){
-    Article.findOne({ _id : req.params.id }, function(err,article) {
-      if (err) return next(err);
-      if (!article) return next(new Error('Failed to load article ' + id));
-      req.article = article;
-      next();
-    });
-  })
+    Article
+      .findOne({ _id : req.params.id }, function(err,article) {
+        if (err) return next(err);
+        if (!article) return next(new Error('Failed to load article ' + id));
+        req.article = article;
+        next();
+      }).populate('comments');
+  });
 
   // Create an article
   app.post('/articles', function(req, res){
@@ -38,10 +40,27 @@ module.exports = function(app){
   // Update article
   app.put('/articles/:id', function(req, res){
     article = req.article;
-    article.title = req.body.article.title;
-    article.body = req.body.article.body;
-    article.save(function(err) {
+
+    if (req.body.article.comment && req.body.article.comment.body) {
+      var comment = new Comment({
+        body : req.body.article.comment.body
+      });
+      article.comments.push(comment);
+      req.flash('notice', 'Comment added successfully');
+    }
+    else {
+      if (req.body.article.title) article.title = req.body.article.title;
+      if (req.body.article.body) article.body = req.body.article.body;
       req.flash('notice', 'Updated successfully');
+    }
+
+    article.save(function(err, doc) {
+      if (err) throw err;
+      if (comment) {
+        comment.save(function(err){
+          if (err) throw err;
+        });
+      }
       res.redirect('/article/'+req.body.article._id);
     });
   });

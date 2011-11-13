@@ -12,3 +12,8 @@ p
   a(class='destroy', href='/article/'+article._id, title="delete") Delete
   &nbsp;
   a(href='/articles', title="back") Back
+
+p
+  h2 Comments
+  != partial('../comments/list', {collection : article.comments, as : 'comment'})
+  != partial('../comments/form')  
