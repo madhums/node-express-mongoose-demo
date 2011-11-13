@@ -1,0 +1,11 @@
+h2 Add comment
+
+form(method="post",action="/articles/"+article._id)
+  input(type="hidden", name="csrf", value=csrf)
+  input(name='_method', value='PUT', type='hidden')
+  input(type="hidden", name="article[_id]", value=article._id)
+  p
+    textarea(name="article[comment][body]")
+
+  p
+    input(type="submit")

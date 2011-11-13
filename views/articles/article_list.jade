@@ -11,4 +11,5 @@ div(class="article #{class}")
   &nbsp;
   a(class='destroy', href='/article/'+article._id, title="delete") Delete
   &nbsp;
-  span.article_date #{dateformat(article.created_at, "%b %d, %Y at %I:%M %p")}
+  span.article_date #{dateformat(article.created_at, "%b %d, %Y at %I:%M %p")} |
+  | &nbsp; #{article.comments.length} comments
