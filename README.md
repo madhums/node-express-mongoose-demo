@@ -3,17 +3,21 @@ node.js application illustrating various features used in everyday web developme
 ## Install Steps
   * [Install mongodb](http://www.mongodb.org/display/DOCS/Building+for+Linux)
   * [Install node.js](https://github.com/joyent/node/wiki/Installation)
-  * Install npm : `curl http://npmjs.org/install.sh | sh`
-  * `git clone git://github.com/madhums/nodejs-express-mongoose-demo.git noobjs`
-  * `cd noobjs`
-  * `cp config.example.json config.json`
-  * `npm install`
-  * `node app.js`
+
+```sh
+    curl http://npmjs.org/install.sh | sh
+    git clone git://github.com/qed42/nodejs-express-mongoose-demo.git noobjs
+    cd noobjs
+    cp config.example.json config.json
+    npm install
+    node app.js
+```
+
   * [http://localhost:3000/](http://localhost:3000/)
 
 ## Changelog
-  * [version 2.0](https://github.com/madhums/nodejs-express-mongoose-demo/compare/v1.0...v2.0) (August 29, 2011)
-  * [version 1.0](https://github.com/madhums/nodejs-express-mongoose-demo/commit/28d800dc4c794080ec34138be6358e5f05b34d37) (March 05, 2011)
+  * [version 2.0](https://github.com/qed42/nodejs-express-mongoose-demo/compare/v1.0...v2.0) (August 29, 2011)
+  * [version 1.0](https://github.com/qed42/nodejs-express-mongoose-demo/commit/28d800dc4c794080ec34138be6358e5f05b34d37) (March 05, 2011)
 
 ## Todo demos
   * <del>MVC architecture using express</del>
@@ -21,12 +25,13 @@ node.js application illustrating various features used in everyday web developme
   * <del>Routing in express</del>
   * <del>CURD operations using mongoose orm and mongodb</del>
   * <del>Use of [stylus](http://learnboost.github.com/stylus/)</del>
+  * <del>dbref and populate</del> [Populate - DBRef-like behavior](http://mongoosejs.com/docs/populate.html)
+  * <del>use of flash variables (displaying messaages like "updated successfully" etc)</del>
+  * <del>dynamic helpers (use of commonjs date formatting library).</del> Thanks to [commonjs-date-formatting](https://github.com/loopj/commonjs-date-formatting)
   * user authentication
     * [mongoose-auth](https://github.com/bnoguchi/mongoose-auth)
     * [everyauth](https://github.com/bnoguchi/everyauth)
   * pagination
-  * <del>use of flash variables (displaying messaages like "updated successfully" etc)</del>
-  * <del>dynamic helpers (use of commonjs date formatting library).</del> Thanks to [commonjs-date-formatting](https://github.com/loopj/commonjs-date-formatting)
   * validations
   * map-reduce
   * embedded documents in mongoose
