@@ -8,8 +8,8 @@ var exports = module.exports = mongooseAuth = require('mongoose-auth');
 
 everyauth.debug = true;
 
-// Permissions for Oauth Facebook
-everyauth.facebook.scope('email, user_about_me, user_location, offline_access, user_groups, user_interests, user_likes, user_birthday');
+// This is how you request permissions
+everyauth.facebook.scope('email, user_about_me, user_location');
 
 // Eleminate timeout completely
 everyauth.facebook.moduleTimeout(-1);
@@ -18,7 +18,12 @@ everyauth.facebook.moduleTimeout(-1);
 // console.log(everyauth.facebook.configurable());
 
 UserSchema.add({
-  created_at  : {type : Date, default : Date.now}
+    bio: String
+  , location: {
+      name: String
+    }
+  , fbProfileUrl: String
+  , created_at  : {type : Date, default : Date.now}
 });
 
 
@@ -42,6 +47,7 @@ UserSchema.plugin(mongooseAuth, {
             // TODO Check user in session or request helper first
             //      e.g., req.user or sess.auth.userId
             User.findOne({'fb.id': fbUser.id}, function (err, foundUser) {
+              if (err) return promise.fail(err);
               if (foundUser) {
                 return promise.fulfill(foundUser);
               }
@@ -51,23 +57,22 @@ UserSchema.plugin(mongooseAuth, {
               expiresDate.setSeconds(expiresDate.getSeconds() + accessTokExtra);
 
               user = new User({
-                fb: {
-                    id: fbUser.id
-                  , accessToken: accessTok
-                  , expires: expiresDate
-                  , name: {
-                        full: fbUser.name
-                      , first: fbUser.first_name
-                      , last: fbUser.last_name
-                    }
-                  , alias: fbUser.link.match(/^http:\/\/www.facebook\.com\/(.+)/)[1]
-                  , gender: fbUser.gender
-                  , email: fbUser.email
-                  , timezone: fbUser.timezone
-                  , locale: fbUser.locale
-                  , verified: fbUser.verified
-                  , updatedTime: fbUser.updated_time
-                }
+                  fb: {
+                      id: fbUser.id
+                    , accessToken: accessTok
+                    , expires: expiresDate
+                    , name: {
+                          full: fbUser.name
+                        , first: fbUser.first_name
+                        , last: fbUser.last_name
+                      }
+                    , alias: fbUser.link.match(/^http:\/\/www.facebook\.com\/(.+)/)[1]
+                    , gender: fbUser.gender
+                    , email: fbUser.email
+                    , timezone: fbUser.timezone
+                    , locale: fbUser.locale
+                    , updatedTime: fbUser.updated_time
+                  }
                 , fbProfileUrl: fbUser.link
                 , bio: fbUser.bio
                 , location: {
@@ -85,7 +90,6 @@ UserSchema.plugin(mongooseAuth, {
       }
     }
 });
-
 
 // validations
 
