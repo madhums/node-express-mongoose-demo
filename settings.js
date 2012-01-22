@@ -4,7 +4,7 @@
  */
 
 var express = require('express'),
-    gzippo = require('gzippo'),
+    //gzippo = require('gzippo'),
     mongoStore = require('connect-mongodb'),
     mongooseAuth = require('mongoose-auth'),
     url = require('url');
@@ -122,12 +122,12 @@ function bootApplication(app) {
   // gzip only in staging and production envs
 
   app.configure('staging', function(){
-    app.use(gzippo.staticGzip(__dirname + '/public'));
+    //app.use(gzippo.staticGzip(__dirname + '/public'));
     app.enable('view cache');
   });
 
   app.configure('production', function(){
-    app.use(gzippo.staticGzip(__dirname + '/public'));
+    //app.use(gzippo.staticGzip(__dirname + '/public'));
     // view cache is enabled by default in production mode
   });
 
