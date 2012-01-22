@@ -1,5 +1,7 @@
 h2= title
 
+!= messages()
+
 form(method="post",action="/articles/"+article._id)
   input(name='_method', value='PUT', type='hidden')
   p
