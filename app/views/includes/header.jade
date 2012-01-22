@@ -12,6 +12,13 @@
   a(href="/articles/new", title="new article") New Article
   \ |
   a(href='/articles', title="article listing") Article Listing
+  \ |
+  if (everyauth.loggedIn)
+    a(href="/profile/"+current_user.id, title="Profile") Profile
+    \ |
+    a(href="/logout", title="logout") Logout
+  else
+    a(href="/auth/facebook", title="Login") Login
 
   br
   br
