@@ -35,6 +35,7 @@ node.js application illustrating various features used in everyday web developme
   * <del>validations</del>
   * map-reduce
   * <del>embedded documents in mongoose</del>
+  * <del>route middlewares</del>
   * using of middlewares in mongoose
 
 If you are looking a specific feature, please use the issue tracker. I will try to come up with a demo as earliest as I can. Please feel free to fork and send updates :)

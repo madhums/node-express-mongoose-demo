@@ -4,15 +4,9 @@
  */
 
 exports.requiresLogin = function (req, res, next) {
-  if (!req.session.auth && req.xhr);
-  else if (!req.session.auth) {
-    req.flash('notice', 'You are not authorized')
-    if (req.item)
-      res.redirect('/item/'+req.item.id)
-    else if (req.foundUser)
-      res.redirect('/profile/'+req.foundUser.id);
-    else
-      res.redirect('/home')
+  if (!req.loggedIn) {
+    req.flash('notice', 'You are not authorized. Please login')
+    res.redirect('/articles')
   }
   next()
 };
@@ -41,7 +35,7 @@ exports.article = {
     hasAuthorization : function (req, res, next) {
       if (req.item.owner.id != req.session.auth.userId) {
         req.flash('notice', 'You are not authorized');
-        res.redirect('/item/'+req.item.id);
+        res.redirect('/article/'+req.item.id);
       }
       next()
     }

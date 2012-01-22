@@ -4,7 +4,7 @@ var Article = mongoose.model('Article')
 module.exports = function(app){
 
   // New article
-  app.get('/articles/new', function(req, res){
+  app.get('/articles/new', auth.requiresLogin, function(req, res){
     res.render('articles/new', {
       title: 'New Article',
       article: new Article({})
@@ -50,7 +50,7 @@ module.exports = function(app){
   })
 
   // Edit an article
-  app.get('/article/:id/edit', function(req, res){
+  app.get('/article/:id/edit', auth.requiresLogin, function(req, res){
     res.render('articles/edit', {
       title: 'Edit '+req.article.title,
       article: req.article
