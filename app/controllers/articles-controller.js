@@ -14,7 +14,7 @@ module.exports = function(app){
   app.param('id', function(req, res, next, id){
     Article
       .findOne({ _id : req.params.id })
-      .populate('comments')
+      .populate('user')
       .run(function(err,article) {
         if (err) return next(err)
         if (!article) return next(new Error('Failed to load article ' + id))
@@ -31,7 +31,8 @@ module.exports = function(app){
 
   // Create an article
   app.post('/articles', function(req, res){
-    article = new Article(req.body.article)
+    var article = new Article(req.body.article)
+    article.user = req.session.auth.userId
 
     article.save(function(err){
       if (err) {
@@ -58,15 +59,23 @@ module.exports = function(app){
 
   // Update article
   app.put('/articles/:id', function(req, res){
-    article = req.article
+    var article = req.article
 
-    if (req.body.article.title) article.title = req.body.article.title
-    if (req.body.article.body) article.body = req.body.article.body
-    req.flash('notice', 'Updated successfully')
+    article.title = req.body.article.title
+    article.body = req.body.article.body
 
     article.save(function(err, doc) {
-      if (err) throw err
-      res.redirect('/article/'+req.body.article._id)
+      if (err) {
+        utils.mongooseErrorHandler(err, req)
+        res.render('articles/edit', {
+            title: 'Edit Article'
+          , article: article
+        })
+      }
+      else {
+        req.flash('notice', 'Updated successfully')
+        res.redirect('/article/'+article._id)
+      }
     })
   })
 
@@ -81,7 +90,7 @@ module.exports = function(app){
 
   // Delete an article
   app.del('/article/:id', function(req, res){
-    article = req.article
+    var article = req.article
     article.remove(function(err){
       req.flash('notice', 'Deleted successfully')
       res.redirect('/articles')
