@@ -1,4 +1,24 @@
 
+2.2.0 / 2012-01-23 
+==================
+
+  * add the right mongohq uri
+  * add space
+  * dont add comment unless logged in
+  * new mongohq uri
+  * use latest version of connect-mongodb
+  * throw err if unauthorized
+  * fb oauth details for production
+  * mongohq uri for production
+  * use my own
+  * port back to official node package repo
+  * mongodb uri for production
+  * use my (gh/madhums) node-compress
+  * remove semi colons
+  * add user to comments
+  * route middlewares
+  * remove old references, update readme
+
 2.1.0 / 2012-01-22 
 ==================
 
