@@ -18,4 +18,4 @@ production:
   facebook:
     appId: "202263326537254"
     appSecret: "f12d943a863da7bd6d27823355769ec5"
-    host_uri: "http://localhost:3000"
+    host_uri: "http://nodejs-express-demo.herokuapp.com"
