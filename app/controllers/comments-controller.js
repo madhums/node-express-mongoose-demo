@@ -19,6 +19,8 @@ module.exports = function(app){
       var comment = new Comment({})
       comment.article = req.article.id
       comment.body = req.body.comment.body
+      if (req.loggedIn)
+        comment.user = req.session.auth.userId
       comment.save(function (err) {
         if (err) throw err
         req.flash('notice', 'Comment added successfully')
