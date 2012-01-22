@@ -35,6 +35,7 @@ controller_files.forEach(function(file){
 
 require('./error-handler').boot(app);   // Bootstrap custom error handler
 mongooseAuth.helpExpress(app);          // Add in Dynamic View Helpers
+everyauth.helpExpress(app, { userAlias: 'current_user' });
 
 // Start the app by listening on <port>
 var port = process.env.PORT || 3000;
