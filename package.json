@@ -13,7 +13,7 @@
     , "mongoose": "2.4.9"
     , "gzippo" : "0.1.2"
     , "yaml-config" : "0.1.0"
-    , "connect-mongodb" : "0.4.0"
+    , "connect-mongodb" : "1.1.2"
     , "mongoose-auth" : "0.0.11"
     , "everyauth" : "0.2.29"
     , "cloudfiles" : "0.3.1"
