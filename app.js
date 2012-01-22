@@ -1,24 +1,42 @@
+/* Main application entry file. Please note, the order of loading is important.
+ * Configuration loading and booting of controllers and custom error handlers */
+
 var express = require('express');
-var app     = express.createServer();
+var fs = require('fs');
+utils = require('./lib/utils');
+auth = require('./authorization');
 
-require('./settings').boot(app);
 
-app.dynamicHelpers({
-  base: function(){
-    // return the app's mount-point
-    // so that urls can adjust. For example
-    // if you run this example /post/add works
-    // however if you run the mounting example
-    // it adjusts to /blog/post/add
-    return '/' == app.route ? '' : app.route;
-  },
-  appName: function(req, res){ return 'node.js express demo'  }
+// Load configurations
+var config_file = require('yaml-config');
+exports = module.exports = config = config_file.readConfig('config/config.yaml');
+
+require('./db-connect');                // Bootstrap db connection
+
+// Bootstrap models
+var models_path = __dirname + '/app/models';
+var model_files = fs.readdirSync(models_path);
+model_files.forEach(function(file){
+  if (file == 'user.js')
+    User = require(models_path+'/'+file);
+  else
+    require(models_path+'/'+file);
 });
 
-// Include all routes here
+var app = express.createServer();       // express app
+require('./settings').boot(app);        // Bootstrap application settings
 
-require('./routes/articles')(app)
+// Bootstrap controllers
+var controllers_path = __dirname + '/app/controllers';
+var controller_files = fs.readdirSync(controllers_path);
+controller_files.forEach(function(file){
+  require(controllers_path+'/'+file)(app);
+});
 
+require('./error-handler').boot(app);   // Bootstrap custom error handler
+mongooseAuth.helpExpress(app);          // Add in Dynamic View Helpers
+
+// Start the app by listening on <port>
 var port = process.env.PORT || 3000;
 app.listen(port);
 console.log('Express app started on port '+port);

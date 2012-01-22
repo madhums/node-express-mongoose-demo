@@ -1,11 +1,10 @@
-require('./db_connect');
-
 // comment schema
 
 var Comments = new Schema({
   body        : {type : String, default : ''},
+  article     : {type : Schema.ObjectId, ref : 'Article'},
   created_at  : {type : Date, default : Date.now},
   updated_at  : {type : Date, default : Date.now}
 });
 
-var exports = module.exports = mongoose.model('Comment', Comments);
+mongoose.model('Comment', Comments);

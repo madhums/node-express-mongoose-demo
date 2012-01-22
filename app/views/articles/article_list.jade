@@ -1,8 +1,8 @@
 - if(lastInCollection)
-  - class = 'last'
+  - clas = 'last'
 - else
-  - class = ''
-div(class="article #{class}")
+  - clas = ''
+div(class="article #{clas}")
   div.article_title
     a(href='/article/'+article._id, title=article.title) #{article.title}
   div.article_body
@@ -12,4 +12,3 @@ div(class="article #{class}")
   a(class='destroy', href='/article/'+article._id, title="delete") Delete
   &nbsp;
   span.article_date #{dateformat(article.created_at, "%b %d, %Y at %I:%M %p")} |
-  | &nbsp; #{article.comments.length} comments

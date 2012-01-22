@@ -1,18 +1,18 @@
 h2= title
-p Create a new article
+
+!= messages()
 
 form(method="post",action="/articles")
-  input(type="hidden", name="csrf", value=csrf)
   p
     label Title
     br
-    input(type="text", name="article[title]")
-  
+    input(type="text", name="article[title]", value=article.title)
+
   p
     label Body
     br
-    textarea(name="article[body]")
-  
+    textarea(name="article[body]")=article.body
+
   input(type="submit", value="Submit")
   &nbsp;
   a(href='/articles', title="cancel") Cancel

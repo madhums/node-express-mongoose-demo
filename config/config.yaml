@@ -1,0 +1,21 @@
+development:
+  db:
+    uri: "mongodb://localhost/noobjs_development"
+  facebook:
+    appId: "269516006404222"
+    appSecret: "e09b06ecc3219f7161cd67b13a305445"
+    host_uri: "http://localhost:3000"
+staging:
+  db:
+    uri: "mongodb://localhost/noobjs_staging"
+  facebook:
+    appId: "269516006404222"
+    appSecret: "e09b06ecc3219f7161cd67b13a305445"
+    host_uri: "http://localhost:3000"
+production:
+  db:
+    uri: "mongodb://localhost/noobjs_production"
+  facebook:
+    appId: "269516006404222"
+    appSecret: "e09b06ecc3219f7161cd67b13a305445"
+    host_uri: "http://localhost:3000"

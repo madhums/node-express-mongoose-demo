@@ -1,19 +1,26 @@
 {
     "name": "noobjs"
   , "description": "A demo app in nodejs illustrating use of express, jade and mogoose"
-  , "version": "2.0.0"
+  , "version": "2.1.0"
   , "private": true
   , "author": "Madhusudhan M S (http://twitter.com/madhums)"
   , "engines": {
-      "node": ">= 0.4.10"
+      "node": ">= 0.6.5"
     }
   , "dependencies": {
-      "express" : ">= 2.3.12"
-    , "jade"    : ">= 0.12.4"
-    , "mongoose": ">= 1.4.0"
-    , "stylus"   : ">= 0.13.7"
-    , "express-csrf" : ">= 0.3.3"
-    , "gzippo"   : ">= 0.0.4"
-    , "express-messages" : ">= 0.0.2"
+      "express" : "2.5.4"
+    , "jade"    : "0.20.0"
+    , "mongoose": "2.4.9"
+    , "gzippo"   : "0.1.2"
+    , "yaml-config" : "git+ssh://git@github.com:madhums/yaml-config-node.git#patch-1"
+    , "connect-mongodb" : "0.4.0"
+    , "mongoose-auth" : "0.0.11"
+    , "everyauth" : "0.2.28"
+    , "cloudfiles" : "0.3.1"
+    , "imagemagick" : "0.1.2"
+    , "node-uuid" : "1.3.1"
+    , "compress" : "git+ssh://git@github.com:madhums/node-compress.git"
+    , "postmark" : "0.1.6"
+    , "express-messages" : "0.0.2"
   }
 }
