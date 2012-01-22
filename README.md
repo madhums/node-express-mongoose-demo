@@ -8,7 +8,6 @@ node.js application illustrating various features used in everyday web developme
     $ curl http://npmjs.org/install.sh | sh
     $ git clone git://github.com/qed42/nodejs-express-mongoose-demo.git noobjs
     $ cd noobjs
-    $ cp config.example.json config.json
     $ npm install
     $ node app.js
 ```
@@ -29,12 +28,13 @@ node.js application illustrating various features used in everyday web developme
   * <del>use of flash variables (displaying messaages like "updated successfully" etc)</del>
   * <del>dynamic helpers (use of commonjs date formatting library).</del> Thanks to [commonjs-date-formatting](https://github.com/loopj/commonjs-date-formatting)
   * user authentication
-    * [mongoose-auth](https://github.com/bnoguchi/mongoose-auth)
-    * [everyauth](https://github.com/bnoguchi/everyauth)
+    * <del>[mongoose-auth](https://github.com/bnoguchi/mongoose-auth)</del>
+    * <del>[everyauth](https://github.com/bnoguchi/everyauth)</del>
+    * Traditional username/password authentication
   * pagination
-  * validations
+  * <del>validations</del>
   * map-reduce
-  * embedded documents in mongoose
+  * <del>embedded documents in mongoose</del>
   * using of middlewares in mongoose
 
 If you are looking a specific feature, please use the issue tracker. I will try to come up with a demo as earliest as I can. Please feel free to fork and send updates :)
