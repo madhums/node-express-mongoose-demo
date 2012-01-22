@@ -15,7 +15,7 @@ module.exports = function(app){
   });
 
   app.post('/comment/:articleId', function (req, res) {
-    if (req.body.comment && req.body.comment.body != '') {
+    if (req.body.comment && req.body.comment.body != '' && req.loggedIn) {
       var comment = new Comment({})
       comment.article = req.article.id
       comment.body = req.body.comment.body
