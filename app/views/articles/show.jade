@@ -12,6 +12,11 @@ p
   a(class='destroy', href='/article/'+article._id, title="delete") Delete
   &nbsp;
   a(href='/articles', title="back") Back
+  &nbsp;
+  if (article.user)
+    br
+    | by
+    a(href='/profile/'+article.user.id, title="back")= article.user.fb.name.full
 
 p
   h2 Comments
