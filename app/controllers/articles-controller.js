@@ -100,4 +100,9 @@ module.exports = function(app){
         })
       })
   })
+
+  // home
+  app.get('/', function(req, res){
+    res.redirect('/articles')
+  })
 }
