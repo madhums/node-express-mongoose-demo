@@ -103,6 +103,7 @@ module.exports = function(app){
       .find({})
       .desc('created_at') // sort by date
       .run(function(err, articles) {
+        if (err) throw err
         res.render('articles/index', {
           title: 'List of Articles',
           articles: articles
