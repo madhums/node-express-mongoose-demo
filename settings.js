@@ -8,6 +8,7 @@ var express = require('express')
   , mongoStore = require('connect-mongodb')
   , mongooseAuth = require('mongoose-auth')
   , url = require('url')
+  , stylus = require('stylus')
 
 exports.boot = function(app){
   bootApplication(app)
@@ -104,6 +105,33 @@ function bootApplication(app) {
     }
 
   })
+
+
+  // Use stylus for css templating
+
+  // completely optional, however
+  // the compile function allows you to
+  // define additional functions exposed to Stylus,
+  // alter settings, etc
+
+  function compile(str, path) {
+    return stylus(str)
+      .set('filename', path)
+      .set('warn', true)
+      .set('compress', true)
+   // .define('url', stylus.url({ paths: [__dirname + '/public/images'], limit:1000000 }))
+  }
+
+  // add the stylus middleware, which re-compiles when
+  // a stylesheet has changed, compiling FROM src,
+  // TO dest. dest is optional, defaulting to src
+
+  app.use(stylus.middleware({
+      debug: true
+    , src: __dirname + '/stylus'
+    , dest: __dirname + '/public'
+    , compile: compile
+  }))
 
   // Don't use express errorHandler as we are using custom error handlers
   // app.use(express.errorHandler({ dumpExceptions: false, showStack: false }))

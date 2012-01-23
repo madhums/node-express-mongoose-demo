@@ -22,5 +22,6 @@
     , "compress" : "git+ssh://git@github.com:madhums/node-compress.git"
     , "postmark" : "0.1.6"
     , "express-messages" : "0.0.2"
+    , "stylus" : "0.22.6"
   }
 }
