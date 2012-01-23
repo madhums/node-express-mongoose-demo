@@ -33,9 +33,9 @@ exports.user = {
 
 exports.article = {
     hasAuthorization : function (req, res, next) {
-      if (req.item.owner.id != req.session.auth.userId) {
+      if (req.article.owner.id != req.session.auth.userId) {
         req.flash('notice', 'You are not authorized');
-        res.redirect('/article/'+req.item.id);
+        res.redirect('/article/'+req.article.id);
       }
       next()
     }
