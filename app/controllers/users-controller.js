@@ -21,10 +21,10 @@ module.exports = function (app) {
 
   // Profile view
   app.get('/profile/:profileId', function (req, res) {
-    var user = req.foundUser
+    var user1 = req.foundUser
     res.render('users/profile', {
-        title : user.fb.name.full
-      , user : user
+        title : user1.fb.name.full
+      , user1 : user1
     })
   })
 
