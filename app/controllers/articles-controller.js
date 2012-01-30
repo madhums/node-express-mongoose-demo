@@ -50,7 +50,7 @@ module.exports = function(app){
   })
 
   // Edit an article
-  app.get('/article/:id/edit', auth.requiresLogin, function(req, res){
+  app.get('/article/:id/edit', auth.requiresLogin, auth.article.hasAuthorization, function(req, res){
     res.render('articles/edit', {
       title: 'Edit '+req.article.title,
       article: req.article
