@@ -2,8 +2,8 @@ development:
   db:
     uri: "mongodb://localhost/noobjs_development"
   facebook:
-    appId: "202263326537254"
-    appSecret: "f12d943a863da7bd6d27823355769ec5"
+    appId: "363663163645036"
+    appSecret: "9c3c0bde2389f7ec7ccfaeba3b49ec32"
     host_uri: "http://localhost:3000"
 staging:
   db:
