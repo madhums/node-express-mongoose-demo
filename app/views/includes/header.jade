@@ -1,29 +1,23 @@
-#logo
-  h1
-    a(href="/articles", title="node.js express demo") node.js express demo
-    br
-    .let-me-know A hobby project done at &nbsp;
-      a(href="http://www.qed42.com") QED42
-      | , a web consultancy firm.
-      br
-      | If you wish to talk to us drop a mail
-      a(href="mailto:mail@qed42.com") here
-#user_nav
-  a(href="/articles/new", title="new article") New Article
-  \ |
-  a(href='/articles', title="article listing") Article Listing
-  \ |
-  if (everyauth.loggedIn)
-    a(href="/profile/"+current_user.id, title="Profile") Profile
-    \ |
-    a(href="/logout", title="logout") Logout
-  else
-    a(href="/auth/facebook", title="Login") Login
 
-  br
-  br
-  div.let-me-know If you want any specific feature to
-    br
-    | be demoed, you can
-    a(href="https://github.com/qed42/nodejs-express-mongoose-demo/issues", title="issue tracker") let us know
-.clear
+header#header
+  .navbar.navbar-fixed-top(role='navigation')
+    .navbar-inner
+      .container
+        a.brand(href='/') Node.js Express Mongoose Demo
+        .nav-collapse.collapse
+          ul.nav
+            li
+              a(href='/articles', title="article listing") Articles
+            li
+              a(href="/articles/new", title="new article") New
+            li
+              a(href="https://github.com/madhums/nodejs-express-mongoose-demo", title="fork me on github") FORK ME ON GITHUB
+          ul.nav.pull-right
+            if (everyauth.loggedIn)
+              li
+                a(href="/profile/"+current_user.id, title="Profile") Profile
+              li
+                a(href="/logout", title="logout") Logout
+            else
+              li
+                a(href="/auth/facebook", title="Login") Login

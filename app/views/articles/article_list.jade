@@ -1,14 +1,8 @@
-- if(lastInCollection)
-  - clas = 'last'
-- else
-  - clas = ''
-div(class="article #{clas}")
-  div.article_title
-    a(href='/article/'+article._id, title=article.title) #{article.title}
-  div.article_body
-    =article.body
-  a(href='/article/'+article._id+'/edit', title="edit") Edit
-  &nbsp;
-  a(class='destroy', href='/article/'+article._id, title="delete") Delete
-  &nbsp;
-  span.article_date #{dateformat(article.created_at, "%b %d, %Y at %I:%M %p")} |
+.article
+  a.title(href='/article/'+article._id, title=article.title) #{article.title}
+  p.author
+    span Author :&nbsp;
+    a(href="/profile/"+article.user._id)=article.user.fb.name.full
+  p=article.body
+  span.date
+    #{dateformat(article.created_at, "%b %d, %Y at %I:%M %p")}

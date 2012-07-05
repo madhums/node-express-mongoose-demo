@@ -1,24 +1,20 @@
-h2= title
 
 != messages()
 
-form(method="post",action="/articles/"+article._id)
-  input(name='_method', value='PUT', type='hidden')
-  p
-    label Title
-    br
-    input(type="text", name="article[title]", value=article.title)
+form.form-horizontal(method="post", action="/articles/"+article._id)
+    input(name='_method', value='PUT', type='hidden')
+    fieldset
+        legend Edit #{article.title}
+        .control-group
+          label.control-label(for='title') Title
+          .controls
+            input#title.input-xlarge(type='text', name="article[title]", value=article.title, placeholder='Enter the title')
+        .control-group
+          label.control-label(for='desc') Body
+          .controls
+            textarea#desc.input-xxlarge(type='text', rows="6", name="article[body]", placeholder='Enter the article description')=article.body
+        .form-actions
+          button.btn.btn-primary(type='submit') Save changes
+          &nbsp;
+          a.btn(href='/articles', title="cancel") Cancel
 
-  p
-    label Body
-    br
-    textarea(name="article[body]")=article.body
-
-  input(type="hidden", name="article[_id]", value=article._id)
-
-  input(type="submit", value="Submit")
-
-  &nbsp;
-  a(class='destroy', href='/article/'+article._id, title="delete") Delete
-  &nbsp;
-  a(href='/articles', title="cancel") Cancel

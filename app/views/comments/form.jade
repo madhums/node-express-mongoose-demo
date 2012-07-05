@@ -1,8 +1,5 @@
-h2 Add comment
-
-form(method="post",action="/comment/"+article._id)
-  p
-    textarea(name="comment[body]")
-
-  p
-    input(type="submit")
+form.form-vertical(method="post", action="/comment/"+article._id)
+  .control-group
+    .controls
+      textarea#comment.input-xxlarge(type='text', rows="6", name="comment[body]", placeholder='Add your comment')
+  button.btn.btn-primary(type='submit') Add comment
