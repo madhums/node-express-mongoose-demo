@@ -59,7 +59,6 @@ function bootApplication(app) {
       })
     }))
 
-    app.use(express.logger(':method :url :status'))
     app.use(express.favicon())
 
     // routes should be at the last
@@ -85,7 +84,7 @@ function bootApplication(app) {
     },
 
     // flash messages
-    messages: require('express-messages'),
+    messages: require('./lib/express-messages'),
 
     // dateformat helper. Thanks to gh-/loopj/commonjs-date-formatting
     dateformat: function(req, res) {
@@ -114,24 +113,24 @@ function bootApplication(app) {
   // define additional functions exposed to Stylus,
   // alter settings, etc
 
-  function compile(str, path) {
+  /*function compile(str, path) {
     return stylus(str)
       .set('filename', path)
       .set('warn', true)
       .set('compress', true)
    // .define('url', stylus.url({ paths: [__dirname + '/public/images'], limit:1000000 }))
-  }
+  }*/
 
   // add the stylus middleware, which re-compiles when
   // a stylesheet has changed, compiling FROM src,
   // TO dest. dest is optional, defaulting to src
 
-  app.use(stylus.middleware({
+  /*app.use(stylus.middleware({
       debug: true
     , src: __dirname + '/stylus'
     , dest: __dirname + '/public'
     , compile: compile
-  }))
+  }))*/
 
   // Don't use express errorHandler as we are using custom error handlers
   // app.use(express.errorHandler({ dumpExceptions: false, showStack: false }))
@@ -158,5 +157,7 @@ function bootApplication(app) {
     app.use(gzippo.staticGzip(__dirname + '/public'))
     // view cache is enabled by default in production mode
   })
+
+  app.use(express.logger(':method :url :status'))
 
 }
