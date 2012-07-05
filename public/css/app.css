@@ -1,0 +1,23 @@
+body {
+  padding-top: 60px;
+}
+
+.date {
+  font-size: 11px;
+  color: #aaa;
+}
+
+.author {
+  color: #aaa;
+}
+
+.title {
+  padding: 5px 0 15px 0;
+  display: block;
+  font-size: 24px;
+}
+
+.article, .comment {
+  padding: 15px 0;
+  border-top: 1px solid #e8e8e8;
+}
