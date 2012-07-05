@@ -21,6 +21,7 @@ module.exports = function(app){
         req.article = article
         Comment
           .find({article : req.article})
+          .populate('user')
           .run(function (err, comments) {
             if (err) throw err
             req.comments = comments
@@ -58,7 +59,7 @@ module.exports = function(app){
   })
 
   // Update article
-  app.put('/articles/:id', function(req, res){
+  app.put('/articles/:id', auth.requiresLogin, auth.article.hasAuthorization, function(req, res){
     var article = req.article
 
     article.title = req.body.article.title
@@ -89,10 +90,10 @@ module.exports = function(app){
   })
 
   // Delete an article
-  app.del('/article/:id', function(req, res){
+  app.del('/article/:id', auth.requiresLogin, auth.article.hasAuthorization, function(req, res){
     var article = req.article
     article.remove(function(err){
-      req.flash('notice', 'Deleted successfully')
+      // req.flash('notice', 'Deleted successfully')
       res.redirect('/articles')
     })
   })
@@ -101,6 +102,7 @@ module.exports = function(app){
   app.get('/articles', function(req, res){
     Article
       .find({})
+      .populate('user')
       .desc('created_at') // sort by date
       .run(function(err, articles) {
         if (err) throw err
