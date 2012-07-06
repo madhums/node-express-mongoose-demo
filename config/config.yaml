@@ -14,7 +14,7 @@ staging:
     host_uri: "http://localhost:3000"
 production:
   db:
-    uri: "mongodb://nodejs:nodejs@staff.mongohq.com:10045/app2591449"
+    uri: "mongodb://madhums:madhums@staff.mongohq.com:10097/app2695805"
   facebook:
     appId: "202263326537254"
     appSecret: "f12d943a863da7bd6d27823355769ec5"
