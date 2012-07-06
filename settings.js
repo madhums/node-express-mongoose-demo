@@ -8,7 +8,6 @@ var express = require('express')
   , mongoStore = require('connect-mongodb')
   , mongooseAuth = require('mongoose-auth')
   , url = require('url')
-  , stylus = require('stylus')
 
 exports.boot = function(app){
   bootApplication(app)
