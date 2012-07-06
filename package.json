@@ -6,7 +6,7 @@
   , "author": "Madhusudhan M S (http://github.com/madhums)"
   , "engines": {
         "node": "0.6.18"
-      , "npm": "1.1.21"
+      , "npm": "1.1.9"
     }
   , "dependencies": {
       "express" : "2.5.11"
