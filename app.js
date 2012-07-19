@@ -2,21 +2,20 @@
  * Configuration loading and booting of controllers and custom error handlers */
 
 var express = require('express')
-var fs = require('fs')
-utils = require('./lib/utils')
-auth = require('./authorization')
-
+  , fs = require('fs')
+  , utils = require('./lib/utils')
+  , auth = require('./authorization')
 
 // Load configurations
 var config_file = require('yaml-config')
-exports = module.exports = config = config_file.readConfig('config/config.yaml')
+config = config_file.readConfig('config/config.yaml')
 
 require('./db-connect')                // Bootstrap db connection
 
 // Bootstrap models
 var models_path = __dirname + '/app/models'
-var model_files = fs.readdirSync(models_path)
-model_files.forEach(function(file){
+  , model_files = fs.readdirSync(models_path)
+model_files.forEach(function (file) {
   if (file == 'user.js')
     User = require(models_path+'/'+file)
   else
@@ -28,9 +27,9 @@ require('./settings').boot(app)        // Bootstrap application settings
 
 // Bootstrap controllers
 var controllers_path = __dirname + '/app/controllers'
-var controller_files = fs.readdirSync(controllers_path)
-controller_files.forEach(function(file){
-  require(controllers_path+'/'+file)(app)
+  , controller_files = fs.readdirSync(controllers_path)
+controller_files.forEach(function (file) {
+  require(controllers_path+'/'+file)(app, auth)
 })
 
 require('./error-handler').boot(app)   // Bootstrap custom error handler
