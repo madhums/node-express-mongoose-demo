@@ -1,6 +1,6 @@
 var User = mongoose.model('User')
 
-module.exports = function (app) {
+module.exports = function (app, auth) {
 
   app.param('profileId', function (req, res, next, id) {
     User

@@ -2,7 +2,7 @@ var Article = mongoose.model('Article')
   , Comment = mongoose.model('Comment')
 
 
-module.exports = function(app){
+module.exports = function(app, auth){
   app.param('articleId', function(req, res, next, id){
     Article
       .findOne({ _id : id })

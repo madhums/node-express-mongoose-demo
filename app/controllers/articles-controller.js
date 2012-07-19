@@ -1,7 +1,7 @@
 var Article = mongoose.model('Article')
   , Comment = mongoose.model('Comment')
 
-module.exports = function(app){
+module.exports = function(app, auth){
 
   // New article
   app.get('/articles/new', auth.requiresLogin, function(req, res){
