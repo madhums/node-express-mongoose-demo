@@ -1,4 +1,7 @@
-node.js application illustrating various features used in everyday web development, with a fine touch of best practices.
+Blog post:
+[Breaking down app.js file - nodejs, express, mongoose](http://madhums.tumblr.com/post/27521420404/breaking-down-app-js-file-nodejs-express-mongoose)
+
+node.js application illustrating various features used in everyday web development, with a fine touch of best practices. The demo app is a blog application where users (signing up using facebook) can create an article, delete an article and comment on an article.
 
 ## Install Steps
   * [Install mongodb](http://www.mongodb.org/display/DOCS/Building+for+Linux)
@@ -39,6 +42,3 @@ node.js application illustrating various features used in everyday web developme
   * using of middlewares in mongoose
 
 If you are looking a specific feature, please use the issue tracker. I will try to come up with a demo as earliest as I can. Please feel free to fork and send updates :)
-
-## Contributors
-  [M Fazle Taher](https://github.com/mftaher)  - D of CURD
