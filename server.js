@@ -3,40 +3,37 @@
 
 var express = require('express')
   , fs = require('fs')
-  , utils = require('./lib/utils')
-  , auth = require('./authorization')
+  , passport = require('passport')
+
+require('express-namespace')
 
 // Load configurations
-var config_file = require('yaml-config')
-config = config_file.readConfig('config/config.yaml')
+var env = process.env.NODE_ENV || 'development'
+  , config = require('./config/config')[env]
+  , auth = require('./authorization')
 
-require('./db-connect')                // Bootstrap db connection
+// Bootstrap db connection
+var mongoose = require('mongoose')
+  , Schema = mongoose.Schema
+mongoose.connect(config.db)
 
 // Bootstrap models
 var models_path = __dirname + '/app/models'
   , model_files = fs.readdirSync(models_path)
 model_files.forEach(function (file) {
-  if (file == 'user.js')
-    User = require(models_path+'/'+file)
-  else
-    require(models_path+'/'+file)
+  require(models_path+'/'+file)
 })
 
-var app = express.createServer()       // express app
-require('./settings').boot(app)        // Bootstrap application settings
+// bootstrap passport config
+require('./config/passport')
 
-// Bootstrap controllers
-var controllers_path = __dirname + '/app/controllers'
-  , controller_files = fs.readdirSync(controllers_path)
-controller_files.forEach(function (file) {
-  require(controllers_path+'/'+file)(app, auth)
-})
+var app = express()                                       // express app
+require('./settings').boot(app, config, passport)         // Bootstrap application settings
 
-require('./error-handler').boot(app)   // Bootstrap custom error handler
-mongooseAuth.helpExpress(app)          // Add in Dynamic View Helpers
-everyauth.helpExpress(app, { userAlias: 'current_user' })
+// Bootstrap routes
+require('./config/routes')(app, passport, auth)
 
 // Start the app by listening on <port>
-var port = process.env.PORT || 3000
+var port = process.env.PORT || 4000
 app.listen(port)
 console.log('Express app started on port '+port)
