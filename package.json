@@ -9,17 +9,20 @@
       , "npm": "1.1.9"
     }
   , "scripts": {
-      "start": "./node_modules/.bin/nodemon app.js"
+      "start": "./node_modules/.bin/nodemon server.js"
     }
   , "dependencies": {
-      "express" : "2.5.11"
-    , "jade"    : "0.20.0"
-    , "mongoose": "2.7.1"
-    , "gzippo" : "0.1.7"
-    , "yaml-config" : "0.1.0"
-    , "connect-mongodb" : "1.1.2"
-    , "mongoose-auth" : "0.0.11"
-    , "everyauth" : "0.2.29"
+      "express": "latest"
+    , "express-namespace": "latest"
+    , "jade": "latest"
+    , "mongoose": "latest"
+    , "connect-mongodb": "latest"
+    , "passport": "latest"
+    , "passport-local": "latest"
+    , "passport-facebook": "latest"
+    , "passport-twitter": "latest"
+    , "underscore": "latest"
+    , "async": "latest"
     , "nodemon": "latest"
   }
 }
