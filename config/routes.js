@@ -2,18 +2,22 @@
 var mongoose = require('mongoose')
   , Article = mongoose.model('Article')
   , User = mongoose.model('User')
+  , async = require('async')
 
 module.exports = function (app, passport, auth) {
 
   // user routes
   var users = require('../app/controllers/users')
   app.get('/login', users.login)
+  app.get('/users/:userId', users.show)
   app.get('/auth/facebook', passport.authenticate('facebook', { scope: [ 'email', 'user_about_me'], failureRedirect: '/' }), users.signin)
   app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/' }), users.authCallback)
-  app.get('/auth/github', users.github)
-  app.get('/auth/twitter', users.twitter)
+  app.get('/auth/github', passport.authenticate('github', { failureRedirect: '/' }), users.signin)
+  app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/' }), users.authCallback)
+  app.get('/auth/twitter', passport.authenticate('twitter', { failureRedirect: '/' }), users.signin)
+  app.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/' }), users.authCallback)
 
-  app.param('profileId', function (req, res, next, id) {
+  app.param('userId', function (req, res, next, id) {
     User
       .findOne({ _id : id })
       .exec(function (err, user) {
@@ -39,15 +43,43 @@ module.exports = function (app, passport, auth) {
       .findOne({ _id : id })
       .populate('user')
       .populate('comments')
-      .exec(function(err,article) {
+      .exec(function (err, article) {
         if (err) return next(err)
         if (!article) return next(new Error('Failed to load article ' + id))
         req.article = article
-        next()
+
+        var populateComments = function (comment, cb) {
+          User
+            .find({ _id: comment.user })
+            .exec(function (err, user) {
+              if (err) return next(err)
+              comment.user = user
+              cb()
+            })
+        }
+
+        if (article.comments.length) {
+          async.map(article.comments, populateComments, function (err, results) {
+            if (err) {
+              console.log(err)
+              return next(err)
+            }
+            req.article.comments = results
+            next()
+          })
+        }
+        else {
+          req.article = article
+          next()
+        }
       })
   })
 
   // home route
   app.get('/', articles.index)
+
+  // comment routes
+  var comments = require('../app/controllers/comments')
+  app.post('/articles/:id/comments', auth.requiresLogin, comments.create)
 
 }
