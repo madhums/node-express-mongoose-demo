@@ -1,33 +1,18 @@
-var Article = mongoose.model('Article')
+var mongoose = require('mongoose')
   , Comment = mongoose.model('Comment')
 
+exports.create = function (req, res) {
+  var comment = new Comment(req.body)
+    , article = req.article
 
-module.exports = function(app, auth){
-  app.param('articleId', function(req, res, next, id){
-    Article
-      .findOne({ _id : id })
-      .run(function(err,article) {
-        if (err) return next(err);
-        if (!article) return next(new Error('Failed to load article ' + id));
-        req.article = article;
-        next();
-      })
-  });
+  comment.user = req.user
 
-  app.post('/comment/:articleId', function (req, res) {
-    if (req.body.comment && req.body.comment.body != '' && req.loggedIn) {
-      var comment = new Comment({})
-      comment.article = req.article.id
-      comment.body = req.body.comment.body
-      if (req.loggedIn)
-        comment.user = req.session.auth.userId
-      comment.save(function (err) {
-        if (err) throw err
-        req.flash('notice', 'Comment added successfully')
-        res.redirect('/article/'+req.article.id)
-      })
-    }
-    else
-      res.redirect('/article/'+req.article.id)
+  comment.save(function (err) {
+    if (err) throw new Error('Error while saving comment')
+    article.comments.push(comment)
+    article.save(function (err) {
+      if (err) throw new Error('Error while saving article')
+      res.redirect('/articles/'+article.id+'#comments')
+    })
   })
 }
