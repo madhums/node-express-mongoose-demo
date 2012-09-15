@@ -9,7 +9,7 @@ var mongoose = require('mongoose')
 
 exports.boot = function (passport, config) {
 
-  require('./initializer')
+  // require('./initializer')
 
   // serialize sessions
   passport.serializeUser(function(user, done) {
