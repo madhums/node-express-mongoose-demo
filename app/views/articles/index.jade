@@ -1,12 +1,15 @@
 extends ../layouts/default
 
+block main
+  h1 Articles
+
 block content
   each article in articles
     .article
-      a.title(href='/article/'+article._id, title=article.title) #{article.title}
+      a.title(href='/articles/'+article._id, title=article.title) #{article.title}
       p.author
         span Author :&nbsp;
-        a(href="/profile/"+article.user._id)=article.user.fb.name.full
+        a(href="/users/"+article.user._id)=article.user.name
       p=article.body
       span.date
-        #{dateformat(article.created_at, "%b %d, %Y at %I:%M %p")}
+        #{formatDate(article.createdAt, "%b %d, %Y at %I:%M %p")}

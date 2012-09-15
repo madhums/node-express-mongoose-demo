@@ -15,7 +15,7 @@ header#header
           ul.nav.pull-right
             if (req.isAuthenticated())
               li
-                a(href="/profile/"+req.user.id, title="Profile") Profile
+                a(href="/users/"+req.user.id, title="Profile") Profile
               li
                 a(href="/logout", title="logout") Logout
             else
