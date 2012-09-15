@@ -9,6 +9,7 @@ module.exports = function (app, passport, auth) {
   // user routes
   var users = require('../app/controllers/users')
   app.get('/login', users.login)
+  app.get('/logout', users.logout)
   app.get('/users/:userId', users.show)
   app.get('/auth/facebook', passport.authenticate('facebook', { scope: [ 'email', 'user_about_me'], failureRedirect: '/' }), users.signin)
   app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/' }), users.authCallback)
