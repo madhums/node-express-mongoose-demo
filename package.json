@@ -21,7 +21,9 @@
     , "passport-local": "latest"
     , "passport-facebook": "latest"
     , "passport-twitter": "latest"
+    , "passport-github" : "latest"
     , "underscore": "latest"
+    , "gzippo": "latest"
     , "async": "latest"
     , "nodemon": "latest"
   }
