@@ -5,15 +5,15 @@ var mongoose = require('mongoose')
 // New article
 exports.new = function(req, res){
   res.render('articles/new', {
-    title: 'New Article',
-    article: new Article({})
+      title: 'New Article'
+    , article: new Article({})
   })
 }
 
 
 // Create an article
 exports.create = function (req, res) {
-  var article = new Article(req.body.article)
+  var article = new Article(req.body)
   article.user = req.user
 
   article.save(function(err){
@@ -25,7 +25,7 @@ exports.create = function (req, res) {
       })
     }
     else {
-      res.redirect('/article/'+article._id)
+      res.redirect('/articles/'+article._id)
     }
   })
 }
@@ -46,7 +46,6 @@ exports.update = function(req, res){
 
   article.save(function(err, doc) {
     if (err) {
-      utils.mongooseErrorHandler(err, req)
       res.render('articles/edit', {
           title: 'Edit Article'
         , article: article
@@ -54,7 +53,7 @@ exports.update = function(req, res){
       })
     }
     else {
-      res.redirect('/article/'+article._id)
+      res.redirect('/articles/'+article._id)
     }
   })
 }
