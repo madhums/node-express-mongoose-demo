@@ -24,7 +24,7 @@ exports.logout = function (req, res) {
 // show profile
 exports.show = function (req, res) {
   var user = req.profile
-  res.render('users/profile', {
+  res.render('users/show', {
       title: user.name
     , user: user
   })
