@@ -1,4 +1,5 @@
 **Blog post 1:** [Breaking down app.js file - nodejs, express, mongoose](http://madhums.tumblr.com/post/27521420404/breaking-down-app-js-file-nodejs-express-mongoose)
+
 **Blog post 2:** Coming soon!
 
 This is a boilerplate node.js application illustrating various features used in everyday
@@ -13,6 +14,18 @@ an article, delete an article and add comment on the article.
   $ git clone git://github.com/qed42/nodejs-express-mongoose-demo.git
   $ npm install
   $ npm start
+```
+
+## Directory structure
+```
+-app
+  |__controllers
+  |__models
+  |__views
+-config
+  |__routes
+  |__config
+  |__passport (auth config)
 ```
 
 Then visit [http://localhost:3000/](http://localhost:4000/)
