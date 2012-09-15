@@ -42,7 +42,7 @@ module.exports = function (app, passport, auth) {
   app.param('id', function(req, res, next, id){
     Article
       .findOne({ _id : id })
-      .populate('user')
+      .populate('user', 'name')
       .populate('comments')
       .exec(function (err, article) {
         if (err) return next(err)
@@ -51,28 +51,21 @@ module.exports = function (app, passport, auth) {
 
         var populateComments = function (comment, cb) {
           User
-            .find({ _id: comment.user })
+            .findOne({ _id: comment._user }, 'name')
             .exec(function (err, user) {
               if (err) return next(err)
               comment.user = user
-              cb()
+              cb(null, comment)
             })
         }
 
         if (article.comments.length) {
           async.map(article.comments, populateComments, function (err, results) {
-            if (err) {
-              console.log(err)
-              return next(err)
-            }
-            req.article.comments = results
-            next()
+            next(err)
           })
         }
-        else {
-          req.article = article
+        else
           next()
-        }
       })
   })
 
