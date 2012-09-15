@@ -1,6 +1,7 @@
 
 var mongoose = require('mongoose')
   , Article = mongoose.model('Article')
+  , _ = require('underscore')
 
 // New article
 exports.new = function(req, res){
@@ -43,6 +44,8 @@ exports.edit = function (req, res) {
 // Update article
 exports.update = function(req, res){
   var article = req.article
+
+  article = _.extend(article, req.body)
 
   article.save(function(err, doc) {
     if (err) {
