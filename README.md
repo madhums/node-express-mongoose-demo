@@ -16,7 +16,7 @@ an article, delete an article and add comment on the article.
   $ npm start
 ```
 
-Then visit [http://localhost:3000/](http://localhost:4000/)
+Then visit [http://localhost:3000/](http://localhost:3000/)
 
 ## Directory structure
 ```
