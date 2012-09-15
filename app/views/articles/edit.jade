@@ -1,7 +1,7 @@
+extends ../layouts/default
 
-!= messages()
-
-form.form-horizontal(method="post", action="/articles/"+article._id)
+block content
+  form.form-horizontal(method="post", action="/articles/"+article._id)
     input(name='_method', value='PUT', type='hidden')
     fieldset
         legend Edit #{article.title}

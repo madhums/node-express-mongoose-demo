@@ -1,10 +1,12 @@
-!= messages()
+extends ../layouts/default
 
-h2= title
-
-div#articles
-  - if(articles.length)
-    != partial('article_list', {collection : articles, as : 'article'})
-  - else
-    #no-results No articles found. Create one
-      a(href="/articles/new") &nbsp;here
+block content
+  each article in articles
+    .article
+      a.title(href='/article/'+article._id, title=article.title) #{article.title}
+      p.author
+        span Author :&nbsp;
+        a(href="/profile/"+article.user._id)=article.user.fb.name.full
+      p=article.body
+      span.date
+        #{dateformat(article.created_at, "%b %d, %Y at %I:%M %p")}

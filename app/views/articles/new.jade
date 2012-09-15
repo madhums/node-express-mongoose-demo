@@ -1,6 +1,7 @@
-!= messages()
+extends ../layouts/default
 
-form.form-horizontal(method="post", action="/articles")
+block content
+  form.form-horizontal(method="post", action="/articles")
     fieldset
         legend= title
         .control-group

@@ -1,8 +1,0 @@
-.article
-  a.title(href='/article/'+article._id, title=article.title) #{article.title}
-  p.author
-    span Author :&nbsp;
-    a(href="/profile/"+article.user._id)=article.user.fb.name.full
-  p=article.body
-  span.date
-    #{dateformat(article.created_at, "%b %d, %Y at %I:%M %p")}

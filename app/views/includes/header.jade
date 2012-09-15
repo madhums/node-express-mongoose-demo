@@ -13,9 +13,9 @@ header#header
             li
               a(href="https://github.com/qed42/nodejs-express-mongoose-demo", title="fork me on github") FORK ME ON GITHUB
           ul.nav.pull-right
-            if (everyauth.loggedIn)
+            if (req.isAuthenticated())
               li
-                a(href="/profile/"+current_user.id, title="Profile") Profile
+                a(href="/profile/"+req.user.id, title="Profile") Profile
               li
                 a(href="/logout", title="logout") Logout
             else
