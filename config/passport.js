@@ -44,16 +44,24 @@ exports.boot = function (passport, config) {
       consumerSecret: config.twitter.consumerSecret,
       callbackURL: config.twitter.callbackURL
     },
-    function(username, password, done) {
-      User.findOne({ username: username }, function (err, user) {
+    function(token, tokenSecret, profile, done) {
+      User.findOne({ 'twitter.id': profile.id }, function (err, user) {
         if (err) { return done(err) }
         if (!user) {
-          return done(null, false, { message: 'Unknown user' })
+          user = new User({
+              name: profile.displayName
+            , username: profile.username
+            , provider: 'twitter'
+            , twitter: profile._json
+          })
+          user.save(function (err, user) {
+            if (err) console.log(err)
+            return done(err, user)
+          })
         }
-        if (!user.authenticate(password)) {
-          return done(null, false, { message: 'Invalid password' })
+        else {
+          return done(err, user)
         }
-        return done(null, user)
       })
     }
   ))
