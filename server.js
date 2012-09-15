@@ -25,7 +25,7 @@ model_files.forEach(function (file) {
 })
 
 // bootstrap passport config
-require('./config/passport')
+require('./config/passport').boot(passport, config)
 
 var app = express()                                       // express app
 require('./settings').boot(app, config, passport)         // Bootstrap application settings
