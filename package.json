@@ -1,9 +1,9 @@
 {
     "name": "noobjs"
   , "description": "A demo app in nodejs illustrating use of express, jade and mogoose"
-  , "version": "2.2.0"
-  , "private": true
-  , "author": "Madhusudhan M S (http://github.com/madhums)"
+  , "version": "3.0.0"
+  , "private": false
+  , "author": "Madhusudhan Srinivasa <madhums8@gmail.com> (http://madhums.github.com)"
   , "engines": {
         "node": "0.6.18"
       , "npm": "1.1.9"
