@@ -26,3 +26,7 @@ body {
   text-align: center;
   padding: 20px;
 }
+
+.btn {
+  outline: none !important;
+}

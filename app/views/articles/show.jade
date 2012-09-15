@@ -13,10 +13,11 @@ block content
 
   p
     br
-    a.btn(href='/articles/'+article._id+'/edit', title="edit") Edit
-    &nbsp;
-    a.btn.destroy(href='/articles/'+article._id, title="delete") Delete
-    &nbsp;
+    form.form-inline.confirm(action="/articles/"+article.id, method="post")
+      a.btn(href='/articles/'+article._id+'/edit', title="edit") Edit
+      &nbsp;&nbsp;
+      input(type="hidden", name="_method", value="DELETE")
+      button.btn.btn-danger(type="submit") delete
 
   p
     br
