@@ -1,32 +1,31 @@
-var User = mongoose.model('User')
+var mongoose = require('mongoose')
+  , User = mongoose.model('User')
 
-module.exports = function (app, auth) {
+exports.signin = function (req, res) {}
 
-  app.param('profileId', function (req, res, next, id) {
-    User
-      .findOne({ _id : id })
-      .run(function (err, user) {
-        if (err) return next(err)
-        if (!user) return next(new Error('Failed to load User ' + id))
-        req.foundUser = user
-        next()
-      })
+// auth callback
+exports.authCallback = function (req, res, next) {
+  res.redirect('/')
+}
+
+// login
+exports.login = function (req, res) {
+  res.render('users/login', {
+    title: 'Login'
   })
+}
 
-  // Handles session Logout
-  app.get('/logout', function (req, res) {
-    req.logout()
-    res.redirect('/articles')
+// logout
+exports.logout = function (req, res) {
+  req.logout()
+  res.redirect('/articles')
+}
+
+// show profile
+exports.show = function (req, res) {
+  var user = req.profile
+  res.render('users/profile', {
+      title: user.name
+    , user: user
   })
-
-  // Profile view
-  app.get('/profile/:profileId', function (req, res) {
-    var user1 = req.foundUser
-    res.render('users/profile', {
-        title : user1.fb.name.full
-      , user1 : user1
-    })
-  })
-
-
 }
