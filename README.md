@@ -16,6 +16,8 @@ an article, delete an article and add comment on the article.
   $ npm start
 ```
 
+**NOTE:** Do not forget to update your facebook twitter and github APP_ID and APP_SECRET in `config/config.js`
+
 Then visit [http://localhost:3000/](http://localhost:3000/)
 
 ## Directory structure
