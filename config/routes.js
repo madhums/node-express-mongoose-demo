@@ -20,6 +20,8 @@ module.exports = function (app, passport, auth) {
   app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }), users.authCallback)
   app.get('/auth/twitter', passport.authenticate('twitter', { failureRedirect: '/login' }), users.signin)
   app.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/login' }), users.authCallback)
+  app.get('/auth/google', passport.authenticate('google', { failureRedirect: '/login', scope: 'https://www.google.com/m8/feeds' }), users.signin)
+  app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login', scope: 'https://www.google.com/m8/feeds' }), users.authCallback)
 
   app.param('userId', function (req, res, next, id) {
     User
