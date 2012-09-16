@@ -35,9 +35,9 @@ module.exports = function (app, passport, auth) {
   app.get('/articles/new', auth.requiresLogin, articles.new)
   app.post('/articles', auth.requiresLogin, articles.create)
   app.get('/articles/:id', articles.show)
-  app.get('/articles/:id/edit', auth.requiresLogin, articles.edit)
-  app.put('/articles/:id', auth.requiresLogin, articles.update)
-  app.del('/articles/:id', auth.requiresLogin, articles.destroy)
+  app.get('/articles/:id/edit', auth.requiresLogin, auth.article.hasAuthorization, articles.edit)
+  app.put('/articles/:id', auth.requiresLogin, auth.article.hasAuthorization, articles.update)
+  app.del('/articles/:id', auth.requiresLogin, auth.article.hasAuthorization, articles.destroy)
 
   app.param('id', function(req, res, next, id){
     Article
