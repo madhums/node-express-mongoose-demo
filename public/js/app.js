@@ -18,14 +18,4 @@ $(document).ready(function () {
     'width':'280px'
   });
 
-  $('a.show-login').click(function (e) {
-    $('form.signup').hide();
-    $('form.login').fadeIn();
-  });
-
-  $('a.show-signup').click(function (e) {
-    $('form.login').hide();
-    $('form.signup').fadeIn();
-  });
-
 });
