@@ -15,14 +15,22 @@ block content
   form.form-horizontal(method="post", action=action)
     if (!article.isNew)
       input(type="hidden", name="_method", value="PUT")
+
     .control-group
       label.control-label(for='title') Title
       .controls
         input#title.input-xlarge(type='text', name="title", value=article.title, placeholder='Enter the title')
+
     .control-group
       label.control-label(for='desc') Body
       .controls
-        textarea#desc.input-xxlarge(type='text', rows="6", name="body", placeholder='Enter the article description')=article.body
+        textarea#desc.input-xxlarge(type='text', rows="5", name="body", placeholder='Enter the article description')=article.body
+
+    .control-group
+      label.control-label(for='desc') Tags
+      .controls
+        input#tags(type='text', rows="3", name="tags", placeholder='Enter the tags')=article.tags
+
     .form-actions
       button.btn.btn-primary(type='submit') Save changes
       &nbsp;

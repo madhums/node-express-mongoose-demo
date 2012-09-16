@@ -8,6 +8,8 @@ var ArticleSchema = new Schema({
   , body: {type : String, default : '', trim : true}
   , user: {type : Schema.ObjectId, ref : 'User'}
   , comments: [{type : Schema.ObjectId, ref : 'Comment'}]
+  , tags: []
+  , categories: []
   , createdAt  : {type : Date, default : Date.now}
 })
 
