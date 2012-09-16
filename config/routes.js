@@ -51,7 +51,8 @@ module.exports = function (app, passport, auth) {
 
         var populateComments = function (comment, cb) {
           User
-            .findOne({ _id: comment._user }, 'name')
+            .findOne({ _id: comment._user })
+            .select('name')
             .exec(function (err, user) {
               if (err) return next(err)
               comment.user = user
@@ -60,7 +61,7 @@ module.exports = function (app, passport, auth) {
         }
 
         if (article.comments.length) {
-          async.map(article.comments, populateComments, function (err, results) {
+          async.map(req.article.comments, populateComments, function (err, results) {
             next(err)
           })
         }
