@@ -11,8 +11,7 @@ block content
   .date= formatDate(article.createdAt, "%b %d, %Y at %I:%M %p")
   if (article.tags)
     .tags
-      | Tagged with
-      br
+      | Tags :&nbsp;
       each tag in article.tags.split(',')
         a.tag(href="/tags/"+tag)
           i.icon-tags

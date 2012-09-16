@@ -7,9 +7,16 @@ block content
   each article in articles
     .article
       a.title(href='/articles/'+article._id, title=article.title) #{article.title}
-      p.author
-        span Author :&nbsp;
-        a(href="/users/"+article.user._id)=article.user.name
       p=article.body
       span.date
         #{formatDate(article.createdAt, "%b %d, %Y at %I:%M %p")}
+      p.author
+        span Author :&nbsp;
+        a(href="/users/"+article.user._id)=article.user.name
+      if (article.tags)
+        p.tags
+          span Tags :&nbsp;
+          each tag in article.tags.split(',')
+            a.tag(href="/tags/"+tag)
+              i.icon-tags
+              |  #{tag}
