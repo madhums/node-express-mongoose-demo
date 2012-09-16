@@ -43,7 +43,7 @@ exports.boot = function (passport, config) {
 
   // use twitter strategy
   passport.use(new TwitterStrategy({
-        consumerKey: config.twitter.clientId
+        consumerKey: config.twitter.clientID
       , consumerSecret: config.twitter.clientSecret
       , callbackURL: config.twitter.callbackURL
     },
