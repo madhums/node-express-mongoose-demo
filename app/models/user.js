@@ -4,7 +4,7 @@ var mongoose = require('mongoose')
   , Schema = mongoose.Schema
   , crypto = require('crypto')
   , _ = require('underscore')
-  , authTypes = ['github', 'twitter', 'facebook']
+  , authTypes = ['github', 'twitter', 'facebook', 'google']
 
 var UserSchema = new Schema({
     name: String
@@ -58,7 +58,7 @@ UserSchema.path('username').validate(function (username) {
 UserSchema.pre('save', function(next) {
   if (!this.isNew) return next()
 
-  if (!validatePresenceOf(this.password))
+  if (!validatePresenceOf(this.password) && authTypes.indexOf(this.provider) === -1)
     next(new Error('Invalid password'))
   else
     next()
