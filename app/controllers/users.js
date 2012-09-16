@@ -18,7 +18,25 @@ exports.login = function (req, res) {
 // logout
 exports.logout = function (req, res) {
   req.logout()
-  res.redirect('/articles')
+  res.redirect('/login')
+}
+
+// session
+exports.session = function (req, res) {
+  res.redirect('/')
+}
+
+// signup
+exports.create = function (req, res) {
+  var user = new User(req.body)
+  user.provider = 'local'
+  user.save(function (err) {
+    if (err) return res.render('users/login', { errors: err.errors })
+    req.logIn(user, function(err) {
+      if (err) return next(err)
+      return res.redirect('/')
+    })
+  })
 }
 
 // show profile
