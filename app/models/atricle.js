@@ -7,12 +7,16 @@ var getTags = function (tags) {
   return tags.join(',')
 }
 
+var setTags = function (tags) {
+  return tags.split(',')
+}
+
 var ArticleSchema = new Schema({
     title: {type : String, default : '', trim : true}
   , body: {type : String, default : '', trim : true}
   , user: {type : Schema.ObjectId, ref : 'User'}
   , comments: [{type : Schema.ObjectId, ref : 'Comment'}]
-  , tags: {type: [], get: getTags}
+  , tags: {type: [], get: getTags, set: setTags}
   , categories: []
   , createdAt  : {type : Date, default : Date.now}
 })
