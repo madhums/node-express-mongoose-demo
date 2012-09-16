@@ -9,6 +9,7 @@ module.exports = function (app, passport, auth) {
   // user routes
   var users = require('../app/controllers/users')
   app.get('/login', users.login)
+  app.get('/signup', users.signup)
   app.get('/logout', users.logout)
   app.post('/users', users.create)
   app.post('/users/session', passport.authenticate('local', {failureRedirect: '/login'}), users.session)
