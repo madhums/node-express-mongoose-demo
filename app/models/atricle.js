@@ -3,12 +3,16 @@
 var mongoose = require('mongoose')
   , Schema = mongoose.Schema
 
+var getTags = function (tags) {
+  return tags.join(',')
+}
+
 var ArticleSchema = new Schema({
     title: {type : String, default : '', trim : true}
   , body: {type : String, default : '', trim : true}
   , user: {type : Schema.ObjectId, ref : 'User'}
   , comments: [{type : Schema.ObjectId, ref : 'Comment'}]
-  , tags: []
+  , tags: {type: [], get: getTags}
   , categories: []
   , createdAt  : {type : Date, default : Date.now}
 })
@@ -20,5 +24,7 @@ ArticleSchema.path('title').validate(function (title) {
 ArticleSchema.path('body').validate(function (body) {
   return body.length > 0
 }, 'Article body cannot be blank')
+
+
 
 mongoose.model('Article', ArticleSchema)
