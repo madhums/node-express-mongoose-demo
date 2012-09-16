@@ -33,5 +33,5 @@ Then visit [http://localhost:3000/](http://localhost:3000/)
   |__passport (auth config)
 ```
 
-If you are looking a specific feature, please use the issue tracker. I will try to come
+If you are looking for a specific feature, please use the issue tracker. I will try to come
 up with a demo as earliest as I can. Please feel free to fork and send updates :)
