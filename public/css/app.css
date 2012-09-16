@@ -42,3 +42,5 @@ body {
 a.tag {
   margin: 0 10px 0 0;
 }
+
+form.signup { display: none; }

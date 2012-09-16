@@ -5,10 +5,55 @@ block main
 
 block content
   .row
-    .offset4
+    .span6
       a(href="/auth/facebook")
         img(src="/img/facebook.png")
       a(href="/auth/github")
         img(src="/img/github.png")
       a(href="/auth/twitter")
         img(src="/img/twitter.png")
+
+    .span6
+      form.signup.form-horizontal(action="/users", method="post")
+        .control-group
+          label.control-label(for='name') Full name
+          .controls
+            input#name(type='text', name="name", placeholder='Full name')
+
+        .control-group
+          label.control-label(for='email') Email
+          .controls
+            input#email(type='text', name="email", placeholder='Email')
+
+        .control-group
+          label.control-label(for='username') Username
+          .controls
+            input#username(type='text', name="username", placeholder='Username')
+
+        .control-group
+          label.control-label(for='password') Password
+          .controls
+            input#password(type='text', name="password", placeholder='Password')
+
+        .form-actions
+          button.btn.btn-primary(type='submit') Sign up
+          &nbsp;
+          | or&nbsp;
+          a.show-login(href="#") login
+
+      form.login.form-horizontal(action="/users/session", method="post")
+        .control-group
+          label.control-label(for='email') Email
+          .controls
+            input#email(type='text', name="email", placeholder='Email')
+
+        .control-group
+          label.control-label(for='password') Password
+          .controls
+            input#password(type='text', name="password", placeholder='Password')
+
+        .form-actions
+          button.btn.btn-primary(type='submit') Login
+          &nbsp;
+          | or&nbsp;
+          a.show-signup(href="#") sign up
