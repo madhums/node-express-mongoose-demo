@@ -1,7 +1,8 @@
 
-if (comment)
+if (comment && comment.user)
   .comment
-    a(href="/users/"+comment.user._id) #{comment.user.name} :&nbsp;
+    a(href="/users/"+comment.user._id) #{comment.user.name}
+    |  :&nbsp;
     != comment.body
     br
     span.date #{formatDate(comment.createdAt, "%b %d, %Y at %I:%M %p")}
