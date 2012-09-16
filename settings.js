@@ -29,6 +29,7 @@ function bootApplication(app, config, passport) {
     app.use(function (req, res, next) {
       res.locals.appName = 'Nodejs Express Mongoose Demo'
       res.locals.title = 'Nodejs Express Mongoose Demo'
+      res.locals.showStack = app.showStackError
       res.locals.req = req
       res.locals.formatDate = function (date) {
         var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec" ]
@@ -63,6 +64,27 @@ function bootApplication(app, config, passport) {
 
     // routes should be at the last
     app.use(app.router)
+
+    // assume "not found" in the error msgs
+    // is a 404. this is somewhat silly, but
+    // valid, you can do whatever you like, set
+    // properties, use instanceof etc.
+    app.use(function(err, req, res, next){
+      // treat as 404
+      if (~err.message.indexOf('not found')) return next()
+
+      // log it
+      console.error(err.stack)
+
+      // error page
+      res.status(500).render('500')
+    })
+
+    // assume 404 since no middleware responded
+    app.use(function(req, res, next){
+      res.status(404).render('404', { url: req.originalUrl })
+    })
+
   })
 
   app.set('showStackError', false)
