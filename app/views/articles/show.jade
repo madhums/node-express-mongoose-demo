@@ -4,16 +4,23 @@ block main
   h1= article.title
 
 block content
+  p=article.body
   p.author
     span Author :&nbsp;
     a(href="/users/"+article.user._id)=article.user.name
-  p=article.body
-  span.date
-    #{formatDate(article.createdAt, "%b %d, %Y at %I:%M %p")}
+  .date= formatDate(article.createdAt, "%b %d, %Y at %I:%M %p")
+  if (article.tags)
+    .tags
+      | Tagged with
+      br
+      each tag in article.tags.split(',')
+        a.tag(href="/tags/"+tag)
+          i.icon-tags
+          |  #{tag}
 
   p
     br
-    form.form-inline.confirm(action="/articles/"+article.id, method="post")
+    form.center.form-inline.confirm(action="/articles/"+article.id, method="post")
       a.btn(href='/articles/'+article._id+'/edit', title="edit") Edit
       &nbsp;&nbsp;
       input(type="hidden", name="_method", value="DELETE")

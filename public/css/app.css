@@ -30,3 +30,15 @@ body {
 .btn {
   outline: none !important;
 }
+
+.center {
+  text-align: center;
+}
+
+.tags {
+  margin-top: 10px;
+}
+
+a.tag {
+  margin: 0 10px 0 0;
+}
