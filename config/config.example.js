@@ -15,7 +15,12 @@ module.exports = {
       github: {
           appId: 'APP_ID'
         , secret: 'APP_SECRET'
-        , callbackURL: 'http://127.0.0.1:3000/auth/github/callback'
+        , callbackURL: 'http://localhost:3000/auth/github/callback'
+      },
+      google: {
+          clientID: "APP_ID"
+        , clientSecret: "APP_SECRET"
+        , callbackURL: "http://localhost:3000/auth/google/callback"
       }
     }
   , test: {
