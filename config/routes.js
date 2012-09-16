@@ -10,13 +10,15 @@ module.exports = function (app, passport, auth) {
   var users = require('../app/controllers/users')
   app.get('/login', users.login)
   app.get('/logout', users.logout)
+  app.post('/users', users.create)
+  app.post('/users/session', passport.authenticate('local', {failureRedirect: '/login'}), users.session)
   app.get('/users/:userId', users.show)
-  app.get('/auth/facebook', passport.authenticate('facebook', { scope: [ 'email', 'user_about_me'], failureRedirect: '/' }), users.signin)
-  app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/' }), users.authCallback)
-  app.get('/auth/github', passport.authenticate('github', { failureRedirect: '/' }), users.signin)
-  app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/' }), users.authCallback)
-  app.get('/auth/twitter', passport.authenticate('twitter', { failureRedirect: '/' }), users.signin)
-  app.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/' }), users.authCallback)
+  app.get('/auth/facebook', passport.authenticate('facebook', { scope: [ 'email', 'user_about_me'], failureRedirect: '/login' }), users.signin)
+  app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), users.authCallback)
+  app.get('/auth/github', passport.authenticate('github', { failureRedirect: '/login' }), users.signin)
+  app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }), users.authCallback)
+  app.get('/auth/twitter', passport.authenticate('twitter', { failureRedirect: '/login' }), users.signin)
+  app.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/login' }), users.authCallback)
 
   app.param('userId', function (req, res, next, id) {
     User
