@@ -23,14 +23,14 @@ Then visit [http://localhost:3000/](http://localhost:3000/)
 
 ## Directory structure
 ```
--app
-  |__controllers
-  |__models
-  |__views
--config
-  |__routes
-  |__config
-  |__passport (auth config)
+-app/
+  |__controllers/
+  |__models/
+  |__views/
+-config/
+  |__routes.js
+  |__config.js
+  |__passport.js (auth config)
 ```
 
 If you are looking for a specific feature, please use the issue tracker. I will try to come
