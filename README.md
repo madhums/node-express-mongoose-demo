@@ -11,7 +11,7 @@ an article, delete an article and add comment on the article.
 
 ## Install
 ```sh
-  $ git clone git://github.com/qed42/nodejs-express-mongoose-demo.git
+  $ git clone git://github.com/madhums/nodejs-express-mongoose-demo.git
   $ npm install
   $ cp config/config.example.js config/config.js
   $ npm start
