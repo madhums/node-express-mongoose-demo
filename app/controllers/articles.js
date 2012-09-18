@@ -89,8 +89,7 @@ exports.index = function(req, res){
 
   Article
     .find({})
-    .populate('user')
-    .populate('comments')
+    .populate('user', 'name')
     .sort({'createdAt': -1}) // sort by date
     .limit(perPage)
     .skip(perPage * page)
