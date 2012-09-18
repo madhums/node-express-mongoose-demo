@@ -2,7 +2,7 @@ var mongoose = require('mongoose')
   , Article = mongoose.model('Article')
 
 exports.index = function (req, res) {
-  var perPage = 1
+  var perPage = 5
     , page = req.param('page') > 0 ? req.param('page') : 0
 
   Article
