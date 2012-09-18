@@ -20,3 +20,8 @@ block content
               a.tag(href="/tags/"+tag)
                 i.icon-tags
                 |  #{tag}
+
+  if (pages > 1)
+    .pagination
+      ul
+        != createPagination(pages, page)
