@@ -18,7 +18,7 @@ exports.requiresLogin = function (req, res, next) {
 exports.user = {
     hasAuthorization : function (req, res, next) {
       if (req.profile.id != req.user.id) {
-        res.redirect('/users/'+req.profile.id)
+        return res.redirect('/users/'+req.profile.id)
       }
       next()
     }
@@ -32,7 +32,7 @@ exports.user = {
 exports.article = {
     hasAuthorization : function (req, res, next) {
       if (req.article.user.id != req.user.id) {
-        res.redirect('/articles/'+req.article.id)
+        return res.redirect('/articles/'+req.article.id)
       }
       next()
     }
