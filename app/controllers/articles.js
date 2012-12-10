@@ -1,6 +1,7 @@
 
 var mongoose = require('mongoose')
   , Article = mongoose.model('Article')
+  , Imager = require('imager')
   , _ = require('underscore')
 
 // New article
@@ -15,20 +16,29 @@ exports.new = function(req, res){
 // Create an article
 exports.create = function (req, res) {
   var article = new Article(req.body)
+    , imagerConfig = require('../../config/imager')
+    , imager = new Imager(imagerConfig, 'Rackspace')
+
   article.user = req.user
 
-  article.save(function(err){
-    if (err) {
-      res.render('articles/new', {
-          title: 'New Article'
-        , article: article
-        , errors: err.errors
-      })
+  imager.upload(req.files.image, function (err, cdnUri, files) {
+    if (err) return res.render('400')
+    if (files.length) {
+      article.image = { cdnUri : cdnUri, files : files }
     }
-    else {
-      res.redirect('/articles/'+article._id)
-    }
-  })
+    article.save(function(err){
+      if (err) {
+        res.render('articles/new', {
+            title: 'New Article'
+          , article: article
+          , errors: err.errors
+        })
+      }
+      else {
+        res.redirect('/articles/'+article._id)
+      }
+    })
+  }, 'article')
 }
 
 

@@ -12,26 +12,36 @@ block content
         each error in errors
           li= error.type
 
-  form.form-horizontal(method="post", action=action)
-    if (!article.isNew)
-      input(type="hidden", name="_method", value="PUT")
+  .row
+    .span7
+      form.form-horizontal(method="post", action=action, enctype="multipart/form-data")
+        if (!article.isNew)
+          input(type="hidden", name="_method", value="PUT")
 
-    .control-group
-      label.control-label(for='title') Title
-      .controls
-        input#title.input-xlarge(type='text', name="title", value=article.title, placeholder='Enter the title')
+        .control-group
+          label.control-label(for='title') Title
+          .controls
+            input#title.input-xlarge(type='text', name="title", value=article.title, placeholder='Enter the title')
 
-    .control-group
-      label.control-label(for='desc') Body
-      .controls
-        textarea#desc.input-xxlarge(type='text', rows="5", name="body", placeholder='Enter the article description')=article.body
+        .control-group
+          label.control-label(for='title') Image
+          .controls
+            input(type='file', name="image[]")
 
-    .control-group
-      label.control-label(for='desc') Tags
-      .controls
-        input#tags(type='text', name="tags", value=article.tags, placeholder='Enter the tags')
+        .control-group
+          label.control-label(for='desc') Body
+          .controls
+            textarea#desc.input-xlarge(type='text', rows="5", name="body", placeholder='Enter the article description')=article.body
 
-    .form-actions
-      button.btn.btn-primary(type='submit') Save changes
-      &nbsp;
-      a.btn(href='/articles', title="cancel") Cancel
+        .control-group
+          label.control-label(for='desc') Tags
+          .controls
+            input#tags(type='text', name="tags", value=article.tags, placeholder='Enter the tags')
+
+        .form-actions
+          button.btn.btn-primary(type='submit') Save changes
+          &nbsp;
+          a.btn(href='/articles', title="cancel") Cancel
+    .span5
+      if (!article.isNew && article.image)
+        img(src=article.image.cdnUri + '/mini_' + article.image.files[0])

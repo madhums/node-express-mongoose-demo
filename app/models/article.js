@@ -17,6 +17,10 @@ var ArticleSchema = new Schema({
   , user: {type : Schema.ObjectId, ref : 'User'}
   , comments: [{type : Schema.ObjectId, ref : 'Comment'}]
   , tags: {type: [], get: getTags, set: setTags}
+  , image: {
+        cdnUri: String
+      , files: []
+    }
   , categories: []
   , createdAt  : {type : Date, default : Date.now}
 })
