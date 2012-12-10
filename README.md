@@ -14,10 +14,11 @@ an article, delete an article and add comment on the article.
   $ git clone git://github.com/madhums/nodejs-express-mongoose-demo.git
   $ npm install
   $ cp config/config.example.js config/config.js
+  $ cp config/imager.example.js config/imager.js
   $ npm start
 ```
 
-**NOTE:** Do not forget to update your facebook twitter and github APP_ID and APP_SECRET in `config/config.js`
+**NOTE:** Do not forget to update your facebook twitter and github APP_ID and APP_SECRET in `config/config.js`. Also if you want to use image uploads, don't forget to replace the S3 and Rackspace keys in `config/imager.js`.
 
 Then visit [http://localhost:3000/](http://localhost:3000/)
 
