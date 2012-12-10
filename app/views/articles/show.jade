@@ -19,7 +19,7 @@ block content
               i.icon-tags
               |  #{tag}
     .span3
-      if (!article.isNew && article.image)
+      if (!article.isNew && article.image && article.image.files && article.image.files.length)
         img(src=article.image.cdnUri + '/mini_' + article.image.files[0])
 
   p
