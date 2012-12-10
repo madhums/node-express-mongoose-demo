@@ -17,7 +17,7 @@ exports.new = function(req, res){
 exports.create = function (req, res) {
   var article = new Article(req.body)
     , imagerConfig = require('../../config/imager')
-    , imager = new Imager(imagerConfig, 'Rackspace')
+    , imager = new Imager(imagerConfig, 'S3')
 
   article.user = req.user
 
