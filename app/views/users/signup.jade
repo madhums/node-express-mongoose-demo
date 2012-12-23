@@ -5,17 +5,17 @@ block auth
     .control-group
       label.control-label(for='name') Full name
       .controls
-        input#name(type='text', name="name", placeholder='Full name')
+        input#name(type='text', name="name", placeholder='Full name', value=user.name)
 
     .control-group
       label.control-label(for='email') Email
       .controls
-        input#email(type='text', name="email", placeholder='Email')
+        input#email(type='text', name="email", placeholder='Email', value=user.email)
 
     .control-group
       label.control-label(for='username') Username
       .controls
-        input#username(type='text', name="username", placeholder='Username')
+        input#username(type='text', name="username", placeholder='Username', value=user.username)
 
     .control-group
       label.control-label(for='password') Password

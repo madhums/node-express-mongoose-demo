@@ -53,6 +53,12 @@ UserSchema.path('username').validate(function (username) {
   return username.length
 }, 'Username cannot be blank')
 
+UserSchema.path('hashed_password').validate(function (hashed_password) {
+  // if you are authenticating by any of the oauth strategies, don't validate
+  if (authTypes.indexOf(this.provider) !== -1) return true
+  return hashed_password.length
+}, 'Password cannot be blank')
+
 
 // pre save hooks
 UserSchema.pre('save', function(next) {
@@ -74,6 +80,7 @@ UserSchema.method('makeSalt', function() {
 })
 
 UserSchema.method('encryptPassword', function(password) {
+  if (!password) return ''
   return crypto.createHmac('sha1', this.salt).update(password).digest('hex')
 })
 

@@ -11,14 +11,16 @@ exports.authCallback = function (req, res, next) {
 // login
 exports.login = function (req, res) {
   res.render('users/login', {
-    title: 'Login'
+      title: 'Login'
+    , message: req.flash('error')
   })
 }
 
 // sign up
 exports.signup = function (req, res) {
   res.render('users/signup', {
-    title: 'Sign up'
+      title: 'Sign up'
+    , user: new User()
   })
 }
 
@@ -38,7 +40,9 @@ exports.create = function (req, res) {
   var user = new User(req.body)
   user.provider = 'local'
   user.save(function (err) {
-    if (err) return res.render('users/signup', { errors: err.errors })
+    if (err) {
+      return res.render('users/signup', { errors: err.errors, user: user })
+    }
     req.logIn(user, function(err) {
       if (err) return next(err)
       return res.redirect('/')

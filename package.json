@@ -17,6 +17,7 @@
     , "jade": "latest"
     , "mongoose": "latest"
     , "connect-mongodb": "latest"
+    , "connect-flash": "latest"
     , "passport": "latest"
     , "passport-local": "latest"
     , "passport-facebook": "latest"

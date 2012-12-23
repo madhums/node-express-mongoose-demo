@@ -5,6 +5,7 @@
 
 var express = require('express')
   , mongoStore = require('connect-mongodb')
+  , flash = require('connect-flash')
 
 exports.boot = function(app, config, passport){
   bootApplication(app, config, passport)
@@ -76,6 +77,8 @@ function bootApplication(app, config, passport) {
         collection : 'sessions'
       })
     }))
+
+    app.use(flash())
 
     app.use(passport.initialize())
     app.use(passport.session())
