@@ -100,7 +100,7 @@ function bootApplication(app, config, passport) {
       console.error(err.stack)
 
       // error page
-      res.status(500).render('500')
+      res.status(500).render('500', { error: err.stack })
     })
 
     // assume 404 since no middleware responded
