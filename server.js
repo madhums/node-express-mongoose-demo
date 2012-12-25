@@ -8,7 +8,7 @@ var express = require('express')
 // Load configurations
 var env = process.env.NODE_ENV || 'development'
   , config = require('./config/config')[env]
-  , auth = require('./config/authorization')
+  , auth = require('./config/middlewares/authorization')
   , mongoose = require('mongoose')
 
 // Bootstrap db connection
@@ -21,11 +21,11 @@ fs.readdirSync(models_path).forEach(function (file) {
 })
 
 // bootstrap passport config
-require('./config/passport').boot(passport, config)
+require('./config/passport')(passport, config)
 
 var app = express()
 // express settings
-require('./config/express').boot(app, config, passport)
+require('./config/express')(app, config, passport)
 
 // Bootstrap routes
 require('./config/routes')(app, passport, auth)

@@ -6,15 +6,9 @@
 var express = require('express')
   , mongoStore = require('connect-mongodb')
   , flash = require('connect-flash')
-  , viewHelpers = require('../app/helpers/view')
+  , viewHelpers = require('./middlewares/view')
 
-exports.boot = function(app, config, passport){
-  bootApplication(app, config, passport)
-}
-
-// App settings and middleware
-
-function bootApplication(app, config, passport) {
+module.exports = function (app, config, passport) {
 
   app.set('showStackError', true)
   app.use(express.static(config.root + '/public'))

@@ -32,6 +32,8 @@ Then visit [http://localhost:3000/](http://localhost:3000/)
   |__routes.js
   |__config.js
   |__passport.js (auth config)
+  |__express.js (express.js configs)
+  |__middlewares/ (custom middlewares)
 ```
 
 If you are looking for a specific feature, please use the issue tracker. I will try to come
