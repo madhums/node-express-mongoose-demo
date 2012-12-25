@@ -1,6 +1,10 @@
 
 module.exports = {
     development: {
+      root: require('path').normalize(__dirname + '/..'),
+      app: {
+        name: 'Nodejs Express Mongoose Demo'
+      },
       db: 'mongodb://localhost/noobjs_dev',
       facebook: {
           clientID: "APP_ID"
