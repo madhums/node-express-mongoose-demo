@@ -9,6 +9,7 @@ var express = require('express')
 var env = process.env.NODE_ENV || 'development'
   , config = require('./config/config')[env]
   , auth = require('./config/authorization')
+  , mongoose = require('mongoose')
 
 // Bootstrap db connection
 mongoose.connect(config.db)
