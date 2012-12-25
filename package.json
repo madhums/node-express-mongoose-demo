@@ -9,11 +9,10 @@
       , "npm": "1.1.9"
     }
   , "scripts": {
-      "start": "./node_modules/.bin/nodemon server.js"
+      "start": "NODE_ENV=production ./node_modules/.bin/nodemon server.js"
     }
   , "dependencies": {
       "express": "latest"
-    , "express-namespace": "latest"
     , "jade": "latest"
     , "mongoose": "latest"
     , "connect-mongodb": "latest"
