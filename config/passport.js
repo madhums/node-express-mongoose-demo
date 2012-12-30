@@ -57,7 +57,7 @@ module.exports = function (passport, config) {
             , provider: 'twitter'
             , twitter: profile._json
           })
-          user.save(function (err, user) {
+          user.save(function (err) {
             if (err) console.log(err)
             return done(err, user)
           })
@@ -86,7 +86,7 @@ module.exports = function (passport, config) {
             , provider: 'facebook'
             , facebook: profile._json
           })
-          user.save(function (err, user) {
+          user.save(function (err) {
             if (err) console.log(err)
             return done(err, user)
           })
@@ -114,9 +114,13 @@ module.exports = function (passport, config) {
             , provider: 'github'
             , github: profile._json
           })
-          user.save()
+          user.save(function (err) {
+            if (err) console.log(err)
+            return done(err, user)
+          })
+        } else {
+          return done(err, user)
         }
-        return done(err, user)
       })
     }
   ))
@@ -137,9 +141,13 @@ module.exports = function (passport, config) {
             , provider: 'google'
             , google: profile._json
           })
-          user.save()
+          user.save(function (err) {
+            if (err) console.log(err)
+            return done(err, user)
+          })
+        } else {
+          return done(err, user)
         }
-        return done(err, user)
       })
     }
   ));

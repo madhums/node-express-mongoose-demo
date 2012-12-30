@@ -16,6 +16,7 @@ var UserSchema = new Schema({
   , facebook: {}
   , twitter: {}
   , github: {}
+  , google: {}
 })
 
 // virtual attributes
