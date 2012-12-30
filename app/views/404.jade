@@ -8,6 +8,6 @@ block main
 block content
   #error-message-box
     #error-stack-trace
-      - if(showStack)
-        pre
-          code!= error.stack
+      pre
+        code!= error
+
