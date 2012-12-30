@@ -12,7 +12,7 @@ module.exports = function (app, config, passport) {
 
   app.set('showStackError', true)
   app.use(express.static(config.root + '/public'))
-  app.use(express.logger(':method :url :status'))
+  app.use(express.logger('dev'))
 
   // set views path, template engine and default layout
   app.set('views', config.root + '/app/views')
