@@ -4,7 +4,7 @@
  */
 
 var express = require('express')
-  , mongoStore = require('connect-mongodb')
+  , mongoStore = require('connect-mongo')(express)
   , flash = require('connect-flash')
   , viewHelpers = require('./middlewares/view')
 
