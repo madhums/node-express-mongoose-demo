@@ -11,6 +11,14 @@ var express = require('express')
 module.exports = function (app, config, passport) {
 
   app.set('showStackError', true)
+  // should be placed before express.static
+  app.use(express.compress({
+    filter: function (req, res) {
+      console.log(res.getHeader('Content-Type'));
+      return /json|text|javascript|css/.test(res.getHeader('Content-Type'));
+    },
+    level: 9
+  }))
   app.use(express.static(config.root + '/public'))
   app.use(express.logger('dev'))
 
