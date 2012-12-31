@@ -1,0 +1,17 @@
+//- Flash Message Processor
+//- req.flash() -> {"type": ["errora", "errorb"]} example: {"error":["Invalid Password"]}
+//- Note: 
+  .alert-error    is red
+  .alert-success  is green
+  .alert-info     is blue
+  Info: http://twitter.github.com/bootstrap/components.html#alerts
+mixin flashMessage(data)
+  - for (var type in data)
+    - if (data[type].length >= 1)
+      - each msg in data[type]
+        div(class="flash alert alert-#{type}")
+          strong
+            !=type.charAt(0).toUpperCase() + type.slice(1); //capitalize the first letter of the error type
+            | : 
+          p(style="margin:0")
+            !=msg
