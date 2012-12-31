@@ -65,6 +65,7 @@ module.exports = function (config) {
     res.locals.isActive = function (link) {
       return req.url === link ? 'active' : ''
     }
+    res.locals.messages = req.flash()
     res.locals.formatDate = formatDate
     res.locals.stripScript = stripScript
     res.locals.createPagination = createPagination(req)

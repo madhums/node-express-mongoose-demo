@@ -14,7 +14,7 @@ module.exports = function (app, config, passport) {
   // should be placed before express.static
   app.use(express.compress({
     filter: function (req, res) {
-      console.log(res.getHeader('Content-Type'));
+      console.log("Req Content-Type: ",res.getHeader('Content-Type'));
       return /json|text|javascript|css/.test(res.getHeader('Content-Type'));
     },
     level: 9
@@ -27,9 +27,7 @@ module.exports = function (app, config, passport) {
   app.set('view engine', 'jade')
 
   app.configure(function () {
-    // dynamic helpers
-    app.use(viewHelpers(config))
-
+    
     // cookieParser should be above session
     app.use(express.cookieParser())
 
@@ -46,12 +44,15 @@ module.exports = function (app, config, passport) {
       })
     }))
 
-    // connect flash for flash messages
-    app.use(flash())
-
     // use passport session
     app.use(passport.initialize())
     app.use(passport.session())
+
+    // connect flash for flash messages. needs to be above viewhelpers and below session
+    app.use(flash())
+
+    // dynamic helpers
+    app.use(viewHelpers(config))
 
     app.use(express.favicon())
 

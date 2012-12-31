@@ -2,7 +2,6 @@ extends auth
 
 block auth
   form.login.form-horizontal(action="/users/session", method="post")
-    p.error= message
     .control-group
       label.control-label(for='email') Email
       .controls
