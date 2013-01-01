@@ -32,6 +32,7 @@ header#header
                   form(action="/users/session", method="post", accept-charset="UTF-8", style="margin-bottom:5px;")
                     input.email(type='text', name="email", placeholder='Email')
                     input.password(type='password', name="password", placeholder='Password')
+                    input(type="hidden", name="next", value=login_next)
                     button.btn.btn-primary(type='submit') Login
                     &nbsp;
                     | or&nbsp;
