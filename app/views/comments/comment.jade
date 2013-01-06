@@ -5,4 +5,4 @@ if (comment && comment.user)
     |  :&nbsp;
     != comment.body
     br
-    span.date #{formatDate(comment.createdAt, "%b %d, %Y at %I:%M %p")}
+    span.date #{formatDate(comment.createdAt, "LLL ")}

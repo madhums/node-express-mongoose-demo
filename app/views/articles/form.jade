@@ -19,29 +19,29 @@ block content
           input(type="hidden", name="_method", value="PUT")
 
         .control-group
-          label.control-label(for='title') Title
+          label.control-label(for='title') !{__i('Title')}
           .controls
-            input#title.input-xlarge(type='text', name="title", value=article.title, placeholder='Enter the title')
+            input#title.input-xlarge(type='text', name="title", value=article.title, placeholder='#{__i('Enter the title')}')
 
         .control-group
-          label.control-label(for='title') Image
+          label.control-label(for='title') !{__i('Image')}
           .controls
             input(type='file', name="image[]")
 
         .control-group
-          label.control-label(for='desc') Body
+          label.control-label(for='desc') !{__i('Body')}
           .controls
-            textarea#desc.input-xlarge(type='text', rows="5", name="body", placeholder='Enter the article description')=article.body
+            textarea#desc.input-xlarge(type='text', rows="5", name="body", placeholder='#{__i('Enter the article description')}')=article.body
 
         .control-group
-          label.control-label(for='desc') Tags
+          label.control-label(for='desc') !{__i('Tags')}
           .controls
-            input#tags(type='text', name="tags", value=article.tags, placeholder='Enter the tags')
+            input#tags(type='text', name="tags", value=article.tags, placeholder='#{__i('Enter the tags')}')
 
         .form-actions
-          button.btn.btn-primary(type='submit') Save changes
+          button.btn.btn-primary(type='submit') !{__i('Save changes')}
           &nbsp;
-          a.btn(href='/articles', title="cancel") Cancel
+          a.btn(href='/articles', title="cancel") !{__i('Cancel')}
     .span5
       if (!article.isNew && article.image && article.image.files && article.image.files.length)
         img(src=article.image.cdnUri + '/mini_' + article.image.files[0])

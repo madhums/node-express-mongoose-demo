@@ -3,27 +3,27 @@ extends auth
 block auth
   form.signup.form-horizontal(action="/users", method="post")
     .control-group
-      label.control-label(for='name') Full name
+      label.control-label(for='name') !{__i('Full name')}
       .controls
-        input#name(type='text', name="name", placeholder='Full name', value=user.name)
+        input#name(type='text', name="name", placeholder='#{__i('Full name')}', value=user.name)
 
     .control-group
-      label.control-label(for='email') Email
+      label.control-label(for='email') !{__i('Email')}
       .controls
-        input#email(type='text', name="email", placeholder='Email', value=user.email)
+        input#email(type='text', name="email", placeholder='#{__i('Full name')}', value=user.email)
 
     .control-group
-      label.control-label(for='username') Username
+      label.control-label(for='username') !{__i('Username')}
       .controls
-        input#username(type='text', name="username", placeholder='Username', value=user.username)
+        input#username(type='text', name="username", placeholder='#{__i('Username')}', value=user.username)
 
     .control-group
-      label.control-label(for='password') Password
+      label.control-label(for='password') !{__i('Password')}
       .controls
-        input#password(type='password', name="password", placeholder='Password')
+        input#password(type='password', name="password", placeholder='#{__i('Password')}')
 
     .form-actions
-      button.btn.btn-primary(type='submit') Sign up
+      button.btn.btn-primary(type='submit') !{__i('Sign up')}
       &nbsp;
       | or&nbsp;
-      a.show-login(href="/login") login
+      a.show-login(href="/login") !{__i('Login')}

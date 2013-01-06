@@ -1,4 +1,7 @@
-
+var moment = require('moment')
+    , i18n = require("i18n");
+	
+	
 /**
  * Pagination helper
  *
@@ -39,9 +42,9 @@ function createPagination (req) {
  * @api private
  */
 
-function formatDate (date) {
-  var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec" ]
-  return monthNames[date.getMonth()]+' '+date.getDate()+', '+date.getFullYear()
+function formatDate(data, format) {
+    moment.lang(i18n.getLocale())
+    return moment(new Date(data)).format(format);
 }
 
 /**
