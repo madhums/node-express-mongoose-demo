@@ -4,17 +4,17 @@ block auth
   form.login.form-horizontal(action="/users/session", method="post")
     p.error= message
     .control-group
-      label.control-label(for='email') Email
+      label.control-label(for='email') !{__i('Email')}
       .controls
-        input#email(type='text', name="email", placeholder='Email')
+        input#email(type='text', name="email", placeholder='#{__i('Email')}')
 
     .control-group
-      label.control-label(for='password') Password
+      label.control-label(for='password') !{__i('Password')}
       .controls
-        input#password(type='password', name="password", placeholder='Password')
+        input#password(type='password', name="password", placeholder='#{__i('Password')}')
 
     .form-actions
-      button.btn.btn-primary(type='submit') Login
+      button.btn.btn-primary(type='submit') !{__i('Login')}
       &nbsp;
       | or&nbsp;
-      a.show-signup(href="/signup") sign up
+      a.show-signup(href="/signup") !{__i('Sign up')}

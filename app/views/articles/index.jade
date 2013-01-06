@@ -1,7 +1,7 @@
 extends ../layouts/default
 
 block main
-  h1 Articles
+  h1 !{__i('Articles')}
 
 block content
   each article in articles
@@ -9,13 +9,13 @@ block content
       a.title(href='/articles/'+article._id, title=article.title) #{article.title}
       p=article.body
       .author
-        span= formatDate(article.createdAt, "%b %d, %Y at %I:%M %p")
-        span &nbsp;| Author :&nbsp;
+        span= formatDate(article.createdAt, "LLL")
+        span &nbsp;| !{__i('Author')} :&nbsp;
         a(href="/users/"+article.user._id)=article.user.name
         | &nbsp;|&nbsp;
         if (article.tags)
           span.tags
-            span Tags :&nbsp;
+            span !{__i('Tags')} :&nbsp;
             each tag in article.tags.split(',')
               a.tag(href="/tags/"+tag)
                 i.icon-tags

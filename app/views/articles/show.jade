@@ -8,12 +8,12 @@ block content
     .span9
       p=article.body
       p.author
-        span Author :&nbsp;
+        span !{__i('Author')} :&nbsp;
         a(href="/users/"+article.user._id)=article.user.name
-      .date= formatDate(article.createdAt, "%b %d, %Y at %I:%M %p")
+      .date= formatDate(article.createdAt, "LLL")
       if (article.tags)
         .tags
-          | Tags :&nbsp;
+          | !{__i('Tags')} :&nbsp;
           each tag in article.tags.split(',')
             a.tag(href="/tags/"+tag)
               i.icon-tags
@@ -25,14 +25,14 @@ block content
   p
     br
     form.center.form-inline.confirm(action="/articles/"+article.id, method="post")
-      a.btn(href='/articles/'+article._id+'/edit', title="edit") Edit
+      a.btn(href='/articles/'+article._id+'/edit', title="edit") !{__i('Edit')}
       &nbsp;&nbsp;
       input(type="hidden", name="_method", value="DELETE")
-      button.btn.btn-danger(type="submit") delete
+      button.btn.btn-danger(type="submit") !{__i('Delete')}
 
   p
     br
-    h2 Comments
+    h2 !{__i('Comments')}
     each comment in article.comments
       include ../comments/comment
     include ../comments/form
