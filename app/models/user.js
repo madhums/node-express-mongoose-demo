@@ -67,8 +67,23 @@ UserSchema.pre('save', function(next) {
 
   if (!validatePresenceOf(this.password) && authTypes.indexOf(this.provider) === -1)
     next(new Error('Invalid password'))
-  else
-    next()
+  else {
+      var self = this;
+      if(self.username.length < 7)
+      {
+          self.username = 'user-' + self.username;
+      }
+      mongoose.models["User"].findOne({username : self.username},function(err, user) {
+          if(err) {
+              next(err);
+          } else if(user) {
+              self.username += (new Date()).getMilliseconds();
+              next();
+          } else {
+              next();
+          }
+      });
+  }
 })
 
 // methods
