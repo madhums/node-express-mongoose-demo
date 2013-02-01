@@ -119,6 +119,8 @@ exports.index = function(req, res){
 
 // find requested article
 exports.article = function(req, res, next, id){
+  var User = mongoose.model('User')
+
   Article
     .findOne({ _id : id })
     .populate('user', 'name')
