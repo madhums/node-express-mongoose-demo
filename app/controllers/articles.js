@@ -116,3 +116,34 @@ exports.index = function(req, res){
     })
 }
 
+// find requested article
+exports.article = function(req, res, next, id){
+  Article
+    .findOne({ _id : id })
+    .populate('user', 'name')
+    .populate('comments')
+    .exec(function (err, article) {
+      if (err) return next(err)
+      if (!article) return next(new Error('Failed to load article ' + id))
+      req.article = article
+
+      var populateComments = function (comment, cb) {
+        User
+          .findOne({ _id: comment._user })
+          .select('name')
+          .exec(function (err, user) {
+            if (err) return next(err)
+            comment.user = user
+            cb(null, comment)
+          })
+      }
+
+      if (article.comments.length) {
+        async.map(req.article.comments, populateComments, function (err, results) {
+          next(err)
+        })
+      }
+      else
+        next()
+    })
+}

@@ -23,16 +23,7 @@ module.exports = function (app, passport, auth) {
   app.get('/auth/google', passport.authenticate('google', { failureRedirect: '/login', scope: 'https://www.google.com/m8/feeds' }), users.signin)
   app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login', scope: 'https://www.google.com/m8/feeds' }), users.authCallback)
 
-  app.param('userId', function (req, res, next, id) {
-    User
-      .findOne({ _id : id })
-      .exec(function (err, user) {
-        if (err) return next(err)
-        if (!user) return next(new Error('Failed to load User ' + id))
-        req.profile = user
-        next()
-      })
-  })
+  app.param('userId', users.user)
 
   // article routes
   var articles = require('../app/controllers/articles')
@@ -44,36 +35,7 @@ module.exports = function (app, passport, auth) {
   app.put('/articles/:id', auth.requiresLogin, auth.article.hasAuthorization, articles.update)
   app.del('/articles/:id', auth.requiresLogin, auth.article.hasAuthorization, articles.destroy)
 
-  app.param('id', function(req, res, next, id){
-    Article
-      .findOne({ _id : id })
-      .populate('user', 'name')
-      .populate('comments')
-      .exec(function (err, article) {
-        if (err) return next(err)
-        if (!article) return next(new Error('Failed to load article ' + id))
-        req.article = article
-
-        var populateComments = function (comment, cb) {
-          User
-            .findOne({ _id: comment._user })
-            .select('name')
-            .exec(function (err, user) {
-              if (err) return next(err)
-              comment.user = user
-              cb(null, comment)
-            })
-        }
-
-        if (article.comments.length) {
-          async.map(req.article.comments, populateComments, function (err, results) {
-            next(err)
-          })
-        }
-        else
-          next()
-      })
-  })
+  app.param('id', articles.article)
 
   // home route
   app.get('/', articles.index)
