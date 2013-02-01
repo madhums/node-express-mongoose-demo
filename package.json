@@ -5,8 +5,8 @@
   , "private": false
   , "author": "Madhusudhan Srinivasa <madhums8@gmail.com> (http://madhums.github.com)"
   , "engines": {
-        "node": "0.6.18"
-      , "npm": "1.1.9"
+        "node": "0.8.14"
+      , "npm": "1.1.65"
     }
   , "scripts": {
       "start": "./node_modules/.bin/nodemon server.js"
