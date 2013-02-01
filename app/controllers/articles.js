@@ -1,7 +1,8 @@
 
 var mongoose = require('mongoose')
-  , Article = mongoose.model('Article')
   , Imager = require('imager')
+  , async = require('async')
+  , Article = mongoose.model('Article')
   , _ = require('underscore')
 
 // New article
