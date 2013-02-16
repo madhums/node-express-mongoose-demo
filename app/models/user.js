@@ -1,4 +1,7 @@
-// user schema
+
+/**
+ * Module dependencies.
+ */
 
 var mongoose = require('mongoose')
   , Schema = mongoose.Schema
@@ -6,20 +9,27 @@ var mongoose = require('mongoose')
   , _ = require('underscore')
   , authTypes = ['github', 'twitter', 'facebook', 'google']
 
+/**
+ * User Schema
+ */
+
 var UserSchema = new Schema({
-    name: String
-  , email: String
-  , username: String
-  , provider: String
-  , hashed_password: String
-  , salt: String
-  , facebook: {}
-  , twitter: {}
-  , github: {}
-  , google: {}
+  name: String,
+  email: String,
+  username: String,
+  provider: String,
+  hashed_password: String,
+  salt: String,
+  facebook: {},
+  twitter: {},
+  github: {},
+  google: {}
 })
 
-// virtual attributes
+/**
+ * Virtuals
+ */
+
 UserSchema
   .virtual('password')
   .set(function(password) {
@@ -29,7 +39,10 @@ UserSchema
   })
   .get(function() { return this._password })
 
-// validations
+/**
+ * Validations
+ */
+
 var validatePresenceOf = function (value) {
   return value && value.length
 }
@@ -61,28 +74,61 @@ UserSchema.path('hashed_password').validate(function (hashed_password) {
 }, 'Password cannot be blank')
 
 
-// pre save hooks
+/**
+ * Pre-save hook
+ */
+
 UserSchema.pre('save', function(next) {
   if (!this.isNew) return next()
 
-  if (!validatePresenceOf(this.password) && authTypes.indexOf(this.provider) === -1)
+  if (!validatePresenceOf(this.password)
+    && authTypes.indexOf(this.provider) === -1)
     next(new Error('Invalid password'))
   else
     next()
 })
 
-// methods
-UserSchema.method('authenticate', function(plainText) {
-  return this.encryptPassword(plainText) === this.hashed_password
-})
+/**
+ * Methods
+ */
 
-UserSchema.method('makeSalt', function() {
-  return Math.round((new Date().valueOf() * Math.random())) + ''
-})
+UserSchema.methods = {
 
-UserSchema.method('encryptPassword', function(password) {
-  if (!password) return ''
-  return crypto.createHmac('sha1', this.salt).update(password).digest('hex')
-})
+  /**
+   * Authenticate - check if the passwords are the same
+   *
+   * @param {String} plainText
+   * @return {Boolean}
+   * @api public
+   */
+
+  authenticate: function(plainText) {
+    return this.encryptPassword(plainText) === this.hashed_password
+  },
+
+  /**
+   * Make salt
+   *
+   * @return {String}
+   * @api public
+   */
+
+  makeSalt: function() {
+    return Math.round((new Date().valueOf() * Math.random())) + ''
+  },
+
+  /**
+   * Encrypt password
+   *
+   * @param {String} password
+   * @return {String}
+   * @api public
+   */
+
+  encryptPassword: function(password) {
+    if (!password) return ''
+    return crypto.createHmac('sha1', this.salt).update(password).digest('hex')
+  }
+}
 
 mongoose.model('User', UserSchema)

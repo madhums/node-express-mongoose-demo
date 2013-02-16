@@ -1,41 +1,64 @@
+
+/**
+ * Module dependencies.
+ */
+
 var mongoose = require('mongoose')
   , User = mongoose.model('User')
 
 exports.signin = function (req, res) {}
 
-// auth callback
+/**
+ * Auth callback
+ */
+
 exports.authCallback = function (req, res, next) {
   res.redirect('/')
 }
 
-// login
+/**
+ * Show login form
+ */
+
 exports.login = function (req, res) {
   res.render('users/login', {
-      title: 'Login'
-    , message: req.flash('error')
+    title: 'Login',
+    message: req.flash('error')
   })
 }
 
-// sign up
+/**
+ * Show sign up form
+ */
+
 exports.signup = function (req, res) {
   res.render('users/signup', {
-      title: 'Sign up'
-    , user: new User()
+    title: 'Sign up',
+    user: new User()
   })
 }
 
-// logout
+/**
+ * Logout
+ */
+
 exports.logout = function (req, res) {
   req.logout()
   res.redirect('/login')
 }
 
-// session
+/**
+ * Session
+ */
+
 exports.session = function (req, res) {
   res.redirect('/')
 }
 
-// signup
+/**
+ * Create user
+ */
+
 exports.create = function (req, res) {
   var user = new User(req.body)
   user.provider = 'local'
@@ -50,7 +73,10 @@ exports.create = function (req, res) {
   })
 }
 
-// show profile
+/**
+ *  Show profile
+ */
+
 exports.show = function (req, res) {
   var user = req.profile
   res.render('users/show', {
@@ -59,7 +85,10 @@ exports.show = function (req, res) {
   })
 }
 
-// find requested user
+/**
+ * Find user by id
+ */
+
 exports.user = function (req, res, next, id) {
   User
     .findOne({ _id : id })
