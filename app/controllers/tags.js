@@ -24,10 +24,10 @@ exports.index = function (req, res) {
     if (err) return res.render('500')
     Article.count(criteria).exec(function (err, count) {
       res.render('articles/index', {
-          title: 'List of Articles'
-        , articles: articles
-        , page: page
-        , pages: count / perPage
+        title: 'List of Articles',
+        articles: articles,
+        page: page,
+        pages: count / perPage
       })
     })
   })
