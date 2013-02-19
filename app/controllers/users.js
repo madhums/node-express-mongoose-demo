@@ -52,7 +52,11 @@ exports.logout = function (req, res) {
  */
 
 exports.session = function (req, res) {
-  res.redirect('/')
+  console.log(req.body);
+  if(typeof req.body.next != 'undefined')
+    res.redirect(req.body.next)
+  else
+    res.redirect('/')
 }
 
 /**

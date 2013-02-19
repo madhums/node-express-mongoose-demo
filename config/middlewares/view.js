@@ -62,6 +62,7 @@ module.exports = function (config) {
     res.locals.appName = config.app.name
     res.locals.title = 'Nodejs Express Mongoose Demo'
     res.locals.req = req
+    res.locals.login_next = req.originalUrl.indexOf('/login')==-1?req.originalUrl:"/" //this is usefull when having login on every page
     res.locals.isActive = function (link) {
       return req.url === link ? 'active' : ''
     }

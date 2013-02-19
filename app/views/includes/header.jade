@@ -1,6 +1,6 @@
 
 header#header
-  .navbar.navbar-fixed-top(role='navigation')
+  .navbar.navbar-fixed-top.navbar-inverse(role='navigation')
     .navbar-inner
       .container
         a.brand(href='/') Node.js Express Mongoose Demo
@@ -15,9 +15,25 @@ header#header
           ul.nav.pull-right
             if (req.isAuthenticated())
               li
-                a(href="/users/"+req.user.id, title="Profile") Profile
+                p.navbar-text
+                  | Logged in as 
+                  a(href="/users/"+req.user.id, title="Profile") 
+                    !=req.user.name
               li
                 a(href="/logout", title="logout") Logout
             else
-              li
-                a(href="/login", title="Login") Login
+              //- li
+              //-   a(href="/login", title="Login") Login
+              li.dropdown
+                a.tropdown-toggle(href="#", data-toggle="dropdown", title="Login", data-toggle:dropdown) Login 
+                  strong.caret
+                .dropdown-menu(style="padding:15px;")
+                  //- include ../includes/login
+                  form(action="/users/session", method="post", accept-charset="UTF-8", style="margin-bottom:5px;")
+                    input.email(type='text', name="email", placeholder='Email')
+                    input.password(type='password', name="password", placeholder='Password')
+                    input(type="hidden", name="next", value=login_next)
+                    button.btn.btn-primary(type='submit') Login
+                    &nbsp;
+                    | or&nbsp;
+                    a.show-signup(href="/signup") sign up
