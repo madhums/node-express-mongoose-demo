@@ -6,7 +6,7 @@
 var express = require('express')
   , mongoStore = require('connect-mongo')(express)
   , flash = require('connect-flash')
-  , viewHelpers = require('./middlewares/view')
+  , helpers = require('view-helpers')
 
 module.exports = function (app, config, passport) {
 
@@ -27,7 +27,7 @@ module.exports = function (app, config, passport) {
 
   app.configure(function () {
     // dynamic helpers
-    app.use(viewHelpers(config))
+    app.use(helpers(config.app.name))
 
     // cookieParser should be above session
     app.use(express.cookieParser())
