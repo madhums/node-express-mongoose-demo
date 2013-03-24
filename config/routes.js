@@ -1,8 +1,5 @@
 
-var mongoose = require('mongoose')
-  , Article = mongoose.model('Article')
-  , User = mongoose.model('User')
-  , async = require('async')
+var async = require('async')
 
 module.exports = function (app, passport, auth) {
 
