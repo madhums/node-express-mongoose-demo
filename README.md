@@ -2,10 +2,9 @@
 
 **Blog post 2:** Coming soon!
 
-This is a boilerplate node.js application illustrating various features used in everyday
-web development, with a fine touch of best practices. The demo app is a blog application
-where users (signing up using facebook, twitter, github and simple registrations) can create
-an article, delete an article and add comment on the article.
+This is a demo node.js application illustrating various features used in everyday web development, with a fine touch of best practices. The demo app is a blog application where users (signing up using facebook, twitter, github and simple registrations) can create an article, delete an article and add comments on the article.
+
+If you want to create more apps using the same approach, use [node-genem](https://github.com/madhums/node-genem) to generate the MVC skeleton.
 
 **Note:** You need to have node.js and mongodb installed and running
 
