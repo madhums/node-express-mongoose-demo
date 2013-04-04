@@ -1,0 +1,5 @@
+node_modules/
+.monitor
+config/config.js
+config/imager.js
+Makefile
