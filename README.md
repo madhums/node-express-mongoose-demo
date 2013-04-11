@@ -6,7 +6,7 @@ This is a demo node.js application illustrating various features used in everyda
 
 If you want to create more apps using the same approach, use [node-genem](https://github.com/madhums/node-genem) to generate the MVC skeleton.
 
-**Note:** You need to have node.js and mongodb installed and running
+**Note:** You need to have node.js, mongodb and [imagemagick](http://www.imagemagick.org/script/index.php) installed and running.
 
 ## Install
 ```sh
