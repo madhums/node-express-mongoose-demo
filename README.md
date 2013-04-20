@@ -4,11 +4,10 @@
 
 This is a demo node.js application illustrating various features used in everyday web development, with a fine touch of best practices. The demo app is a blog application where users (signing up using facebook, twitter, github and simple registrations) can create an article, delete an article and add comments on the article.
 
-If you want to create more apps using the same approach, use [node-genem](https://github.com/madhums/node-genem) to generate the MVC skeleton.
+## Install
 
 **Note:** You need to have node.js, mongodb and [imagemagick](http://www.imagemagick.org/script/index.php) installed and running.
 
-## Install
 ```sh
   $ git clone git://github.com/madhums/nodejs-express-mongoose-demo.git
   $ npm install
@@ -20,6 +19,13 @@ If you want to create more apps using the same approach, use [node-genem](https:
 **NOTE:** Do not forget to update your facebook twitter and github APP_ID and APP_SECRET in `config/config.js`. Also if you want to use image uploads, don't forget to replace the S3 and Rackspace keys in `config/imager.js`.
 
 Then visit [http://localhost:3000/](http://localhost:3000/)
+
+## Info
+
+1. If you want to create more apps using the same approach, use [node-genem](https://github.com/madhums/node-genem) to generate the MVC skeleton.
+2. [node-notifier](http://github.com/madhums/node-notifier) - used for notifications via emails and push notificatiions
+3. [node-imager](http://github.com/madhums/node-imager) - used to resize, crop and upload images to S3/rackspace
+4. [view-helpers](http://github.com/madhums/node-view-helpers) - some common view helpers
 
 ## Directory structure
 ```
