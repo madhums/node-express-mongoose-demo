@@ -1,10 +1,16 @@
-
+var common = {
+    appName: 'Node.js Express Mongoose Demo'
+  , company: 'Company'
+  , company_url: 'http://example.com'
+  
+}
 module.exports = {
     development: {
       root: require('path').normalize(__dirname + '/..'),
       app: {
-        name: 'Nodejs Express Mongoose Demo'
+        name: common.appName
       },
+      common: common,
       db: 'mongodb://localhost/noobjs_dev',
       facebook: {
           clientID: "APP_ID"

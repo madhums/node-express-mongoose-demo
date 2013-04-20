@@ -46,3 +46,7 @@ a.tag {
 .error {
   color: #FF2602;
 }
+
+.footer {
+  margin: 25px;
+}

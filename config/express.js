@@ -48,6 +48,9 @@ module.exports = function (app, config, passport) {
     // connect flash for flash messages
     app.use(flash())
 
+    //add commons to template. accessed by common.item
+    app.locals({common: config.common})
+
     // use passport session
     app.use(passport.initialize())
     app.use(passport.session())
