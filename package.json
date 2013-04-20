@@ -24,6 +24,7 @@
     , "passport-github": "latest"
     , "passport-google-oauth": "latest"
     , "imager": "latest"
+    , "notifier": "latest"
     , "underscore": "latest"
     , "gzippo": "latest"
     , "async": "latest"
