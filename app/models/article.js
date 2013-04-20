@@ -86,7 +86,7 @@ ArticleSchema.methods = {
    *
    * @param {Object} images
    * @param {Function} cb
-   * @api public
+   * @api private
    */
 
   uploadAndSave: function (images, cb) {
@@ -100,6 +100,32 @@ ArticleSchema.methods = {
       }
       self.save(cb)
     }, 'article')
+  },
+
+  /**
+   * Add comment
+   *
+   * @param {User} user
+   * @param {Object} comment
+   * @param {Function} cb
+   * @api private
+   */
+
+  addComment: function (user, comment, cb) {
+    var notify = require('../mailer/notify')
+
+    this.comments.push({
+      body: comment.body,
+      user: user._id
+    })
+
+    notify.comment({
+      article: this,
+      currentUser: user,
+      comment: comment.body
+    })
+
+    this.save(cb)
   }
 
 }
@@ -115,12 +141,12 @@ ArticleSchema.statics = {
    *
    * @param {ObjectId} id
    * @param {Function} cb
-   * @api public
+   * @api private
    */
 
   load: function (id, cb) {
     this.findOne({ _id : id })
-      .populate('user', 'name')
+      .populate('user', 'name email')
       .populate('comments.user')
       .exec(cb)
   },
@@ -130,7 +156,7 @@ ArticleSchema.statics = {
    *
    * @param {Object} options
    * @param {Function} cb
-   * @api public
+   * @api private
    */
 
   list: function (options, cb) {
