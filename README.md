@@ -22,23 +22,26 @@ Then visit [http://localhost:3000/](http://localhost:3000/)
 
 ## Info
 
-1. If you want to create more apps using the same approach, use [node-genem](https://github.com/madhums/node-genem) to generate the MVC skeleton.
+1. [node-genem](https://github.com/madhums/node-genem) A module to generate the MVC skeleton using this approach.
 2. [node-notifier](http://github.com/madhums/node-notifier) - used for notifications via emails and push notificatiions
 3. [node-imager](http://github.com/madhums/node-imager) - used to resize, crop and upload images to S3/rackspace
-4. [view-helpers](http://github.com/madhums/node-view-helpers) - some common view helpers
+4. [node-view-helpers](http://github.com/madhums/node-view-helpers) - some common view helpers
 
 ## Directory structure
 ```
 -app/
   |__controllers/
   |__models/
+  |__mailer/
   |__views/
 -config/
   |__routes.js
   |__config.js
   |__passport.js (auth config)
+  |__imager.js (imager config)
   |__express.js (express.js configs)
   |__middlewares/ (custom middlewares)
+-public/
 ```
 
 If you are looking for a specific feature, please use the issue tracker. I will try to come
