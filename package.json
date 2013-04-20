@@ -9,7 +9,7 @@
       , "npm": "1.1.65"
     }
   , "scripts": {
-      "start": "./node_modules/.bin/nodemon server.js"
+      "start": "NODE_ENV=development ./node_modules/.bin/nodemon server.js"
     }
   , "dependencies": {
       "express": "latest"
