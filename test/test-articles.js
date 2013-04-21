@@ -3,7 +3,7 @@
  * Module dependencies.
  */
 
-require('./helper.js')
+// require('./helper.js')
 
 var mongoose = require('mongoose')
   , should = require('should')
