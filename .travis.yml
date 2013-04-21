@@ -1,5 +1,4 @@
 before_script:
-  - sudo service mongodb start || true
   - cp config/config.example.js config/config.js
   - cp config/imager.example.js config/imager.js
 services:
