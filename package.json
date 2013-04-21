@@ -1,6 +1,6 @@
 {
     "name": "noobjs"
-  , "description": "A demo app in nodejs illustrating use of express, jade and mogoose"
+  , "description": "A demo app in nodejs illustrating the use of express, jade and mongoose"
   , "version": "3.0.0"
   , "private": false
   , "author": "Madhusudhan Srinivasa <madhums8@gmail.com> (http://madhums.github.com)"
