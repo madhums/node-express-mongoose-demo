@@ -6,7 +6,7 @@ This is a demo node.js application illustrating various features used in everyda
 
 ## Install
 
-**Note:** You need to have node.js, mongodb and [imagemagick](http://www.imagemagick.org/script/index.php) installed and running.
+**NOTE:** You need to have node.js, mongodb and [imagemagick](http://www.imagemagick.org/script/index.php) installed and running.
 
 ```sh
   $ git clone git://github.com/madhums/nodejs-express-mongoose-demo.git
@@ -44,8 +44,11 @@ Then visit [http://localhost:3000/](http://localhost:3000/)
 -public/
 ```
 
-If you are looking for a specific feature, please use the issue tracker. I will try to come
-up with a demo as earliest as I can. Please feel free to fork and send updates :)
+## Tests
+
+```sh
+$ npm test
+```
 
 ## License
 (The MIT License)
