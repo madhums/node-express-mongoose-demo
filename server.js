@@ -34,3 +34,6 @@ require('./config/routes')(app, passport, auth)
 var port = process.env.PORT || 3000
 app.listen(port)
 console.log('Express app started on port '+port)
+
+// expose app
+exports = module.exports = app
