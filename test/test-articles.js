@@ -159,7 +159,7 @@ describe('Articles', function () {
           .end(done)
         })
 
-        it('should save the article in the database', function (done) {
+        it('should insert a record to the database', function (done) {
           var req = request(app).post('/articles')
           req.cookies = cookies
           req
@@ -170,6 +170,21 @@ describe('Articles', function () {
               cnt.should.equal(count + 2)
               done()
             })
+          })
+        })
+
+        it('should save the article to the database', function (done) {
+          Article
+          .findOne({ title: 'article 2'})
+          .populate('user')
+          .exec(function (err, article) {
+            should.not.exist(err)
+            article.should.be.an.instanceOf(Article)
+            article.title.should.equal('article 2')
+            article.body.should.equal('test body')
+            article.user.email.should.equal('foobar@example.com')
+            article.user.name.should.equal('Foo bar')
+            done()
           })
         })
       })
