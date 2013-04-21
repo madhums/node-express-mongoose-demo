@@ -1,0 +1,13 @@
+install:
+  - npm install
+  - cp config/config.example.js config/config.js
+  - sudo service mongodb start || true
+env:
+  - NODE_ENV=test
+services:
+  - mongodb
+language: node_js
+node_js:
+  - "0.10"
+  - "0.8"
+  - "0.6"

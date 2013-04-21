@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/madhums/nodejs-express-mongoose-demo.png)](https://travis-ci.org/madhums/nodejs-express-mongoose-demo)
+
+# Nodejs Express Mongoose Demo
+
 **Blog post 1:** [Breaking down app.js file - nodejs, express, mongoose](http://madhums.me/2012/07/19/breaking-down-app-js-file-nodejs-express-mongoose/)
 
 **Blog post 2:** Coming soon!

@@ -21,9 +21,7 @@ var express = require('express')
 // Load configurations
 // if test env, load example file
 var env = process.env.NODE_ENV || 'development'
-  , config = env === 'test'
-      ? require('./config/config.example')[env]
-      : require('./config/config')[env]
+  , config = require('./config/config')[env]
   , auth = require('./config/middlewares/authorization')
   , mongoose = require('mongoose')
 
