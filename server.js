@@ -1,13 +1,29 @@
-/* Main application entry file. Please note, the order of loading is important.
- * Configuration loading and booting of controllers and custom error handlers */
+
+/*!
+ * nodejs-express-mongoose-demo
+ * Copyright(c) 2013 Madhusudhan Srinivasa <madhums8@gmail.com>
+ * MIT Licensed
+ */
+
+/**
+ * Module dependencies.
+ */
 
 var express = require('express')
   , fs = require('fs')
   , passport = require('passport')
 
+/**
+ * Main application entry file.
+ * Please note that the order of loading is important.
+ */
+
 // Load configurations
+// if test env, load example file
 var env = process.env.NODE_ENV || 'development'
-  , config = require('./config/config')[env]
+  , config = env === 'test'
+      ? require('./config/config.example')[env]
+      : require('./config/config')[env]
   , auth = require('./config/middlewares/authorization')
   , mongoose = require('mongoose')
 
