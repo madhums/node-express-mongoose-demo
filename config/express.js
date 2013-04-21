@@ -19,7 +19,11 @@ module.exports = function (app, config, passport) {
     level: 9
   }))
   app.use(express.static(config.root + '/public'))
-  app.use(express.logger('dev'))
+
+  // don't use logger for test env
+  if (process.env.NODE_ENV !== 'test') {
+    app.use(express.logger('dev'))
+  }
 
   // set views path, template engine and default layout
   app.set('views', config.root + '/app/views')
