@@ -29,12 +29,13 @@
     , "underscore": "latest"
     , "gzippo": "latest"
     , "async": "latest"
-    , "nodemon": "latest"
     , "view-helpers": "latest"
+    , "forever": "latest"
   }
   , "devDependencies": {
-      "supertest": "latest",
-      "should": "latest",
-      "mocha": "latest"
+        "supertest": "latest"
+      , "should": "latest"
+      , "mocha": "latest"
+      , "nodemon": "latest"
     }
 }
