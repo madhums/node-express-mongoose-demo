@@ -3,24 +3,20 @@
  * Module dependencies.
  */
 
-// require('./helper.js')
-
 var mongoose = require('mongoose')
   , should = require('should')
   , request = require('supertest')
   , app = require('../server')
-  , async = require('async')
+  , context = describe
+  , User = mongoose.model('User')
 
-var cookies
-var count
-var User = mongoose.model('User')
+var cookies, count
 
 /**
  * Users tests
  */
 
 describe('Users', function () {
-
   describe('POST /users', function () {
     describe('Invalid parameters', function () {
       before(function (done) {
@@ -92,10 +88,6 @@ describe('Users', function () {
   })
 
   after(function (done) {
-    User.find().exec(function (err, users) {
-      var callback = function (user, fn) { user.remove(fn) }
-      async.forEach(users, callback, done)
-    })
+    require('./helper').clearDb(done)
   })
-
 })

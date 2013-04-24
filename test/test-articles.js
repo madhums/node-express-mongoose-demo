@@ -3,25 +3,21 @@
  * Module dependencies.
  */
 
-// require('./helper.js')
-
 var mongoose = require('mongoose')
   , should = require('should')
   , request = require('supertest')
   , app = require('../server')
-  , async = require('async')
+  , context = describe
+  , User = mongoose.model('User')
+  , Article = mongoose.model('Article')
 
-var cookies
-var count
-var User = mongoose.model('User')
-var Article = mongoose.model('Article')
+var count, cookies
 
 /**
  * Articles tests
  */
 
 describe('Articles', function () {
-
   before(function (done) {
     // create a user
     var user = new User({
@@ -45,7 +41,7 @@ describe('Articles', function () {
   })
 
   describe('GET /articles/new', function () {
-    describe('When not logged in', function () {
+    context('When not logged in', function () {
       it('should redirect to /login', function (done) {
         request(app)
         .get('/articles/new')
@@ -57,7 +53,7 @@ describe('Articles', function () {
       })
     })
 
-    describe('When logged in', function () {
+    context('When logged in', function () {
       before(function (done) {
         // login the user
         request(app)
@@ -84,7 +80,7 @@ describe('Articles', function () {
   })
 
   describe('POST /articles', function () {
-    describe('When not logged in', function () {
+    context('When not logged in', function () {
       it('should redirect to /login', function (done) {
         request(app)
         .get('/articles/new')
@@ -96,7 +92,7 @@ describe('Articles', function () {
       })
     })
 
-    describe('When logged in', function () {
+    context('When logged in', function () {
       before(function (done) {
         // login the user
         request(app)
@@ -185,19 +181,6 @@ describe('Articles', function () {
   })
 
   after(function (done) {
-    var callback = function (item, fn) { item.remove(fn) }
-
-    async.parallel([
-      function (cb) {
-        User.find().exec(function (err, users) {
-          async.forEach(users, callback, cb)
-        })
-      },
-      function (cb) {
-        Article.find().exec(function (err, articles) {
-          async.forEach(articles, callback, cb)
-        })
-      }
-    ], done)
+    require('./helper').clearDb(done)
   })
 })
