@@ -25,8 +25,8 @@ exports.clearDb = function (done) {
       })
     },
     function (cb) {
-      Article.find().exec(function (err, articles) {
-        async.forEach(articles, callback, cb)
+      Article.find().exec(function (err, apps) {
+        async.forEach(apps, callback, cb)
       })
     }
   ], done)
