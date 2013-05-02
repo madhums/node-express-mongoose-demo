@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -18,6 +17,7 @@ module.exports = function (app, config, passport) {
     },
     level: 9
   }))
+  app.use(express.favicon())
   app.use(express.static(config.root + '/public'))
 
   // don't use logger for test env
@@ -55,8 +55,6 @@ module.exports = function (app, config, passport) {
     // use passport session
     app.use(passport.initialize())
     app.use(passport.session())
-
-    app.use(express.favicon())
 
     // routes should be at the last
     app.use(app.router)
