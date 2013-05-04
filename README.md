@@ -24,7 +24,7 @@ This is a demo node.js application illustrating various features used in everyda
 
 Then visit [http://localhost:3000/](http://localhost:3000/)
 
-## Info
+## Related modules
 
 1. [node-genem](https://github.com/madhums/node-genem) A module to generate the MVC skeleton using this approach.
 2. [node-notifier](http://github.com/madhums/node-notifier) - used for notifications via emails and push notificatiions
