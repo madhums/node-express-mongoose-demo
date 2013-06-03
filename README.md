@@ -30,6 +30,7 @@ Then visit [http://localhost:3000/](http://localhost:3000/)
 2. [node-notifier](http://github.com/madhums/node-notifier) - used for notifications via emails and push notificatiions
 3. [node-imager](http://github.com/madhums/node-imager) - used to resize, crop and upload images to S3/rackspace
 4. [node-view-helpers](http://github.com/madhums/node-view-helpers) - some common view helpers
+5. [mongoose-migrate](https://github.com/madhums/mongoose-migrate#readme) - Keeps track of the migrations in a mongodb collection (fork of visionmedia/node-migrate)
 
 ## Directory structure
 ```
