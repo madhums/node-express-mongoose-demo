@@ -20,6 +20,7 @@ var UserSchema = new Schema({
   provider: String,
   hashed_password: String,
   salt: String,
+  authToken: String,
   facebook: {},
   twitter: {},
   github: {},
@@ -102,7 +103,7 @@ UserSchema.methods = {
    * @api public
    */
 
-  authenticate: function(plainText) {
+  authenticate: function (plainText) {
     return this.encryptPassword(plainText) === this.hashed_password
   },
 
@@ -113,7 +114,7 @@ UserSchema.methods = {
    * @api public
    */
 
-  makeSalt: function() {
+  makeSalt: function () {
     return Math.round((new Date().valueOf() * Math.random())) + ''
   },
 
@@ -125,9 +126,15 @@ UserSchema.methods = {
    * @api public
    */
 
-  encryptPassword: function(password) {
+  encryptPassword: function (password) {
     if (!password) return ''
-    return crypto.createHmac('sha1', this.salt).update(password).digest('hex')
+    var encrypred
+    try {
+      encrypred = crypto.createHmac('sha1', this.salt).update(password).digest('hex')
+      return encrypred
+    } catch (err) {
+      return ''
+    }
   }
 }
 
