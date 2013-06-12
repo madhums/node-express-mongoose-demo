@@ -15,6 +15,7 @@ block content
   .row
     .span7
       form.form-horizontal(method="post", action=action, enctype="multipart/form-data")
+        input(type='hidden', name='_csrf', value="#{csrf_token}")
         if (!article.isNew)
           input(type="hidden", name="_method", value="PUT")
 
