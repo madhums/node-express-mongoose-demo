@@ -55,6 +55,14 @@ module.exports = function (app, config, passport) {
     // use passport session
     app.use(passport.initialize())
     app.use(passport.session())
+    // adds CSRF support
+    app.use(express.csrf())
+
+    // This could be moved to view-helpers :-)
+    app.use(function(req, res, next){
+      res.locals.csrf_token = req.session._csrf
+      next()
+    })
 
     // routes should be at the last
     app.use(app.router)

@@ -1,4 +1,5 @@
 form.form-vertical(method="post", action="/articles/#{article._id}/comments")
+  input(type='hidden', name='_csrf', value="#{csrf_token}")
   .control-group
     .controls
       textarea#comment.input-xxlarge(type='text', rows="6", name="body", placeholder='Add your comment')
