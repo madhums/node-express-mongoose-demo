@@ -55,12 +55,37 @@ module.exports = function (app, config, passport) {
     // use passport session
     app.use(passport.initialize())
     app.use(passport.session())
+
     // adds CSRF support
     app.use(express.csrf())
 
     // This could be moved to view-helpers :-)
     app.use(function(req, res, next){
       res.locals.csrf_token = req.session._csrf
+      next()
+    })
+
+    // Render mobile views
+    // if the request is coming from mobile and if you have a view
+    // with users.mobile.jade, then that view will be rendered
+    app.use(function (req, res, next) {
+      var ua = req.header('user-agent')
+      var fs = require('fs')
+
+      res._render = res.render
+      req.isMobile = /mobile/i.test(ua)
+
+      res.render = function (template, locals, cb) {
+        var view = template + '.mobile.' + app.get('view engine')
+        var file = app.get('views') + '/' + view
+
+        if (/mobile/i.test(ua) && fs.existsSync(file)) {
+          res._render(view, locals, cb)
+        } else {
+          res._render(template, locals, cb)
+        }
+      }
+
       next()
     })
 
