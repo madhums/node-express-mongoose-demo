@@ -6,6 +6,7 @@ var express = require('express')
   , mongoStore = require('connect-mongo')(express)
   , flash = require('connect-flash')
   , helpers = require('view-helpers')
+  , pkg = require('../package.json')
 
 module.exports = function (app, config, passport) {
 
@@ -31,7 +32,7 @@ module.exports = function (app, config, passport) {
 
   app.configure(function () {
     // dynamic helpers
-    app.use(helpers(config.app.name))
+    app.use(helpers(pkg.name, app))
 
     // cookieParser should be above session
     app.use(express.cookieParser())
@@ -65,30 +66,6 @@ module.exports = function (app, config, passport) {
       next()
     })
 
-    // Render mobile views
-    // if the request is coming from mobile and if you have a view
-    // with users.mobile.jade, then that view will be rendered
-    app.use(function (req, res, next) {
-      var ua = req.header('user-agent')
-      var fs = require('fs')
-
-      res._render = res.render
-      req.isMobile = /mobile/i.test(ua)
-
-      res.render = function (template, locals, cb) {
-        var view = template + '.mobile.' + app.get('view engine')
-        var file = app.get('views') + '/' + view
-
-        if (/mobile/i.test(ua) && fs.existsSync(file)) {
-          res._render(view, locals, cb)
-        } else {
-          res._render(template, locals, cb)
-        }
-      }
-
-      next()
-    })
-
     // routes should be at the last
     app.use(app.router)
 
@@ -101,6 +78,7 @@ module.exports = function (app, config, passport) {
       if (~err.message.indexOf('not found')) return next()
 
       // log it
+      // send emails if you want
       console.error(err.stack)
 
       // error page
@@ -109,7 +87,10 @@ module.exports = function (app, config, passport) {
 
     // assume 404 since no middleware responded
     app.use(function(req, res, next){
-      res.status(404).render('404', { url: req.originalUrl, error: 'Not found' })
+      res.status(404).render('404', {
+        url: req.originalUrl,
+        error: 'Not found'
+      })
     })
 
   })

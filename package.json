@@ -1,5 +1,5 @@
 {
-    "name": "noobjs"
+    "name": "nodejs-express-mongoose-demo"
   , "description": "A demo app in nodejs illustrating the use of express, jade and mongoose"
   , "version": "3.0.0"
   , "private": false
