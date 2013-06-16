@@ -51,3 +51,8 @@ a.tag {
 .error {
   color: #FF2602;
 }
+
+.form-actions {
+  background: #fff;
+  border: 0;
+}

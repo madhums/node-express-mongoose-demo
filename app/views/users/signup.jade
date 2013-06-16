@@ -1,7 +1,7 @@
 extends auth
 
 block auth
-  form.signup.form-horizontal(action="/users", method="post")
+  form.offset1.form-horizontal(action="/users", method="post")
     input(type='hidden', name='_csrf', value="#{csrf_token}")
     .control-group
       label.control-label(for='name') Full name
