@@ -10,16 +10,20 @@ block content
       p=article.body
       .author
         span= formatDate(article.createdAt, "%b %d, %Y at %I:%M %p")
-        span &nbsp;| Author :&nbsp;
-        a(href="/users/"+article.user._id)=article.user.name
-        | &nbsp;|&nbsp;
+        &nbsp;&nbsp;
+        span Author :&nbsp;
+
+        - var name = article.user.name ? article.user.name : article.user.username
+
+        - console.log(name);
+
+        a(href="/users/"+article.user._id)= name
+        &nbsp;&nbsp;
         if (article.tags)
-          span.tags
-            span Tags :&nbsp;
-            each tag in article.tags.split(',')
-              a.tag(href="/tags/"+tag)
-                i.icon-tags
-                |  #{tag}
+          each tag in article.tags.split(',')
+            a.tag(href="/tags/"+tag)
+              i.icon-tags
+              |  #{tag}
 
   if (pages > 1)
     .pagination
