@@ -6,21 +6,22 @@ block main
 block content
   each article in articles
     .article
-      a.title(href='/articles/'+article._id, title=article.title) #{article.title}
+      h3
+        a(href='/articles/'+article._id, title=article.title) #{article.title}
       p=article.body
-      .author
+
+      .meta.muted
         span= formatDate(article.createdAt, "%b %d, %Y at %I:%M %p")
-        &nbsp;&nbsp;
-        span Author :&nbsp;
+        &nbsp; - &nbsp;
+        span Author &nbsp;
 
         - var name = article.user.name ? article.user.name : article.user.username
 
-        - console.log(name);
-
         a(href="/users/"+article.user._id)= name
-        &nbsp;&nbsp;
+        &nbsp; - &nbsp;
         if (article.tags)
           each tag in article.tags.split(',')
+            &nbsp;
             a.tag(href="/tags/"+tag)
               i.icon-tags
               |  #{tag}

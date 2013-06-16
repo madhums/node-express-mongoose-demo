@@ -7,46 +7,11 @@ body {
   max-width: 680px;
 }
 
-.date {
-  font-size: 11px;
-  color: #aaa;
-}
-
-.author {
-  color: #aaa;
-}
-
-.title {
-  padding: 5px 0 15px 0;
-  display: block;
-  font-size: 24px;
-}
-
 .article, .comment {
   padding: 15px 0;
   border-top: 1px solid #e8e8e8;
 }
 
-.main-head {
-  text-align: center;
-  padding: 20px;
-}
-
-.btn {
-  outline: none !important;
-}
-
-.center {
-  text-align: center;
-}
-
-.tags {
-  margin-top: 10px;
-}
-
-a.tag {
-  margin: 0 10px 0 0;
-}
 
 .error {
   color: #FF2602;
