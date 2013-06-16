@@ -2,6 +2,11 @@ body {
   padding-top: 60px;
 }
 
+.container {
+  width: auto;
+  max-width: 680px;
+}
+
 .date {
   font-size: 11px;
   color: #aaa;
