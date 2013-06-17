@@ -117,7 +117,7 @@ exports.destroy = function(req, res){
 
 exports.index = function(req, res){
   var page = req.param('page') > 0 ? req.param('page') : 0
-  var perPage = 15
+  var perPage = 30
   var options = {
     perPage: perPage,
     page: page
