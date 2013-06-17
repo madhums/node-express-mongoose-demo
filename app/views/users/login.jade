@@ -3,7 +3,9 @@ extends auth
 block auth
   form.offset1.login.form-horizontal(action="/users/session", method="post")
     input(type='hidden', name='_csrf', value="#{csrf_token}")
-    p.error= message
+
+    p.offset2.error= message
+
     .control-group
       label.control-label(for='email') Email
       .controls

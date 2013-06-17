@@ -1,22 +1,21 @@
 extends ../layouts/default
 
+
+block main
+  h1= title
+  hr
+
 block content
   - var action = '/articles'
-  if (!article.isNew)
-    - action += '/'+article.id
-
-  if (typeof errors !== 'undefined')
-    .fade.in.alert.alert-block.alert-error
-      a.close(data-dismiss="alert", href="javascript:void(0)") x
-      ul
-        each error in errors
-          li= error.type
+  - action += article.isNew? '' : '/' + article.id
 
   .row
     .span7
       form.form-horizontal(method="post", action=action, enctype="multipart/form-data")
-        input(type='hidden', name='_csrf', value="#{csrf_token}")
-        if (!article.isNew)
+
+        input(type="hidden", name="_csrf", value="#{csrf_token}")
+
+        - if (!article.isNew)
           input(type="hidden", name="_method", value="PUT")
 
         .control-group
@@ -43,6 +42,7 @@ block content
           button.btn.btn-primary(type='submit') Save changes
           &nbsp;
           a.btn(href='/articles', title="cancel") Cancel
+
     .span5
-      if (!article.isNew && article.image && article.image.files && article.image.files.length)
-        img(src=article.image.cdnUri + '/mini_' + article.image.files[0])
+      - if (!article.isNew && article.image && article.image.files && article.image.files.length)
+        img(src=article.image.cdnUri + "/mini_" + article.image.files[0])
