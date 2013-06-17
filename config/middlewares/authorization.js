@@ -8,11 +8,10 @@ exports.requiresLogin = function (req, res, next) {
     return res.redirect('/login')
   }
   next()
-};
-
+}
 
 /*
- *  User authorizations routing middleware
+ *  User authorization routing middleware
  */
 
 exports.user = {
@@ -25,9 +24,8 @@ exports.user = {
   }
 }
 
-
 /*
- *  Article authorizations routing middleware
+ *  Article authorization routing middleware
  */
 
 exports.article = {
