@@ -1,3 +1,4 @@
+
 /**
  * Module dependencies.
  */
@@ -11,13 +12,15 @@ var express = require('express')
 module.exports = function (app, config, passport) {
 
   app.set('showStackError', true)
+
   // should be placed before express.static
   app.use(express.compress({
     filter: function (req, res) {
-      return /json|text|javascript|css/.test(res.getHeader('Content-Type'));
+      return /json|text|javascript|css/.test(res.getHeader('Content-Type'))
     },
     level: 9
   }))
+
   app.use(express.favicon())
   app.use(express.static(config.root + '/public'))
 
@@ -31,9 +34,6 @@ module.exports = function (app, config, passport) {
   app.set('view engine', 'jade')
 
   app.configure(function () {
-    // dynamic helpers
-    app.use(helpers(pkg.name, app))
-
     // cookieParser should be above session
     app.use(express.cookieParser())
 
@@ -50,12 +50,15 @@ module.exports = function (app, config, passport) {
       })
     }))
 
-    // connect flash for flash messages
-    app.use(flash())
-
     // use passport session
     app.use(passport.initialize())
     app.use(passport.session())
+
+    // connect flash for flash messages - should be declared after sessions
+    app.use(flash())
+
+    // dynamic helpers - should be declared after flash
+    app.use(helpers(pkg.name, app))
 
     // adds CSRF support
     app.use(express.csrf())
@@ -75,7 +78,11 @@ module.exports = function (app, config, passport) {
     // properties, use instanceof etc.
     app.use(function(err, req, res, next){
       // treat as 404
-      if (~err.message.indexOf('not found')) return next()
+      if (err.message
+        && (~err.message.indexOf('not found')
+        || (~err.message.indexOf('Cast to ObjectId failed')))) {
+        return next()
+      }
 
       // log it
       // send emails if you want
@@ -92,6 +99,5 @@ module.exports = function (app, config, passport) {
         error: 'Not found'
       })
     })
-
   })
 }
