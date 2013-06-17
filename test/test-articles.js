@@ -10,8 +10,9 @@ var mongoose = require('mongoose')
   , context = describe
   , User = mongoose.model('User')
   , Article = mongoose.model('Article')
+  , agent = request.agent(app)
 
-var count, cookies
+var count
 
 /**
  * Articles tests
@@ -31,11 +32,11 @@ describe('Articles', function () {
 
   describe('GET /articles', function () {
     it('should respond with Content-Type text/html', function (done) {
-      request(app)
+      agent
       .get('/articles')
       .expect('Content-Type', /html/)
       .expect(200)
-      .expect(/List of Articles/)
+      .expect(/Articles/)
       .end(done)
     })
   })
@@ -43,7 +44,7 @@ describe('Articles', function () {
   describe('GET /articles/new', function () {
     context('When not logged in', function () {
       it('should redirect to /login', function (done) {
-        request(app)
+        agent
         .get('/articles/new')
         .expect('Content-Type', /plain/)
         .expect(302)
@@ -56,21 +57,16 @@ describe('Articles', function () {
     context('When logged in', function () {
       before(function (done) {
         // login the user
-        request(app)
+        agent
         .post('/users/session')
         .field('email', 'foobar@example.com')
         .field('password', 'foobar')
-        .end(function (err, res) {
-          // store the cookie
-          cookies = res.headers['set-cookie'].pop().split(';')[0];
-          done()
-        })
+        .end(done)
       })
 
       it('should respond with Content-Type text/html', function (done) {
-        var req = request(app).get('/articles/new')
-        req.cookies = cookies
-        req
+        agent
+        .get('/articles/new')
         .expect('Content-Type', /html/)
         .expect(200)
         .expect(/New Article/)
@@ -95,15 +91,11 @@ describe('Articles', function () {
     context('When logged in', function () {
       before(function (done) {
         // login the user
-        request(app)
+        agent
         .post('/users/session')
         .field('email', 'foobar@example.com')
         .field('password', 'foobar')
-        .end(function (err, res) {
-          // store the cookie
-          cookies = res.headers['set-cookie'].pop().split(';')[0];
-          done()
-        })
+        .end(done)
       })
 
       describe('Invalid parameters', function () {
@@ -115,9 +107,8 @@ describe('Articles', function () {
         })
 
         it('should respond with error', function (done) {
-          var req = request(app).post('/articles')
-          req.cookies = cookies
-          req
+          agent
+          .post('/articles')
           .field('title', '')
           .field('body', 'foo')
           .expect('Content-Type', /html/)
@@ -143,9 +134,8 @@ describe('Articles', function () {
         })
 
         it('should redirect to the new article page', function (done) {
-          var req = request(app).post('/articles')
-          req.cookies = cookies
-          req
+          agent
+          .post('/articles')
           .field('title', 'foo')
           .field('body', 'bar')
           .expect('Content-Type', /plain/)
