@@ -61,7 +61,9 @@ module.exports = function (app, config, passport) {
     app.use(helpers(pkg.name, app))
 
     // adds CSRF support
-    app.use(express.csrf())
+    if (process.env.NODE_ENV !== 'test') {
+      app.use(express.csrf())
+    }
 
     // This could be moved to view-helpers :-)
     app.use(function(req, res, next){
