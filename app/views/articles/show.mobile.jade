@@ -1,5 +1,6 @@
 extends ../layouts/mobile
 
+
 block main
   h1= article.title
 
@@ -7,19 +8,20 @@ block content
   .row
     .span9
       p=article.body
-      p.author
-        span Author :&nbsp;
-        a(href="/users/"+article.user._id)=article.user.name
-      .date= formatDate(article.createdAt, "%b %d, %Y at %I:%M %p")
-      if (article.tags)
-        .tags
-          | Tags :&nbsp;
-          each tag in article.tags.split(',')
-            a.tag(href="/tags/"+tag)
-              i.icon-tags
-              |  #{tag}
+      .meta.muted
+        - var name = article.user.name ? article.user.name : article.user.username
+        p Author -&nbsp;
+          a(href="/users/"+article.user._id)= name
+        p.muted= formatDate(article.createdAt, "%b %d, %Y at %I:%M %p")
+        - if (article.tags)
+          .tags
+            - each tag in article.tags.split(',')
+              a.tag(href="/tags/"+tag)
+                i.icon-tags
+                |  #{tag}
+              &nbsp;&nbsp;
     .span3
-      if (!article.isNew && article.image && article.image.files && article.image.files.length)
+      - if (!article.isNew && article.image && article.image.files && article.image.files.length)
         img(src=article.image.cdnUri + '/mini_' + article.image.files[0])
 
   p
@@ -33,7 +35,7 @@ block content
 
   p
     br
-    h2 Comments
-    each comment in article.comments
+    h3 Comments
+    - each comment in article.comments
       include ../comments/comment
     include ../comments/form
