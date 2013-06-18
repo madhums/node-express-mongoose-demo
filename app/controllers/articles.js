@@ -116,8 +116,8 @@ exports.destroy = function(req, res){
  */
 
 exports.index = function(req, res){
-  var page = req.param('page') > 0 ? req.param('page') : 0
-  var perPage = 30
+  var page = (req.param('page') > 0 ? req.param('page') : 1) - 1
+  var perPage = 4
   var options = {
     perPage: perPage,
     page: page
@@ -129,8 +129,8 @@ exports.index = function(req, res){
       res.render('articles/index', {
         title: 'Articles',
         articles: articles,
-        page: page,
-        pages: count / perPage
+        page: page + 1,
+        pages: Math.ceil(count / perPage)
       })
     })
   })
