@@ -22,7 +22,6 @@ var express = require('express')
 // if test env, load example file
 var env = process.env.NODE_ENV || 'development'
   , config = require('./config/config')[env]
-  , auth = require('./config/middlewares/authorization')
   , mongoose = require('mongoose')
 
 // Bootstrap db connection
@@ -42,7 +41,7 @@ var app = express()
 require('./config/express')(app, config, passport)
 
 // Bootstrap routes
-require('./config/routes')(app, passport, auth)
+require('./config/routes')(app, passport)
 
 // Start the app by listening on <port>
 var port = process.env.PORT || 3000

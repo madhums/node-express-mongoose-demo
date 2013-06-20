@@ -4,7 +4,7 @@ var mongoose = require('mongoose')
   , TwitterStrategy = require('passport-twitter').Strategy
   , FacebookStrategy = require('passport-facebook').Strategy
   , GitHubStrategy = require('passport-github').Strategy
-  , GoogleStrategy = require('passport-google-oauth').Strategy
+  , GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
   , User = mongoose.model('User')
 
 
@@ -43,19 +43,19 @@ module.exports = function (passport, config) {
 
   // use twitter strategy
   passport.use(new TwitterStrategy({
-        consumerKey: config.twitter.clientID
-      , consumerSecret: config.twitter.clientSecret
-      , callbackURL: config.twitter.callbackURL
+      consumerKey: config.twitter.clientID,
+      consumerSecret: config.twitter.clientSecret,
+      callbackURL: config.twitter.callbackURL
     },
     function(token, tokenSecret, profile, done) {
       User.findOne({ 'twitter.id': profile.id }, function (err, user) {
         if (err) { return done(err) }
         if (!user) {
           user = new User({
-              name: profile.displayName
-            , username: profile.username
-            , provider: 'twitter'
-            , twitter: profile._json
+            name: profile.displayName,
+            username: profile.username,
+            provider: 'twitter',
+            twitter: profile._json
           })
           user.save(function (err) {
             if (err) console.log(err)
@@ -71,20 +71,20 @@ module.exports = function (passport, config) {
 
   // use facebook strategy
   passport.use(new FacebookStrategy({
-        clientID: config.facebook.clientID
-      , clientSecret: config.facebook.clientSecret
-      , callbackURL: config.facebook.callbackURL
+      clientID: config.facebook.clientID,
+      clientSecret: config.facebook.clientSecret,
+      callbackURL: config.facebook.callbackURL
     },
     function(accessToken, refreshToken, profile, done) {
       User.findOne({ 'facebook.id': profile.id }, function (err, user) {
         if (err) { return done(err) }
         if (!user) {
           user = new User({
-              name: profile.displayName
-            , email: profile.emails[0].value
-            , username: profile.username
-            , provider: 'facebook'
-            , facebook: profile._json
+            name: profile.displayName,
+            email: profile.emails[0].value,
+            username: profile.username,
+            provider: 'facebook',
+            facebook: profile._json
           })
           user.save(function (err) {
             if (err) console.log(err)
@@ -108,11 +108,11 @@ module.exports = function (passport, config) {
       User.findOne({ 'github.id': profile.id }, function (err, user) {
         if (!user) {
           user = new User({
-              name: profile.displayName
-            , email: profile.emails[0].value
-            , username: profile.username
-            , provider: 'github'
-            , github: profile._json
+            name: profile.displayName,
+            email: profile.emails[0].value,
+            username: profile.username,
+            provider: 'github',
+            github: profile._json
           })
           user.save(function (err) {
             if (err) console.log(err)
@@ -127,19 +127,19 @@ module.exports = function (passport, config) {
 
   // use google strategy
   passport.use(new GoogleStrategy({
-      consumerKey: config.google.clientID,
-      consumerSecret: config.google.clientSecret,
+      clientID: config.google.clientID,
+      clientSecret: config.google.clientSecret,
       callbackURL: config.google.callbackURL
     },
     function(accessToken, refreshToken, profile, done) {
       User.findOne({ 'google.id': profile.id }, function (err, user) {
         if (!user) {
           user = new User({
-              name: profile.displayName
-            , email: profile.emails[0].value
-            , username: profile.username
-            , provider: 'google'
-            , google: profile._json
+            name: profile.displayName,
+            email: profile.emails[0].value,
+            username: profile.username,
+            provider: 'google',
+            google: profile._json
           })
           user.save(function (err) {
             if (err) console.log(err)

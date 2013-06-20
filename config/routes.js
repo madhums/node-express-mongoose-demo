@@ -1,36 +1,89 @@
 
+/*!
+ * Module dependencies.
+ */
+
 var async = require('async')
 
-module.exports = function (app, passport, auth) {
+/**
+ * Controllers
+ */
+
+var users = require('../app/controllers/users')
+  , articles = require('../app/controllers/articles')
+  , auth = require('./middlewares/authorization')
+
+/**
+ * Route middlewares
+ */
+
+var articleAuth = [auth.requiresLogin, auth.article.hasAuthorization]
+
+/**
+ * Expose routes
+ */
+
+module.exports = function (app, passport) {
 
   // user routes
-  var users = require('../app/controllers/users')
   app.get('/login', users.login)
   app.get('/signup', users.signup)
   app.get('/logout', users.logout)
   app.post('/users', users.create)
-  app.post('/users/session', passport.authenticate('local', {failureRedirect: '/login', failureFlash: 'Invalid email or password.'}), users.session)
+  app.post('/users/session',
+    passport.authenticate('local', {
+      failureRedirect: '/login',
+      failureFlash: 'Invalid email or password.'
+    }), users.session)
   app.get('/users/:userId', users.show)
-  app.get('/auth/facebook', passport.authenticate('facebook', { scope: [ 'email', 'user_about_me'], failureRedirect: '/login' }), users.signin)
-  app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), users.authCallback)
-  app.get('/auth/github', passport.authenticate('github', { failureRedirect: '/login' }), users.signin)
-  app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }), users.authCallback)
-  app.get('/auth/twitter', passport.authenticate('twitter', { failureRedirect: '/login' }), users.signin)
-  app.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/login' }), users.authCallback)
-  app.get('/auth/google', passport.authenticate('google', { failureRedirect: '/login', scope: 'https://www.google.com/m8/feeds' }), users.signin)
-  app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login', scope: 'https://www.google.com/m8/feeds' }), users.authCallback)
+  app.get('/auth/facebook',
+    passport.authenticate('facebook', {
+      scope: [ 'email', 'user_about_me'],
+      failureRedirect: '/login'
+    }), users.signin)
+  app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+      failureRedirect: '/login'
+    }), users.authCallback)
+  app.get('/auth/github',
+    passport.authenticate('github', {
+      failureRedirect: '/login'
+    }), users.signin)
+  app.get('/auth/github/callback',
+    passport.authenticate('github', {
+      failureRedirect: '/login'
+    }), users.authCallback)
+  app.get('/auth/twitter',
+    passport.authenticate('twitter', {
+      failureRedirect: '/login'
+    }), users.signin)
+  app.get('/auth/twitter/callback',
+    passport.authenticate('twitter', {
+      failureRedirect: '/login'
+    }), users.authCallback)
+  app.get('/auth/google',
+    passport.authenticate('google', {
+      failureRedirect: '/login',
+      scope: [
+        'https://www.googleapis.com/auth/userinfo.profile',
+        'https://www.googleapis.com/auth/userinfo.email'
+      ]
+    }), users.signin)
+  app.get('/auth/google/callback',
+    passport.authenticate('google', {
+      failureRedirect: '/login'
+    }), users.authCallback)
 
   app.param('userId', users.user)
 
   // article routes
-  var articles = require('../app/controllers/articles')
   app.get('/articles', articles.index)
   app.get('/articles/new', auth.requiresLogin, articles.new)
   app.post('/articles', auth.requiresLogin, articles.create)
   app.get('/articles/:id', articles.show)
-  app.get('/articles/:id/edit', auth.requiresLogin, auth.article.hasAuthorization, articles.edit)
-  app.put('/articles/:id', auth.requiresLogin, auth.article.hasAuthorization, articles.update)
-  app.del('/articles/:id', auth.requiresLogin, auth.article.hasAuthorization, articles.destroy)
+  app.get('/articles/:id/edit', articleAuth, articles.edit)
+  app.put('/articles/:id', articleAuth, articles.update)
+  app.del('/articles/:id', articleAuth, articles.destroy)
 
   app.param('id', articles.load)
 
