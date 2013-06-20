@@ -9,10 +9,10 @@ var mongoose = require('mongoose')
   , _ = require('underscore')
 
 /**
- * Load article
+ * Load
  */
 
-exports.article = function(req, res, next, id){
+exports.load = function(req, res, next, id){
   var User = mongoose.model('User')
 
   Article.load(id, function (err, article) {
@@ -20,6 +20,31 @@ exports.article = function(req, res, next, id){
     if (!article) return next(new Error('not found'))
     req.article = article
     next()
+  })
+}
+
+/**
+ * List
+ */
+
+exports.index = function(req, res){
+  var page = (req.param('page') > 0 ? req.param('page') : 1) - 1
+  var perPage = 30
+  var options = {
+    perPage: perPage,
+    page: page
+  }
+
+  Article.list(options, function(err, articles) {
+    if (err) return res.render('500')
+    Article.count().exec(function (err, count) {
+      res.render('articles/index', {
+        title: 'Articles',
+        articles: articles,
+        page: page + 1,
+        pages: Math.ceil(count / perPage)
+      })
+    })
   })
 }
 
@@ -89,7 +114,7 @@ exports.update = function(req, res){
 }
 
 /**
- * View an article
+ * Show
  */
 
 exports.show = function(req, res){
@@ -108,30 +133,5 @@ exports.destroy = function(req, res){
   article.remove(function(err){
     req.flash('info', 'Deleted successfully')
     res.redirect('/articles')
-  })
-}
-
-/**
- * List articles
- */
-
-exports.index = function(req, res){
-  var page = (req.param('page') > 0 ? req.param('page') : 1) - 1
-  var perPage = 30
-  var options = {
-    perPage: perPage,
-    page: page
-  }
-
-  Article.list(options, function(err, articles) {
-    if (err) return res.render('500')
-    Article.count().exec(function (err, count) {
-      res.render('articles/index', {
-        title: 'Articles',
-        articles: articles,
-        page: page + 1,
-        pages: Math.ceil(count / perPage)
-      })
-    })
   })
 }

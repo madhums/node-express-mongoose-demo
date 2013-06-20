@@ -32,7 +32,7 @@ module.exports = function (app, passport, auth) {
   app.put('/articles/:id', auth.requiresLogin, auth.article.hasAuthorization, articles.update)
   app.del('/articles/:id', auth.requiresLogin, auth.article.hasAuthorization, articles.destroy)
 
-  app.param('id', articles.article)
+  app.param('id', articles.load)
 
   // home route
   app.get('/', articles.index)

@@ -34,6 +34,12 @@ module.exports = function (app, config, passport) {
   app.set('view engine', 'jade')
 
   app.configure(function () {
+    // expose package.json to views
+    app.use(function (req, res, next) {
+      res.locals.pkg = pkg
+      next()
+    })
+
     // cookieParser should be above session
     app.use(express.cookieParser())
 
@@ -57,8 +63,8 @@ module.exports = function (app, config, passport) {
     // connect flash for flash messages - should be declared after sessions
     app.use(flash())
 
-    // dynamic helpers - should be declared after flash
-    app.use(helpers(pkg.name, app))
+    // should be declared after session and flash
+    app.use(helpers(pkg.name))
 
     // adds CSRF support
     if (process.env.NODE_ENV !== 'test') {
@@ -101,5 +107,10 @@ module.exports = function (app, config, passport) {
         error: 'Not found'
       })
     })
+  })
+
+  // development env config
+  app.configure('development', function () {
+    app.locals.pretty = true
   })
 }
