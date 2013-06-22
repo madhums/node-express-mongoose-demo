@@ -2,13 +2,13 @@ module.exports = {
   variants: {
     article: {
       resize: {
-        detail: "x440"
+        detail: "800x600"
       },
       crop: {
-        thumb: "16000@"
+        thumb: "200x200"
       },
       resizeAndCrop: {
-        mini: {resize: "63504@", crop: "252x210"}
+        mini: {resize: "200x150", crop: "100x100"}
       }
     },
 
