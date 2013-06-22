@@ -14,13 +14,13 @@ var mongoose = require('mongoose')
  */
 
 var UserSchema = new Schema({
-  name: String,
-  email: String,
-  username: String,
-  provider: String,
-  hashed_password: String,
-  salt: String,
-  authToken: String,
+  name: { type: String, default: '' },
+  email: { type: String, default: '' },
+  username: { type: String, default: '' },
+  provider: { type: String, default: '' },
+  hashed_password: { type: String, default: '' },
+  salt: { type: String, default: '' },
+  authToken: { type: String, default: '' },
   facebook: {},
   twitter: {},
   github: {},
