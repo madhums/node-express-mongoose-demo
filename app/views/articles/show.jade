@@ -8,9 +8,10 @@ block content
     .span9
       p=article.body
       .meta.muted
-        - var name = article.user.name ? article.user.name : article.user.username
-        p Author -&nbsp;
-          a(href="/users/"+article.user._id)= name
+        - if (article.user)
+          - var name = article.user.name ? article.user.name : article.user.username
+          p Author -&nbsp;
+            a(href="/users/"+article.user._id)= name
         p.muted= formatDate(article.createdAt, "%b %d, %Y at %I:%M %p")
         - if (article.tags)
           .tags
