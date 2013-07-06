@@ -4,30 +4,34 @@ block main
   h1= title
 
 block content
-  - each article in articles
-    .article
-      h3
-        a(href='/articles/'+article._id, title=article.title) #{article.title}
-      p= article.body
+  - if (articles.length)
+    - each article in articles
+      .article
+        h3
+          a(href='/articles/'+article._id, title=article.title) #{article.title}
+        p= article.body
 
-      .meta.muted
-        span= formatDate(article.createdAt)
-        &nbsp; - &nbsp;
-        - if (article.user)
-          span Author &nbsp;
+        .meta.muted
+          span= formatDate(article.createdAt)
+          &nbsp; - &nbsp;
+          - if (article.user)
+            span Author &nbsp;
 
-          - var name = article.user.name ? article.user.name : article.user.username
+            - var name = article.user.name ? article.user.name : article.user.username
 
-          a(href="/users/"+article.user._id)= name
-        &nbsp; - &nbsp;
-        - if (article.tags)
-          - each tag in article.tags.split(',')
-            &nbsp;
-            a.tag(href="/tags/"+tag)
-              i.icon-tags
-              |  #{tag}
+            a(href="/users/"+article.user._id)= name
+          &nbsp; - &nbsp;
+          - if (article.tags)
+            - each tag in article.tags.split(',')
+              &nbsp;
+              a.tag(href="/tags/"+tag)
+                i.icon-tags
+                |  #{tag}
 
-  - if (pages > 1)
-    .pagination
-      ul
-        != createPagination(pages, page)
+    - if (pages > 1)
+      .pagination
+        ul
+          != createPagination(pages, page)
+  - else
+    p.muted No articles.&nbsp;
+      a(href="/articles/new") create one
