@@ -7,15 +7,22 @@ var mongoose = require('mongoose')
   , User = mongoose.model('User')
   , utils = require('../../lib/utils')
 
+var login = function (req, res) {
+  if (req.session.returnTo) {
+    res.redirect(req.session.returnTo)
+    delete req.session.returnTo
+    return
+  }
+  res.redirect('/')
+}
+
 exports.signin = function (req, res) {}
 
 /**
  * Auth callback
  */
 
-exports.authCallback = function (req, res, next) {
-  res.redirect('/')
-}
+exports.authCallback = login
 
 /**
  * Show login form
@@ -52,9 +59,7 @@ exports.logout = function (req, res) {
  * Session
  */
 
-exports.session = function (req, res) {
-  res.redirect('/')
-}
+exports.session = login
 
 /**
  * Create user
