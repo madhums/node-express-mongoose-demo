@@ -1,6 +1,6 @@
 {
   "name": "nodejs-express-mongoose-demo",
-  "description": "A demo app illustrating the usage of express framework, mongoose orm, mongodb and stylus in node.js. The also illustrates how to properly organize your application",
+  "description": "A demo app illustrating the usage of express, mongoose, passportjs, jade and other modules in nodejs",
   "keywords": [
     "express",
     "mongoose",
