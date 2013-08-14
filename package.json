@@ -31,6 +31,7 @@
     "passport-twitter": "latest",
     "passport-github": "latest",
     "passport-google-oauth": "latest",
+    "passport-linkedin": "latest",
     "imager": "latest",
     "notifier": "latest",
     "underscore": "latest",

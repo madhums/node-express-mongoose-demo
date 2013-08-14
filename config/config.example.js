@@ -41,6 +41,11 @@ module.exports = {
       clientSecret: "APP_SECRET",
       callbackURL: "http://localhost:3000/auth/google/callback"
     },
+    linkedin: {
+      clientID: "CONSUMER_KEY",
+      clientSecret: "CONSUMER_SECRET",
+      callbackURL: "http://localhost:3000/auth/linkedin/callback"
+    }
   },
   test: {
     db: 'mongodb://localhost/noobjs_test',
