@@ -11,6 +11,10 @@
   "version": "3.0.0",
   "private": false,
   "author": "Madhusudhan Srinivasa <madhums8@gmail.com> (http://madhums.github.com)",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/madhums/node-express-mongoose-demo.git"
+  },
   "engines": {
     "node": "0.10.x",
     "npm":  "1.2.x"
