@@ -24,9 +24,9 @@ block content
             input#title.input-xlarge(type='text', name="title", value=article.title, placeholder='Enter the title')
 
         .control-group
-          label.control-label(for='title') Image
+          label.control-label(for='file') Image
           .controls
-            input(type='file', name="image[]")
+            input#file(type='file', name="image[]")
 
         .control-group
           label.control-label(for='desc') Body
@@ -34,7 +34,7 @@ block content
             textarea#desc.input-xlarge(type='text', rows="5", name="body", placeholder='Enter the article description')=article.body
 
         .control-group
-          label.control-label(for='desc') Tags
+          label.control-label(for='tags') Tags
           .controls
             input#tags(type='text', name="tags", value=article.tags, placeholder='Enter the tags')
 
