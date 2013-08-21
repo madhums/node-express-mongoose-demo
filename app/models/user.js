@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -64,6 +63,9 @@ UserSchema.path('email').validate(function (email) {
 
 UserSchema.path('email').validate(function (email, fn) {
   var User = mongoose.model('User')
+  
+  // if you are authenticating by any of the oauth strategies, don't validate
+  if (authTypes.indexOf(this.provider) !== -1) fn(true)
 
   // Check only when it is a new user or when email field is modified
   if (this.isNew || this.isModified('email')) {
