@@ -8,6 +8,8 @@ Read the [wiki](https://github.com/madhums/node-express-mongoose/wiki) (or the [
 
 Want to build something from scratch? use the [boilerplate app](https://github.com/madhums/node-express-mongoose)
 
+Checkout the [apps that are built using this approach](https://github.com/madhums/node-express-mongoose/wiki/Apps-built-using-this-approach)
+
 ## Install
 
 **NOTE:** You need to have node.js, mongodb and [imagemagick](http://www.imagemagick.org/script/index.php) installed and running.
@@ -32,8 +34,6 @@ Then visit [http://localhost:3000/](http://localhost:3000/)
 4. [node-view-helpers](http://github.com/madhums/node-view-helpers) - some common view helpers
 5. [mongoose-migrate](https://github.com/madhums/mongoose-migrate#readme) - Keeps track of the migrations in a mongodb collection (fork of visionmedia/node-migrate)
 6. [mongoose-user](http://github.com/madhums/mongoose-user) - Generic methods, statics and virtuals used for user schemas
-
-Checkout the [apps that are built using this approach](https://github.com/madhums/node-express-mongoose/wiki/Apps-built-using-this-approach)
 
 ## Directory structure
 ```
