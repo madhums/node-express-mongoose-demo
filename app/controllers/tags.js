@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -27,7 +26,7 @@ exports.index = function (req, res) {
         title: 'Articles tagged ' + req.param('tag'),
         articles: articles,
         page: page,
-        pages: count / perPage
+        pages: Math.ceil(count / perPage)
       })
     })
   })
