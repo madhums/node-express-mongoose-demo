@@ -5,12 +5,8 @@ header#header
         a.brand(href='/') Node.js Express Mongoose Demo
         .nav-collapse.collapse
           ul.nav
-            - if (isActive('/articles/new'))
-              li.active
-                a(href="/articles/new", title="new article") New
-            - else
-              li
-                a(href="/articles/new", title="new article") New
+            li(class=isActive('/articles/new') ? 'active' : '')
+              a(href="/articles/new", title="new article") New
           ul.nav.pull-right
             li
               iframe(style="border: 0; margin: 10px 0 0 0; padding: 0;", src="https://www.gittip.com/madhums/widget.html", width="48pt", height="22pt")
