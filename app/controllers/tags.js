@@ -12,7 +12,7 @@ var mongoose = require('mongoose')
 exports.index = function (req, res) {
   var criteria = { tags: req.param('tag') }
   var perPage = 5
-  var page = req.param('page') > 0 ? req.param('page') : 0
+  var page = (req.param('page') > 0 ? req.param('page') : 1) - 1
   var options = {
     perPage: perPage,
     page: page,
@@ -25,7 +25,7 @@ exports.index = function (req, res) {
       res.render('articles/index', {
         title: 'Articles tagged ' + req.param('tag'),
         articles: articles,
-        page: page,
+        page: page + 1,
         pages: Math.ceil(count / perPage)
       })
     })
