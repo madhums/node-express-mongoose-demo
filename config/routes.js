@@ -72,6 +72,17 @@ module.exports = function (app, passport) {
     passport.authenticate('google', {
       failureRedirect: '/login'
     }), users.authCallback)
+  app.get('/auth/linkedin',
+    passport.authenticate('linkedin', {
+      failureRedirect: '/login',
+      scope: [ 
+        'r_emailaddress'
+      ]
+    }), users.signin)
+  app.get('/auth/linkedin/callback',
+    passport.authenticate('linkedin', {
+      failureRedirect: '/login'
+    }), users.authCallback)
 
   app.param('userId', users.user)
 

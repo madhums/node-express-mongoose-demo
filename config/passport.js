@@ -1,10 +1,10 @@
-
 var mongoose = require('mongoose')
   , LocalStrategy = require('passport-local').Strategy
   , TwitterStrategy = require('passport-twitter').Strategy
   , FacebookStrategy = require('passport-facebook').Strategy
   , GitHubStrategy = require('passport-github').Strategy
   , GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
+  , LinkedinStrategy = require('passport-linkedin').Strategy
   , User = mongoose.model('User')
 
 
@@ -151,4 +151,31 @@ module.exports = function (passport, config) {
       })
     }
   ));
+
+  // use linkedin strategy
+  passport.use(new LinkedinStrategy({
+    consumerKey: config.linkedin.clientID,
+    consumerSecret: config.linkedin.clientSecret,
+    callbackURL: config.linkedin.callbackURL,
+    profileFields: ['id', 'first-name', 'last-name', 'email-address']
+    },
+    function(accessToken, refreshToken, profile, done) {
+      User.findOne({ 'linkedin.id': profile.id }, function (err, user) {
+        if (!user) {
+          user = new User({
+            name: profile.displayName
+          , email: profile.emails[0].value
+          , username: profile.emails[0].value
+          , provider: 'linkedin'
+          })
+          user.save(function (err) {
+            if (err) console.log(err)
+            return done(err, user)
+          })
+        } else {
+          return done(err, user)
+        }
+      })
+    }
+    ));
 }
