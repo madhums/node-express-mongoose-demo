@@ -6,7 +6,7 @@ var mongoose = require('mongoose')
   , Schema = mongoose.Schema
   , crypto = require('crypto')
   , _ = require('underscore')
-  , authTypes = ['github', 'twitter', 'facebook', 'google']
+  , authTypes = ['github', 'twitter', 'facebook', 'google', 'linkedin']
 
 /**
  * User Schema
@@ -23,7 +23,8 @@ var UserSchema = new Schema({
   facebook: {},
   twitter: {},
   github: {},
-  google: {}
+  google: {},
+  linkedin: {}
 })
 
 /**
