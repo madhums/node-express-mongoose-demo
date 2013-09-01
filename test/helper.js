@@ -16,18 +16,12 @@ var mongoose = require('mongoose')
  */
 
 exports.clearDb = function (done) {
-  var callback = function (item, fn) { item.remove(fn) }
-
   async.parallel([
     function (cb) {
-      User.find().exec(function (err, users) {
-        async.forEach(users, callback, cb)
-      })
+      User.collection.remove(cb)
     },
     function (cb) {
-      Article.find().exec(function (err, apps) {
-        async.forEach(apps, callback, cb)
-      })
+      Article.collection.remove(cb)
     }
   ], done)
 }
