@@ -15,7 +15,7 @@ Checkout the [apps that are built using this approach](https://github.com/madhum
 **NOTE:** You need to have node.js, mongodb and [imagemagick](http://www.imagemagick.org/script/index.php) installed and running.
 
 ```sh
-  $ git clone git://github.com/madhums/nodejs-express-mongoose-demo.git
+  $ git clone git://github.com/madhums/node-express-mongoose-demo.git
   $ npm install
   $ cp config/config.example.js config/config.js
   $ cp config/imager.example.js config/imager.js
