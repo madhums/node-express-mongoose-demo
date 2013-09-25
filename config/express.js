@@ -71,14 +71,14 @@ module.exports = function (app, config, passport) {
       app.use(express.csrf())
     }
 
+    // routes should be at the last
+    app.use(app.router)
+
     // This could be moved to view-helpers :-)
     app.use(function(req, res, next){
       res.locals.csrf_token = req.csrfToken()
       next()
     })
-
-    // routes should be at the last
-    app.use(app.router)
 
     // assume "not found" in the error msgs
     // is a 404. this is somewhat silly, but
