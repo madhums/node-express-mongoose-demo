@@ -45,7 +45,7 @@ exports.index = function(req, res){
         pages: Math.ceil(count / perPage)
       })
     })
-  })  
+  })
 }
 
 /**
