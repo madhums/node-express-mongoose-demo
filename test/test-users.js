@@ -39,6 +39,19 @@ describe('Users', function () {
         .end(done)
       })
 
+      it('no name - should respond with errors', function (done) {
+        request(app)
+        .post('/users')
+        .field('name', '')
+        .field('username', 'foobar')
+        .field('email', 'foobar@example.com')
+        .field('password', 'foobar')
+        .expect('Content-Type', /html/)
+        .expect(200)
+        .expect(/Name cannot be blank/)
+        .end(done)
+      })
+
       it('should not save the user to the database', function (done) {
         User.count(function (err, cnt) {
           count.should.equal(cnt)

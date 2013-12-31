@@ -25,7 +25,7 @@ block content
 
         .control-group
           label.control-label(for='file') Image
-          .controls
+           .controls
             input#file(type='file', name="image[]")
 
         .control-group
@@ -39,8 +39,8 @@ block content
             input#tags(type='text', name="tags", value=article.tags, placeholder='Enter the tags')
 
         .form-actions
-          button.btn.btn-primary(type='submit') Save changes
-          &nbsp;
+          button.btn.btn-primary(type='submit') Save changes 
+          .div#spacer &nbsp;
           a.btn(href='/articles', title="cancel") Cancel
 
     .span5

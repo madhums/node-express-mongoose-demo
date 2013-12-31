@@ -72,7 +72,7 @@ exports.create = function (req, res) {
       req.flash('success', 'Successfully created article!')
       return res.redirect('/articles/'+article._id)
     }
-
+    
     res.render('articles/new', {
       title: 'New Article',
       article: article,
