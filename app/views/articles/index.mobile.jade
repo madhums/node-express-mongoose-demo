@@ -4,7 +4,7 @@ block main
   h1= title
 
 block content
-  each article in articles
+  - each article in articles
     .article
       h3
         a(href='/articles/'+article._id, title=article.title) #{article.title}
@@ -26,7 +26,6 @@ block content
               i.icon-tags
               |  #{tag}
 
-  if (pages > 1)
-    .pagination
-      ul
-        != createPagination(pages, page)
+  - if (pages > 1)
+    ul.pagination
+      != createPagination(pages, page)

@@ -13,23 +13,22 @@ block content
 
         .meta
           span.muted= formatDate(article.createdAt)
-          | - &nbsp;
 
           - if (article.user)
+            | &nbsp; - &nbsp;
             span Author &nbsp;
 
             - var name = article.user.name ? article.user.name : article.user.username
 
             a(href="/users/"+article.user._id)= name
 
-          | &nbsp;
-
           - if (article.tags)
+            | &nbsp; - &nbsp;
+            span Tags &nbsp;
             - each tag in article.tags.split(',')
-              .div#spacer
-              a.tag(href="/tags/"+tag)
-                i.icon-tags
-                |  #{tag}
+              i.muted.fa.fa-tag&nbsp;
+              a.tag(href="/tags/"+tag)= tag
+              | &nbsp;
 
     - if (pages > 1)
       ul.pagination
