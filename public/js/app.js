@@ -19,3 +19,19 @@ $(document).ready(function () {
   });
 
 });
+
+
+function reply(commentId) {
+  container = $('.comment[comment-id="' + commentId + '"] > .comment-reply-form');
+
+  container.html($('#comment-form').clone())
+  container.find('form input[name=parent]').val(commentId);
+  container.find('button[type=submit]').click(function() {
+    setTimeout(function() {
+      container.find('form').empty();
+    }, 3000);
+    container.find('form').hide();
+
+    return true;
+  });
+}

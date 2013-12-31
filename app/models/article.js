@@ -27,6 +27,18 @@ var setTags = function (tags) {
 }
 
 /**
+ * Comment Schema
+ */
+
+var CommentSchema = new Schema({
+  body: { type : String, default : '' },
+  user: { type : Schema.ObjectId, ref : 'User' },
+  createdAt: { type : Date, default : Date.now },
+  parent: { type : Schema.ObjectId, ref : 'Comment' }
+})
+
+
+/**
  * Article Schema
  */
 
@@ -34,18 +46,14 @@ var ArticleSchema = new Schema({
   title: {type : String, default : '', trim : true},
   body: {type : String, default : '', trim : true},
   user: {type : Schema.ObjectId, ref : 'User'},
-  comments: [{
-    body: { type : String, default : '' },
-    user: { type : Schema.ObjectId, ref : 'User' },
-    createdAt: { type : Date, default : Date.now }
-  }],
+  comments: [CommentSchema],
   tags: {type: [], get: getTags, set: setTags},
   image: {
     cdnUri: String,
     files: []
   },
   createdAt  : {type : Date, default : Date.now}
-})
+});
 
 /**
  * Validations
@@ -113,7 +121,8 @@ ArticleSchema.methods = {
 
     this.comments.push({
       body: comment.body,
-      user: user._id
+      user: user._id,
+      parent: comment.parent
     })
 
     notify.comment({
@@ -170,3 +179,5 @@ ArticleSchema.statics = {
 }
 
 mongoose.model('Article', ArticleSchema)
+
+mongoose.model('Comment', CommentSchema)
