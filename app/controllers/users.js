@@ -8,12 +8,9 @@ var mongoose = require('mongoose')
   , utils = require('../../lib/utils')
 
 var login = function (req, res) {
-  if (req.session.returnTo) {
-    res.redirect(req.session.returnTo)
-    delete req.session.returnTo
-    return
-  }
-  res.redirect('/')
+  var redirectTo = req.session.returnTo ? req.session.returnTo : '/'
+  delete req.session.returnTo
+  res.redirect(redirectTo)
 }
 
 exports.signin = function (req, res) {}
