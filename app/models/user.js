@@ -6,7 +6,7 @@ var mongoose = require('mongoose')
   , Schema = mongoose.Schema
   , crypto = require('crypto')
   , _ = require('underscore')
-  , authTypes = ['github', 'twitter', 'facebook', 'google', 'linkedin']
+  , oAuthTypes = ['github', 'twitter', 'facebook', 'google', 'linkedin']
 
 /**
  * User Schema
@@ -48,25 +48,21 @@ var validatePresenceOf = function (value) {
   return value && value.length
 }
 
-// the below 4 validations only apply if you are signing up traditionally
+// the below 5 validations only apply if you are signing up traditionally
 
 UserSchema.path('name').validate(function (name) {
-  // if you are authenticating by any of the oauth strategies, don't validate
-  if (authTypes.indexOf(this.provider) !== -1) return true
+  if (this.doesNotRequireValidation()) return true
   return name.length
 }, 'Name cannot be blank')
 
 UserSchema.path('email').validate(function (email) {
-  // if you are authenticating by any of the oauth strategies, don't validate
-  if (authTypes.indexOf(this.provider) !== -1) return true
+  if (this.doesNotRequireValidation()) return true
   return email.length
 }, 'Email cannot be blank')
 
 UserSchema.path('email').validate(function (email, fn) {
   var User = mongoose.model('User')
-  
-  // if you are authenticating by any of the oauth strategies, don't validate
-  if (authTypes.indexOf(this.provider) !== -1) fn(true)
+  if (this.doesNotRequireValidation()) fn(true)
 
   // Check only when it is a new user or when email field is modified
   if (this.isNew || this.isModified('email')) {
@@ -77,14 +73,12 @@ UserSchema.path('email').validate(function (email, fn) {
 }, 'Email already exists')
 
 UserSchema.path('username').validate(function (username) {
-  // if you are authenticating by any of the oauth strategies, don't validate
-  if (authTypes.indexOf(this.provider) !== -1) return true
+  if (this.doesNotRequireValidation()) return true
   return username.length
 }, 'Username cannot be blank')
 
 UserSchema.path('hashed_password').validate(function (hashed_password) {
-  // if you are authenticating by any of the oauth strategies, don't validate
-  if (authTypes.indexOf(this.provider) !== -1) return true
+  if (this.doesNotRequireValidation()) return true
   return hashed_password.length
 }, 'Password cannot be blank')
 
@@ -97,7 +91,7 @@ UserSchema.pre('save', function(next) {
   if (!this.isNew) return next()
 
   if (!validatePresenceOf(this.password)
-    && authTypes.indexOf(this.provider) === -1)
+    && !_.contains(oAuthTypes, this.provider))
     next(new Error('Invalid password'))
   else
     next()
@@ -149,6 +143,14 @@ UserSchema.methods = {
     } catch (err) {
       return ''
     }
+  },
+
+  /**
+   * Validation is not required if using OAuth
+   */
+
+  doesNotRequireValidation: function() {
+      return _.contains(oAuthTypes, this.provider);
   }
 }
 

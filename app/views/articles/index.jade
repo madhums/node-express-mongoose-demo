@@ -13,17 +13,17 @@ block content
 
         .meta.muted
           span= formatDate(article.createdAt)
-          &nbsp; - &nbsp;
+          .div#spacer - &nbsp;
           - if (article.user)
             span Author &nbsp;
 
             - var name = article.user.name ? article.user.name : article.user.username
 
             a(href="/users/"+article.user._id)= name
-          &nbsp; - &nbsp;
+          .div#spacer - &nbsp;
           - if (article.tags)
             - each tag in article.tags.split(',')
-              &nbsp;
+              .div#spacer
               a.tag(href="/tags/"+tag)
                 i.icon-tags
                 |  #{tag}
