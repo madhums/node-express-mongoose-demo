@@ -6,8 +6,11 @@
 var express = require('express')
   , mongoStore = require('connect-mongo')(express)
   , flash = require('connect-flash')
+  , winston = require('winston')
   , helpers = require('view-helpers')
   , pkg = require('../package.json')
+
+var env = process.env.NODE_ENV || 'development'
 
 module.exports = function (app, config, passport) {
 
@@ -24,10 +27,22 @@ module.exports = function (app, config, passport) {
   app.use(express.favicon())
   app.use(express.static(config.root + '/public'))
 
-  // don't use logger for test env
-  if (process.env.NODE_ENV !== 'test') {
-    app.use(express.logger('dev'))
+  // Logging
+  // Use winston on production
+  var log
+  if (env !== 'development') {
+    log = {
+      stream: {
+        write: function (message, encoding) {
+          winston.info(message)
+        }
+      }
+    }
+  } else {
+    log = 'dev'
   }
+  // Don't log during tests
+  if (env !== 'test') app.use(express.logger(log))
 
   // set views path, template engine and default layout
   app.set('views', config.root + '/app/views')
@@ -49,7 +64,7 @@ module.exports = function (app, config, passport) {
 
     // express/mongo session storage
     app.use(express.session({
-      secret: 'noobjs',
+      secret: pkg.name,
       store: new mongoStore({
         url: config.db,
         collection : 'sessions'

@@ -37,8 +37,8 @@
     "passport-google-oauth": "latest",
     "passport-linkedin": "latest",
     "imager": "latest",
+    "winston": "latest",
     "notifier": "latest",
-    "underscore": "latest",
     "async": "latest",
     "view-helpers": "latest",
     "forever": "latest"
