@@ -91,7 +91,7 @@ UserSchema.pre('save', function(next) {
   if (!this.isNew) return next()
 
   if (!validatePresenceOf(this.password)
-    && !_.contains(oAuthTypes, this.provider))
+    && !this.doesNotRequireValidation())
     next(new Error('Invalid password'))
   else
     next()
@@ -150,7 +150,7 @@ UserSchema.methods = {
    */
 
   doesNotRequireValidation: function() {
-      return _.contains(oAuthTypes, this.provider);
+    return ~oAuthTypes.indexOf(this.provider);
   }
 }
 

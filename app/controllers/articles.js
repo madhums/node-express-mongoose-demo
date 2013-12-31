@@ -6,7 +6,7 @@
 var mongoose = require('mongoose')
   , Article = mongoose.model('Article')
   , utils = require('../../lib/utils')
-  , _ = require('underscore')
+  , extend = require('util')._extend
 
 /**
  * Load
@@ -45,7 +45,7 @@ exports.index = function(req, res){
         pages: Math.ceil(count / perPage)
       })
     })
-  })  
+  })
 }
 
 /**
@@ -72,7 +72,7 @@ exports.create = function (req, res) {
       req.flash('success', 'Successfully created article!')
       return res.redirect('/articles/'+article._id)
     }
-    
+
     res.render('articles/new', {
       title: 'New Article',
       article: article,
@@ -98,7 +98,7 @@ exports.edit = function (req, res) {
 
 exports.update = function(req, res){
   var article = req.article
-  article = _.extend(article, req.body)
+  article = extend(article, req.body)
 
   article.uploadAndSave(req.files.image, function(err) {
     if (!err) {
