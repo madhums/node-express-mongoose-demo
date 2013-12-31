@@ -84,3 +84,7 @@ button.error:focus {
   font-size: 14px;
   color: #000 !important;
 }
+
+.navbar-nav > li > a.travis{
+  padding-top: 13px;
+}
