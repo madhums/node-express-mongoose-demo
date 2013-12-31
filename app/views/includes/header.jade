@@ -17,7 +17,7 @@ nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
           li
             a(href="/logout", title="logout") Logout
         - else
-          li
+          li(class=isActive('/login') ? 'active' : '')
             a(href="/login", title="Login") Login
 
       ul.nav.navbar-nav.navbar-right
