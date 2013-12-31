@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -110,16 +109,20 @@ ArticleSchema.methods = {
 
   addComment: function (user, comment, cb) {
     var notify = require('../mailer/notify')
+    
+    var text = comment.body
+    text = text.replace(/\n\s+\n/gm, '\n\n')
+    text = text.replace(/\r?\n/g, '<br />')
 
     this.comments.push({
-      body: comment.body,
+      body: text,
       user: user._id
     })
 
     notify.comment({
       article: this,
       currentUser: user,
-      comment: comment.body
+      comment: text
     })
 
     this.save(cb)

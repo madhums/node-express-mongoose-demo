@@ -1,9 +1,9 @@
-
 - if (comment && comment.user)
   .comment
     - var name = comment.user.name ? comment.user.name : comment.user.username
     a(href="/users/"+comment.user._id)= name
     |  :&nbsp;
-    = comment.body
+    p
+      !{comment.body}
     br
     .muted= formatDate(comment.createdAt)
