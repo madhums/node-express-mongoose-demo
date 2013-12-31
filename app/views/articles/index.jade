@@ -11,16 +11,19 @@ block content
           a(href='/articles/'+article._id, title=article.title) #{article.title}
         p= article.body
 
-        .meta.muted
-          span= formatDate(article.createdAt)
-          .div#spacer - &nbsp;
+        .meta
+          span.muted= formatDate(article.createdAt)
+          | - &nbsp;
+
           - if (article.user)
             span Author &nbsp;
 
             - var name = article.user.name ? article.user.name : article.user.username
 
             a(href="/users/"+article.user._id)= name
-          .div#spacer - &nbsp;
+
+          | &nbsp;
+
           - if (article.tags)
             - each tag in article.tags.split(',')
               .div#spacer
@@ -29,9 +32,8 @@ block content
                 |  #{tag}
 
     - if (pages > 1)
-      .pagination
-        ul
-          != createPagination(pages, page)
+      ul.pagination
+        != createPagination(pages, page)
   - else
-    p.muted No articles.&nbsp;
+    h4.muted No articles.&nbsp;
       a(href="/articles/new") create one

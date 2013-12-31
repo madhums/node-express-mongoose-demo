@@ -1,10 +1,11 @@
 extends ../layouts/default
 
 block main
-  h1= title
+  center
+    h1= title
 
 block content
-  .offset0
+  center
     a(href="/auth/facebook")
       img(src="/img/facebook.png")
     a(href="/auth/github")

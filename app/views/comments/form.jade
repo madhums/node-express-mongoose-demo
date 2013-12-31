@@ -1,6 +1,5 @@
-form.form-vertical(method="post", action="/articles/#{article._id}/comments")
+form(method="post", action="/articles/#{article._id}/comments", role="form")
   input(type='hidden', name='_csrf', value="#{csrf_token}")
-  .control-group
-    .controls
-      textarea#comment.input-xxlarge(type='text', rows="6", name="body", placeholder='Add your comment')
+  .form-group
+    textarea.form-control(type='text', rows="6", name="body", placeholder='Add your comment')
   button.btn.btn-primary(type='submit') Add comment

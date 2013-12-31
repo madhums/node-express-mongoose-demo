@@ -1,30 +1,31 @@
 extends auth
 
 block auth
-  form.offset1.form-horizontal(action="/users", method="post")
+  form.form-horizontal(action="/users", method="post", role="form")
     input(type='hidden', name='_csrf', value="#{csrf_token}")
-    .control-group
-      label.control-label(for='name') Full name
-      .controls
-        input#name(type='text', name="name", placeholder='Full name', value=user.name)
 
-    .control-group
-      label.control-label(for='email') Email
-      .controls
-        input#email(type='text', name="email", placeholder='Email', value=user.email)
+    .form-group
+      label.col-sm-2.control-label(for='name') Full name
+      .col-sm-10
+        input#name.form-control(type='text', name="name", placeholder='Full name', value=user.name)
 
-    .control-group
-      label.control-label(for='username') Username
-      .controls
-        input#username(type='text', name="username", placeholder='Username', value=user.username)
+    .form-group
+      label.col-sm-2.control-label(for='email') Email
+      .col-sm-10
+        input#email.form-control(type='text', name="email", placeholder='Email', value=user.email)
 
-    .control-group
-      label.control-label(for='password') Password
-      .controls
-        input#password(type='password', name="password", placeholder='Password')
+    .form-group
+      label.col-sm-2.control-label(for='username') Username
+      .col-sm-10
+        input#username.form-control(type='text', name="username", placeholder='Username', value=user.username)
 
-    .form-actions
-      button.btn.btn-primary(type='submit') Sign up
-      .div#spacer
-      | or&nbsp;
-      a.show-login(href="/login") login
+    .form-group
+      label.col-sm-2.control-label(for='password') Password
+      .col-sm-10
+        input#password.form-control(type='password', name="password", placeholder='Password')
+
+    .form-group
+      .col-sm-offset-2.col-sm-10
+        button.btn.btn-primary(type='submit') Sign up
+        | &nbsp; or &nbsp;
+        a.show-login(href="/login") Log in
