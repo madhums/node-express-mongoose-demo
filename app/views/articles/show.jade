@@ -19,7 +19,7 @@ block content
               a.tag(href="/tags/"+tag)
                 i.icon-tags
                 |  #{tag}
-              &nbsp;&nbsp;
+              | &nbsp;&nbsp;
     .span3
       - if (!article.isNew && article.image && article.image.files && article.image.files.length)
         img(src=article.image.cdnUri + '/mini_' + article.image.files[0])
@@ -29,7 +29,7 @@ block content
     form.center.form-inline.confirm(action="/articles/"+article.id, method="post")
       input(type='hidden', name='_csrf', value="#{csrf_token}")
       a.btn(href='/articles/'+article._id+'/edit', title="edit") Edit
-      &nbsp;&nbsp;
+      | &nbsp;&nbsp;
       input(type="hidden", name="_method", value="DELETE")
       button.btn.btn-danger(type="submit") delete
 
