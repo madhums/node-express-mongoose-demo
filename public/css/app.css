@@ -52,8 +52,14 @@ body {
   border-top: 1px solid #e8e8e8;
 }
 
-.error {
-  color: #FF2602;
+.error,
+a.error,
+a.error:hover,
+a.error:focus,
+button.error,
+button.error:hover,
+button.error:focus {
+  color: #D9534F;
 }
 
 .form-actions {
@@ -68,4 +74,13 @@ body {
 .muted {
   color: #aaa;
   font-size: 12px;
+}
+
+.alert {
+  margin-top: 10px;
+}
+
+.navbar-brand {
+  font-size: 14px;
+  color: #000 !important;
 }

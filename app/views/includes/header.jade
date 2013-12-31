@@ -1,4 +1,4 @@
-.navbar.navbar-default.navbar-fixed-top(role='navigation')
+nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
   .container
     .navbar-header
       button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
@@ -19,10 +19,11 @@
         - else
           li
             a(href="/login", title="Login") Login
-        li
-          iframe(style="border: 0; margin: 10px 0 0 0; padding: 0;", src="https://www.gittip.com/madhums/widget.html", width="48pt", height="22pt")
 
-a(href="https://github.com/madhums/nodejs-express-mongoose-demo")
-    img(style="position: fixed; top: 0; right: 0; border: 0; z-index: 9999",
-      src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png",
-      alt="Fork me on GitHub")
+      ul.nav.navbar-nav.navbar-right
+        li
+          iframe(style="border: 0; margin: 0 0 0 0; padding: 15px 0 0 15px;", src="https://www.gittip.com/madhums/widget.html", width="60pt", height="45pt")
+        li
+          iframe(src="http://ghbtns.com/github-btn.html?user=madhums&repo=node-express-mongoose-demo&type=watch&count=true", allowtransparency="true", frameborder="0", scrolling="0", width="110", height="45", style="padding: 15px 0 0 15px;")
+        li
+          iframe(src="http://ghbtns.com/github-btn.html?user=madhums&repo=node-express-mongoose-demo&type=fork&count=true", allowtransparency="true", frameborder="0", scrolling="0", width="110", height="45", style="padding: 15px 0 0 15px;")

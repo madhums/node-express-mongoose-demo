@@ -13,15 +13,14 @@ block content
           p Author :&nbsp;
             a(href="/users/"+article.user._id)= name
 
-        p.muted= formatDate(article.createdAt, "%b %d, %Y at %I:%M %p")
-
         - if (article.tags)
-          .tags
+          p Tags &nbsp;
             - each tag in article.tags.split(',')
-              a.tag(href="/tags/"+tag)
-                i.icon-tags
-                |  #{tag}
+              i.muted.fa.fa-tag &nbsp;
+              a.tag(href="/tags/"+tag)= tag
               | &nbsp;&nbsp;
+
+        p.muted= formatDate(article.createdAt, "%b %d, %Y at %I:%M %p")
 
     .col-md-4
       - if (!article.isNew && article.image && article.image.files && article.image.files.length)
