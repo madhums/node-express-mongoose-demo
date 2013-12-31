@@ -17,6 +17,7 @@ var users = require('../app/controllers/users')
  */
 
 var articleAuth = [auth.requiresLogin, auth.article.hasAuthorization]
+var commentAuth = [auth.requiresLogin, auth.comment.hasAuthorization]
 
 /**
  * Expose routes
@@ -75,7 +76,7 @@ module.exports = function (app, passport) {
   app.get('/auth/linkedin',
     passport.authenticate('linkedin', {
       failureRedirect: '/login',
-      scope: [ 
+      scope: [
         'r_emailaddress'
       ]
     }), users.signin)
@@ -87,6 +88,7 @@ module.exports = function (app, passport) {
   app.param('userId', users.user)
 
   // article routes
+  app.param('id', articles.load)
   app.get('/articles', articles.index)
   app.get('/articles/new', auth.requiresLogin, articles.new)
   app.post('/articles', auth.requiresLogin, articles.create)
@@ -95,15 +97,15 @@ module.exports = function (app, passport) {
   app.put('/articles/:id', articleAuth, articles.update)
   app.del('/articles/:id', articleAuth, articles.destroy)
 
-  app.param('id', articles.load)
-
   // home route
   app.get('/', articles.index)
 
   // comment routes
   var comments = require('../app/controllers/comments')
+  app.param('commentId', comments.load)
   app.post('/articles/:id/comments', auth.requiresLogin, comments.create)
   app.get('/articles/:id/comments', auth.requiresLogin, comments.create)
+  app.del('/articles/:id/comments/:commentId', commentAuth, comments.destroy)
 
   // tag routes
   var tags = require('../app/controllers/tags')
