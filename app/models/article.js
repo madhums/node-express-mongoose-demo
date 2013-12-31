@@ -51,13 +51,8 @@ var ArticleSchema = new Schema({
  * Validations
  */
 
-ArticleSchema.path('title').validate(function (title) {
-  return title.length > 0
-}, 'Article title cannot be blank')
-
-ArticleSchema.path('body').validate(function (body) {
-  return body.length > 0
-}, 'Article body cannot be blank')
+ArticleSchema.path('title').required(true, 'Article title cannot be blank');
+ArticleSchema.path('body').required(true, 'Article body cannot be blank');
 
 /**
  * Pre-remove hook
