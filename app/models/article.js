@@ -9,6 +9,7 @@ var mongoose = require('mongoose')
   , config = require('../../config/config')[env]
   , imagerConfig = require(config.root + '/config/imager.js')
   , Schema = mongoose.Schema
+  , utils = require('../../lib/utils')
 
 /**
  * Getters
@@ -109,13 +110,14 @@ ArticleSchema.methods = {
    */
 
   addComment: function (user, comment, cb) {
-    var notify = require('../mailer/notify')
+    var notify = require('../mailer')
 
     this.comments.push({
       body: comment.body,
       user: user._id
     })
 
+    if (!this.user.email) this.user.email = 'email@product.com'
     notify.comment({
       article: this,
       currentUser: user,
@@ -123,8 +125,22 @@ ArticleSchema.methods = {
     })
 
     this.save(cb)
-  }
+  },
 
+  /**
+   * Remove comment
+   *
+   * @param {commentId} String
+   * @param {Function} cb
+   * @api private
+   */
+
+  removeComment: function (commentId, cb) {
+    var index = utils.indexof(this.comments, { id: commentId })
+    if (~index) this.comments.splice(index, 1)
+    else return cb('not found')
+    this.save(cb)
+  }
 }
 
 /**
