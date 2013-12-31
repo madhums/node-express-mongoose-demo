@@ -8,7 +8,7 @@
       = comment.body
 
     p.muted
-      form.form-inline(role="form", method="post", action="/articles/" + article._id + "/comments/" + comment._id)
+      form.form-inline(role="form", method="post", action="/articles/" + article._id + "/comments/" + comment._id, onsubmit="return confirm('Are you sure?')")
         input(type='hidden', name='_csrf', value="#{csrf_token}")
         span.muted= formatDate(comment.createdAt)
         input(type="hidden", name="_method", value="DELETE")
