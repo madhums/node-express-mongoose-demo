@@ -43,7 +43,7 @@ exports.destroy = function (req, res) {
   var article = req.article
   article.removeComment(req.param('commentId'), function (err) {
     if (err) {
-      req.flash('errors', 'Oops! The comment was not found')
+      req.flash('error', 'Oops! The comment was not found')
     } else {
       req.flash('info', 'Removed comment')
     }
