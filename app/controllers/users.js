@@ -68,7 +68,7 @@ exports.create = function (req, res) {
   user.save(function (err) {
     if (err) {
       return res.render('users/signup', {
-        errors: utils.errors(err.errors),
+        error: utils.errors(err.errors),
         user: user,
         title: 'Sign up'
       })
