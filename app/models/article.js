@@ -91,13 +91,16 @@ ArticleSchema.methods = {
     var imager = new Imager(imagerConfig, 'S3')
     var self = this
 
-    imager.upload(images, function (err, cdnUri, files) {
-      if (err) return cb(err)
-      if (files.length) {
-        self.image = { cdnUri : cdnUri, files : files }
-      }
-      self.save(cb)
-    }, 'article')
+    this.validate(function (err) {
+      if (err) return cb(err);
+      imager.upload(images, function (err, cdnUri, files) {
+        if (err) return cb(err)
+        if (files.length) {
+          self.image = { cdnUri : cdnUri, files : files }
+        }
+        self.save(cb)
+      }, 'article')
+    })
   },
 
   /**
