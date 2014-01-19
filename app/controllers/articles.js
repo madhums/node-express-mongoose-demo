@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -108,7 +107,7 @@ exports.update = function(req, res){
     res.render('articles/edit', {
       title: 'Edit Article',
       article: article,
-      errors: err.errors
+      errors: utils.errors(err.errors || err)
     })
   })
 }
