@@ -75,7 +75,7 @@ exports.create = function (req, res) {
     res.render('articles/new', {
       title: 'New Article',
       article: article,
-      errors: utils.errors(err.errors || err)
+      error: utils.errors(err.errors || err)
     })
   })
 }
@@ -107,7 +107,7 @@ exports.update = function(req, res){
     res.render('articles/edit', {
       title: 'Edit Article',
       article: article,
-      errors: utils.errors(err.errors || err)
+      error: utils.errors(err.errors || err)
     })
   })
 }
