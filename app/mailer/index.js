@@ -3,16 +3,30 @@
  * Module dependencies.
  */
 
-var mongoose = require('mongoose')
-  , Notifier = require('notifier')
-  , env = process.env.NODE_ENV || 'development'
-  , config = require('../../config/config')[env]
+var mongoose = require('mongoose');
+var Notifier = require('notifier');
+var config = require('config');
 
 /**
- * Notification methods
+ * Process the templates using swig - refer to notifier#processTemplate method
+ *
+ * @param {String} tplPath
+ * @param {Object} locals
+ * @return {String}
+ * @api public
  */
 
-var Notify = {
+Notifier.prototype.processTemplate = function (tplPath, locals) {
+  var swig = require('swig');
+  locals.filename = tplPath;
+  return swig.renderFile(tplPath, locals);
+};
+
+/**
+ * Expose
+ */
+
+module.exports = {
 
   /**
    * Comment notification
@@ -23,10 +37,10 @@ var Notify = {
    */
 
   comment: function (options, cb) {
-    var article = options.article
-    var author = article.user
-    var user = options.currentUser
-    var notifier = new Notifier(config.notifier)
+    var article = options.article;
+    var author = article.user;
+    var user = options.currentUser;
+    var notifier = new Notifier(config.notifier);
 
     var obj = {
       to: author.email,
@@ -39,7 +53,7 @@ var Notify = {
         body: options.comment,
         article: article.name
       }
-    }
+    };
 
     // for apple push notifications
     /*notifier.use({
@@ -47,12 +61,6 @@ var Notify = {
       parseChannels: ['USER_' + author._id.toString()]
     })*/
 
-    notifier.send('comment', obj, cb)
+    notifier.send('comment', obj, cb);
   }
-}
-
-/**
- * Expose
- */
-
-module.exports = Notify
+};

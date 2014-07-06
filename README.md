@@ -17,12 +17,11 @@ Checkout the [apps that are built using this approach](https://github.com/madhum
 ```sh
   $ git clone git://github.com/madhums/node-express-mongoose-demo.git
   $ npm install
-  $ cp config/config.example.js config/config.js
   $ cp config/imager.example.js config/imager.js
   $ npm start
 ```
 
-**NOTE:** Do not forget to update your facebook twitter and github APP_ID and APP_SECRET in `config/config.js`. Also if you want to use image uploads, don't forget to replace the S3 and Rackspace keys in `config/imager.js`.
+**NOTE:** Do not forget to update your facebook, twitter, google, linkedin and github `APP_ID` and `APP_SECRET` in `config/config.js`. Also if you want to use image uploads, don't forget to replace the S3 and Rackspace keys in `config/imager.js`.
 
 Then visit [http://localhost:3000/](http://localhost:3000/)
 

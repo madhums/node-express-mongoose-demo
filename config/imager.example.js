@@ -1,3 +1,8 @@
+
+/**
+ * Expose
+ */
+
 module.exports = {
   variants: {
     article: {

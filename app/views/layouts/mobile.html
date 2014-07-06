@@ -1,0 +1,20 @@
+  {% include '../includes/head.html' %}
+
+  <body>
+    {% include '../includes/header.html' %}
+    <div class="container">
+      {# Customize this layout for mobile device resolutions #}
+      <div class="page-header">
+        {% block main %}{% endblock %}
+      </div>
+      <div class="messages">
+        {% include '../includes/messages.html' %}
+      </div>
+      <div class="content">
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+    {% include '../includes/footer.html' %}
+    {% include '../includes/foot.html' %}
+  </body>
+</html>

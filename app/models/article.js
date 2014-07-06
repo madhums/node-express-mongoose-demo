@@ -3,29 +3,30 @@
  * Module dependencies.
  */
 
-var mongoose = require('mongoose')
-  , Imager = require('imager')
-  , env = process.env.NODE_ENV || 'development'
-  , config = require('../../config/config')[env]
-  , imagerConfig = require(config.root + '/config/imager.js')
-  , Schema = mongoose.Schema
-  , utils = require('../../lib/utils')
+var mongoose = require('mongoose');
+var Imager = require('imager');
+var config = require('config');
+
+var imagerConfig = require(config.root + '/config/imager.js');
+var utils = require('../../lib/utils');
+
+var Schema = mongoose.Schema;
 
 /**
  * Getters
  */
 
 var getTags = function (tags) {
-  return tags.join(',')
-}
+  return tags.join(',');
+};
 
 /**
  * Setters
  */
 
 var setTags = function (tags) {
-  return tags.split(',')
-}
+  return tags.split(',');
+};
 
 /**
  * Article Schema
@@ -46,7 +47,7 @@ var ArticleSchema = new Schema({
     files: []
   },
   createdAt  : {type : Date, default : Date.now}
-})
+});
 
 /**
  * Validations
@@ -60,16 +61,16 @@ ArticleSchema.path('body').required(true, 'Article body cannot be blank');
  */
 
 ArticleSchema.pre('remove', function (next) {
-  var imager = new Imager(imagerConfig, 'S3')
-  var files = this.image.files
+  var imager = new Imager(imagerConfig, 'S3');
+  var files = this.image.files;
 
   // if there are files associated with the item, remove from the cloud too
   imager.remove(files, function (err) {
-    if (err) return next(err)
-  }, 'article')
+    if (err) return next(err);
+  }, 'article');
 
-  next()
-})
+  next();
+});
 
 /**
  * Methods
@@ -88,19 +89,19 @@ ArticleSchema.methods = {
   uploadAndSave: function (images, cb) {
     if (!images || !images.length) return this.save(cb)
 
-    var imager = new Imager(imagerConfig, 'S3')
-    var self = this
+    var imager = new Imager(imagerConfig, 'S3');
+    var self = this;
 
     this.validate(function (err) {
       if (err) return cb(err);
       imager.upload(images, function (err, cdnUri, files) {
-        if (err) return cb(err)
+        if (err) return cb(err);
         if (files.length) {
-          self.image = { cdnUri : cdnUri, files : files }
+          self.image = { cdnUri : cdnUri, files : files };
         }
-        self.save(cb)
-      }, 'article')
-    })
+        self.save(cb);
+      }, 'article');
+    });
   },
 
   /**
@@ -113,21 +114,21 @@ ArticleSchema.methods = {
    */
 
   addComment: function (user, comment, cb) {
-    var notify = require('../mailer')
+    var notify = require('../mailer');
 
     this.comments.push({
       body: comment.body,
       user: user._id
-    })
+    });
 
-    if (!this.user.email) this.user.email = 'email@product.com'
+    if (!this.user.email) this.user.email = 'email@product.com';
     notify.comment({
       article: this,
       currentUser: user,
       comment: comment.body
-    })
+    });
 
-    this.save(cb)
+    this.save(cb);
   },
 
   /**
@@ -139,10 +140,10 @@ ArticleSchema.methods = {
    */
 
   removeComment: function (commentId, cb) {
-    var index = utils.indexof(this.comments, { id: commentId })
-    if (~index) this.comments.splice(index, 1)
-    else return cb('not found')
-    this.save(cb)
+    var index = utils.indexof(this.comments, { id: commentId });
+    if (~index) this.comments.splice(index, 1);
+    else return cb('not found');
+    this.save(cb);
   }
 }
 
@@ -164,7 +165,7 @@ ArticleSchema.statics = {
     this.findOne({ _id : id })
       .populate('user', 'name email username')
       .populate('comments.user')
-      .exec(cb)
+      .exec(cb);
   },
 
   /**
@@ -183,9 +184,8 @@ ArticleSchema.statics = {
       .sort({'createdAt': -1}) // sort by date
       .limit(options.perPage)
       .skip(options.perPage * options.page)
-      .exec(cb)
+      .exec(cb);
   }
-
 }
 
-mongoose.model('Article', ArticleSchema)
+mongoose.model('Article', ArticleSchema);

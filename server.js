@@ -4,64 +4,42 @@
  * Copyright(c) 2013 Madhusudhan Srinivasa <madhums8@gmail.com>
  * MIT Licensed
  */
-
 /**
- * Module dependencies.
+ * Module dependencies
  */
 
-var express = require('express')
-  , fs = require('fs')
-  , passport = require('passport')
+var fs = require('fs');
+var express = require('express');
+var mongoose = require('mongoose');
+var passport = require('passport');
+var config = require('config');
 
-/**
- * Main application entry file.
- * Please note that the order of loading is important.
- */
+var app = express();
+var port = process.env.PORT || 3000;
 
-// Load configurations
-// if test env, load example file
-var env = process.env.NODE_ENV || 'development'
-  , config = require('./config/config')[env]
-  , mongoose = require('mongoose')
-
-// Bootstrap db connection
 // Connect to mongodb
 var connect = function () {
-  var options = { server: { socketOptions: { keepAlive: 1 } } }
-  mongoose.connect(config.db, options)
-}
-connect()
+  var options = { server: { socketOptions: { keepAlive: 1 } } };
+  mongoose.connect(config.db, options);
+};
+connect();
 
-// Error handler
-mongoose.connection.on('error', function (err) {
-  console.log(err)
-})
-
-// Reconnect when closed
-mongoose.connection.on('disconnected', function () {
-  connect()
-})
+mongoose.connection.on('error', console.log);
+mongoose.connection.on('disconnected', connect);
 
 // Bootstrap models
-var models_path = __dirname + '/app/models'
-fs.readdirSync(models_path).forEach(function (file) {
-  if (~file.indexOf('.js')) require(models_path + '/' + file)
-})
+fs.readdirSync(__dirname + '/app/models').forEach(function (file) {
+  if (~file.indexOf('.js')) require(__dirname + '/app/models/' + file);
+});
 
-// bootstrap passport config
-require('./config/passport')(passport, config)
+// Bootstrap passport config
+require('./config/passport')(passport, config);
 
-var app = express()
-// express settings
-require('./config/express')(app, config, passport)
+// Bootstrap application settings
+require('./config/express')(app, passport);
 
 // Bootstrap routes
-require('./config/routes')(app, passport)
+require('./config/routes')(app, passport);
 
-// Start the app by listening on <port>
-var port = process.env.PORT || 3000
-app.listen(port)
-console.log('Express app started on port '+port)
-
-// expose app
-exports = module.exports = app
+app.listen(port);
+console.log('Express app started on port ' + port);

@@ -1,0 +1,9 @@
+{% extends '../layouts/default.html' %}
+
+{% block main %}
+  {% if (user.name) %}
+    <h1>{{ user.name }}</h1>
+  {% else %}
+    <h1>{{ user.username }}</h1>
+  {% endif %}
+{% endblock %}

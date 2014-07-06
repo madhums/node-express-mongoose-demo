@@ -1,0 +1,13 @@
+{% extends 'layouts/default.html' %}
+
+{% block main %}
+  <h2>500 - Oops! Internal server error occured</h2>
+{% endblock %}
+
+{% block content %}
+  {% if (env == 'development') %}
+    <pre>
+      {{ error }}
+    </pre>
+  {% endif %}
+{% endblock %}
