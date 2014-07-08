@@ -24,7 +24,7 @@
     "test": "NODE_ENV=test ./node_modules/.bin/mocha --reporter spec --timeout 10000 test/test-*.js"
   },
   "dependencies": {
-    "express": "latest",
+    "express": "3.5.1",
     "jade": "latest",
     "mongoose": "latest",
     "connect-mongo": "latest",
