@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/madhums/node-express-mongoose-demo.png)](https://travis-ci.org/madhums/node-express-mongoose-demo)
 
+**work in progress:** Migrating the demo to express 4 and swig - checkout [express4.x-swig](https://github.com/madhums/node-express-mongoose-demo/tree/express-4.x-swig) branch
+
 # Nodejs Express Mongoose Demo
 
 This is a demo node.js application illustrating various features used in everyday web development, with a fine touch of best practices. The demo app is a blog application where users (signing up using facebook, twitter, github and simple registrations) can create an article, delete an article and add comments on the article.
