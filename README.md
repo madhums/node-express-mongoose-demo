@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/madhums/node-express-mongoose-demo.png)](https://travis-ci.org/madhums/node-express-mongoose-demo)
 
-**work in progress:** Migrating the demo to express 4 and swig - checkout [express4.x-swig](https://github.com/madhums/node-express-mongoose-demo/tree/express-4.x-swig) branch
+**work in progress:** Migrating the demo to express 4 and swig - checkout [express4.x-swig](https://github.com/madhums/node-express-mongoose-demo/tree/express-4.x-swig) branch (its ready except that it doesn't have image upload yet)
 
 # Nodejs Express Mongoose Demo
 
