@@ -176,6 +176,36 @@
         }
       }
     },
+    "cookie-session": {
+      "version": "1.0.2",
+      "from": "cookie-session@latest",
+      "resolved": "https://registry.npmjs.org/cookie-session/-/cookie-session-1.0.2.tgz",
+      "dependencies": {
+        "cookies": {
+          "version": "0.4.1",
+          "from": "cookies@~0.4.0",
+          "resolved": "https://registry.npmjs.org/cookies/-/cookies-0.4.1.tgz",
+          "dependencies": {
+            "keygrip": {
+              "version": "1.0.1",
+              "from": "keygrip@~1.0.0",
+              "resolved": "https://registry.npmjs.org/keygrip/-/keygrip-1.0.1.tgz"
+            }
+          }
+        },
+        "debug": {
+          "version": "2.0.0",
+          "from": "debug@*",
+          "dependencies": {
+            "ms": {
+              "version": "0.6.2",
+              "from": "ms@0.6.2",
+              "resolved": "https://registry.npmjs.org/ms/-/ms-0.6.2.tgz"
+            }
+          }
+        }
+      }
+    },
     "csurf": {
       "version": "1.2.1",
       "from": "csurf@1.2.1",
