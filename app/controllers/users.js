@@ -83,8 +83,7 @@ exports.authCallback = login;
 
 exports.login = function (req, res) {
   res.render('users/login', {
-    title: 'Login',
-    message: req.flash('error')
+    title: 'Login'
   });
 };
 
