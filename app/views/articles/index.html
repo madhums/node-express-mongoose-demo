@@ -13,7 +13,7 @@
     {% if (pages > 1) %}
       <ul class="pagination">
         {% autoescape false %}
-          {{ createPagination(pages, page + 1) }}
+          {{ createPagination(pages, page) }}
         {% endautoescape %}
       </ul>
     {% endif %}

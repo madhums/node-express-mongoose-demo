@@ -10,23 +10,21 @@
       <p>{{ article.body }}</p>
       <div class="meta">
         {% if (article.user) %}
-          {% if (article.user.name) %}
-            {% set name = article.user.name %}
-          {% else %}
-            {% set name = article.user.username %}
-          {% endif %}
-
-          <a href="{{ '/users/' + article.user._id }}">{{ name }}</a>
+          Author: &nbsp;
+          <a href="{{ '/users/' + article.user._id }}">
+            {{ article.user.name || article.user.username }}
+          </a>
         {% endif %}
         {% if (article.tags) %}
-          <p>Tags &nbsp;</p>
-          {% for tag in article.tags.split(',') %}
-            <i class="muted fa fa-tag"></i>&nbsp;
-            <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
-            &nbsp;&nbsp;
-          {% endfor %}
+          <p>
+            Tags: &nbsp;
+            {% for tag in article.tags.split(',') %}
+              <i class="muted fa fa-tag"></i>&nbsp;
+              <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
+              &nbsp;&nbsp;
+            {% endfor %}
+          </p>
         {% endif %}
-
         <span class="muted">{{ article.createdAt.toISOString()|date('M d, Y  h:m a') }}</span>
       </div>
     </div>
@@ -38,6 +36,7 @@
   </div>
 
   <form action="{{ '/articles/' + article.id }}" method="post" onsubmit="return confirm('Are you sure?')">
+    <br>
     <input type="hidden" name="_csrf" value="{{ csrf_token }}">
     <a href="{{ '/articles/' + article._id + '/edit' }}" title="edit" class="btn btn-default">
       Edit

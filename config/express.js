@@ -11,8 +11,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var csrf = require('csurf');
+var multer = require('multer');
 var swig = require('swig');
-var serveStatic = require('serve-static');
 
 var mongoStore = require('connect-mongo')(session);
 var flash = require('connect-flash');
@@ -35,7 +35,7 @@ module.exports = function (app, passport) {
   }));
 
   // Static files middleware
-  app.use(serveStatic(config.root + '/public'));
+  app.use(express.static(config.root + '/public'));
 
   // Use winston on production
   var log;
@@ -78,8 +78,10 @@ module.exports = function (app, passport) {
   app.use(cookieParser());
 
   // bodyParser should be above methodOverride
-  app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(multer());
+
   app.use(methodOverride(function (req, res) {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
       // look in urlencoded POST bodies and delete it
@@ -115,7 +117,7 @@ module.exports = function (app, passport) {
     app.use(csrf());
 
     // This could be moved to view-helpers :-)
-    app.use(function(req, res, next){
+    app.use(function (req, res, next) {
       res.locals.csrf_token = req.csrfToken();
       next();
     });

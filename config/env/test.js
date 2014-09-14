@@ -6,28 +6,28 @@
 module.exports = {
   db: 'mongodb://localhost/noobjs_test',
   facebook: {
-    clientID: "ID",
-    clientSecret: "SECRET",
+    clientID: process.env.FACEBOOK_CLIENTID,
+    clientSecret: process.env.FACEBOOK_SECRET,
     callbackURL: "http://localhost:3000/auth/facebook/callback"
   },
   twitter: {
-    clientID: "ID",
-    clientSecret: "SECRET",
+    clientID: process.env.TWITTER_CLIENTID,
+    clientSecret: process.env.TWITTER_SECRET,
     callbackURL: "http://localhost:3000/auth/twitter/callback"
   },
   github: {
-    clientID: 'ID',
-    clientSecret: 'SECRET',
+    clientID: process.env.GITHUB_CLIENTID,
+    clientSecret: process.env.GITHUB_SECRET,
     callbackURL: 'http://localhost:3000/auth/github/callback'
   },
   linkedin: {
-    clientID: 'ID',
-    clientSecret: 'SECRET',
+    clientID: process.env.LINKEDIN_CLIENTID,
+    clientSecret: process.env.LINKEDIN_SECRET,
     callbackURL: 'http://localhost:3000/auth/linkedin/callback'
   },
   google: {
-    clientID: "ID",
-    clientSecret: "SECRET",
+    clientID: process.env.GOOGLE_CLIENTID,
+    clientSecret: process.env.GOOGLE_SECRET,
     callbackURL: "http://localhost:3000/auth/google/callback"
   }
 };

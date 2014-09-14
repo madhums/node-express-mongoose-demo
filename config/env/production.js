@@ -4,30 +4,30 @@
  */
 
 module.exports = {
-  db: 'mongodb://neocom:neocom@alex.mongohq.com:10014/app6633199',
+  db: process.env.MONGOHQ_URL,
   facebook: {
-    clientID: "ID",
-    clientSecret: "SECRET",
-    callbackURL: "http://localhost:3000/auth/facebook/callback"
+    clientID: process.env.FACEBOOK_CLIENTID,
+    clientSecret: process.env.FACEBOOK_SECRET,
+    callbackURL: "http://nodejs-express-demo.herokuapp.com/auth/facebook/callback"
   },
   twitter: {
-    clientID: "ID",
-    clientSecret: "SECRET",
-    callbackURL: "http://localhost:3000/auth/twitter/callback"
+    clientID: process.env.TWITTER_CLIENTID,
+    clientSecret: process.env.TWITTER_SECRET,
+    callbackURL: "http://nodejs-express-demo.herokuapp.com/auth/twitter/callback"
   },
   github: {
-    clientID: 'ID',
-    clientSecret: 'SECRET',
-    callbackURL: 'http://localhost:3000/auth/github/callback'
+    clientID: process.env.GITHUB_CLIENTID,
+    clientSecret: process.env.GITHUB_SECRET,
+    callbackURL: 'http://nodejs-express-demo.herokuapp.com/auth/github/callback'
   },
   linkedin: {
-    clientID: 'ID',
-    clientSecret: 'SECRET',
-    callbackURL: 'http://localhost:3000/auth/linkedin/callback'
+    clientID: process.env.LINKEDIN_CLIENTID,
+    clientSecret: process.env.LINKEDIN_SECRET,
+    callbackURL: 'http://nodejs-express-demo.herokuapp.com/auth/linkedin/callback'
   },
   google: {
-    clientID: "ID",
-    clientSecret: "SECRET",
-    callbackURL: "http://localhost:3000/auth/google/callback"
+    clientID: process.env.GOOGLE_CLIENTID,
+    clientSecret: process.env.GOOGLE_SECRET,
+    callbackURL: "http://nodejs-express-demo.herokuapp.com/auth/google/callback"
   }
 };

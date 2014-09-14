@@ -26,7 +26,7 @@ exports.load = function (req, res, next, id) {
 exports.create = function (req, res) {
   var article = req.article;
   var user = req.user;
-
+  console.log(req.body);
   if (!req.body.body) return res.redirect('/articles/'+ article.id);
 
   article.addComment(user, req.body, function (err) {

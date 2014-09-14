@@ -11,13 +11,9 @@
   {% if (article.user) %}
     &nbsp; - &nbsp;
     <span>Author: </span>
-    {% if (article.user.name) %}
-      {% set name = article.user.name %}
-    {% else %}
-      {% set name = article.user.username %}
-    {% endif %}
-
-    <a href="{{ '/users/' + article.user._id }}">{{ name }}</a>
+    <a href="{{ '/users/' + article.user._id }}">
+      {{ article.user.name || article.user.username }}
+    </a>
   {% endif %}
 
   {% if (article.tags) %}

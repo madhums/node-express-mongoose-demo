@@ -61,6 +61,10 @@ module.exports = {
       parseChannels: ['USER_' + author._id.toString()]
     })*/
 
-    notifier.send('comment', obj, cb);
+    try {
+      notifier.send('comment', obj, cb);
+    } catch (err) {
+      console.log(err);
+    }
   }
 };

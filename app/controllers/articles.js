@@ -61,13 +61,14 @@ exports.new = function (req, res){
 
 /**
  * Create an article
+ * Upload an image
  */
 
 exports.create = function (req, res) {
   var article = new Article(req.body);
-  article.user = req.user;
 
-  article.uploadAndSave(req.files.image, function (err) {
+  article.user = req.user;
+  article.uploadAndSave([req.files.image], function (err) {
     if (!err) {
       req.flash('success', 'Successfully created article!');
       return res.redirect('/articles/'+article._id);
@@ -98,9 +99,11 @@ exports.edit = function (req, res) {
 
 exports.update = function (req, res){
   var article = req.article;
+  // make sure no one changes the user
+  delete req.body.user;
   article = extend(article, req.body);
 
-  article.uploadAndSave(req.files.image, function (err) {
+  article.uploadAndSave([req.files.image], function (err) {
     if (!err) {
       return res.redirect('/articles/' + article._id);
     }

@@ -26,7 +26,6 @@ module.exports = new TwitterStrategy({
       if (!user) {
         user = new User({
           name: profile.displayName,
-          email: profile.emails[0].value,
           username: profile.username,
           provider: 'twitter',
           twitter: profile._json
