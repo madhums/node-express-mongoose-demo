@@ -22,17 +22,28 @@ Want to build something from scratch? use the [boilerplate app](https://github.c
 ```sh
 $ git clone git://github.com/madhums/node-express-mongoose-demo.git
 $ npm install
-$ cp config/imager.example.js config/imager.js
-$ npm start
 ```
 
 **NOTE:** Do not forget to set the facebook, twitter, google, linkedin and github `CLIENT_ID`s and `SECRET`s. In `development` env, you can simply copy
 `config/env/env.example.json` to `config/env/env.json` and just replace the
 values there. In production, it is not safe to keep the ids and secrets in
 a file, so you need to set it up via commandline. If you are using heroku
-checkout how environment variables are set [here](https://devcenter.heroku.com/articles/config-vars)
+checkout how environment variables are set [here](https://devcenter.heroku.com/articles/config-vars).
 
-in `config/config.js`. Also if you want to use image uploads, don't forget to replace the S3 and Rackspace keys in `config/imager.js`.
+If you want to use image uploads, don't forget to set env variables for the
+imager config.
+
+```sh
+$ export IMAGER_S3_KEY=AWS_S3_KEY
+$ export IMAGER_S3_SECRET=AWS_S3_SECRET
+$ export IMAGER_S3_BUCKET=AWS_S3_BUCKET
+```
+
+then
+
+```sh
+$ npm start
+```
 
 Then visit [http://localhost:3000/](http://localhost:3000/)
 

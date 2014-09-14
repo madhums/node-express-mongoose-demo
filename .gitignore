@@ -1,6 +1,5 @@
 node_modules/
 .monitor
 config/env/env.json
-config/imager.js
 Makefile
 .DS_Store
