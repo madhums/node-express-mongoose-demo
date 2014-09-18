@@ -1,4 +1,6 @@
-[![Build Status](https://travis-ci.org/madhums/node-express-mongoose-demo.png)](https://travis-ci.org/madhums/node-express-mongoose-demo)
+[![Build Status](https://img.shields.io/travis/strongloop/express.svg?style=flat)](https://travis-ci.org/madhums/node-express-mongoose-demo)
+[![Gittip](https://img.shields.io/gittip/madhums.svg?style=flat)](https://www.gittip.com/madhums/)
+
 
 # Nodejs Express Mongoose Demo
 
