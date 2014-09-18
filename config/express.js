@@ -49,7 +49,7 @@ module.exports = function (app, passport) {
       }
     };
   } else {
-    log = { format: 'dev' };
+    log = 'dev';
   }
 
   // Don't log during tests
