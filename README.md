@@ -1,6 +1,6 @@
 [![Build Status](https://img.shields.io/travis/madhums/node-express-mongoose-demo.svg?style=flat)](https://travis-ci.org/madhums/node-express-mongoose-demo)
-[![Gittip](https://img.shields.io/gittip/madhums.svg?style=flat)](https://www.gittip.com/madhums/)
-
+[![Gittip](https://img.shields.io/gratipay/madhums.svg?style=flat)](https://www.gratipay.com/madhums/)
+[![Dependencies](https://img.shields.io/david/madhums/node-express-mongoose-demo.svg?style=flat)](https://david-dm.org/madhums/node-express-mongoose)
 
 # Nodejs Express Mongoose Demo
 
