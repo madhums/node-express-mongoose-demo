@@ -88,3 +88,8 @@ button.error:focus {
 .navbar-nav > li > a.travis{
   padding-top: 13px;
 }
+
+.navbar-right > li > a {
+  padding-left: 5px;
+  padding-right: 5px;
+}
