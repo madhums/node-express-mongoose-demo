@@ -80,7 +80,7 @@ exports.create = function (req, res) {
     res.render('articles/new', {
       title: 'New Article',
       article: article,
-      error: utils.errors(err.errors || err)
+      errors: utils.errors(err.errors || err)
     });
   });
 };
@@ -118,7 +118,7 @@ exports.update = function (req, res){
     res.render('articles/edit', {
       title: 'Edit Article',
       article: article,
-      error: utils.errors(err.errors || err)
+      errors: utils.errors(err.errors || err)
     });
   });
 };
