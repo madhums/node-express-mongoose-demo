@@ -25,7 +25,7 @@ module.exports = function (passport, config) {
   })
 
   passport.deserializeUser(function(id, done) {
-    User.findOne({ _id: id }, function (err, user) {
+    User.load({ criteria: { _id: id } }, function (err, user) {
       done(err, user)
     })
   })
