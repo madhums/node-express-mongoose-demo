@@ -143,10 +143,11 @@ UserSchema.methods = {
 
   encryptPassword: function (password) {
     if (!password) return '';
-    var encrypred;
     try {
-      encrypred = crypto.createHmac('sha1', this.salt).update(password).digest('hex');
-      return encrypred;
+      return crypto
+        .createHmac('sha1', this.salt)
+        .update(password)
+        .digest('hex');
     } catch (err) {
       return '';
     }
