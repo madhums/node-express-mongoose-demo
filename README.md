@@ -1,6 +1,7 @@
 [![Build Status](https://img.shields.io/travis/madhums/node-express-mongoose-demo.svg?style=flat)](https://travis-ci.org/madhums/node-express-mongoose-demo)
 [![Gittip](https://img.shields.io/gratipay/madhums.svg?style=flat)](https://www.gratipay.com/madhums/)
 [![Dependencies](https://img.shields.io/david/madhums/node-express-mongoose-demo.svg?style=flat)](https://david-dm.org/madhums/node-express-mongoose-demo)
+[![Code climate](http://img.shields.io/codeclimate/github/madhums/node-express-mongoose-demo.svg)](https://codeclimate.com/github/madhums/node-express-mongoose-demo)
 
 # Nodejs Express Mongoose Demo
 
