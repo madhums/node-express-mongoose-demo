@@ -33,7 +33,7 @@ fs.readdirSync(__dirname + '/app/models').forEach(function (file) {
 });
 
 // Bootstrap passport config
-require('./config/passport')(passport, config);
+require('./config/passport')(passport);
 
 // Bootstrap application settings
 require('./config/express')(app, passport);
