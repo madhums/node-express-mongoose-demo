@@ -9,6 +9,7 @@
  */
 
 var fs = require('fs');
+var join = require('path').join;
 var express = require('express');
 var mongoose = require('mongoose');
 var passport = require('passport');
@@ -28,8 +29,8 @@ mongoose.connection.on('error', console.log);
 mongoose.connection.on('disconnected', connect);
 
 // Bootstrap models
-fs.readdirSync(__dirname + '/app/models').forEach(function (file) {
-  if (~file.indexOf('.js')) require(__dirname + '/app/models/' + file);
+fs.readdirSync(join(__dirname, 'app/models')).forEach(function (file) {
+  if (~file.indexOf('.js')) require(join(__dirname, 'app/models', file));
 });
 
 // Bootstrap passport config

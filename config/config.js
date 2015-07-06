@@ -15,12 +15,12 @@ var notifier = {
   APN: false,
   email: true, // true
   actions: ['comment'],
-  tplPath: path.normalize(__dirname + '/../app/mailer/templates'),
+  tplPath: path.join(__dirname, '..', 'app/mailer/templates'),
   key: 'POSTMARK_KEY'
 };
 
 var defaults = {
-  root: path.normalize(__dirname + '/..'),
+  root: path.join(__dirname, '..'),
   notifier: notifier
 };
 
