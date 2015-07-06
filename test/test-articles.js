@@ -61,7 +61,9 @@ describe('Articles', function () {
         .post('/users/session')
         .field('email', 'foobar@example.com')
         .field('password', 'foobar')
-        .end(done)
+        .end(function (err) {
+          done()
+        })
       })
 
       it('should respond with Content-Type text/html', function (done) {
@@ -95,7 +97,9 @@ describe('Articles', function () {
         .post('/users/session')
         .field('email', 'foobar@example.com')
         .field('password', 'foobar')
-        .end(done)
+        .end(function () {
+          done();
+        })
       })
 
       describe('Invalid parameters', function () {
