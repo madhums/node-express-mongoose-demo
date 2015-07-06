@@ -16,7 +16,7 @@
     <!-- <p class="muted"> -->
       <form role="form" method="post" action="{{ '/articles/' + article._id + '/comments/' + comment._id }}" onsubmit="return confirm('Are you sure?')" class="form-inline">
         <input type="hidden" name="_csrf" value="{{ csrf_token }}">
-        <span class="muted">{{ comment.createdAt.toISOString()|date('M d, Y  h:m a') }}</span>
+        <span class="muted">{{ comment.createdAt.toISOString()|date('M d, Y  h:i a') }}</span>
         <input type="hidden" name="_method" value="DELETE">
         <button class="btn btn-danger btn-link error" type="submit">delete</button>
       </form>

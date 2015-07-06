@@ -6,7 +6,7 @@
   </h3>
   <p>{{ article.body }}</p>
 
-  <span class="muted">{{ article.createdAt.toISOString()|date('M d, Y  h:m a') }}</span>
+  <span class="muted">{{ article.createdAt.toISOString()|date('M d, Y  h:i a') }}</span>
 
   {% if (article.user) %}
     &nbsp; - &nbsp;
