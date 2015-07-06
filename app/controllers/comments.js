@@ -41,7 +41,7 @@ exports.create = function (req, res) {
 
 exports.destroy = function (req, res) {
   var article = req.article;
-  article.removeComment(req.param('commentId'), function (err) {
+  article.removeComment(req.params.commentId, function (err) {
     if (err) {
       req.flash('error', 'Oops! The comment was not found');
     } else {
