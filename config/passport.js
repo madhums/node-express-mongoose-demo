@@ -7,6 +7,8 @@ var mongoose = require('mongoose');
 var LocalStrategy = require('passport-local').Strategy;
 var User = mongoose.model('User');
 
+var config = require('./config')
+
 var local = require('./passport/local');
 var google = require('./passport/google');
 var facebook = require('./passport/facebook');
@@ -18,7 +20,7 @@ var github = require('./passport/github');
  * Expose
  */
 
-module.exports = function (passport, config) {
+module.exports = function (passport) {
   // serialize sessions
   passport.serializeUser(function(user, done) {
     done(null, user.id)
@@ -32,9 +34,19 @@ module.exports = function (passport, config) {
 
   // use these strategies
   passport.use(local);
-  passport.use(google);
-  passport.use(facebook);
-  passport.use(twitter);
-  passport.use(linkedin);
-  passport.use(github);
+
+  if(config.google.clientID) 
+    passport.use(google);
+
+  if(config.facebook.clientID)
+    passport.use(facebook);
+
+  if(config.twitter.clientID)
+    passport.use(twitter);
+
+  if(config.linkedin.clientID)
+    passport.use(linkedin);
+
+  if(config.github.clientID)
+    passport.use(github);
 };
