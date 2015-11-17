@@ -28,7 +28,7 @@ exports.load = function (req, res, next, id){
  */
 
 exports.index = function (req, res){
-  var page = (req.params.page > 0 ? req.params.page : 1) - 1;
+  var page = (req.query.page > 0 ? req.query.page : 1) - 1;
   var perPage = 30;
   var options = {
     perPage: perPage,
