@@ -1,16 +1,17 @@
+'use strict';
 
 /**
  * Module dependencies.
  */
 
-var path = require('path');
-var extend = require('util')._extend;
+const path = require('path');
+const extend = require('util')._extend;
 
-var development = require('./env/development');
-var test = require('./env/test');
-var production = require('./env/production');
+const development = require('./env/development');
+const test = require('./env/test');
+const production = require('./env/production');
 
-var notifier = {
+const notifier = {
   service: 'postmark',
   APN: false,
   email: true, // true
@@ -19,7 +20,7 @@ var notifier = {
   key: 'POSTMARK_KEY'
 };
 
-var defaults = {
+const defaults = {
   root: path.join(__dirname, '..'),
   notifier: notifier
 };

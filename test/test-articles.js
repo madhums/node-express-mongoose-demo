@@ -1,18 +1,19 @@
+'use strict';
 
 /**
  * Module dependencies.
  */
 
-var mongoose = require('mongoose')
-  , should = require('should')
-  , request = require('supertest')
-  , app = require('../server')
-  , context = describe
-  , User = mongoose.model('User')
-  , Article = mongoose.model('Article')
-  , agent = request.agent(app)
+const mongoose = require('mongoose');
+const should = require('should');
+const request = require('supertest');
+const app = require('../server');
+const context = describe;
+const User = mongoose.model('User');
+const Article = mongoose.model('Article');
+const agent = request.agent(app);
 
-var count
+let count;
 
 /**
  * Articles tests
@@ -26,9 +27,9 @@ describe('Articles', function () {
       name: 'Foo bar',
       username: 'foobar',
       password: 'foobar'
-    })
-    user.save(done)
-  })
+    });
+    user.save(done);
+  });
 
   describe('GET /articles', function () {
     it('should respond with Content-Type text/html', function (done) {
@@ -37,9 +38,9 @@ describe('Articles', function () {
       .expect('Content-Type', /html/)
       .expect(200)
       .expect(/Articles/)
-      .end(done)
-    })
-  })
+      .end(done);
+    });
+  });
 
   describe('GET /articles/new', function () {
     context('When not logged in', function () {
@@ -50,9 +51,9 @@ describe('Articles', function () {
         .expect(302)
         .expect('Location', '/login')
         .expect(/Moved Temporarily/)
-        .end(done)
-      })
-    })
+        .end(done);
+      });
+    });
 
     context('When logged in', function () {
       before(function (done) {
@@ -61,10 +62,8 @@ describe('Articles', function () {
         .post('/users/session')
         .field('email', 'foobar@example.com')
         .field('password', 'foobar')
-        .end(function (err) {
-          done()
-        })
-      })
+        .end(done);
+      });
 
       it('should respond with Content-Type text/html', function (done) {
         agent
@@ -72,10 +71,10 @@ describe('Articles', function () {
         .expect('Content-Type', /html/)
         .expect(200)
         .expect(/New Article/)
-        .end(done)
-      })
-    })
-  })
+        .end(done);
+      });
+    });
+  });
 
   describe('POST /articles', function () {
     context('When not logged in', function () {
@@ -86,9 +85,9 @@ describe('Articles', function () {
         .expect(302)
         .expect('Location', '/login')
         .expect(/Moved Temporarily/)
-        .end(done)
-      })
-    })
+        .end(done);
+      });
+    });
 
     context('When logged in', function () {
       before(function (done) {
@@ -97,18 +96,16 @@ describe('Articles', function () {
         .post('/users/session')
         .field('email', 'foobar@example.com')
         .field('password', 'foobar')
-        .end(function () {
-          done();
-        })
-      })
+        .end(done);
+      });
 
       describe('Invalid parameters', function () {
         before(function (done) {
           Article.count(function (err, cnt) {
-            count = cnt
-            done()
-          })
-        })
+            count = cnt;
+            done(err);
+          });
+        });
 
         it('should respond with error', function (done) {
           agent
@@ -118,24 +115,24 @@ describe('Articles', function () {
           .expect('Content-Type', /html/)
           .expect(200)
           .expect(/Article title cannot be blank/)
-          .end(done)
-        })
+          .end(done);
+        });
 
         it('should not save to the database', function (done) {
           Article.count(function (err, cnt) {
-            count.should.equal(cnt)
-            done()
-          })
-        })
-      })
+            count.should.equal(cnt);
+            done(err);
+          });
+        });
+      });
 
       describe('Valid parameters', function () {
         before(function (done) {
           Article.count(function (err, cnt) {
-            count = cnt
-            done()
-          })
-        })
+            count = cnt;
+            done();
+          });
+        });
 
         it('should redirect to the new article page', function (done) {
           agent
@@ -146,35 +143,35 @@ describe('Articles', function () {
           .expect('Location', /\/articles\//)
           .expect(302)
           .expect(/Moved Temporarily/)
-          .end(done)
-        })
+          .end(done);
+        });
 
         it('should insert a record to the database', function (done) {
           Article.count(function (err, cnt) {
-            cnt.should.equal(count + 1)
-            done()
-          })
-        })
+            cnt.should.equal(count + 1);
+            done(err);
+          });
+        });
 
         it('should save the article to the database', function (done) {
           Article
           .findOne({ title: 'foo'})
           .populate('user')
           .exec(function (err, article) {
-            should.not.exist(err)
-            article.should.be.an.instanceOf(Article)
-            article.title.should.equal('foo')
-            article.body.should.equal('bar')
-            article.user.email.should.equal('foobar@example.com')
-            article.user.name.should.equal('Foo bar')
-            done()
-          })
-        })
-      })
-    })
-  })
+            should.not.exist(err);
+            article.should.be.an.instanceOf(Article);
+            article.title.should.equal('foo');
+            article.body.should.equal('bar');
+            article.user.email.should.equal('foobar@example.com');
+            article.user.name.should.equal('Foo bar');
+            done();
+          });
+        });
+      });
+    });
+  });
 
   after(function (done) {
-    require('./helper').clearDb(done)
-  })
-})
+    require('./helper').clearDb(done);
+  });
+});

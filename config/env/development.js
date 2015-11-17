@@ -1,11 +1,13 @@
+'use strict';
 
 /*!
  * Module dependencies.
  */
 
-var fs = require('fs');
-var env = {};
-var envFile = require('path').join(__dirname, 'env.json');
+const fs = require('fs');
+const envFile = require('path').join(__dirname, 'env.json');
+
+let env = {};
 
 // Read env.json file, if it exists, load the id's and secrets from that
 // Note that this is only in the development env
@@ -14,9 +16,7 @@ var envFile = require('path').join(__dirname, 'env.json');
 if (fs.existsSync(envFile)) {
   env = fs.readFileSync(envFile, 'utf-8');
   env = JSON.parse(env);
-  Object.keys(env).forEach(function (key) {
-    process.env[key] = env[key];
-  });
+  Object.keys(env).forEach(key => process.env[key] = env[key]);
 }
 
 /**
@@ -28,12 +28,12 @@ module.exports = {
   facebook: {
     clientID: process.env.FACEBOOK_CLIENTID,
     clientSecret: process.env.FACEBOOK_SECRET,
-    callbackURL: "http://localhost:3000/auth/facebook/callback"
+    callbackURL: 'http://localhost:3000/auth/facebook/callback'
   },
   twitter: {
     clientID: process.env.TWITTER_CLIENTID,
     clientSecret: process.env.TWITTER_SECRET,
-    callbackURL: "http://localhost:3000/auth/twitter/callback"
+    callbackURL: 'http://localhost:3000/auth/twitter/callback'
   },
   github: {
     clientID: process.env.GITHUB_CLIENTID,
@@ -48,6 +48,6 @@ module.exports = {
   google: {
     clientID: process.env.GOOGLE_CLIENTID,
     clientSecret: process.env.GOOGLE_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/callback"
+    callbackURL: 'http://localhost:3000/auth/google/callback'
   }
 };

@@ -1,3 +1,4 @@
+'use strict';
 
 /*!
  * Module dependencies.
@@ -6,18 +7,18 @@
 // Note: We can require users, articles and other cotrollers because we have
 // set the NODE_PATH to be ./app/controllers (package.json # scripts # start)
 
-var users = require('users');
-var articles = require('articles');
-var comments = require('comments');
-var tags = require('tags');
-var auth = require('./middlewares/authorization');
+const users = require('users');
+const articles = require('articles');
+const comments = require('comments');
+const tags = require('tags');
+const auth = require('./middlewares/authorization');
 
 /**
  * Route middlewares
  */
 
-var articleAuth = [auth.requiresLogin, auth.article.hasAuthorization];
-var commentAuth = [auth.requiresLogin, auth.comment.hasAuthorization];
+const articleAuth = [auth.requiresLogin, auth.article.hasAuthorization];
+const commentAuth = [auth.requiresLogin, auth.comment.hasAuthorization];
 
 /**
  * Expose routes
@@ -127,10 +128,10 @@ module.exports = function (app, passport) {
   });
 
   // assume 404 since no middleware responded
-  app.use(function (req, res, next) {
+  app.use(function (req, res) {
     res.status(404).render('404', {
       url: req.originalUrl,
       error: 'Not found'
     });
   });
-}
+};

@@ -1,20 +1,20 @@
+'use strict';
 
 /**
  * Module dependencies.
  */
 
-var mongoose = require('mongoose')
-var Article = mongoose.model('Article')
-var utils = require('../../lib/utils')
-var extend = require('util')._extend
+const mongoose = require('mongoose');
+const Article = mongoose.model('Article');
+const utils = require('../../lib/utils');
+const assign = require('object-assign');
+
 
 /**
  * Load
  */
 
 exports.load = function (req, res, next, id){
-  var User = mongoose.model('User');
-
   Article.load(id, function (err, article) {
     if (err) return next(err);
     if (!article) return next(new Error('not found'));
@@ -28,9 +28,9 @@ exports.load = function (req, res, next, id){
  */
 
 exports.index = function (req, res){
-  var page = (req.params.page > 0 ? req.params.page : 1) - 1;
-  var perPage = 30;
-  var options = {
+  const page = (req.params.page > 0 ? req.params.page : 1) - 1;
+  const perPage = 30;
+  const options = {
     perPage: perPage,
     page: page
   };
@@ -65,8 +65,8 @@ exports.new = function (req, res){
  */
 
 exports.create = function (req, res) {
-  var article = new Article(req.body);
-  var images = req.files.image
+  const article = new Article(req.body);
+  const images = req.files.image
     ? [req.files.image]
     : undefined;
 
@@ -100,14 +100,14 @@ exports.edit = function (req, res) {
  */
 
 exports.update = function (req, res){
-  var article = req.article;
-  var images = req.files.image
+  const article = req.article;
+  const images = req.files.image
     ? [req.files.image]
     : undefined;
 
   // make sure no one changes the user
   delete req.body.user;
-  article = extend(article, req.body);
+  assign(article, req.body);
 
   article.uploadAndSave(images, function (err) {
     if (!err) {
@@ -138,8 +138,8 @@ exports.show = function (req, res){
  */
 
 exports.destroy = function (req, res){
-  var article = req.article;
-  article.remove(function (err){
+  const article = req.article;
+  article.remove(function () {
     req.flash('info', 'Deleted successfully');
     res.redirect('/articles');
   });

@@ -1,12 +1,13 @@
+'use strict';
 
 /**
  * Module dependencies.
  */
 
-var mongoose = require('mongoose')
-  , async = require('async')
-  , Article = mongoose.model('Article')
-  , User = mongoose.model('User')
+const mongoose = require('mongoose');
+const async = require('async');
+const Article = mongoose.model('Article');
+const User = mongoose.model('User');
 
 /**
  * Clear database
@@ -17,11 +18,7 @@ var mongoose = require('mongoose')
 
 exports.clearDb = function (done) {
   async.parallel([
-    function (cb) {
-      User.collection.remove(cb)
-    },
-    function (cb) {
-      Article.collection.remove(cb)
-    }
-  ], done)
-}
+    cb => User.collection.remove(cb),
+    cb => Article.collection.remove(cb)
+  ], done);
+};

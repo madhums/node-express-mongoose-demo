@@ -1,11 +1,12 @@
+'use strict';
 
 /**
  * Module dependencies.
  */
 
-var mongoose = require('mongoose');
-var Notifier = require('notifier');
-var config = require('config');
+const Notifier = require('notifier');
+const swig = require('swig');
+const config = require('config');
 
 /**
  * Process the templates using swig - refer to notifier#processTemplate method
@@ -17,7 +18,6 @@ var config = require('config');
  */
 
 Notifier.prototype.processTemplate = function (tplPath, locals) {
-  var swig = require('swig');
   locals.filename = tplPath;
   return swig.renderFile(tplPath, locals);
 };
@@ -37,12 +37,12 @@ module.exports = {
    */
 
   comment: function (options, cb) {
-    var article = options.article;
-    var author = article.user;
-    var user = options.currentUser;
-    var notifier = new Notifier(config.notifier);
+    const article = options.article;
+    const author = article.user;
+    const user = options.currentUser;
+    const notifier = new Notifier(config.notifier);
 
-    var obj = {
+    const obj = {
       to: author.email,
       from: 'your@product.com',
       subject: user.name + ' added a comment on your article ' + article.title,

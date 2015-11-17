@@ -1,12 +1,13 @@
+'use strict';
 
 /**
  * Module dependencies.
  */
 
-var mongoose = require('mongoose');
-var LocalStrategy = require('passport-local').Strategy;
-var config = require('config');
-var User = mongoose.model('User');
+const mongoose = require('mongoose');
+const LocalStrategy = require('passport-local').Strategy;
+const config = require('config');
+const User = mongoose.model('User');
 
 /**
  * Expose
@@ -16,8 +17,8 @@ module.exports = new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password'
   },
-  function(email, password, done) {
-    var options = {
+  function (email, password, done) {
+    const options = {
       criteria: { email: email },
       select: 'name username email hashed_password salt'
     };

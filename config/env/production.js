@@ -1,3 +1,4 @@
+'use strict';
 
 /**
  * Expose
@@ -8,12 +9,12 @@ module.exports = {
   facebook: {
     clientID: process.env.FACEBOOK_CLIENTID,
     clientSecret: process.env.FACEBOOK_SECRET,
-    callbackURL: "http://nodejs-express-demo.herokuapp.com/auth/facebook/callback"
+    callbackURL: 'http://nodejs-express-demo.herokuapp.com/auth/facebook/callback'
   },
   twitter: {
     clientID: process.env.TWITTER_CLIENTID,
     clientSecret: process.env.TWITTER_SECRET,
-    callbackURL: "http://nodejs-express-demo.herokuapp.com/auth/twitter/callback"
+    callbackURL: 'http://nodejs-express-demo.herokuapp.com/auth/twitter/callback'
   },
   github: {
     clientID: process.env.GITHUB_CLIENTID,
@@ -28,6 +29,6 @@ module.exports = {
   google: {
     clientID: process.env.GOOGLE_CLIENTID,
     clientSecret: process.env.GOOGLE_SECRET,
-    callbackURL: "http://nodejs-express-demo.herokuapp.com/auth/google/callback"
+    callbackURL: 'http://nodejs-express-demo.herokuapp.com/auth/google/callback'
   }
 };

@@ -1,13 +1,14 @@
+'use strict';
 
 /**
  * Module dependencies.
  */
 
-var mongoose = require('mongoose');
-var crypto = require('crypto');
+const mongoose = require('mongoose');
+const crypto = require('crypto');
 
-var Schema = mongoose.Schema;
-var oAuthTypes = [
+const Schema = mongoose.Schema;
+const oAuthTypes = [
   'github',
   'twitter',
   'facebook',
@@ -19,7 +20,7 @@ var oAuthTypes = [
  * User Schema
  */
 
-var UserSchema = new Schema({
+const UserSchema = new Schema({
   name: { type: String, default: '' },
   email: { type: String, default: '' },
   username: { type: String, default: '' },
@@ -34,26 +35,26 @@ var UserSchema = new Schema({
   linkedin: {}
 });
 
+const validatePresenceOf = value => value && value.length;
+
 /**
  * Virtuals
  */
 
 UserSchema
   .virtual('password')
-  .set(function(password) {
+  .set(function (password) {
     this._password = password;
     this.salt = this.makeSalt();
     this.hashed_password = this.encryptPassword(password);
   })
-  .get(function() { return this._password });
+  .get(function () {
+    return this._password;
+  });
 
 /**
  * Validations
  */
-
-var validatePresenceOf = function (value) {
-  return value && value.length;
-};
 
 // the below 5 validations only apply if you are signing up traditionally
 
@@ -68,7 +69,7 @@ UserSchema.path('email').validate(function (email) {
 }, 'Email cannot be blank');
 
 UserSchema.path('email').validate(function (email, fn) {
-  var User = mongoose.model('User');
+  const User = mongoose.model('User');
   if (this.skipValidation()) fn(true);
 
   // Check only when it is a new user or when email field is modified
@@ -94,7 +95,7 @@ UserSchema.path('hashed_password').validate(function (hashed_password) {
  * Pre-save hook
  */
 
-UserSchema.pre('save', function(next) {
+UserSchema.pre('save', function (next) {
   if (!this.isNew) return next();
 
   if (!validatePresenceOf(this.password) && !this.skipValidation()) {
@@ -102,7 +103,7 @@ UserSchema.pre('save', function(next) {
   } else {
     next();
   }
-})
+});
 
 /**
  * Methods
@@ -157,7 +158,7 @@ UserSchema.methods = {
    * Validation is not required if using OAuth
    */
 
-  skipValidation: function() {
+  skipValidation: function () {
     return ~oAuthTypes.indexOf(this.provider);
   }
 };
@@ -182,6 +183,6 @@ UserSchema.statics = {
       .select(options.select)
       .exec(cb);
   }
-}
+};
 
 mongoose.model('User', UserSchema);

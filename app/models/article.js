@@ -1,22 +1,23 @@
+'use strict';
 
 /**
  * Module dependencies.
  */
 
-var mongoose = require('mongoose');
-var Imager = require('imager');
-var config = require('config');
+const mongoose = require('mongoose');
+const Imager = require('imager');
+const config = require('config');
 
-var imagerConfig = require(config.root + '/config/imager.js');
-var utils = require('../../lib/utils');
+const imagerConfig = require(config.root + '/config/imager.js');
+const utils = require('../../lib/utils');
 
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 /**
  * Getters
  */
 
-var getTags = function (tags) {
+const getTags = function (tags) {
   return tags.join(',');
 };
 
@@ -24,7 +25,7 @@ var getTags = function (tags) {
  * Setters
  */
 
-var setTags = function (tags) {
+const setTags = function (tags) {
   return tags.split(',');
 };
 
@@ -32,7 +33,7 @@ var setTags = function (tags) {
  * Article Schema
  */
 
-var ArticleSchema = new Schema({
+const ArticleSchema = new Schema({
   title: {type : String, default : '', trim : true},
   body: {type : String, default : '', trim : true},
   user: {type : Schema.ObjectId, ref : 'User'},
@@ -61,8 +62,8 @@ ArticleSchema.path('body').required(true, 'Article body cannot be blank');
  */
 
 ArticleSchema.pre('remove', function (next) {
-  var imager = new Imager(imagerConfig, 'S3');
-  var files = this.image.files;
+  const imager = new Imager(imagerConfig, 'S3');
+  const files = this.image.files;
 
   // if there are files associated with the item, remove from the cloud too
   imager.remove(files, function (err) {
@@ -87,10 +88,10 @@ ArticleSchema.methods = {
    */
 
   uploadAndSave: function (images, cb) {
-    if (!images || !images.length) return this.save(cb)
+    if (!images || !images.length) return this.save(cb);
 
-    var imager = new Imager(imagerConfig, 'S3');
-    var self = this;
+    const imager = new Imager(imagerConfig, 'S3');
+    const self = this;
 
     this.validate(function (err) {
       if (err) return cb(err);
@@ -114,7 +115,7 @@ ArticleSchema.methods = {
    */
 
   addComment: function (user, comment, cb) {
-    var notify = require('../mailer');
+    const notify = require('../mailer');
 
     this.comments.push({
       body: comment.body,
@@ -140,12 +141,12 @@ ArticleSchema.methods = {
    */
 
   removeComment: function (commentId, cb) {
-    var index = utils.indexof(this.comments, { id: commentId });
+    const index = utils.indexof(this.comments, { id: commentId });
     if (~index) this.comments.splice(index, 1);
     else return cb('not found');
     this.save(cb);
   }
-}
+};
 
 /**
  * Statics
@@ -177,7 +178,7 @@ ArticleSchema.statics = {
    */
 
   list: function (options, cb) {
-    var criteria = options.criteria || {}
+    const criteria = options.criteria || {};
 
     this.find(criteria)
       .populate('user', 'name username')
@@ -186,6 +187,6 @@ ArticleSchema.statics = {
       .skip(options.perPage * options.page)
       .exec(cb);
   }
-}
+};
 
 mongoose.model('Article', ArticleSchema);
