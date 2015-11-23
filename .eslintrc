@@ -2,18 +2,17 @@
   "extends": "eslint:recommended",
   "env": {
     "browser": true,
-    "node": true,
-    "mocha": true
+    "es6": true,
+    "node": true
   },
   "parser": "babel-eslint",
   "rules": {
+    "object-curly-spacing": [2, "always"],
     "strict": [2, "global"],
     "quotes": [2, "single", "avoid-escape"],
     "semi": [2, "always"],
-    "space-before-function-paren": [2, "always"],
     "no-console": 0
   },
   "globals": {
-
   }
 }
