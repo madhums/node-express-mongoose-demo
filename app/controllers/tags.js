@@ -5,31 +5,30 @@
  */
 
 const mongoose = require('mongoose');
+const wrap = require('co-express');
 const Article = mongoose.model('Article');
 
 /**
  * List items tagged with a tag
  */
 
-exports.index = function (req, res) {
+exports.index = wrap(function* (req, res) {
   const criteria = { tags: req.params.tag };
-  const perPage = 5;
   const page = (req.params.page > 0 ? req.params.page : 1) - 1;
+  const limit = 30;
   const options = {
-    perPage: perPage,
+    limit: limit,
     page: page,
     criteria: criteria
   };
 
-  Article.list(options, function (err, articles) {
-    if (err) return res.render('500');
-    Article.count(criteria).exec(function (err, count) {
-      res.render('articles/index', {
-        title: 'Articles tagged ' + req.params.tag,
-        articles: articles,
-        page: page + 1,
-        pages: Math.ceil(count / perPage)
-      });
-    });
+  const articles = yield Article.list(options);
+  const count = yield Article.count(criteria);
+
+  res.render('articles/index', {
+    title: 'Articles tagged ' + req.params.tag,
+    articles: articles,
+    page: page + 1,
+    pages: Math.ceil(count / limit)
   });
-};
+});

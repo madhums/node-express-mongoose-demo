@@ -6,7 +6,7 @@
 
 const Notifier = require('notifier');
 const swig = require('swig');
-const config = require('config');
+const config = require('../../config/config');
 
 /**
  * Process the templates using swig - refer to notifier#processTemplate method
