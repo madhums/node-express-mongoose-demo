@@ -1,4 +1,4 @@
-** wip ** : currently in the process of moving to ES6 generators
+**wip** : currently in the process of moving to ES6 generators
 
 [![Build Status](https://img.shields.io/travis/madhums/node-express-mongoose-demo.svg?style=flat)](https://travis-ci.org/madhums/node-express-mongoose-demo)
 [![Gittip](https://img.shields.io/gratipay/madhums.svg?style=flat)](https://www.gratipay.com/madhums/)
