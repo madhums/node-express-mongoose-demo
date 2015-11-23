@@ -16,7 +16,8 @@ const User = mongoose.model('User');
  * @api public
  */
 
-exports.clearDb = function (done) {
+exports.cleanup = function (done) {
+  done = done || () => {};
   async.parallel([
     cb => User.collection.remove(cb),
     cb => Article.collection.remove(cb)
