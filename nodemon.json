@@ -1,5 +1,0 @@
-{
-  "execMap": {
-    "js": "node --harmony"
-  }
-}
