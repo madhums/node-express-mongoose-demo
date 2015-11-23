@@ -7,10 +7,10 @@
 // Note: We can require users, articles and other cotrollers because we have
 // set the NODE_PATH to be ./app/controllers (package.json # scripts # start)
 
-const users = require('users');
-const articles = require('articles');
-const comments = require('comments');
-const tags = require('tags');
+const users = require('../app/controllers/users');
+const articles = require('../app/controllers/articles');
+const comments = require('../app/controllers/comments');
+const tags = require('../app/controllers/tags');
 const auth = require('./middlewares/authorization');
 
 /**
@@ -122,7 +122,14 @@ module.exports = function (app, passport) {
       || (~err.message.indexOf('Cast to ObjectId failed')))) {
       return next();
     }
+
     console.error(err.stack);
+
+    if (err.stack.includes('ValidationError')) {
+      res.status(422).render('422', { error: err.stack });
+      return;
+    }
+
     // error page
     res.status(500).render('500', { error: err.stack });
   });

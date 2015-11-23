@@ -20,7 +20,7 @@ const mongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
 const winston = require('winston');
 const helpers = require('view-helpers');
-const config = require('config');
+const config = require('./config');
 const pkg = require('../package.json');
 
 const env = process.env.NODE_ENV || 'development';
@@ -40,15 +40,13 @@ module.exports = function (app, passport) {
   app.use(express.static(config.root + '/public'));
 
   // Use winston on production
-  let log;
+  let log = 'dev';
   if (env !== 'development') {
     log = {
       stream: {
         write: message => winston.info(message)
       }
     };
-  } else {
-    log = 'dev';
   }
 
   // Don't log during tests
@@ -77,7 +75,7 @@ module.exports = function (app, passport) {
   // bodyParser should be above methodOverride
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
-  app.use(multer());
+  app.use(multer().array('image', 1));
   app.use(methodOverride(function (req) {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
       // look in urlencoded POST bodies and delete it
@@ -90,15 +88,6 @@ module.exports = function (app, passport) {
   // CookieParser should be above session
   app.use(cookieParser());
   app.use(cookieSession({ secret: 'secret' }));
-  app.use(session({
-    resave: true,
-    saveUninitialized: true,
-    secret: pkg.name,
-    store: new mongoStore({
-      url: config.db,
-      collection : 'sessions'
-    })
-  }));
 
   // use passport session
   app.use(passport.initialize());
@@ -110,8 +99,17 @@ module.exports = function (app, passport) {
   // should be declared after session and flash
   app.use(helpers(pkg.name));
 
-  // adds CSRF support
-  if (process.env.NODE_ENV !== 'test') {
+  if (env !== 'test') {
+    app.use(session({
+      resave: true,
+      saveUninitialized: true,
+      secret: pkg.name,
+      store: new mongoStore({
+        url: config.db,
+        collection : 'sessions'
+      })
+    }));
+
     app.use(csrf());
 
     // This could be moved to view-helpers :-)
