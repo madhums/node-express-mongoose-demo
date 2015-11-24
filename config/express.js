@@ -88,6 +88,15 @@ module.exports = function (app, passport) {
   // CookieParser should be above session
   app.use(cookieParser());
   app.use(cookieSession({ secret: 'secret' }));
+  app.use(session({
+    resave: true,
+    saveUninitialized: true,
+    secret: pkg.name,
+    store: new mongoStore({
+      url: config.db,
+      collection : 'sessions'
+    })
+  }));
 
   // use passport session
   app.use(passport.initialize());
@@ -100,16 +109,6 @@ module.exports = function (app, passport) {
   app.use(helpers(pkg.name));
 
   if (env !== 'test') {
-    app.use(session({
-      resave: true,
-      saveUninitialized: true,
-      secret: pkg.name,
-      store: new mongoStore({
-        url: config.db,
-        collection : 'sessions'
-      })
-    }));
-
     app.use(csrf());
 
     // This could be moved to view-helpers :-)
