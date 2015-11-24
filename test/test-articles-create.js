@@ -11,6 +11,7 @@ const app = require('../server');
 const cleanup = require('./helper').cleanup;
 const User = mongoose.model('User');
 const Article = mongoose.model('Article');
+const agent = request.agent(app);
 
 const _user = {
   email: 'foo@email.com',
@@ -21,31 +22,22 @@ const _user = {
 
 
 test.before(cleanup);
-test.beforeEach(cleanup);
-
-
-// user login
-test.beforeEach(async t => {
-  const ctx = global.Promise.defer();
-  const agent = request.agent(app);
+test.before(async t => {
   const user = new User(_user);
-
-  user.save().then(() => {
-    agent
-    .post('/users/session')
-    .field('email', _user.email)
-    .field('password', _user.password)
-    .expect('Location', '/')
-    .expect('Content-Type', /text/)
-    .end((err, res) => {
-      ctx.resolve(res.headers['set-cookie']);
-    });
-  });
-
-  t.context.agent = agent;
-  t.context.cookie = await ctx.promise;
-  t.end();
+  return await user.save(t.end);
 });
+
+test.beforeEach(t => {
+  agent
+  .post('/users/session')
+  .field('email', _user.email)
+  .field('password', _user.password)
+  .expect('Location', '/')
+  .expect('Content-Type', /text/)
+  .end(t.end);
+});
+
+test.after(cleanup);
 
 
 test('POST /articles - when not logged in - should redirect to /login', t => {
@@ -60,13 +52,12 @@ test('POST /articles - when not logged in - should redirect to /login', t => {
 
 
 test('POST /articles - invalid form - should respond with error', t => {
-  t.context.agent
+  agent
   .post('/articles')
   .field('title', '')
   .field('body', 'foo')
-  .set('cookie', t.context.cookie)
   .expect('Content-Type', /text/)
-  .expect(302)
+  .expect(422)
   .expect(/Article title cannot be blank/)
   .end(async err => {
     const count = await Article.count().exec();
@@ -78,11 +69,10 @@ test('POST /articles - invalid form - should respond with error', t => {
 
 
 test('POST /articles - valid form - should redirect to the new article page', t => {
-  t.context.agent
+  agent
   .post('/articles')
   .field('title', 'foo')
   .field('body', 'bar')
-  .set('cookie', t.context.cookie)
   .expect('Content-Type', /plain/)
   .expect('Location', /\/articles\//)
   .expect(302)

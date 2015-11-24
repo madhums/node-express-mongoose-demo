@@ -123,7 +123,7 @@ module.exports = function (app, passport) {
       return next();
     }
 
-    console.error(err.stack);
+    // console.error(err.stack);
 
     if (err.stack.includes('ValidationError')) {
       res.status(422).render('422', { error: err.stack });
