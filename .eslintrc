@@ -11,6 +11,11 @@
     "strict": [2, "global"],
     "quotes": [2, "single", "avoid-escape"],
     "semi": [2, "always"],
+    "space-before-function-paren": [2, "always"],
+    "space-after-keywords": [2, "always"],
+    "space-infix-ops": 2,
+    "spaced-comment": [2, "always"],
+    "arrow-spacing": 2,
     "no-console": 0
   },
   "globals": {

@@ -5,21 +5,18 @@
  */
 
 const mongoose = require('mongoose');
-const async = require('async');
 const Article = mongoose.model('Article');
 const User = mongoose.model('User');
 
 /**
  * Clear database
  *
- * @param {Function} done
+ * @param {Object} t<Ava>
  * @api public
  */
 
-exports.cleanup = function (done) {
-  done = done || () => {};
-  async.parallel([
-    cb => User.collection.remove(cb),
-    cb => Article.collection.remove(cb)
-  ], done);
+exports.cleanup = function* (t) {
+  yield User.remove();
+  yield Article.remove();
+  t.end();
 };

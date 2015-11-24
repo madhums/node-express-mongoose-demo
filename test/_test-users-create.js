@@ -11,7 +11,7 @@ const app = require('../server');
 const cleanup = require('./helper').cleanup;
 const User = mongoose.model('User');
 
-test.beforeEach(t => cleanup(t.end));
+test.beforeEach(cleanup);
 
 test('no email - should respond with errors', t => {
   request(app)
@@ -69,4 +69,4 @@ test('valid signup - should redirect to /', t => {
   });
 });
 
-test.afterEach(t => cleanup(t.end));
+test.afterEach(cleanup);

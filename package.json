@@ -24,7 +24,6 @@
     "test": "NODE_ENV=test ./node_modules/.bin/ava --serial test/test-*.js"
   },
   "dependencies": {
-    "async": "~1.5.0",
     "body-parser": "~1.14.1",
     "co-express": "~1.2.1",
     "compression": "~1.6.0",

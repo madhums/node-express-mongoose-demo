@@ -11,16 +11,42 @@ const app = require('../server');
 const cleanup = require('./helper').cleanup;
 const User = mongoose.model('User');
 const Article = mongoose.model('Article');
-const agent = request.agent(app);
 
 const _user = {
-  email: 'foobar@example.com',
+  email: 'foo@email.com',
   name: 'Foo bar',
   username: 'foobar',
   password: 'foobar'
 };
 
-test.beforeEach(t => cleanup(t.end));
+
+test.before(cleanup);
+test.beforeEach(cleanup);
+
+
+// user login
+test.beforeEach(async t => {
+  const ctx = global.Promise.defer();
+  const agent = request.agent(app);
+  const user = new User(_user);
+
+  user.save().then(() => {
+    agent
+    .post('/users/session')
+    .field('email', _user.email)
+    .field('password', _user.password)
+    .expect('Location', '/')
+    .expect('Content-Type', /text/)
+    .end((err, res) => {
+      ctx.resolve(res.headers['set-cookie']);
+    });
+  });
+
+  t.context.agent = agent;
+  t.context.cookie = await ctx.promise;
+  t.end();
+});
+
 
 test('POST /articles - when not logged in - should redirect to /login', t => {
   request(app)
@@ -32,33 +58,17 @@ test('POST /articles - when not logged in - should redirect to /login', t => {
   .end(t.end);
 });
 
-// user login
-test.before(async t => {
-  const user = new User(_user);
-  await user.save();
-
-  agent
-  .post('/users/session')
-  .field('email', _user.email)
-  .field('password', _user.password)
-  .expect('Location', '/')
-  .expect('Content-Type', /html/)
-  .end(err => {
-    console.log(err);
-    t.ifError(err);
-    t.end(err);
-  });
-});
 
 test('POST /articles - invalid form - should respond with error', t => {
-  agent
+  t.context.agent
   .post('/articles')
   .field('title', '')
   .field('body', 'foo')
+  .set('cookie', t.context.cookie)
   .expect('Content-Type', /text/)
   .expect(302)
   .expect(/Article title cannot be blank/)
-  .end(async (err, res) => {
+  .end(async err => {
     const count = await Article.count().exec();
     t.ifError(err);
     t.same(count, 0, 'Count should be 0');
@@ -66,11 +76,13 @@ test('POST /articles - invalid form - should respond with error', t => {
   });
 });
 
+
 test('POST /articles - valid form - should redirect to the new article page', t => {
-  agent
+  t.context.agent
   .post('/articles')
   .field('title', 'foo')
   .field('body', 'bar')
+  .set('cookie', t.context.cookie)
   .expect('Content-Type', /plain/)
   .expect('Location', /\/articles\//)
   .expect(302)
@@ -78,9 +90,7 @@ test('POST /articles - valid form - should redirect to the new article page', t 
   .end(async err => {
     const count = await Article.count().exec();
     t.ifError(err);
-    t.same(count, 1, 'Count should be 0');
+    t.same(count, 1, 'Count should be 1');
     t.end();
   });
 });
-
-test.afterEach(t => cleanup(t.end));
