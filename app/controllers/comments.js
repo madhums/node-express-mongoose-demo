@@ -13,7 +13,7 @@ const wrap = require('co-express');
 exports.load = function (req, res, next, id) {
   req.comment = req.article.comments
     .filter(comment => comment.id === id)
-    .reduce((p, n) => n, null);
+    .reduce(c => c);
 
   if (!req.comment) return next(new Error('Comment not found'));
   next();
