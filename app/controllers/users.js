@@ -5,48 +5,33 @@
  */
 
 const mongoose = require('mongoose');
+const wrap = require('co-express');
 const User = mongoose.model('User');
-const utils = require('../../lib/utils');
 
 /**
  * Load
  */
 
-exports.load = function (req, res, next, id) {
-  const options = {
-    criteria: { _id : id }
-  };
-  User.load(options, function (err, user) {
-    if (err) return next(err);
-    if (!user) return next(new Error('Failed to load User ' + id));
-    req.profile = user;
-    next();
-  });
-};
+exports.load = wrap(function* (req, res, next, _id) {
+  const criteria = { _id };
+  req.profile = yield User.load({ criteria });
+  if (!req.profile) return next(new Error('User not found'));
+  next();
+});
 
 /**
  * Create user
  */
 
-exports.create = function (req, res) {
+exports.create = wrap(function* (req, res) {
   const user = new User(req.body);
   user.provider = 'local';
-  user.save(function (err) {
-    if (err) {
-      return res.render('users/signup', {
-        errors: utils.errors(err.errors || err.message),
-        user: user,
-        title: 'Sign up'
-      });
-    }
-
-    // manually login the user once successfully signed up
-    req.logIn(user, function (err) {
-      if (err) req.flash('info', 'Sorry! We are not able to log you in!');
-      return res.redirect('/');
-    });
+  yield user.save();
+  req.logIn(user, err => {
+    if (err) req.flash('info', 'Sorry! We are not able to log you in!');
+    return res.redirect('/');
   });
-};
+});
 
 /**
  *  Show profile
