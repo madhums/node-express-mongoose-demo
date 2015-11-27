@@ -148,8 +148,8 @@ ArticleSchema.statics = {
    * @api private
    */
 
-  load: function (id) {
-    return this.findOne({ _id : id })
+  load: function (_id) {
+    return this.findOne({ _id })
       .populate('user', 'name email username')
       .populate('comments.user')
       .exec();
