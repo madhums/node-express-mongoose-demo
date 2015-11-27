@@ -16,7 +16,7 @@
     "url": "https://github.com/madhums/node-express-mongoose-demo.git"
   },
   "engines": {
-    "node": ">=4.x"
+    "node": ">=5.x"
   },
   "scripts": {
     "start": "NODE_ENV=development ./node_modules/.bin/nodemon server.js",
