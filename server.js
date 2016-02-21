@@ -29,7 +29,7 @@ module.exports = app;
 
 // Bootstrap models
 fs.readdirSync(models)
-  .filter(file => ~file.indexOf('.js'))
+  .filter(file => ~file.search(/^[^\.].*\.js$/))
   .forEach(file => require(join(models, file)));
 
 // Bootstrap routes
