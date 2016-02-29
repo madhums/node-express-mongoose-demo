@@ -6,9 +6,12 @@
 module.exports = {
   variants: {
     article: {
-      resize: {
-        detail: 'x440'
+      options: {
+        scale: { height: 440, type: 'contain' },
       },
+      // resize: {
+      //   detail: 'x440'
+      // },
       crop: {
 
       },
