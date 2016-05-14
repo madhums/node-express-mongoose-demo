@@ -65,13 +65,9 @@ exports.new = function (req, res){
 
 exports.create = async(function* (req, res) {
   const article = new Article(only(req.body, 'title body tags'));
+  article.user = req.user;
   try {
-    const images = req.files.image
-      ? [req.files.image]
-      : undefined;
-
-    article.user = req.user;
-    yield article.uploadAndSave(images);
+    yield article.uploadAndSave(req.file);
     req.flash('success', 'Successfully created article!');
     res.redirect('/articles/' + article._id);
   } catch (err) {
@@ -100,13 +96,9 @@ exports.edit = function (req, res) {
 
 exports.update = async(function* (req, res){
   const article = req.article;
-  const images = req.files.image
-    ? [req.files.image]
-    : undefined;
-
   assign(article, only(req.body, 'title body tags'));
   try {
-    yield article.uploadAndSave(images);
+    yield article.uploadAndSave(req.file);
     res.redirect('/articles/' + article._id);
   } catch (err) {
     res.render('articles/edit', {
