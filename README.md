@@ -29,11 +29,13 @@ $ git clone git://github.com/madhums/node-express-mongoose-demo.git
 $ npm install
 ```
 
-**NOTE:** Do not forget to set the facebook, twitter, google, linkedin and github `CLIENT_ID`s and `SECRET`s. In `development` env, you can simply copy
-`config/env/env.example.json` to `config/env/env.json` and just replace the
-values there. In production, it is not safe to keep the ids and secrets in
-a file, so you need to set it up via commandline. If you are using heroku
-checkout how environment variables are set [here](https://devcenter.heroku.com/articles/config-vars).
+**NOTE:** Do not forget to set the facebook, twitter, google, linkedin and github `CLIENT_ID`s and `SECRET`s. In `development` env, you can set the env variables by doing
+
+```sh
+cp env.example .env`
+```
+
+and replace the values there. In `production` env, it is not safe to keep the ids and secrets in a file, so you need to set it up via commandline. If you are using heroku checkout how environment variables are set [here](https://devcenter.heroku.com/articles/config-vars).
 
 If you want to use image uploads, don't forget to set env variables for the
 imager config.
