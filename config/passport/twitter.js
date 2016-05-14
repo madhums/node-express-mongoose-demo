@@ -6,7 +6,7 @@
 
 const mongoose = require('mongoose');
 const TwitterStrategy = require('passport-twitter').Strategy;
-const config = require('../config');
+const config = require('../');
 const User = mongoose.model('User');
 
 /**

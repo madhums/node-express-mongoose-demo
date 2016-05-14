@@ -20,7 +20,7 @@ const mongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
 const winston = require('winston');
 const helpers = require('view-helpers');
-const config = require('./config');
+const config = require('./');
 const pkg = require('../package.json');
 
 const env = process.env.NODE_ENV || 'development';

@@ -6,7 +6,7 @@
 
 const mongoose = require('mongoose');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-const config = require('../config');
+const config = require('../');
 const User = mongoose.model('User');
 
 /**

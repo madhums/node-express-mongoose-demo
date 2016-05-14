@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const notify = require('../mailer');
 
 // const Imager = require('imager');
-// const config = require('../../config/config');
+// const config = require('../../config');
 // const imagerConfig = require(config.root + '/config/imager.js');
 
 const Schema = mongoose.Schema;

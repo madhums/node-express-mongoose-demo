@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const test = require('tape');
 const request = require('supertest');
 const app = require('../server');
-const cleanup = require('./helper').cleanup;
+const { cleanup } = require('./helper');
 const User = mongoose.model('User');
 
 test('Clean up', cleanup);
