@@ -3,7 +3,7 @@ head(prefix="og: http://ogp.me/ns# nodejsexpressdemo: http://ogp.me/ns/apps/node
   meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
   meta(name="viewport", content="width=device-width,initial-scale=1")
 
-  title =(title || pkg.name)
+  title= pkg.name + ' - ' + title
   meta(name="keywords", content="{{ pkg.keywords.join(',') }}")
   meta(name="description", content="{{ pkg.description }}")
 
