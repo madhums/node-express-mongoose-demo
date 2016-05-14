@@ -37,13 +37,13 @@ cp env.example .env`
 
 and replace the values there. In `production` env, it is not safe to keep the ids and secrets in a file, so you need to set it up via commandline. If you are using heroku checkout how environment variables are set [here](https://devcenter.heroku.com/articles/config-vars).
 
-If you want to use image uploads, don't forget to set env variables for the
+If you want to use image uploads, don't forget to set these env variables for
 imager config.
 
 ```sh
-$ export IMAGER_S3_KEY=AWS_S3_KEY
-$ export IMAGER_S3_SECRET=AWS_S3_SECRET
-$ export IMAGER_S3_BUCKET=AWS_S3_BUCKET
+IMAGER_S3_KEY=AWS_S3_KEY
+IMAGER_S3_SECRET=AWS_S3_SECRET
+IMAGER_S3_BUCKET=AWS_S3_BUCKET
 ```
 
 then
