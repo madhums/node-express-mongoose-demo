@@ -36,7 +36,7 @@
     "express-session": "~1.13.0",
     "forever": "~0.15.1",
     "method-override": "~2.3.5",
-    "mongoose": "~4.4.14",
+    "mongoose": "~4.4.15",
     "morgan": "~1.7.0",
     "multer": "~1.1.0",
     "notifier": "~0.1.7",
