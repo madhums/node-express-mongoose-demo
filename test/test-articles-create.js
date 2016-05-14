@@ -5,10 +5,10 @@
  */
 
 const mongoose = require('mongoose');
-const test = require('ava');
+const test = require('tape');
 const request = require('supertest');
 const app = require('../server');
-const cleanup = require('./helper').cleanup;
+const { cleanup } = require('./helper');
 const User = mongoose.model('User');
 const Article = mongoose.model('Article');
 const agent = request.agent(app);
@@ -20,25 +20,12 @@ const _user = {
   password: 'foobar'
 };
 
+test('Clean up', cleanup);
 
-test.before(cleanup);
-test.before(async t => {
+test('Create user', async t => {
   const user = new User(_user);
   return await user.save(t.end);
 });
-
-test.beforeEach(t => {
-  agent
-  .post('/users/session')
-  .field('email', _user.email)
-  .field('password', _user.password)
-  .expect('Location', '/')
-  .expect('Content-Type', /text/)
-  .end(t.end);
-});
-
-test.after(cleanup);
-
 
 test('POST /articles - when not logged in - should redirect to /login', t => {
   request(app)
@@ -50,6 +37,16 @@ test('POST /articles - when not logged in - should redirect to /login', t => {
   .end(t.end);
 });
 
+// login
+test('User login', t => {
+  agent
+  .post('/users/session')
+  .field('email', _user.email)
+  .field('password', _user.password)
+  .expect('Location', '/')
+  .expect('Content-Type', /text/)
+  .end(t.end);
+});
 
 test('POST /articles - invalid form - should respond with error', t => {
   agent
@@ -57,7 +54,7 @@ test('POST /articles - invalid form - should respond with error', t => {
   .field('title', '')
   .field('body', 'foo')
   .expect('Content-Type', /text/)
-  .expect(422)
+  .expect(200)
   .expect(/Article title cannot be blank/)
   .end(async err => {
     const count = await Article.count().exec();
@@ -66,7 +63,6 @@ test('POST /articles - invalid form - should respond with error', t => {
     t.end();
   });
 });
-
 
 test('POST /articles - valid form - should redirect to the new article page', t => {
   agent
@@ -84,3 +80,7 @@ test('POST /articles - valid form - should redirect to the new article page', t 
     t.end();
   });
 });
+
+test('Clean up', cleanup);
+
+test.onFinish(() => process.exit(0));

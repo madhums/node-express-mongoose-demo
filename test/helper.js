@@ -7,6 +7,7 @@
 const mongoose = require('mongoose');
 const Article = mongoose.model('Article');
 const User = mongoose.model('User');
+const co = require('co');
 
 /**
  * Clear database
@@ -15,8 +16,10 @@ const User = mongoose.model('User');
  * @api public
  */
 
-exports.cleanup = function* (t) {
-  yield User.remove();
-  yield Article.remove();
-  t.end();
+exports.cleanup = function (t) {
+  co(function* () {
+    yield User.remove();
+    yield Article.remove();
+    t.end();
+  });
 };

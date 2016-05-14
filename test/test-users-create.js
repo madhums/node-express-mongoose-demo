@@ -5,14 +5,13 @@
  */
 
 const mongoose = require('mongoose');
-const test = require('ava');
+const test = require('tape');
 const request = require('supertest');
 const app = require('../server');
 const cleanup = require('./helper').cleanup;
 const User = mongoose.model('User');
 
-test.before(cleanup);
-test.after(cleanup);
+test('Clean up', cleanup);
 
 test('no email - should respond with errors', t => {
   request(app)
@@ -69,3 +68,5 @@ test('valid signup - should redirect to /', t => {
     t.end();
   });
 });
+
+test('Clean up', cleanup);
