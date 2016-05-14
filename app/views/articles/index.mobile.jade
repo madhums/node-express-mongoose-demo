@@ -1,0 +1,31 @@
+extends ../layouts/mobile
+
+block main
+  h1= title
+
+block content
+  - each article in articles
+    .article
+      h3
+        a(href='/articles/'+article._id, title=article.title) #{article.title}
+      p= article.body
+
+      .meta.muted
+        span= formatDate(article.createdAt)
+        | &nbsp; - &nbsp;
+        span Author &nbsp;
+
+        - var name = article.user.name ? article.user.name : article.user.username
+
+        a(href="/users/"+article.user._id)= name
+        &nbsp; - &nbsp;
+        - if (article.tags)
+          - each tag in article.tags.split(',')
+            | &nbsp;
+            a.tag(href="/tags/"+tag)
+              i.icon-tags
+              |  #{tag}
+
+  - if (pages > 1)
+    ul.pagination
+      != createPagination(pages, page)

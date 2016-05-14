@@ -1,0 +1,23 @@
+extends auth
+
+block auth
+  form.form-horizontal(action="/users/session", method="post", role="form")
+    input(type='hidden', name='_csrf', value="#{csrf_token}")
+
+    p.col-sm-offset-2.error= message
+
+    .form-group
+      label.col-sm-2.control-label(for="email") Email
+      .col-sm-10
+        input#email.form-control(type="email", placeholder="Email", name="email")
+
+    .form-group
+      label.col-sm-2.control-label(for="password") Password
+      .col-sm-10
+        input#password.form-control(type="password", placeholder="Password", name="password")
+
+    .form-group
+      .col-sm-offset-2.col-sm-10
+        button.btn.btn-primary(type='submit') Log in
+        | &nbsp; or &nbsp;
+        a.show-signup(href="/signup") Sign up

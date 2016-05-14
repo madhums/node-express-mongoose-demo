@@ -1,0 +1,14 @@
+- if (comment && comment.user)
+  .comment
+    - var name = comment.user.name ? comment.user.name : comment.user.username
+    p
+      a(href="/users/"+comment.user._id)= name
+      |  :&nbsp;
+      = comment.body
+
+    p.muted
+      form.form-inline(role="form", method="post", action="/articles/" + article._id + "/comments/" + comment._id, onsubmit="return confirm('Are you sure?')")
+        input(type='hidden', name='_csrf', value="#{csrf_token}")
+        span.muted= formatDate(comment.createdAt)
+        input(type="hidden", name="_method", value="DELETE")
+        button.btn.btn-danger.btn-link.error(type="submit") delete

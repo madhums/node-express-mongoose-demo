@@ -1,0 +1,5 @@
+form(method="post", action="/articles/#{article._id}/comments", role="form")
+  input(type='hidden', name='_csrf', value="#{csrf_token}")
+  .form-group
+    textarea.form-control(type='text', rows="6", name="body", placeholder='Add your comment')
+  button.btn.btn-primary(type='submit') Add comment

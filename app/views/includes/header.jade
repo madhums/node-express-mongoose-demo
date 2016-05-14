@@ -1,0 +1,33 @@
+nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
+  .container
+    .navbar-header
+      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.navbar-brand(href='/') Node.js Express Mongoose Demo
+    .collapse.navbar-collapse
+      ul.nav.navbar-nav
+        li(class=isActive('/articles/new') ? 'active' : '')
+          a(href="/articles/new", title="new article") New
+        - if (req.isAuthenticated())
+          li
+            a(href="/users/"+req.user.id, title="Profile") Profile
+          li
+            a(href="/logout", title="logout") Logout
+        - else
+          li(class=isActive('/login') ? 'active' : '')
+            a(href="/login", title="Login") Login
+
+      ul.nav.navbar-nav.navbar-right
+        li
+          a(href="https://www.gratipay.com/madhums/")
+            img(src="https://img.shields.io/gratipay/madhums.svg?style=flat", alt="Gittip", data-canonical-src="https://img.shields.io/gratipay/madhums.svg?style=flat", style="max-width:100%;")
+        li
+          iframe(src="http://ghbtns.com/github-btn.html?user=madhums&repo=node-express-mongoose-demo&type=watch&count=true", allowtransparency="true", frameborder="0", scrolling="0", width="110", height="45", style="padding: 15px 0 0 15px;")
+        li
+          iframe(src="http://ghbtns.com/github-btn.html?user=madhums&repo=node-express-mongoose-demo&type=fork&count=true", allowtransparency="true", frameborder="0", scrolling="0", width="110", height="45", style="padding: 15px 0 0 15px;")
+        li
+          a(href='https://travis-ci.org/madhums/node-express-mongoose-demo')
+            img(src='https://img.shields.io/travis/madhums/node-express-mongoose-demo.svg?style=flat', alt='Build Status', data-canonical-src='https://img.shields.io/travis/madhums/node-express-mongoose-demo.svg?style=flat', style='max-width:100%;')
