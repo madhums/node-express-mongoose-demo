@@ -108,4 +108,8 @@ module.exports = function (app, passport) {
       next();
     });
   }
+
+  if (env === 'development') {
+    app.locals.pretty = true;
+  }
 };
