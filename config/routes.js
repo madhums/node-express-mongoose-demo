@@ -1,6 +1,6 @@
 'use strict';
 
-/*!
+/*
  * Module dependencies.
  */
 
@@ -20,11 +20,16 @@ const auth = require('./middlewares/authorization');
 const articleAuth = [auth.requiresLogin, auth.article.hasAuthorization];
 const commentAuth = [auth.requiresLogin, auth.comment.hasAuthorization];
 
+const fail = {
+  failureRedirect: '/login'
+};
+
 /**
  * Expose routes
  */
 
 module.exports = function (app, passport) {
+  const pauth = passport.authenticate.bind(passport);
 
   // user routes
   app.get('/login', users.login);
@@ -32,59 +37,38 @@ module.exports = function (app, passport) {
   app.get('/logout', users.logout);
   app.post('/users', users.create);
   app.post('/users/session',
-    passport.authenticate('local', {
+    pauth('local', {
       failureRedirect: '/login',
       failureFlash: 'Invalid email or password.'
     }), users.session);
   app.get('/users/:userId', users.show);
   app.get('/auth/facebook',
-    passport.authenticate('facebook', {
+    pauth('facebook', {
       scope: [ 'email', 'user_about_me'],
       failureRedirect: '/login'
     }), users.signin);
-  app.get('/auth/facebook/callback',
-    passport.authenticate('facebook', {
-      failureRedirect: '/login'
-    }), users.authCallback);
-  app.get('/auth/github',
-    passport.authenticate('github', {
-      failureRedirect: '/login'
-    }), users.signin);
-  app.get('/auth/github/callback',
-    passport.authenticate('github', {
-      failureRedirect: '/login'
-    }), users.authCallback);
-  app.get('/auth/twitter',
-    passport.authenticate('twitter', {
-      failureRedirect: '/login'
-    }), users.signin);
-  app.get('/auth/twitter/callback',
-    passport.authenticate('twitter', {
-      failureRedirect: '/login'
-    }), users.authCallback);
+  app.get('/auth/facebook/callback', pauth('facebook', fail), users.authCallback);
+  app.get('/auth/github', pauth('github', fail), users.signin);
+  app.get('/auth/github/callback', pauth('github', fail), users.authCallback);
+  app.get('/auth/twitter', pauth('twitter', fail), users.signin);
+  app.get('/auth/twitter/callback', pauth('twitter', fail), users.authCallback);
   app.get('/auth/google',
-    passport.authenticate('google', {
+    pauth('google', {
       failureRedirect: '/login',
       scope: [
         'https://www.googleapis.com/auth/userinfo.profile',
         'https://www.googleapis.com/auth/userinfo.email'
       ]
     }), users.signin);
-  app.get('/auth/google/callback',
-    passport.authenticate('google', {
-      failureRedirect: '/login'
-    }), users.authCallback);
+  app.get('/auth/google/callback', pauth('google', fail), users.authCallback);
   app.get('/auth/linkedin',
-    passport.authenticate('linkedin', {
+    pauth('linkedin', {
       failureRedirect: '/login',
       scope: [
         'r_emailaddress'
       ]
     }), users.signin);
-  app.get('/auth/linkedin/callback',
-    passport.authenticate('linkedin', {
-      failureRedirect: '/login'
-    }), users.authCallback);
+  app.get('/auth/linkedin/callback', pauth('linkedin', fail), users.authCallback);
 
   app.param('userId', users.load);
 
