@@ -55,7 +55,7 @@
   },
   "devDependencies": {
     "ava": "~0.14.0",
-    "nodemon": "*",
+    "nodemon": "1.9.2",
     "supertest": "*"
   }
 }
