@@ -15,6 +15,7 @@
     "type": "git",
     "url": "https://github.com/madhums/node-express-mongoose-demo.git"
   },
+  "license": "MIT",
   "engines": {
     "node": ">=6.x"
   },
@@ -51,7 +52,6 @@
     "passport-linkedin": "~1.0.0",
     "passport-local": "~1.0.0",
     "passport-twitter": "~1.0.3",
-    "swig": "~1.4.2",
     "view-helpers": "~0.1.5",
     "winston": "~2.2.0"
   },
