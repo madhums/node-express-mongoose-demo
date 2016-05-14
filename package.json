@@ -24,7 +24,7 @@
     "test": "NODE_ENV=test ./node_modules/.bin/ava --serial test/test-*.js"
   },
   "dependencies": {
-    "body-parser": "~1.15.0",
+    "body-parser": "~1.15.1",
     "co-express": "~1.2.1",
     "compression": "~1.6.0",
     "connect-flash": "~0.1.1",
