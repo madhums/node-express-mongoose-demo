@@ -40,7 +40,7 @@
     "morgan": "~1.7.0",
     "multer": "~1.1.0",
     "notifier": "~0.1.7",
-    "object-assign": "~4.0.1",
+    "object-assign": "~4.1.0",
     "only": "0.0.2",
     "passport": "~0.3.2",
     "passport-facebook": "~2.1.0",
