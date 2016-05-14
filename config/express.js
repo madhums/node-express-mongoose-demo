@@ -13,7 +13,7 @@ const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const csrf = require('csurf');
-const multer = require('multer');
+const upload = require('multer')();
 
 const mongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
@@ -66,7 +66,7 @@ module.exports = function (app, passport) {
   // bodyParser should be above methodOverride
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
-  app.use(multer().array('image', 1));
+  app.use(upload.single('image'));
   app.use(methodOverride(function (req) {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
       // look in urlencoded POST bodies and delete it
@@ -80,7 +80,7 @@ module.exports = function (app, passport) {
   app.use(cookieParser());
   app.use(cookieSession({ secret: 'secret' }));
   app.use(session({
-    resave: true,
+    resave: false,
     saveUninitialized: true,
     secret: pkg.name,
     store: new mongoStore({
