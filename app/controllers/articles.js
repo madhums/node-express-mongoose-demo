@@ -5,18 +5,22 @@
  */
 
 const mongoose = require('mongoose');
-const assign = require('object-assign');
-const wrap = require('co-express');
+const { wrap: async } = require('co');
 const only = require('only');
 const Article = mongoose.model('Article');
+const assign = Object.assign;
 
 /**
  * Load
  */
 
-exports.load = wrap(function* (req, res, next, id) {
-  req.article = yield Article.load(id);
-  if (!req.article) return next(new Error('Article not found'));
+exports.load = async(function* (req, res, next, id) {
+  try {
+    req.article = yield Article.load(id);
+    if (!req.article) return next(new Error('Article not found'));
+  } catch (err) {
+    return next(err);
+  }
   next();
 });
 
@@ -24,7 +28,7 @@ exports.load = wrap(function* (req, res, next, id) {
  * List
  */
 
-exports.index = wrap(function* (req, res) {
+exports.index = async(function* (req, res) {
   const page = (req.query.page > 0 ? req.query.page : 1) - 1;
   const limit = 30;
   const options = {
@@ -50,7 +54,7 @@ exports.index = wrap(function* (req, res) {
 exports.new = function (req, res){
   res.render('articles/new', {
     title: 'New Article',
-    article: new Article({})
+    article: new Article()
   });
 };
 
@@ -59,16 +63,24 @@ exports.new = function (req, res){
  * Upload an image
  */
 
-exports.create = wrap(function* (req, res) {
+exports.create = async(function* (req, res) {
   const article = new Article(only(req.body, 'title body tags'));
-  const images = req.files.image
-    ? [req.files.image]
-    : undefined;
+  try {
+    const images = req.files.image
+      ? [req.files.image]
+      : undefined;
 
-  article.user = req.user;
-  yield article.uploadAndSave(images);
-  req.flash('success', 'Successfully created article!');
-  res.redirect('/articles/' + article._id);
+    article.user = req.user;
+    yield article.uploadAndSave(images);
+    req.flash('success', 'Successfully created article!');
+    res.redirect('/articles/' + article._id);
+  } catch (err) {
+    res.render('articles/new', {
+      title: article.title || 'New Article',
+      errors: [err.toString()],
+      article
+    });
+  }
 });
 
 /**
@@ -86,15 +98,23 @@ exports.edit = function (req, res) {
  * Update article
  */
 
-exports.update = wrap(function* (req, res){
+exports.update = async(function* (req, res){
   const article = req.article;
   const images = req.files.image
     ? [req.files.image]
     : undefined;
 
   assign(article, only(req.body, 'title body tags'));
-  yield article.uploadAndSave(images);
-  res.redirect('/articles/' + article._id);
+  try {
+    yield article.uploadAndSave(images);
+    res.redirect('/articles/' + article._id);
+  } catch (err) {
+    res.render('articles/edit', {
+      title: 'Edit ' + article.title,
+      errors: [err.toString()],
+      article
+    });
+  }
 });
 
 /**
@@ -112,7 +132,7 @@ exports.show = function (req, res){
  * Delete an article
  */
 
-exports.destroy = wrap(function* (req, res) {
+exports.destroy = async(function* (req, res) {
   yield req.article.remove();
   req.flash('success', 'Deleted successfully');
   res.redirect('/articles');

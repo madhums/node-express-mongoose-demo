@@ -5,17 +5,21 @@
  */
 
 const mongoose = require('mongoose');
-const wrap = require('co-express');
+const { wrap: async } = require('co');
 const User = mongoose.model('User');
 
 /**
  * Load
  */
 
-exports.load = wrap(function* (req, res, next, _id) {
+exports.load = async(function* (req, res, next, _id) {
   const criteria = { _id };
-  req.profile = yield User.load({ criteria });
-  if (!req.profile) return next(new Error('User not found'));
+  try {
+    req.profile = yield User.load({ criteria });
+    if (!req.profile) return next(new Error('User not found'));
+  } catch (err) {
+    return next(err);
+  }
   next();
 });
 
@@ -23,14 +27,25 @@ exports.load = wrap(function* (req, res, next, _id) {
  * Create user
  */
 
-exports.create = wrap(function* (req, res) {
+exports.create = async(function* (req, res) {
   const user = new User(req.body);
   user.provider = 'local';
-  yield user.save();
-  req.logIn(user, err => {
-    if (err) req.flash('info', 'Sorry! We are not able to log you in!');
-    return res.redirect('/');
-  });
+  try {
+    yield user.save();
+    req.logIn(user, err => {
+      if (err) req.flash('info', 'Sorry! We are not able to log you in!');
+      return res.redirect('/');
+    });
+  } catch (err) {
+    const errors = Object.keys(err.errors)
+      .map(field => err.errors[field].message);
+
+    res.render('users/signup', {
+      title: 'Sign up',
+      errors,
+      user
+    });
+  }
 });
 
 /**

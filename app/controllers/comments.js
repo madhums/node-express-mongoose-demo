@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-const wrap = require('co-express');
+const { wrap: async } = require('co');
 
 /**
  * Load comment
@@ -23,7 +23,7 @@ exports.load = function (req, res, next, id) {
  * Create comment
  */
 
-exports.create = wrap(function* (req, res) {
+exports.create = async(function* (req, res) {
   const article = req.article;
   yield article.addComment(req.user, req.body);
   res.redirect('/articles/' + article.id);
@@ -33,7 +33,7 @@ exports.create = wrap(function* (req, res) {
  * Delete comment
  */
 
-exports.destroy = wrap(function* (req, res) {
+exports.destroy = async(function* (req, res) {
   yield req.article.removeComment(req.params.commentId);
   req.flash('info', 'Removed comment');
   res.redirect('/articles/' + req.article.id);
