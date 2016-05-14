@@ -28,7 +28,7 @@
     "co-express": "~1.2.1",
     "compression": "~1.6.2",
     "connect-flash": "~0.1.1",
-    "connect-mongo": "~1.1.0",
+    "connect-mongo": "~1.2.0",
     "cookie-parser": "~1.4.0",
     "cookie-session": "~1.2.0",
     "csurf": "~1.8.3",
