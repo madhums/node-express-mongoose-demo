@@ -12,9 +12,8 @@ const { wrap: async } = require('co');
 
 exports.load = function (req, res, next, id) {
   req.comment = req.article.comments
-    .filter(comment => comment.id === id)
-    .reduce(c => c);
-
+    .find(comment => comment.id === id);
+    
   if (!req.comment) return next(new Error('Comment not found'));
   next();
 };
