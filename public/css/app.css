@@ -52,6 +52,12 @@ body {
   border-bottom: 1px solid #e8e8e8;
 }
 
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
 .error,
 a.error,
 a.error:hover,
@@ -85,11 +91,27 @@ button.error:focus {
   color: #000 !important;
 }
 
-.navbar-nav > li > a.travis{
-  padding-top: 13px;
-}
-
 .navbar-right > li > a {
   padding-left: 5px;
   padding-right: 5px;
+}
+
+/**
+ * Signup / login
+ */
+
+.form-signin input#email {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input#password {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.form-signin input[type="text"] {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
