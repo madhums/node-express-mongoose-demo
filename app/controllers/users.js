@@ -6,6 +6,7 @@
 
 const mongoose = require('mongoose');
 const { wrap: async } = require('co');
+const { respond } = require('../utils');
 const User = mongoose.model('User');
 
 /**
@@ -54,7 +55,7 @@ exports.create = async(function* (req, res) {
 
 exports.show = function (req, res) {
   const user = req.profile;
-  res.render('users/show', {
+  respond(res, 'users/show', {
     title: user.name,
     user: user
   });

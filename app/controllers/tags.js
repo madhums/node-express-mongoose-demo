@@ -6,6 +6,7 @@
 
 const mongoose = require('mongoose');
 const { wrap: async } = require('co');
+const { respond } = require('../utils');
 const Article = mongoose.model('Article');
 
 /**
@@ -25,7 +26,7 @@ exports.index = async(function* (req, res) {
   const articles = yield Article.list(options);
   const count = yield Article.count(criteria);
 
-  res.render('articles/index', {
+  respond(res, 'articles/index', {
     title: 'Articles tagged ' + req.params.tag,
     articles: articles,
     page: page + 1,

@@ -7,6 +7,7 @@
 const mongoose = require('mongoose');
 const { wrap: async } = require('co');
 const only = require('only');
+const { respond, respondOrRedirect } = require('../utils');
 const Article = mongoose.model('Article');
 const assign = Object.assign;
 
@@ -39,7 +40,7 @@ exports.index = async(function* (req, res) {
   const articles = yield Article.list(options);
   const count = yield Article.count();
 
-  res.render('articles/index', {
+  respond(res, 'articles/index', {
     title: 'Articles',
     articles: articles,
     page: page + 1,
@@ -68,14 +69,16 @@ exports.create = async(function* (req, res) {
   article.user = req.user;
   try {
     yield article.uploadAndSave(req.file);
-    req.flash('success', 'Successfully created article!');
-    res.redirect('/articles/' + article._id);
+    respondOrRedirect({ req, res }, `/articles/${article._id}`, article, {
+      type: 'success',
+      text: 'Successfully created article!'
+    });
   } catch (err) {
-    res.render('articles/new', {
+    respond(res, 'articles/new', {
       title: article.title || 'New Article',
       errors: [err.toString()],
       article
-    });
+    }, 422);
   }
 });
 
@@ -99,13 +102,13 @@ exports.update = async(function* (req, res){
   assign(article, only(req.body, 'title body tags'));
   try {
     yield article.uploadAndSave(req.file);
-    res.redirect('/articles/' + article._id);
+    respondOrRedirect({ res }, `/articles/${article._id}`, article);
   } catch (err) {
-    res.render('articles/edit', {
+    respond(res, 'articles/edit', {
       title: 'Edit ' + article.title,
       errors: [err.toString()],
       article
-    });
+    }, 422);
   }
 });
 
@@ -114,7 +117,7 @@ exports.update = async(function* (req, res){
  */
 
 exports.show = function (req, res){
-  res.render('articles/show', {
+  respond(res, 'articles/show', {
     title: req.article.title,
     article: req.article
   });
@@ -126,6 +129,8 @@ exports.show = function (req, res){
 
 exports.destroy = async(function* (req, res) {
   yield req.article.remove();
-  req.flash('success', 'Deleted successfully');
-  res.redirect('/articles');
+  respondOrRedirect({ req, res }, '/articles', {}, {
+    type: 'info',
+    text: 'Deleted successfully'
+  });
 });
