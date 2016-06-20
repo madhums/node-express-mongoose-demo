@@ -4,9 +4,6 @@
  * Module dependencies.
  */
 
-// Note: We can require users, articles and other cotrollers because we have
-// set the NODE_PATH to be ./app/controllers (package.json # scripts # start)
-
 const users = require('../app/controllers/users');
 const articles = require('../app/controllers/articles');
 const comments = require('../app/controllers/comments');

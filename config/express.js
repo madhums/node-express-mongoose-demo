@@ -13,6 +13,7 @@ const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const csrf = require('csurf');
+const cors = require('cors');
 const upload = require('multer')();
 
 const mongoStore = require('connect-mongo')(session);
@@ -34,6 +35,8 @@ module.exports = function (app, passport) {
   app.use(compression({
     threshold: 512
   }));
+
+  app.use(cors());
 
   // Static files middleware
   app.use(express.static(config.root + '/public'));
