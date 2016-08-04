@@ -43,7 +43,7 @@
     "method-override": "~2.3.5",
     "mongoose": "~4.5.0",
     "morgan": "~1.7.0",
-    "multer": "~1.1.0",
+    "multer": "~1.2.0",
     "notifier": "~0.1.7",
     "only": "0.0.2",
     "passport": "~0.3.2",
