@@ -117,9 +117,11 @@ module.exports = function (app, passport) {
 
   // assume 404 since no middleware responded
   app.use(function (req, res) {
-    res.status(404).render('404', {
+    const payload = {
       url: req.originalUrl,
       error: 'Not found'
-    });
+    };
+    if (req.accepts('json')) return res.status(404).json(payload);
+    res.status(404).render('404', payload);
   });
 };
