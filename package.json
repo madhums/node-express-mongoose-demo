@@ -58,7 +58,7 @@
   },
   "devDependencies": {
     "babel-eslint": "~7.0.0",
-    "babel-preset-stage-0": "~6.5.0",
+    "babel-preset-stage-0": "~6.16.0",
     "babel-tape-runner": "~2.0.1",
     "eslint": "~3.6.1",
     "nodemon": "1.10.2",
