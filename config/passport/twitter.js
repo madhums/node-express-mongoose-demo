@@ -20,7 +20,7 @@ module.exports = new TwitterStrategy({
   },
   function (accessToken, refreshToken, profile, done) {
     const options = {
-      criteria: { 'twitter.id': profile.id }
+      criteria: { 'twitter.id_str': profile.id }
     };
     User.load(options, function (err, user) {
       if (err) return done(err);
