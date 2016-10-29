@@ -20,7 +20,7 @@ module.exports = new GithubStrategy({
   },
   function (accessToken, refreshToken, profile, done) {
     const options = {
-      criteria: { 'github.id': profile.id }
+      criteria: { 'github.id': parseInt(profile.id) }
     };
     User.load(options, function (err, user) {
       if (err) return done(err);
