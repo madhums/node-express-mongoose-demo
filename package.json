@@ -25,7 +25,7 @@
     "test": "./node_modules/.bin/cross-env NODE_ENV=test ./node_modules/.bin/babel-tape-runner test/test-*.js"
   },
   "dependencies": {
-    "body-parser": "~1.15.1",
+    "body-parser": "~1.16.0",
     "co": "~4.6.0",
     "compression": "~1.6.2",
     "connect-flash": "~0.1.1",
