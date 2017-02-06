@@ -37,7 +37,7 @@
     "csurf": "~1.9.0",
     "dotenv": "~2.0.0",
     "express": "~4.14.0",
-    "express-session": "~1.14.0",
+    "express-session": "~1.15.0",
     "forever": "~0.15.1",
     "jade": "~1.11.0",
     "method-override": "~2.3.5",
