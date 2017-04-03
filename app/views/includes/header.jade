@@ -12,8 +12,8 @@ nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
         - if (req.isAuthenticated())
           li(class=isActive('/articles/new') ? 'active' : '')
             a(href="/articles/new", title="new article") New Article
-          li(class=isActive('/tables/new') ? 'active' : '')
-            a(href="/tables/new", title="new table") New Table
+          li(class=isActive('/electricityPayment/new') ? 'active' : '')
+            a(href="/electricityPayment/new", title="new table") New Table
           li
             a(href="/users/"+req.user.id, title="Profile") Profile
           li

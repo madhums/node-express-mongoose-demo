@@ -69,7 +69,7 @@ exports.new = function (req, res){
  */
 
 exports.create = async(function* (req, res) {
-    const electricityPaymentRow = new ElectricityPaymentRow(only(req.body, 'clientFirstName clientMiddleName clientLastName'));
+    const electricityPaymentRow = new ElectricityPaymentRow(only(req.body, 'areaNum clientFirstName clientMiddleName clientLastName phoneNum counterModel cost periodRatesFrom kvFrom sumFrom paidFrom paymentDateFrom debtFrom periodRatesTo kvTo sumTo paidTo paymentDateTo debtTo user createdAt'));
     electricityPaymentRow.user = req.user;
     try {
         yield electricityPaymentRow.uploadAndSave(req.file);
@@ -103,7 +103,7 @@ exports.edit = function (req, res) {
 
 exports.update = async(function* (req, res){
     const electricityPaymentRow = req.electricityPaymentRow;
-    assign(electricityPaymentRow, only(req.body, 'clientFirstName clientMiddleName clientLastName'));
+    assign(electricityPaymentRow, only(req.body, 'areaNum clientFirstName clientMiddleName clientLastName phoneNum counterModel cost periodRatesFrom kvFrom sumFrom paidFrom paymentDateFrom debtFrom periodRatesTo kvTo sumTo paidTo paymentDateTo debtTo user createdAt'));
     try {
         //yield electricityPaymentRow.uploadAndSave(req.file);
         respondOrRedirect({ res }, `/electricityPayment/${electricityPaymentRow._id}`, electricityPaymentRow);

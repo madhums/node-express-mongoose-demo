@@ -5,7 +5,7 @@
  */
 
 const users = require('../app/controllers/users');
-//const articles = require('../app/controllers/articles');
+const articles = require('../app/controllers/articles');
 //const tables = require('../app/controllers/tables');
 const electricityPayment = require('../app/controllers/electricityPayment');
 const comments = require('../app/controllers/comments');
@@ -16,7 +16,7 @@ const auth = require('./middlewares/authorization');
  * Route middlewares
  */
 
-//const articleAuth = [auth.requiresLogin, auth.article.hasAuthorization];
+const articleAuth = [auth.requiresLogin, auth.article.hasAuthorization];
 //const tableAuth = [auth.requiresLogin, auth.table.hasAuthorization];
 const electricityPaymentRowAuth = [auth.requiresLogin, auth.electricityPaymentRow.hasAuthorization];
 const commentAuth = [auth.requiresLogin, auth.comment.hasAuthorization];
@@ -94,14 +94,14 @@ module.exports = function (app, passport) {
   app.delete('/electricityPayment/:id', electricityPaymentRowAuth, electricityPayment.destroy);
 
   // article routes
-  // app.param('id', articles.load);
-  // app.get('/articles', articles.index);
-  // app.get('/articles/new', auth.requiresLogin, articles.new);
-  // app.post('/articles', auth.requiresLogin, articles.create);
-  // app.get('/articles/:id', articles.show);
-  // app.get('/articles/:id/edit', articleAuth, articles.edit);
-  // app.put('/articles/:id', articleAuth, articles.update);
-  // app.delete('/articles/:id', articleAuth, articles.destroy);
+  app.param('id', articles.load);
+  app.get('/articles', articles.index);
+  app.get('/articles/new', auth.requiresLogin, articles.new);
+  app.post('/articles', auth.requiresLogin, articles.create);
+  app.get('/articles/:id', articles.show);
+  app.get('/articles/:id/edit', articleAuth, articles.edit);
+  app.put('/articles/:id', articleAuth, articles.update);
+  app.delete('/articles/:id', articleAuth, articles.destroy);
 
   // home route
   //app.get('/', articles.index);

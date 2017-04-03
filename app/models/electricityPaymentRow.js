@@ -37,7 +37,7 @@ const electricityPaymentRowSchema = new Schema({
     createdAt  : { type : Date, default : Date.now }
 });
 
-
+// areaNum clientFirstName clientMiddleName clientLastName phoneNum counterModel cost periodRatesFrom kvFrom sumFrom paidFrom paymentDateFrom debtFrom periodRatesTo kvTo sumTo paidTo paymentDateTo debtTo user createdAt
 // for(var p in electricityPaymentRowSchema.paths){
 //     electricityPaymentRowSchema.path(p).required(true);
 // }
