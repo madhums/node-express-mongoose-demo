@@ -5,26 +5,26 @@ block main
 
 block content
   - each electricityPaymentRow in electricityPayment
-  .article
-    h3
-      a(href='/electricityPayment/'+electricityPaymentRow._id, title=electricityPaymentRow.title) #{electricityPaymentRow.title}
-    p= electricityPaymentRow.body
+    .article
+      h3
+        a(href='/electricityPayment/'+electricityPaymentRow._id, title=electricityPaymentRow.title) #{electricityPaymentRow.title}
+      p= electricityPaymentRow.body
 
-    .meta.muted
-      span= formatDate(electricityPaymentRow.createdAt)
-      | &nbsp; - &nbsp;
-      span Author &nbsp;
+      .meta.muted
+        span= formatDate(electricityPaymentRow.createdAt)
+        | &nbsp; - &nbsp;
+        span Author &nbsp;
 
-      - var name = electricityPaymentRow.user.name ? electricityPaymentRow.user.name : electricityPaymentRow.user.username
+        - var name = electricityPaymentRow.user.name ? electricityPaymentRow.user.name : electricityPaymentRow.user.username
 
-      a(href="/users/"+electricityPaymentRow.user._id)= name
-      &nbsp; - &nbsp;
-      - if (electricityPaymentRow.tags)
-      - each tag in electricityPaymentRow.tags.split(',')
-        | &nbsp;
-        a.tag(href="/tags/"+tag)
-          i.icon-tags
-          |  #{tag}
+        a(href="/users/"+electricityPaymentRow.user._id)= name
+        &nbsp; - &nbsp;
+        - if (electricityPaymentRow.tags)
+        - each tag in electricityPaymentRow.tags.split(',')
+          | &nbsp;
+          a.tag(href="/tags/"+tag)
+            i.icon-tags
+            |  #{tag}
 
   - if (pages > 1)
     ul.pagination

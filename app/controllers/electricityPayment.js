@@ -15,9 +15,9 @@ const assign = Object.assign;
  * Load
  */
 
-exports.load = async(function* (req, res, next, id) {
+exports.load = async(function* (req, res, next, electricityPaymentId) {
     try {
-        req.electricityPaymentRow = yield ElectricityPaymentRow.load(id);
+        req.electricityPaymentRow = yield ElectricityPaymentRow.load(electricityPaymentId);
         if (!req.electricityPaymentRow) return next(new Error('electricityPaymentRow not found'));
     } catch (err) {
         return next(err);

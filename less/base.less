@@ -1,0 +1,76 @@
+/* ==== FONTS ==== */
+/* // Fira Sans // */
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,400,400i,500,500i,700,700i&subset=cyrillic');
+/* // Roboto // */
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&subset=cyrillic');
+/*=================*/
+
+@media-sm: 768px;
+@media-md: 992px;
+@media-lg: 1200px;
+body,
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body,
+html {
+  position: relative;
+  width: 100%;
+  font-size: 16px;
+  line-height: 175%;
+  color: #1f2433;
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+  &.modal-active {
+    height: 100%;
+    overflow-y: hidden;
+  }
+}
+
+body {
+  padding-top: 60px;
+
+  background: #edf2f5;
+  background-image: linear-gradient(to top, #dfe9f3 0%, #edf2f5 100%);
+}
+
+.app-view {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  perspective: 1200px;
+  perspective-origin: 50% -50%;
+  z-index: 100;
+  transform: translateY(0%);
+  transition: transform 0.45s cubic-bezier(0.6, 0, 0.4, 1) 0s, height .3s ease-in-out 0.15s;
+  &-content {
+    position: relative;
+    width: 100%;
+    z-index: 5;
+    overflow: hidden;
+    pointer-events: auto;
+    background: #fff;
+    transform: translate3d(0px, 0px, 0px) rotate(0deg);
+    @media (max-width: @media-md) {
+      box-shadow: 0 0 55px 0 rgba(0, 0, 0, 0.35);
+      transition: transform 0.45s cubic-bezier(0.6, 0, 0.4, 1) 0.15s, box-shadow 0.3s ease-in-out 0s;
+    }
+    &-inner {
+      position: relative;
+      padding-top: 44px;
+      @media (min-width: @media-sm) {
+        padding-top: 72px;
+      }
+    }
+  }
+}
+
+.no-padding-xs {
+  @media (max-width: @media-sm) {
+    padding: 0;
+  }
+}

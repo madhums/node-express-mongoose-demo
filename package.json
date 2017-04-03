@@ -46,7 +46,23 @@
     "passport-local": "~1.0.0",
     "passport-twitter": "~1.0.3",
     "view-helpers": "~0.1.5",
-    "winston": "~2.3.0"
+    "winston": "~2.3.0",
+
+    "bootstrap": "3.3.7",
+    "express-less": "",
+    "font-awesome": "",
+    "grunt": "",
+    "grunt-autoprefixer": "",
+    "grunt-contrib-less": "",
+    "grunt-contrib-uglify": "",
+    "grunt-contrib-watch": "",
+    "jit-grunt": "",
+    "jquery": "^3.2.1",
+    "less": "",
+    "less-plugin-autoprefix": "",
+    "less-plugin-clean-css": "",
+    "serve-favicon": "~2.3.0"
+
   },
   "devDependencies": {
     "babel-eslint": "~7.2.1",
