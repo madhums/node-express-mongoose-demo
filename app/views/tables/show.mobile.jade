@@ -1,0 +1,41 @@
+extends ../layouts/mobile
+
+
+block main
+  h1= table.clientFirstName + ' ' + table.clientMiddleName + ' ' + table.clientLastName
+
+block content
+  .row
+    .span9
+      p=table.body
+      .meta.muted
+        - var name = table.user.name ? table.user.name : table.user.username
+        p Author -&nbsp;
+          a(href="/users/"+table.user._id)= name
+        p.muted= formatDate(table.createdAt, "%b %d, %Y at %I:%M %p")
+        - if (table.tags)
+          .tags
+            - each tag in table.tags.split(',')
+              a.tag(href="/tags/"+tag)
+                i.icon-tags
+                |  #{tag}
+              | &nbsp;&nbsp;
+    .span3
+      - if (!table.isNew && table.image && table.image.files && table.image.files.length)
+        img(src=table.image.cdnUri + '/mini_' + table.image.files[0])
+
+  p
+    br
+    form.center.form-inline.confirm(action="/tables/"+table.id, method="post")
+      input(type='hidden', name='_csrf', value="#{csrf_token}")
+      a.btn(href='/tables/'+table._id+'/edit', title="edit") Edit
+      | &nbsp;&nbsp;
+      input(type="hidden", name="_method", value="DELETE")
+      button.btn.btn-danger(type="submit") delete
+
+  p
+    br
+    h3 Comments
+    - each comment in table.comments
+      include ../comments/comment
+    include ../comments/form

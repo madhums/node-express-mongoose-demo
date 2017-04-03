@@ -1,0 +1,16 @@
+extends ../layouts/default
+
+block main
+  h1= title
+
+block content
+  - if (electricityPayment.length)
+    - each electricityPaymentRow in electricityPayment
+      include electricityPayment
+
+    - if (pages > 1)
+      ul.pagination
+        != createPagination(pages, page)
+  - else
+    h4.muted No electricityPaymentRow.&nbsp;
+      a(href="/electricityPayment/new") create one

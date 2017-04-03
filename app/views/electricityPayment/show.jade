@@ -1,0 +1,25 @@
+extends ../layouts/default
+
+block main
+  h1= electricityPaymentRow.clientLastName
+
+block content
+  .row
+    .col-md-8
+      h3= electricityPaymentRow.clientFirstName + ' ' + electricityPaymentRow.clientMiddleName + ' ' + electricityPaymentRow.clientLastName
+      p=electricityPaymentRow.phoneNum
+      .meta
+        - if (electricityPaymentRow.user)
+          - var name = electricityPaymentRow.user.name ? electricityPaymentRow.user.name : electricityPaymentRow.user.username
+          p Author :&nbsp;
+            a(href="/users/"+electricityPaymentRow.user._id)= name
+
+        p.muted= formatDate(electricityPaymentRow.createdAt, "%b %d, %Y at %I:%M %p")
+
+
+  form(action="/electricityPayment/"+electricityPaymentRow.id, method="post", onsubmit="return confirm('Are you sure?')")
+    input(type='hidden', name='_csrf', value="#{csrf_token}")
+    a.btn.btn-default(href='/electricityPayment/'+electricityPaymentRow._id+'/edit', title="edit") Edit
+    | &nbsp;
+    input(type="hidden", name="_method", value="DELETE")
+    button.btn.btn-danger(type="submit") Delete

@@ -5,7 +5,9 @@
  */
 
 const users = require('../app/controllers/users');
-const articles = require('../app/controllers/articles');
+//const articles = require('../app/controllers/articles');
+//const tables = require('../app/controllers/tables');
+const electricityPayment = require('../app/controllers/electricityPayment');
 const comments = require('../app/controllers/comments');
 const tags = require('../app/controllers/tags');
 const auth = require('./middlewares/authorization');
@@ -14,7 +16,9 @@ const auth = require('./middlewares/authorization');
  * Route middlewares
  */
 
-const articleAuth = [auth.requiresLogin, auth.article.hasAuthorization];
+//const articleAuth = [auth.requiresLogin, auth.article.hasAuthorization];
+//const tableAuth = [auth.requiresLogin, auth.table.hasAuthorization];
+const electricityPaymentRowAuth = [auth.requiresLogin, auth.electricityPaymentRow.hasAuthorization];
 const commentAuth = [auth.requiresLogin, auth.comment.hasAuthorization];
 
 const fail = {
@@ -69,24 +73,56 @@ module.exports = function (app, passport) {
 
   app.param('userId', users.load);
 
+  // table routes
+  // app.param('id', tables.load);
+  // app.get('/tables', tables.index);
+  // app.get('/tables/new', auth.requiresLogin, tables.new);
+  // app.post('/tables', auth.requiresLogin, tables.create);
+  // app.get('/tables/:id', tables.show);
+  // app.get('/tables/:id/edit', tableAuth, tables.edit);
+  // app.put('/tables/:id', tableAuth, tables.update);
+  // app.delete('/tables/:id', tableAuth, tables.destroy);
+
+  // table routes
+  app.param('id', electricityPayment.load);
+  app.get('/electricityPayment', electricityPayment.index);
+  app.get('/electricityPayment/new', auth.requiresLogin, electricityPayment.new);
+  app.post('/electricityPayment', auth.requiresLogin, electricityPayment.create);
+  app.get('/electricityPayment/:id', electricityPayment.show);
+  app.get('/electricityPayment/:id/edit', electricityPaymentRowAuth, electricityPayment.edit);
+  app.put('/electricityPayment/:id', electricityPaymentRowAuth, electricityPayment.update);
+  app.delete('/electricityPayment/:id', electricityPaymentRowAuth, electricityPayment.destroy);
+
   // article routes
-  app.param('id', articles.load);
-  app.get('/articles', articles.index);
-  app.get('/articles/new', auth.requiresLogin, articles.new);
-  app.post('/articles', auth.requiresLogin, articles.create);
-  app.get('/articles/:id', articles.show);
-  app.get('/articles/:id/edit', articleAuth, articles.edit);
-  app.put('/articles/:id', articleAuth, articles.update);
-  app.delete('/articles/:id', articleAuth, articles.destroy);
+  // app.param('id', articles.load);
+  // app.get('/articles', articles.index);
+  // app.get('/articles/new', auth.requiresLogin, articles.new);
+  // app.post('/articles', auth.requiresLogin, articles.create);
+  // app.get('/articles/:id', articles.show);
+  // app.get('/articles/:id/edit', articleAuth, articles.edit);
+  // app.put('/articles/:id', articleAuth, articles.update);
+  // app.delete('/articles/:id', articleAuth, articles.destroy);
 
   // home route
-  app.get('/', articles.index);
+  //app.get('/', articles.index);
+  //app.get('/', tables.index);
+  app.get('/', electricityPayment.index);
 
   // comment routes
   app.param('commentId', comments.load);
   app.post('/articles/:id/comments', auth.requiresLogin, comments.create);
   app.get('/articles/:id/comments', auth.requiresLogin, comments.create);
   app.delete('/articles/:id/comments/:commentId', commentAuth, comments.destroy);
+
+  // comment tables routes
+  app.post('/tables/:id/comments', auth.requiresLogin, comments.create);
+  app.get('/tables/:id/comments', auth.requiresLogin, comments.create);
+  app.delete('/tables/:id/comments/:commentId', commentAuth, comments.destroy);
+
+  // comment electricityPayment routes
+  app.post('/electricityPayment/:id/comments', auth.requiresLogin, comments.create);
+  app.get('/electricityPayment/:id/comments', auth.requiresLogin, comments.create);
+  app.delete('/electricityPayment/:id/comments/:commentId', commentAuth, comments.destroy);
 
   // tag routes
   app.get('/tags/:tag', tags.index);

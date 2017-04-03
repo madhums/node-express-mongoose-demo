@@ -1,0 +1,23 @@
+article.electricityPaymentRow
+  h3
+    a(href='/electricityPayment/'+electricityPaymentRow._id, title=electricityPaymentRow.clientFirstName) #{electricityPaymentRow.clientFirstName + ' ' + electricityPaymentRow.clientMiddleName + ' ' + electricityPaymentRow.clientLastName}
+  p= electricityPaymentRow.phoneNum
+
+  .meta
+    span.muted= formatDate(electricityPaymentRow.createdAt)
+
+    - if (electricityPaymentRow.user)
+      | &nbsp; - &nbsp;
+      span Author &nbsp;
+
+      - var name = electricityPaymentRow.user.name ? electricityPaymentRow.user.name : electricityPaymentRow.user.username
+
+      a(href="/users/"+electricityPaymentRow.user._id)= name
+
+    - if (electricityPaymentRow.tags)
+      | &nbsp; - &nbsp;
+      span Tags &nbsp;
+      - each tag in electricityPaymentRow.tags.split(',')
+        i.muted.fa.fa-tag &nbsp;
+        a.tag(href="/tags/"+tag)= tag
+        | &nbsp;&nbsp;
