@@ -35,11 +35,13 @@ tr.resp-table-body-row(id=electricityPaymentRow._id)
     span #{electricityPaymentRow.paymentDateTo}
   td.resp-table-body-col.col-debt-to(data-title='Борг')
     span #{electricityPaymentRow.debtTo}
-  - if (!electricityPayment.user)
+  - if(req.user)
     td.resp-table-body-col.col-actions(data-title='Дії')
       form(action="/electricityPayment/" + electricityPaymentRow.id, method="post", onsubmit="return confirm('Are you sure?')")
         input(type='hidden', name='_csrf', value="#{csrf_token}")
-        a.btn.btn-default(href='/electricityPayment/' + electricityPaymentRow._id + '/edit', title="edit") Edit
+        a.btn.btn-default(href='/electricityPayment/' + electricityPaymentRow._id + '/edit', title="Редактировать")
+          i.fa.fa-pencil
         | &nbsp;
         input(type="hidden", name="_method", value="DELETE")
-        button.btn.btn-danger(type="submit") Delete
+        button.btn.btn-danger(type="submit", title="Удалить")
+          i.fa.fa-trash

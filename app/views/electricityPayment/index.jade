@@ -1,64 +1,72 @@
 extends ../layouts/default
 
 block main
-  h1= title
+  .main-title
+    .row
+      .col-md-8
+        h1 #{title}
+        small #{'ТОВ "Блакитна затока"'}
+      - if (electricityPayment.length)
+        .col-md-4
+          a(href="/electricityPayment/new") create one
 
 block content
-  .resp-table
-    table.resp-table-content
-      thead.resp-table-head
-        tr.resp-table-head-row
-          th.resp-table-head-col.col-num
-            span #{'№ пп'}
-          th.resp-table-head-col.col-area-num
-            span #{'№ діл.'}
-          th.resp-table-head-col.col-full-name
-            span #{'ПІБ'}
-          th.resp-table-head-col.col-phone
-            span #{'Телефон'}
-          th.resp-table-head-col.col-counter-model
-            span #{'Лічильник'}
-            br
-            small #{'(марка, к-сть фаз, тарифів)'}
-          th.resp-table-head-col.col-cost
-            span #{'Вартість'}
-          th.resp-table-head-col.col-period-rates-from
-            span #{'Період, показники'}
-          th.resp-table-head-col.col-kv-from
-            span #{'KV'}
-          th.resp-table-head-col.col-sum-from
-            span #{'Сума'}
-          th.resp-table-head-col.col-paid-from
-            span #{'Оплачено'}
-          th.resp-table-head-col.col-payment-date-from
-            span #{'Дата оплати'}
-          th.resp-table-head-col.col-debt-from
-            span #{'Борг'}
-          th.resp-table-head-col.col-period-rates-to
-            span #{'Період, показники'}
-          th.resp-table-head-col.col-kv-to
-            span #{'KV'}
-          th.resp-table-head-col.col-sum-to
-            span #{'Сума'}
-          th.resp-table-head-col.col-paid-to
-            span #{'Оплачено'}
-          th.resp-table-head-col.col-payment-date-to
-            span #{'Дата оплати'}
-          th.resp-table-head-col.col-debt-to
-            span #{'Борг'}
-          - if (!electricityPayment.user)
-            th.resp-table-head-col.col-actions
-              span #{'Дії'}
+  - if (electricityPayment.length)
 
-      tbody.resp-table-body
-        - if (electricityPayment.length)
+    .resp-table
+      table.resp-table-content
+        thead.resp-table-head
+          tr.resp-table-head-row
+            th.resp-table-head-col.col-num
+              span #{'№ пп'}
+            th.resp-table-head-col.col-area-num
+              span #{'№ діл.'}
+            th.resp-table-head-col.col-full-name
+              span #{'ПІБ'}
+            th.resp-table-head-col.col-phone
+              span #{'Телефон'}
+            th.resp-table-head-col.col-counter-model
+              span #{'Лічильник'}
+              br
+              small #{'(марка, к-сть фаз, тарифів)'}
+            th.resp-table-head-col.col-cost
+              span #{'Вартість'}
+            th.resp-table-head-col.col-period-rates-from
+              span #{'Період, показники'}
+            th.resp-table-head-col.col-kv-from
+              span #{'KV'}
+            th.resp-table-head-col.col-sum-from
+              span #{'Сума'}
+            th.resp-table-head-col.col-paid-from
+              span #{'Оплачено'}
+            th.resp-table-head-col.col-payment-date-from
+              span #{'Дата оплати'}
+            th.resp-table-head-col.col-debt-from
+              span #{'Борг'}
+            th.resp-table-head-col.col-period-rates-to
+              span #{'Період, показники'}
+            th.resp-table-head-col.col-kv-to
+              span #{'KV'}
+            th.resp-table-head-col.col-sum-to
+              span #{'Сума'}
+            th.resp-table-head-col.col-paid-to
+              span #{'Оплачено'}
+            th.resp-table-head-col.col-payment-date-to
+              span #{'Дата оплати'}
+            th.resp-table-head-col.col-debt-to
+              span #{'Борг'}
+            - if (req.user)
+              th.resp-table-head-col.col-actions
+                span #{'Дії'}
 
-          - each electricityPaymentRow in electricityPayment
-            include electricityPayment
+        tbody.resp-table-body
 
-          - if (pages > 1)
-            ul.pagination
-              != createPagination(pages, page)
-        - else
-          h4.muted No electricityPaymentRow.&nbsp;
-            a(href="/electricityPayment/new") create one
+            - each electricityPaymentRow in electricityPayment
+              include electricityPayment
+
+            - if (pages > 1)
+              ul.pagination
+                != createPagination(pages, page)
+  - else
+    h4.muted No electricityPaymentRow.&nbsp;
+      a(href="/electricityPayment/new") create one

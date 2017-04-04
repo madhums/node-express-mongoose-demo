@@ -44,7 +44,7 @@ exports.index = async(function* (req, res) {
     const count = yield ElectricityPaymentRow.count();
     
     respond(res, 'electricityPayment/index', {
-        title: 'ElectricityPayment',
+        title: 'Облік використання та оплати електроенергії',
         electricityPayment: electricityPayment,
         page: page + 1,
         pages: Math.ceil(count / limit)
@@ -87,7 +87,7 @@ exports.create = async(function* (req, res) {
 });
 
 /**
- * Edit an article
+ * Edit an electricityPaymentRow
  */
 
 exports.edit = function (req, res) {
@@ -98,14 +98,14 @@ exports.edit = function (req, res) {
 };
 
 /**
- * Update article
+ * Update electricityPaymentRow
  */
 
 exports.update = async(function* (req, res){
     const electricityPaymentRow = req.electricityPaymentRow;
     assign(electricityPaymentRow, only(req.body, 'areaNum clientFirstName clientMiddleName clientLastName phoneNum counterModel cost periodRatesFrom kvFrom sumFrom paidFrom paymentDateFrom debtFrom periodRatesTo kvTo sumTo paidTo paymentDateTo debtTo user createdAt'));
     try {
-        //yield electricityPaymentRow.uploadAndSave(req.file);
+        yield electricityPaymentRow.uploadAndSave(req.file);
         respondOrRedirect({ res }, `/electricityPayment/${electricityPaymentRow._id}`, electricityPaymentRow);
     } catch (err) {
         respond(res, 'electricityPayment/edit', {
@@ -117,7 +117,7 @@ exports.update = async(function* (req, res){
 });
 
 /**
- * Show
+ * Show electricityPaymentRow
  */
 
 exports.show = function (req, res){
@@ -128,7 +128,7 @@ exports.show = function (req, res){
 };
 
 /**
- * Delete an article
+ * Delete an electricityPaymentRow
  */
 
 exports.destroy = async(function* (req, res) {

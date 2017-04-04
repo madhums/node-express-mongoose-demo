@@ -20,9 +20,12 @@ block content
   form(action="/electricityPayment/"+electricityPaymentRow.id, method="post", onsubmit="return confirm('Are you sure?')")
     input(type='hidden', name='_csrf', value="#{csrf_token}")
     a.btn.btn-default(href='/electricityPayment/'+electricityPaymentRow._id+'/edit', title="edit") Edit
+      i.fa.fa-pencil
     | &nbsp;
     input(type="hidden", name="_method", value="DELETE")
     button.btn.btn-danger(type="submit") Delete
+      i.fa.fa-trash
+    a.btn.btn-default(href='/', title="Back") Back
 
 
 

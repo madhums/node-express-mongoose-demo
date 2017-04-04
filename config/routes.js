@@ -104,9 +104,9 @@ module.exports = function (app, passport) {
     app.delete('/articles/:articlesId', articleAuth, articles.destroy);
     
     // home route
-    //app.get('/', articles.index);
+    app.get('/', articles.index);
     //app.get('/', tables.index);
-    app.get('/', electricityPayment.index);
+    //app.get('/', electricityPayment.index);
     
     // comment routes
     app.param('commentId', comments.load);
