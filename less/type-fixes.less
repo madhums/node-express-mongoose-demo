@@ -70,8 +70,8 @@
         color: #555;
       }
 
-      @media (min-width: 768px){
-        .dropdown-menu{
+      @media (min-width: 768px) {
+        .dropdown-menu {
           top: -999999999px;
           right: 6px;
           display: block;
@@ -83,10 +83,10 @@
           padding: 0;
           border: 1px solid #c8cdd0;
           border-radius: 0;
-          li{
-            a{
+          li {
+            a {
               padding: 12px 14px;
-              i{
+              i {
                 width: 24px;
                 font-size: 18px;
                 text-align: center;
@@ -95,7 +95,8 @@
             }
           }
         }
-        .open > .dropdown-menu{
+
+        .open > .dropdown-menu {
           top: 6px;
           right: 6px;
           opacity: 1;
@@ -104,6 +105,44 @@
         }
       }
     }
+
+  }
+}
+
+.article {
+  &-list {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+  }
+  &-item {
+
+    position: relative;
+    float: none;
+    padding: 6px 0;
+
+    @media (min-width: 580px) {
+      float: left;
+      width: 50%;
+      //padding: 15px 10px 5px 10px;
+      padding: 15px 18px 12px 12px;
+    }
+    @media (min-width: 1002px) {
+      width: 33.3334%;
+    }
+    @media (min-width: 1366px) {
+      width: 25%;
+    }
+    // @media (min-width:1920px) {
+    //     width: 20%;
+    // }
+    @media (min-width: 2560px) {
+      width: 16.666%;
+    }
+  }
+  &-content {
+    background: #fff;
 
   }
 }

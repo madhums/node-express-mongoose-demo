@@ -1,3 +1,5 @@
+
+
 extends ../layouts/default
 
 block main
@@ -5,12 +7,21 @@ block main
 
 block content
   - if (articles.length)
-    - each article in articles
-      include article
+    .article-content
+      - each article in articles
+        include article
 
-    - if (pages > 1)
-      ul.pagination
-        != createPagination(pages, page)
+      - if (pages > 1)
+        ul.pagination
+          != createPagination(pages, page)
   - else
     h4.muted No articles.&nbsp;
       a(href="/articles/new") create one
+
+
+
+    - for (var i = 0; i < postList.length; i++)
+      div.row
+        mixin blogPost(postList[i])
+        - if (i + 1 < postList.length)
+          mixin blogPost(postList[i + 1])
