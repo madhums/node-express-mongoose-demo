@@ -1,47 +1,48 @@
-tr.resp-table-body-row(id=electricityPaymentRow._id)
-  td.resp-table-body-col.col-num(data-title='№ пп')
-    span
-  td.resp-table-body-col.col-area-num(data-title='№ діл.')
-    span #{electricityPaymentRow.areaNum}
-  td.resp-table-body-col.col-full-name(data-title='ПІБ')
-    span #{electricityPaymentRow.clientFirstName + ' ' + electricityPaymentRow.clientMiddleName + ' ' + electricityPaymentRow.clientLastName}
-  td.resp-table-body-col.col-phone(data-title='№ тел.')
-    span #{electricityPaymentRow.phoneNum}
-  td.resp-table-body-col.col-counter-model(data-title='Лічильник (марка, к-сть фаз, тарифів)')
-    span #{electricityPaymentRow.counterModel}
-  td.resp-table-body-col.col-cost(data-title='Вартість')
-    span #{electricityPaymentRow.cost}
-  td.resp-table-body-col.col-period-rates-from(data-title='Період, показники (від)')
-    span #{electricityPaymentRow.periodRatesFrom}
-  td.resp-table-body-col.col-kv-from(data-title='KV')
-    span #{electricityPaymentRow.kvFrom}
-  td.resp-table-body-col.col-sum-from(data-title='Сума')
-    span #{electricityPaymentRow.sumFrom}
-  td.resp-table-body-col.col-paid-from(data-title='Оплачено')
-    span #{electricityPaymentRow.paidFrom}
-  td.resp-table-body-col.col-date-from(data-title='Дата оплати')
-    span #{electricityPaymentRow.paymentDateFrom}
-  td.resp-table-body-col.col-debt-from(data-title='Борг')
-    span #{electricityPaymentRow.debtFrom}
-  td.resp-table-body-col.col-rates-to(data-title='Період, показники (по)')
-    span #{electricityPaymentRow.periodRatesTo}
-  td.resp-table-body-col.col-kv-to(data-title='KV')
-    span #{electricityPaymentRow.kvTo}
-  td.resp-table-body-col.col-sum-to(data-title='Сума')
-    span #{electricityPaymentRow.sumTo}
-  td.resp-table-body-col.col-paid-to(data-title='Оплачено')
-    span #{electricityPaymentRow.paidTo}
-  td.resp-table-body-col.col-date-to(data-title='Дата оплати')
-    span #{electricityPaymentRow.paymentDateTo}
-  td.resp-table-body-col.col-debt-to(data-title='Борг')
-    span #{electricityPaymentRow.debtTo}
-  - if(req.user)
-    td.resp-table-body-col.col-actions(data-title='Дії')
-      form(action="/electricityPayment/" + electricityPaymentRow.id, method="post", onsubmit="return confirm('Are you sure?')")
-        input(type='hidden', name='_csrf', value="#{csrf_token}")
-        a.btn.btn-default(href='/electricityPayment/' + electricityPaymentRow._id + '/edit', title="Редактировать")
-          i.fa.fa-pencil
-        | &nbsp;
-        input(type="hidden", name="_method", value="DELETE")
-        button.btn.btn-danger(type="submit", title="Удалить")
-          i.fa.fa-trash
+- each electricityPaymentRow,i in electricityPayment
+  tr.resp-table-body-row(id=electricityPaymentRow._id)
+    td.resp-table-body-col.col-num(data-title='№ пп')
+      span #{i+1}
+    td.resp-table-body-col.col-area-num(data-title='№ діл.')
+      span #{electricityPaymentRow.areaNum}
+    td.resp-table-body-col.col-full-name(data-title='ПІБ')
+      span #{electricityPaymentRow.clientFirstName + ' ' + electricityPaymentRow.clientMiddleName + ' ' + electricityPaymentRow.clientLastName}
+    td.resp-table-body-col.col-phone(data-title='№ тел.')
+      span #{electricityPaymentRow.phoneNum}
+    td.resp-table-body-col.col-counter-model(data-title='Лічильник (марка, к-сть фаз, тарифів)')
+      span #{electricityPaymentRow.counterModel}
+    td.resp-table-body-col.col-cost(data-title='Вартість')
+      span #{electricityPaymentRow.cost}
+    td.resp-table-body-col.col-period-rates-from(data-title='Період, показники (від)')
+      span #{electricityPaymentRow.periodRatesFrom}
+    td.resp-table-body-col.col-kv-from(data-title='KV')
+      span #{electricityPaymentRow.kvFrom}
+    td.resp-table-body-col.col-sum-from(data-title='Сума')
+      span #{electricityPaymentRow.sumFrom}
+    td.resp-table-body-col.col-paid-from(data-title='Оплачено')
+      span #{electricityPaymentRow.paidFrom}
+    td.resp-table-body-col.col-date-from(data-title='Дата оплати')
+      span #{electricityPaymentRow.paymentDateFrom}
+    td.resp-table-body-col.col-debt-from(data-title='Борг')
+      span #{electricityPaymentRow.debtFrom}
+    td.resp-table-body-col.col-rates-to(data-title='Період, показники (по)')
+      span #{electricityPaymentRow.periodRatesTo}
+    td.resp-table-body-col.col-kv-to(data-title='KV')
+      span #{electricityPaymentRow.kvTo}
+    td.resp-table-body-col.col-sum-to(data-title='Сума')
+      span #{electricityPaymentRow.sumTo}
+    td.resp-table-body-col.col-paid-to(data-title='Оплачено')
+      span #{electricityPaymentRow.paidTo}
+    td.resp-table-body-col.col-date-to(data-title='Дата оплати')
+      span #{electricityPaymentRow.paymentDateTo}
+    td.resp-table-body-col.col-debt-to(data-title='Борг')
+      span #{electricityPaymentRow.debtTo}
+    - if(req.user)
+      td.resp-table-body-col.col-actions(data-title='Дії')
+        form(action="/electricityPayment/" + electricityPaymentRow.id, method="post", onsubmit="return confirm('Are you sure?')")
+          input(type='hidden', name='_csrf', value="#{csrf_token}")
+          a.btn.btn-default(href='/electricityPayment/' + electricityPaymentRow._id + '/edit', title="Редактировать")
+            i.fa.fa-pencil
+          | &nbsp;
+          input(type="hidden", name="_method", value="DELETE")
+          button.btn.btn-danger(type="submit", title="Удалить")
+            i.fa.fa-trash

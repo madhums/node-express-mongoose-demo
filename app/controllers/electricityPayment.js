@@ -74,6 +74,7 @@ exports.create = async(function* (req, res) {
     try {
         yield electricityPaymentRow.uploadAndSave(req.file);
         respondOrRedirect({ req, res }, `/electricityPayment/${electricityPaymentRow._id}`, electricityPaymentRow, {
+        //respondOrRedirect({ req, res }, `/electricityPayment/`, electricityPaymentRow, {
             type: 'success',
             text: 'Successfully created electricityPaymentRow!'
         });

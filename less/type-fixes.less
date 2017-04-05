@@ -3,6 +3,23 @@
     padding: 0;
     margin: 0;
   }
+  a{
+    &.btn{
+      padding: 6px 14px 6px 8px;
+      margin-top: 12px;
+      i {
+        width: 24px;
+        font-size: 18px;
+        text-align: center;
+        margin-right: 6px;
+        position: relative;
+        top: 2px;
+      }
+      @media (min-width: 768px){
+        float: right;
+      }
+    }
+  }
 }
 
 #mainNav {
@@ -40,7 +57,21 @@
               a {
                 color: #000;
               }
+              .dropdown-menu{
+                li {
+                  a {
+                    padding: 12px 14px;
+                    i {
+                      width: 24px;
+                      font-size: 18px;
+                      text-align: center;
+                      margin-right: 10px;
+                    }
+                  }
+                }
+              }
             }
+
           }
         }
       }
@@ -162,16 +193,21 @@
       &:nth-child(even) {
         padding-left: 9px;
         padding-right: 0;
-
       }
     }
     @media (min-width: 640px) {
       padding: 15px 18px 12px 12px;
+
     }
     @media (min-width: 1140px) {
       -webkit-flex-basis: 33.333%;
       -ms-flex-preferred-size: 33.333%;
       flex-basis: 33.333%;
+      &:nth-child(odd),
+      &:nth-child(even){
+        padding-left: 12px;
+        padding-right: 12px;
+      }
     }
     @media (min-width: 1366px) {
       -webkit-flex-basis: 25%;

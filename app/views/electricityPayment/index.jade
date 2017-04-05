@@ -3,11 +3,13 @@ extends ../layouts/default
 block main
   .main-title
     .row
-      .col-md-8
+      .col-md-8.col-sm-8
         h1 #{title}
         small #{'ТОВ "Блакитна затока"'}
-      .col-md-4
-        a(href="/electricityPayment/new") create one
+      .col-md-4.col-sm-4
+        a.btn.btn-success(href="/electricityPayment/new")
+          i.fa.fa-plus-circle
+          span #{'Додати запис'}
 
 block content
   - if (electricityPayment.length)
@@ -20,7 +22,6 @@ block content
             include electricityPaymentHead
 
           tbody.resp-table-body
-            - each electricityPaymentRow in electricityPayment
               include electricityPayment
 
       - if (pages > 1)

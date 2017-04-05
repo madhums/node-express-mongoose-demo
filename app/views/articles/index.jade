@@ -3,11 +3,13 @@ extends ../layouts/default
 block main
   .main-title
     .row
-      .col-md-8
+      .col-md-8.col-sm-8
         h1 #{title}
         small #{'ТОВ "Блакитна затока"'}
-      .col-md-4
-        a(href="/articles/new") create one
+      .col-md-4.col-sm-4
+        a.btn.btn-success(href="/articles/new")
+          i.fa.fa-plus-circle
+          span #{'Створити новину'}
 
 block content
   - if (articles.length)
