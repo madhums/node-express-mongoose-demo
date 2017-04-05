@@ -2,17 +2,24 @@
   position: relative;
   width: 100%;
   height: 600px;
-  overflow-x: auto;
+  overflow: hidden;
   //border: 1px solid rgba(0,50,100,.1);
   border: 1px solid #d4dbe2;
   margin: 24px 0;
-  //background: #edf2f5;
-  background: #fff;
+  background: #edf2f5;
   box-shadow: 0 5px 40px 0px rgba(10, 50, 80, .2);
   transition: all .15s ease;
   &:hover {
     box-shadow: 0 15px 70px 10px rgba(10, 50, 80, .2);
     transition: all .3s ease;
+  }
+  &-container{
+    position: relative;
+    width: 100%;
+    height: 518px;
+    overflow-x: auto;
+    border-bottom: 1px solid #d4dbe2;
+    background: #fff;
   }
   &-content {
     width: 100%;
@@ -85,7 +92,7 @@
       position: relative;
       padding: .6em 1.2em;
       cursor: pointer;
-      font-size: .875rem;
+      //font-size: .875rem;
       line-height: 1.5;
       border-right: 1px solid #c8cdd0;
       border-bottom: 1px solid #c8cdd0;
@@ -169,6 +176,11 @@
           }
         }
       }
+    }
+  }
+  .pagination{
+    &-block{
+
     }
   }
 }

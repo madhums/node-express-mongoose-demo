@@ -32,7 +32,7 @@ exports.load = async(function* (req, res, next, electricityPaymentId) {
 exports.index = async(function* (req, res) {
     const page = (req.query.page > 0 ? req.query.page : 1) - 1;
     const _id = req.query.item;
-    const limit = 30;
+    const limit = 3;
     const options = {
         limit: limit,
         page: page

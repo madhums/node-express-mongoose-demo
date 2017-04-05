@@ -15,10 +15,10 @@ block content
 
         - if (article.tags)
           p Tags &nbsp;
-            - each tag in article.tags.split(',')
-              i.muted.fa.fa-tag &nbsp;
-              a.tag(href="/tags/"+tag)= tag
-              | &nbsp;&nbsp;
+          - each tag in article.tags.split(',')
+            i.muted.fa.fa-tag &nbsp;
+            a.tag(href="/tags/"+tag)= tag
+            | &nbsp;&nbsp;
 
         p.muted= formatDate(article.createdAt, "%b %d, %Y at %I:%M %p")
 

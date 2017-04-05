@@ -1,31 +1,24 @@
 extends ../layouts/mobile
 
 block main
-  h1= title
+  .main-title
+    .row
+      .col-md-8
+        h1 #{title}
+        small #{'ТОВ "Блакитна затока"'}
+      .col-md-4
+        a(href="/articles/new") create one
 
 block content
-  - each article in articles
-    .article
-      h3
-        a(href='/articles/'+article._id, title=article.title) #{article.title}
-      p= article.body
+  - if (articles.length)
+    .article-list
+      - each article in articles
+        include article
+  - else
+    h4.muted No articles.&nbsp;
 
-      .meta.muted
-        span= formatDate(article.createdAt)
-        | &nbsp; - &nbsp;
-        span Author &nbsp;
-
-        - var name = article.user.name ? article.user.name : article.user.username
-
-        a(href="/users/"+article.user._id)= name
-        &nbsp; - &nbsp;
-        - if (article.tags)
-          - each tag in article.tags.split(',')
-            | &nbsp;
-            a.tag(href="/tags/"+tag)
-              i.icon-tags
-              |  #{tag}
-
-  - if (pages > 1)
-    ul.pagination
-      != createPagination(pages, page)
+  - if (articles.length)
+    - if (pages > 1)
+      .pagination-block
+        ul.pagination
+          != createPagination(pages, page)

@@ -1,24 +1,22 @@
 .article-item
-  .article-content
-    h3
-      a(href='/articles/'+article._id, title=article.title) #{article.title}
-    p= article.body
+  a.article-content(href='/articles/' + article._id, title=article.title)
+    h3 #{article.title}
+    p #{article.body}
+  .meta
+    span.muted= formatDate(article.createdAt)
 
-    .meta
-      span.muted= formatDate(article.createdAt)
-
-      - if (article.user)
-        | &nbsp; - &nbsp;
-        span Author &nbsp;
+    - if (article.user)
+      | &nbsp; - &nbsp;
+      span Author &nbsp;
 
         - var name = article.user.name ? article.user.name : article.user.username
 
-        a(href="/users/"+article.user._id)= name
+        a(href="/users/" + article.user._id)= name
 
-      - if (article.tags)
-        | &nbsp; - &nbsp;
-        span Tags &nbsp;
+    - if (article.tags)
+      | &nbsp; - &nbsp;
+      span Tags &nbsp;
         - each tag in article.tags.split(',')
           i.muted.fa.fa-tag &nbsp;
-          a.tag(href="/tags/"+tag)= tag
+          a.tag(href="/tags/" + tag)= tag
           | &nbsp;&nbsp;

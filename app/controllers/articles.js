@@ -32,7 +32,7 @@ exports.load = async(function* (req, res, next, id) {
 exports.index = async(function* (req, res) {
   const page = (req.query.page > 0 ? req.query.page : 1) - 1;
   const _id = req.query.item;
-  const limit = 30;
+  const limit = 5;
   const options = {
     limit: limit,
     page: page
@@ -44,7 +44,7 @@ exports.index = async(function* (req, res) {
   const count = yield Article.count();
 
   respond(res, 'articles/index', {
-    title: 'Articles',
+    title: 'Новини',
     articles: articles,
     page: page + 1,
     pages: Math.ceil(count / limit)

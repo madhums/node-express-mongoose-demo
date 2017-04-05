@@ -111,38 +111,173 @@
 
 .article {
   &-list {
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
-    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-align-content: flex-start;
+    -ms-flex-line-pack: start;
+    align-content: flex-start;
   }
   &-item {
-
-    position: relative;
-    float: none;
-    padding: 6px 0;
-
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    padding-top: 6px;
+    padding-bottom: 12px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    -webkit-flex-basis: 100%;
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 100%;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
     @media (min-width: 580px) {
-      float: left;
-      width: 50%;
-      //padding: 15px 10px 5px 10px;
+      -webkit-flex-basis: 50%;
+      -ms-flex-preferred-size: 50%;
+      flex-basis: 50%;
+      padding: 0 14px 12px 12px;
+
+      -webkit-flex: 0 0 50%;
+      -ms-flex: 0 0 50%;
+      flex: 0 0 50%;
+      &:nth-child(odd) {
+        padding-left: 0;
+        padding-right: 9px;
+      }
+
+      &:nth-child(even) {
+        padding-left: 9px;
+        padding-right: 0;
+
+      }
+    }
+    @media (min-width: 640px) {
       padding: 15px 18px 12px 12px;
     }
-    @media (min-width: 1002px) {
-      width: 33.3334%;
+    @media (min-width: 1140px) {
+      -webkit-flex-basis: 33.333%;
+      -ms-flex-preferred-size: 33.333%;
+      flex-basis: 33.333%;
     }
     @media (min-width: 1366px) {
-      width: 25%;
+      -webkit-flex-basis: 25%;
+      -ms-flex-preferred-size: 25%;
+      flex-basis: 25%;
     }
     // @media (min-width:1920px) {
     //     width: 20%;
     // }
     @media (min-width: 2560px) {
-      width: 16.666%;
+      -webkit-flex-basis: 16.666%;
+      -ms-flex-preferred-size: 16.666%;
+      flex-basis: 16.666%;
     }
-  }
-  &-content {
-    background: #fff;
+
+    .meta {
+      display: none;
+    }
 
   }
+  &-content {
+    position: relative;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    border-radius: 2px;
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, .1);
+    /* box-shadow: 0 10px 30px 10px rgba(0,0,0,.05); */
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    min-height: 272px;
+    margin: 1px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    background: #FFF;
+    width: 100%;
+    //padding: 8px 14px;
+    padding: 12px 18px;
+    transition: all .3s ease;
+    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+      h3 {
+        color: #197fe6;
+        transition: all .3s ease;
+      }
+      box-shadow: 0px 10px 30px 10px rgba(0, 0, 0, 0.1);
+      transition: all .3s ease;
+    }
+    h3 {
+      font-family: 'Fira Sans', sans-serif;
+      margin-bottom: 14px;
+      font-size: 18px;
+      line-height: 1.2;
+      margin-top: 6px;
+      //color: #4a4a4a;
+      /* color: #294056; */
+      text-decoration: none;
+      color: #32394d;
+      transition: all .3s ease;
+    }
+    p {
+      font-family: 'Roboto', sans-serif;
+      /* color: #294056; */
+      color: #7a7c81;
+      line-height: 1.6;
+    }
+    @media (min-width: 580px) {
+      padding: 12px 18px;
+      h3{
+        font-size: 20px;
+
+      }
+      p{
+
+      }
+
+    }
+    @media (min-width: 768px) {
+      padding: 30px;
+
+      h3{
+        font-size: 20px;
+
+      }
+    }
+  }
+}
+
+.pagination-block{
+  text-align: center;
 }

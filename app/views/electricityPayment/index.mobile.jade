@@ -1,31 +1,32 @@
 extends ../layouts/mobile
 
 block main
-  h1= title
+  .main-title
+    .row
+      .col-md-8
+        h1 #{title}
+        small #{'ТОВ "Блакитна затока"'}
+      .col-md-4
+        a(href="/electricityPayment/new") create one
 
 block content
-  - each electricityPaymentRow in electricityPayment
-    .article
-      h3
-        a(href='/electricityPayment/'+electricityPaymentRow._id, title=electricityPaymentRow.title) #{electricityPaymentRow.title}
-      p= electricityPaymentRow.body
+  - if (electricityPayment.length)
 
-      .meta.muted
-        span= formatDate(electricityPaymentRow.createdAt)
-        | &nbsp; - &nbsp;
-        span Author &nbsp;
+    .resp-table
+      .resp-table-container
+        table.resp-table-content
 
-        - var name = electricityPaymentRow.user.name ? electricityPaymentRow.user.name : electricityPaymentRow.user.username
+          thead.resp-table-head
+            include electricityPaymentHead
 
-        a(href="/users/"+electricityPaymentRow.user._id)= name
-        &nbsp; - &nbsp;
-        - if (electricityPaymentRow.tags)
-        - each tag in electricityPaymentRow.tags.split(',')
-          | &nbsp;
-          a.tag(href="/tags/"+tag)
-            i.icon-tags
-            |  #{tag}
+          tbody.resp-table-body
+            - each electricityPaymentRow in electricityPayment
+              include electricityPayment
 
-  - if (pages > 1)
-    ul.pagination
-      != createPagination(pages, page)
+      - if (electricityPayment.length)
+        - if (pages > 1)
+          .pagination-block
+            ul.pagination
+              != createPagination(pages, page)
+  - else
+    h4.muted No electricityPaymentRow.&nbsp;

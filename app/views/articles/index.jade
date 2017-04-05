@@ -1,26 +1,30 @@
-
-
 extends ../layouts/default
 
 block main
-  h1= title
+  .main-title
+    .row
+      .col-md-8
+        h1 #{title}
+        small #{'ТОВ "Блакитна затока"'}
+      .col-md-4
+        a(href="/articles/new") create one
 
 block content
   - if (articles.length)
-    .article-content
+    .article-list
       - each article in articles
         include article
-
-      - if (pages > 1)
-        ul.pagination
-          != createPagination(pages, page)
   - else
     h4.muted No articles.&nbsp;
-      a(href="/articles/new") create one
+
+  - if (articles.length)
+    - if (pages > 1)
+      .pagination-block
+        ul.pagination
+          != createPagination(pages, page)
 
 
-
-    - for (var i = 0; i < postList.length; i++)
+    //- for (var i = 0; i < postList.length; i++)
       div.row
         mixin blogPost(postList[i])
         - if (i + 1 < postList.length)
