@@ -6,10 +6,11 @@ block main
       .col-md-8.col-sm-8
         h1 #{title}
         small #{'ТОВ "Блакитна затока"'}
-      .col-md-4.col-sm-4
-        a.btn.btn-success(href="/electricityPayment/new")
-          i.fa.fa-plus-circle
-          span #{'Додати запис'}
+      - if(req.user)
+        .col-md-4.col-sm-4
+          a.btn.btn-success(href="/electricityPayment/new")
+            i.fa.fa-plus-circle
+            span #{'Додати запис'}
 
 block content
   - if (electricityPayment.length)
