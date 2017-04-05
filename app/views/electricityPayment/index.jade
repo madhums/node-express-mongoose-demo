@@ -23,10 +23,10 @@ block content
             - each electricityPaymentRow in electricityPayment
               include electricityPayment
 
-      - if (electricityPayment.length)
-        - if (pages > 1)
-          .pagination-block
-            ul.pagination
-              != createPagination(pages, page)
+      - if (pages > 1)
+        .pagination-block
+          ul.pagination
+            != createPagination(pages, page)
+
   - else
     h4.muted No electricityPaymentRow.&nbsp;
