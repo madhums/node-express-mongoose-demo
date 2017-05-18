@@ -41,7 +41,7 @@
     "forever": "~0.15.1",
     "jade": "~1.11.0",
     "method-override": "~2.3.5",
-    "mongoose": "~4.9.0",
+    "mongoose": "~4.10.0",
     "morgan": "~1.8.0",
     "multer": "~1.3.0",
     "notifier": "~0.1.7",
