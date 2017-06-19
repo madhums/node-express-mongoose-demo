@@ -1,0 +1,34 @@
+extends ../layouts/default
+
+block main
+  .main-title
+    .row
+      .col-md-8.col-sm-8
+        h1 #{title}
+        small #{'ТОВ "Блакитна затока"'}
+      - if(req.user)
+        .col-md-4.col-sm-4
+          a.btn.btn-success(href="/electricityPayment/new")
+            i.fa.fa-plus-circle
+            span #{'Додати запис'}
+
+block content
+  - if (electricityPayment.length)
+
+    .resp-table
+      .resp-table-container
+        table.resp-table-content
+
+          thead.resp-table-head
+            include electricityPaymentHead
+
+          tbody.resp-table-body
+              include electricityPayment
+
+      - if (pages > 1)
+        .pagination-block
+          ul.pagination
+            != createPagination(pages, page)
+
+  - else
+    h4.muted No electricityPaymentRow.&nbsp;

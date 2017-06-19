@@ -1,0 +1,32 @@
+extends ../layouts/mobile
+
+block main
+  .main-title
+    .row
+      .col-md-8
+        h1 #{title}
+        small #{'ТОВ "Блакитна затока"'}
+      .col-md-4
+        a(href="/electricityPayment/new") create one
+
+block content
+  - if (electricityPayment.length)
+
+    .resp-table
+      .resp-table-container
+        table.resp-table-content
+
+          thead.resp-table-head
+            include electricityPaymentHead
+
+          tbody.resp-table-body
+            - each electricityPaymentRow in electricityPayment
+              include electricityPayment
+
+      - if (pages > 1)
+        .pagination-block
+          ul.pagination
+            != createPagination(pages, page)
+
+  - else
+    h4.muted No electricityPaymentRow.&nbsp;

@@ -1,8 +1,7 @@
-article.article
-  h3
-    a(href='/articles/'+article._id, title=article.title) #{article.title}
-  p= article.body
-
+.article-item
+  a.article-content(href='/articles/' + article._id, title=article.title)
+    h3 #{article.title}
+    p #{article.body}
   .meta
     span.muted= formatDate(article.createdAt)
 
@@ -10,14 +9,14 @@ article.article
       | &nbsp; - &nbsp;
       span Author &nbsp;
 
-      - var name = article.user.name ? article.user.name : article.user.username
+        - var name = article.user.name ? article.user.name : article.user.username
 
-      a(href="/users/"+article.user._id)= name
+        a(href="/users/" + article.user._id)= name
 
     - if (article.tags)
       | &nbsp; - &nbsp;
       span Tags &nbsp;
-      - each tag in article.tags.split(',')
-        i.muted.fa.fa-tag &nbsp;
-        a.tag(href="/tags/"+tag)= tag
-        | &nbsp;&nbsp;
+        - each tag in article.tags.split(',')
+          i.muted.fa.fa-tag &nbsp;
+          a.tag(href="/tags/" + tag)= tag
+          | &nbsp;&nbsp;

@@ -1,0 +1,41 @@
+extends ../layouts/mobile
+
+
+block main
+  h1= electricityPaymentRow.clientFirstName + ' ' + electricityPaymentRow.clientMiddleName + ' ' + electricityPaymentRow.clientLastName
+
+block content
+  .row
+    .span9
+      p=electricityPaymentRow.body
+      .meta.muted
+        - var name = electricityPaymentRow.user.name ? electricityPaymentRow.user.name : electricityPaymentRow.user.username
+        p Author -&nbsp;
+          a(href="/users/"+electricityPaymentRow.user._id)= name
+        p.muted= formatDate(electricityPaymentRow.createdAt, "%b %d, %Y at %I:%M %p")
+        - if (electricityPaymentRow.tags)
+          .tags
+            - each tag in electricityPaymentRow.tags.split(',')
+              a.tag(href="/tags/"+tag)
+                i.icon-tags
+                |  #{tag}
+              | &nbsp;&nbsp;
+    .span3
+      - if (!electricityPaymentRow.isNew && electricityPaymentRow.image && electricityPaymentRow.image.files && electricityPaymentRow.image.files.length)
+        img(src=electricityPaymentRow.image.cdnUri + '/mini_' + electricityPaymentRow.image.files[0])
+
+  p
+    br
+    form.center.form-inline.confirm(action="/electricityPaymentRow/"+electricityPaymentRow.id, method="post")
+      input(type='hidden', name='_csrf', value="#{csrf_token}")
+      a.btn(href='/electricityPaymentRow/'+electricityPaymentRow._id+'/edit', title="edit") Edit
+      | &nbsp;&nbsp;
+      input(type="hidden", name="_method", value="DELETE")
+      button.btn.btn-danger(type="submit") delete
+
+  p
+    br
+    h3 Comments
+    - each comment in electricityPaymentRow.comments
+      include ../comments/comment
+    include ../comments/form

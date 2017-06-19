@@ -1,0 +1,113 @@
+extends ../layouts/default
+
+block main
+  h1= title
+
+block content
+  - var action = '/tables'
+  - action += table.isNew? '' : '/' + table.id
+
+  .row
+    .col-md-8
+      form.form-horizontal(method="post", action=action, enctype="multipart/form-data", role="form")
+
+        input(type="hidden", name="_csrf", value="#{csrf_token}")
+
+        - if (!table.isNew)
+          input(type="hidden", name="_method", value="PUT")
+        .row
+          .col-md-4
+            .form-group
+              label.control-label(for='clientLastName') Прізвище
+              input.form-control#clientLastName(type='text', name="clientLastName", value=table.clientLastName, placeholder='Ведіть ваше прізвище...')
+          .col-md-4
+            .form-group
+              label.control-label(for='clientFirstName') Ім`я
+              input.form-control#clientFirstName(type='text', name="clientFirstName", value=table.clientFirstName, placeholder='Ведіть ваше ім`я...')
+          .col-md-4
+            .form-group
+              label.control-label(for='clientMiddleName') По батькові
+              input.form-control#clientMiddleName(type='text', name="clientMiddleName", value=table.clientMiddleName, placeholder='Ведіть по батькові...')
+        .row
+          .col-md-6
+            .form-group
+              label.control-label(for='phoneNum') Номер телефону
+              input.form-control#phoneNum(type='text', name="phoneNum", value=table.phoneNum, placeholder='Ведіть номер телефону...')
+          .col-md-6
+            .form-group
+              label.control-label(for='areaNum') Номер ділянки
+              input.form-control#areaNum(type='text', name="areaNum", value=table.areaNum, placeholder='Ведіть номер ділянки...')
+        .row
+          .col-md-12
+            .form-group
+              label.control-label(for='counterModel') Лічильник (марка, к-сть фаз, тарифів)
+              input.form-control#counterModel(type='text', name="counterModel", value=table.counterModel, placeholder='Ведіть марку лічильника...')
+        .row
+          .col-md-12
+            .form-group
+              label.control-label(for='periodRatesFrom') Період, показники (від)
+              input.form-control#periodRatesFrom(type='text', name="periodRatesFrom", value=table.periodRatesFrom, placeholder='Ведіть період, показники (від)...')
+        .row
+          .col-md-4
+            .form-group
+              label.control-label(for='cost') Вартість
+              input.form-control#cost(type='text', name="cost", value=table.cost, placeholder='Ведіть вартість...')
+          .col-md-4
+            .form-group
+              label.control-label(for='kvFrom') KV
+              input.form-control#kvFrom(type='text', name="kvFrom", value=table.kvFrom, placeholder='Ведіть KV...')
+          .col-md-4
+            .form-group
+              label.control-label(for='sumFrom') Сума
+              input.form-control#sumFrom(type='text', name="sumFrom", value=table.sumFrom, placeholder='Ведіть Сума...')
+        .row
+          .col-md-4
+            .form-group
+              label.control-label(for='paidFrom') Оплачено
+              input.form-control#paidFrom(type='text', name="paidFrom", value=table.paidFrom, placeholder='Ведіть Оплачено...')
+          .col-md-4
+            .form-group
+              label.control-label(for='paymentDateFrom') Дата оплати
+              input.form-control#paymentDateFrom(type='text', name="paymentDateFrom", value=table.paymentDateFrom, placeholder='Дата оплати...')
+          .col-md-4
+            .form-group
+              label.control-label(for='debtFrom') Борг
+              input.form-control#debtFrom(type='text', name="debtFrom", value=table.debtFrom, placeholder='Дата Борг...')
+        .row
+          .col-md-12
+            .form-group
+              label.control-label(for='periodRatesTo') Період, показники (по)
+              input.form-control#periodRatesTo(type='text', name="periodRatesTo", value=table.periodRatesTo, placeholder='Ведіть період, показники (по)...')
+        .row
+          .col-md-6
+            .form-group
+              label.control-label(for='kvTo') KV
+              input.form-control#kvTo(type='text', name="kvTo", value=table.kvTo, placeholder='Ведіть KV...')
+          .col-md-6
+            .form-group
+              label.control-label(for='sumTo') Сума
+              input.form-control#sumTo(type='text', name="sumTo", value=table.sumTo, placeholder='Ведіть Сума...')
+        .row
+          .col-md-4
+            .form-group
+              label.control-label(for='paidTo') Оплачено
+              input.form-control#paidTo(type='text', name="paidTo", value=table.paidTo, placeholder='Ведіть Оплачено...')
+          .col-md-4
+            .form-group
+              label.control-label(for='paymentDateTo') Дата оплати
+              input.form-control#paymentDateTo(type='text', name="paymentDateTo", value=table.paymentDateTo, placeholder='Дата оплати...')
+          .col-md-4
+            .form-group
+              label.control-label(for='debtFrom') Борг
+              input.form-control#debtTo(type='text', name="debtTo", value=table.debtTo, placeholder='Дата Борг...')
+        .row
+          .col-md-12
+            .form-group
+              button.btn.btn-primary(type='submit') Save
+              | &nbsp;
+              a.btn(href='/tables', title="cancel") Cancel
+
+
+
+
+

@@ -1,19 +1,11 @@
 {
-  "name": "nodejs-express-mongoose-demo",
-  "description": "A demo app illustrating the usage of express, mongoose, passportjs, swig and other modules in nodejs",
-  "keywords": [
-    "express",
-    "mongoose",
-    "mongodb",
-    "passport",
-    "demo"
-  ],
-  "version": "4.0.0",
-  "private": false,
-  "author": "Madhusudhan Srinivasa <madhums8@gmail.com> (http://madhums.github.com)",
+  "name": "ostrov-v2.0",
+  "version": "2.0.0",
+  "private": true,
+  "author": "Madhusudhan Srinivasa <madhums8@gmail.com> (http://madhums.github.com) forked by MaskiT Inc.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/madhums/node-express-mongoose-demo.git"
+    "url": "https://github.com/maskitInc/ostrov-v2.0.git"
   },
   "license": "MIT",
   "engines": {
@@ -54,7 +46,23 @@
     "passport-local": "~1.0.0",
     "passport-twitter": "~1.0.3",
     "view-helpers": "~0.1.5",
-    "winston": "~2.3.0"
+    "winston": "~2.3.0",
+
+    "bootstrap": "3.3.7",
+    "express-less": "",
+    "font-awesome": "",
+    "grunt": "",
+    "grunt-autoprefixer": "",
+    "grunt-contrib-less": "",
+    "grunt-contrib-uglify": "",
+    "grunt-contrib-watch": "",
+    "jit-grunt": "",
+    "jquery": "^3.2.1",
+    "less": "",
+    "less-plugin-autoprefix": "",
+    "less-plugin-clean-css": "",
+    "serve-favicon": "~2.3.0"
+
   },
   "devDependencies": {
     "babel-eslint": "~7.2.1",

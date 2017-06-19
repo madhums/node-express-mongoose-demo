@@ -1,0 +1,23 @@
+article.table
+  h3
+    a(href='/tables/'+table._id, title=table.clientFirstName) #{table.clientFirstName + ' ' + table.clientMiddleName + ' ' + table.clientLastName}
+  p= table.phoneNum
+
+  .meta
+    span.muted= formatDate(table.createdAt)
+
+    - if (table.user)
+      | &nbsp; - &nbsp;
+      span Author &nbsp;
+
+      - var name = table.user.name ? table.user.name : table.user.username
+
+      a(href="/users/"+table.user._id)= name
+
+    - if (table.tags)
+      | &nbsp; - &nbsp;
+      span Tags &nbsp;
+      - each tag in table.tags.split(',')
+        i.muted.fa.fa-tag &nbsp;
+        a.tag(href="/tags/"+tag)= tag
+        | &nbsp;&nbsp;

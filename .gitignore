@@ -4,3 +4,4 @@ config/env/env.json
 Makefile
 .DS_Store
 .env
+.idea

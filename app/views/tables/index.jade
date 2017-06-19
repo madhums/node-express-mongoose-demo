@@ -1,0 +1,16 @@
+extends ../layouts/default
+
+block main
+  h1= title
+
+block content
+  - if (tables.length)
+    - each table in tables
+      include table
+
+    - if (pages > 1)
+      ul.pagination
+        != createPagination(pages, page)
+  - else
+    h4.muted No tables.&nbsp;
+      a(href="/tables/new") create one

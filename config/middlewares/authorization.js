@@ -25,6 +25,34 @@ exports.user = {
 };
 
 /*
+ *  electricityPaymentRow authorization routing middleware
+ */
+
+exports.electricityPaymentRow = {
+  hasAuthorization: function (req, res, next) {
+    if (req.electricityPaymentRow.user.id != req.user.id) {
+      req.flash('info', 'You are not authorized');
+      return res.redirect('/electricityPayment/' + req.electricityPaymentRow.id);
+    }
+    next();
+  }
+};
+
+/*
+ *  Table authorization routing middleware
+ */
+
+exports.table = {
+  hasAuthorization: function (req, res, next) {
+    if (req.table.user.id != req.user.id) {
+      req.flash('info', 'You are not authorized');
+      return res.redirect('/tables/' + req.table.id);
+    }
+    next();
+  }
+};
+
+/*
  *  Article authorization routing middleware
  */
 

@@ -1,0 +1,25 @@
+extends ../layouts/default
+
+block main
+  h1= table.clientLastName
+
+block content
+  .row
+    .col-md-8
+      h3= table.clientFirstName + ' ' + table.clientMiddleName + ' ' + table.clientLastName
+      p=table.phoneNum
+      .meta
+        - if (table.user)
+          - var name = table.user.name ? table.user.name : table.user.username
+          p Author :&nbsp;
+            a(href="/users/"+table.user._id)= name
+
+        p.muted= formatDate(table.createdAt, "%b %d, %Y at %I:%M %p")
+
+
+  form(action="/tables/"+table.id, method="post", onsubmit="return confirm('Are you sure?')")
+    input(type='hidden', name='_csrf', value="#{csrf_token}")
+    a.btn.btn-default(href='/tables/'+table._id+'/edit', title="edit") Edit
+    | &nbsp;
+    input(type="hidden", name="_method", value="DELETE")
+    button.btn.btn-danger(type="submit") Delete
