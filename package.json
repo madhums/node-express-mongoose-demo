@@ -61,7 +61,7 @@
     "babel-preset-stage-0": "~6.24.1",
     "babel-tape-runner": "~2.0.1",
     "eslint": "~4.3.0",
-    "nodemon": "1.11.0",
+    "nodemon": "1.12.1",
     "supertest": "*",
     "tape": "~4.8.0"
   }
