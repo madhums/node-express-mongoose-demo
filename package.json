@@ -57,7 +57,7 @@
     "winston": "~2.4.0"
   },
   "devDependencies": {
-    "babel-eslint": "~8.1.0",
+    "babel-eslint": "~8.2.0",
     "babel-preset-stage-0": "~6.24.1",
     "babel-tape-runner": "~2.0.1",
     "eslint": "~4.12.0",
