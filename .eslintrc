@@ -9,6 +9,7 @@
   "rules": {
     "prettier/prettier": ["error", {
       "singleQuote": true
-    }]
+    }],
+    "no-console": "off"
   }
 }
