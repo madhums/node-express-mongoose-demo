@@ -16,8 +16,8 @@ const co = require('co');
  * @api public
  */
 
-exports.cleanup = function (t) {
-  co(function* () {
+exports.cleanup = function(t) {
+  co(function*() {
     yield User.remove();
     yield Article.remove();
     t.end();

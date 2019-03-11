@@ -13,16 +13,17 @@ const User = mongoose.model('User');
  * Expose
  */
 
-module.exports = new FacebookStrategy({
+module.exports = new FacebookStrategy(
+  {
     clientID: config.facebook.clientID,
     clientSecret: config.facebook.clientSecret,
     callbackURL: config.facebook.callbackURL
   },
-  function (accessToken, refreshToken, profile, done) {
+  function(accessToken, refreshToken, profile, done) {
     const options = {
       criteria: { 'facebook.id': profile.id }
     };
-    User.load(options, function (err, user) {
+    User.load(options, function(err, user) {
       if (err) return done(err);
       if (!user) {
         user = new User({
@@ -32,7 +33,7 @@ module.exports = new FacebookStrategy({
           provider: 'facebook',
           facebook: profile._json
         });
-        user.save(function (err) {
+        user.save(function(err) {
           if (err) console.log(err);
           return done(err, user);
         });

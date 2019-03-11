@@ -13,7 +13,7 @@ const Article = mongoose.model('Article');
  * List items tagged with a tag
  */
 
-exports.index = async(function* (req, res) {
+exports.index = async(function*(req, res) {
   const criteria = { tags: req.params.tag };
   const page = (req.params.page > 0 ? req.params.page : 1) - 1;
   const limit = 30;

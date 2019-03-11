@@ -15,7 +15,7 @@ const assign = Object.assign;
  * Load
  */
 
-exports.load = async(function* (req, res, next, id) {
+exports.load = async(function*(req, res, next, id) {
   try {
     req.article = yield Article.load(id);
     if (!req.article) return next(new Error('Article not found'));
@@ -29,7 +29,7 @@ exports.load = async(function* (req, res, next, id) {
  * List
  */
 
-exports.index = async(function* (req, res) {
+exports.index = async(function*(req, res) {
   const page = (req.query.page > 0 ? req.query.page : 1) - 1;
   const _id = req.query.item;
   const limit = 30;
@@ -55,7 +55,7 @@ exports.index = async(function* (req, res) {
  * New article
  */
 
-exports.new = function (req, res){
+exports.new = function(req, res) {
   res.render('articles/new', {
     title: 'New Article',
     article: new Article()
@@ -67,7 +67,7 @@ exports.new = function (req, res){
  * Upload an image
  */
 
-exports.create = async(function* (req, res) {
+exports.create = async(function*(req, res) {
   const article = new Article(only(req.body, 'title body tags'));
   article.user = req.user;
   try {
@@ -77,11 +77,16 @@ exports.create = async(function* (req, res) {
       text: 'Successfully created article!'
     });
   } catch (err) {
-    respond(res, 'articles/new', {
-      title: article.title || 'New Article',
-      errors: [err.toString()],
-      article
-    }, 422);
+    respond(
+      res,
+      'articles/new',
+      {
+        title: article.title || 'New Article',
+        errors: [err.toString()],
+        article
+      },
+      422
+    );
   }
 });
 
@@ -89,7 +94,7 @@ exports.create = async(function* (req, res) {
  * Edit an article
  */
 
-exports.edit = function (req, res) {
+exports.edit = function(req, res) {
   res.render('articles/edit', {
     title: 'Edit ' + req.article.title,
     article: req.article
@@ -100,18 +105,23 @@ exports.edit = function (req, res) {
  * Update article
  */
 
-exports.update = async(function* (req, res){
+exports.update = async(function*(req, res) {
   const article = req.article;
   assign(article, only(req.body, 'title body tags'));
   try {
     yield article.uploadAndSave(req.file);
     respondOrRedirect({ res }, `/articles/${article._id}`, article);
   } catch (err) {
-    respond(res, 'articles/edit', {
-      title: 'Edit ' + article.title,
-      errors: [err.toString()],
-      article
-    }, 422);
+    respond(
+      res,
+      'articles/edit',
+      {
+        title: 'Edit ' + article.title,
+        errors: [err.toString()],
+        article
+      },
+      422
+    );
   }
 });
 
@@ -119,7 +129,7 @@ exports.update = async(function* (req, res){
  * Show
  */
 
-exports.show = function (req, res){
+exports.show = function(req, res) {
   respond(res, 'articles/show', {
     title: req.article.title,
     article: req.article
@@ -130,10 +140,15 @@ exports.show = function (req, res){
  * Delete an article
  */
 
-exports.destroy = async(function* (req, res) {
+exports.destroy = async(function*(req, res) {
   yield req.article.remove();
-  respondOrRedirect({ req, res }, '/articles', {}, {
-    type: 'info',
-    text: 'Deleted successfully'
-  });
+  respondOrRedirect(
+    { req, res },
+    '/articles',
+    {},
+    {
+      type: 'info',
+      text: 'Deleted successfully'
+    }
+  );
 });
