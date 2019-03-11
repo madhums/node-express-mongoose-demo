@@ -61,17 +61,17 @@ UserSchema.path('email').validate(function(email) {
   return email.length;
 }, 'Email cannot be blank');
 
-UserSchema.path('email').validate(function(email, fn) {
-  const User = mongoose.model('User');
-  if (this.skipValidation()) fn(true);
+UserSchema.path('email').validate(function(email) {
+  return new Promise(resolve => {
+    const User = mongoose.model('User');
+    if (this.skipValidation()) return resolve(true);
 
-  // Check only when it is a new user or when email field is modified
-  if (this.isNew || this.isModified('email')) {
-    User.find({ email: email }).exec(function(err, users) {
-      fn(!err && users.length === 0);
-    });
-  } else fn(true);
-}, 'Email already exists');
+    // Check only when it is a new user or when email field is modified
+    if (this.isNew || this.isModified('email')) {
+      User.find({ email }).exec((err, users) => resolve(!err && !users.length));
+    } else resolve(true);
+  });
+}, 'Email `{VALUE}` already exists');
 
 UserSchema.path('username').validate(function(username) {
   if (this.skipValidation()) return true;
