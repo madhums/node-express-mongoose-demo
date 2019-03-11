@@ -2,5 +2,5 @@ services:
   - mongodb
 language: node_js
 node_js:
-  - "latest"
+  # - "latest" # figure out how this should work! no example of this in travis ci docs
   - "10.11.0"
