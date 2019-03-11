@@ -1,10 +1,9 @@
 
 [![Build Status](https://img.shields.io/travis/madhums/node-express-mongoose-demo.svg?style=flat)](https://travis-ci.org/madhums/node-express-mongoose-demo)
 [![Dependencies](https://img.shields.io/david/madhums/node-express-mongoose-demo.svg?style=flat)](https://david-dm.org/madhums/node-express-mongoose-demo)
-[![Code climate](http://img.shields.io/codeclimate/github/madhums/node-express-mongoose-demo.svg?style=flat)](https://codeclimate.com/github/madhums/node-express-mongoose-demo)
+[![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/madhums/node-express-mongoose-demo)
 [![Greenkeeper badge](https://badges.greenkeeper.io/madhums/node-express-mongoose-demo.svg)](https://greenkeeper.io/)
 [![Join Gitter Chat](https://img.shields.io/badge/gitter-join%20chat%20%E2%86%92-brightgreen.svg?style=flat)](https://gitter.im/madhums/node-express-mongoose-demo?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Gittip](https://img.shields.io/gratipay/madhums.svg?style=flat)](https://www.gratipay.com/madhums/)
 
 # Nodejs Express Mongoose Demo
 
@@ -19,7 +18,7 @@ Want to build something from scratch? use the [boilerplate](https://github.com/m
 
 ## Requirements
 
-* [NodeJs](http://nodejs.org) >= 6.x 
+* [NodeJs](http://nodejs.org) >= 6.x
 * [mongodb](http://mongodb.org)
 * ~~[imagemagick](http://www.imagemagick.org/script/index.php)~~
 
