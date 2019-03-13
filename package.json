@@ -54,7 +54,7 @@
     "passport-local": "~1.0.0",
     "passport-twitter": "~1.0.4",
     "pug": "~2.0.3",
-    "view-helpers": "~0.1.5",
+    "view-helpers": "~0.2.0",
     "winston": "~3.2.1"
   },
   "devDependencies": {

@@ -11,7 +11,7 @@ block content
 
     - if (pages > 1)
       ul.pagination
-        != createPagination(pages, page)
+        != createPagination(pages, page, 'page-item', 'page-link')
   - else
     h4.text-muted No articles.&nbsp;
       a(href="/articles/new") create one
