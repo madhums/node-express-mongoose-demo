@@ -2,7 +2,7 @@ extends auth
 
 block auth
   form.form-signin(action="/users/session", method="post", role="form")
-    input(type="hidden", name="_csrf", value="#{csrf_token}")
+    input(type="hidden", name="_csrf", value=csrf_token)
 
     p.col-sm-offset-2.error= message
 

@@ -5,12 +5,13 @@ block main
 
 block content
   - if (articles.length)
-    each article in articles
-      include article
+    each article, index in articles
+      div(class=`py-4 ${index && 'border-top'}`)
+        include article
 
     - if (pages > 1)
       ul.pagination
         != createPagination(pages, page)
   - else
-    h4.muted No articles.&nbsp;
+    h4.text-muted No articles.&nbsp;
       a(href="/articles/new") create one

@@ -2,7 +2,7 @@ extends auth
 
 block auth
   form.form-signin(action="/users", method="post", role="form")
-    input(type="hidden", name="_csrf", value="#{csrf_token}")
+    input(type="hidden", name="_csrf", value=csrf_token)
   
     .form-label-group
       input#email.form-control(type='email' name='email' placeholder='Email address' required='' autofocus='' value=user.email)

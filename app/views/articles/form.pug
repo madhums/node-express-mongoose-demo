@@ -11,7 +11,7 @@ block content
     .col-md-8
       form(method="post", action=action, enctype="multipart/form-data", role="form")
 
-        input(type="hidden", name="_csrf", value="#{csrf_token}")
+        input(type="hidden", name="_csrf", value=csrf_token)
 
         - if (!article.isNew)
           input(type="hidden", name="_method", value="PUT")
@@ -22,7 +22,7 @@ block content
 
         .form-group
           label(for='file') Image
-          input.form-control#file(type='file', name="image")
+          input.form-control-file#file(type='file', name="image")
 
         .form-group
           label(for='desc') Body
@@ -32,11 +32,10 @@ block content
           label(for='tags') Tags
           input.form-control#tags(type='text', name="tags", value=article.tags, placeholder='Enter the tags')
 
-        .form-group
-          .col-sm-offset-2.col-sm-10
-            button.btn.btn-primary(type='submit') Save
-            | &nbsp;
-            a.btn(href='/articles', title="cancel") Cancel
+        
+        button.btn.btn-primary(type='submit') Save
+        | &nbsp;
+        a.btn.btn-link(href='/articles', title="cancel") Cancel
 
     .col-md-4
       - if (!article.isNew && article.image && article.image.files && article.image.files.length)

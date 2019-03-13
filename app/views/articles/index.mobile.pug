@@ -7,10 +7,10 @@ block content
   each article in articles
     .article
       h3
-        a(href='/articles/'+article._id, title=article.title) #{article.title}
+        a(href=`/articles/${article._id}`, title=article.title) #{article.title}
       p= article.body
 
-      .meta.muted
+      .meta.text-muted
         span= formatDate(article.createdAt)
         | &nbsp; - &nbsp;
         span Author &nbsp;
