@@ -11,7 +11,17 @@ block content
 
     - if (pages > 1)
       ul.pagination
-        != createPagination(pages, page, 'page-item', 'page-link')
+        - var arr = paginate({ currentPage: page, totalPages: pages })
+        each item in arr
+          li.page-item(class=item.isActive && item.type === 'PAGE' && 'active')
+            a.page-link(href=`?page=${item.value}`)
+              case item.type
+                when 'FIRST_PAGE_LINK': | First
+                when 'PREVIOUS_PAGE_LINK': | Previous
+                when 'PAGE': =item.value
+                when 'ELLIPSIS': | ...
+                when 'NEXT_PAGE_LINK': | Next
+                when 'LAST_PAGE_LINK': | Last
   - else
     h4.text-muted No articles.&nbsp;
       a(href="/articles/new") create one

@@ -32,7 +32,7 @@ exports.load = async(function*(req, res, next, id) {
 exports.index = async(function*(req, res) {
   const page = (req.query.page > 0 ? req.query.page : 1) - 1;
   const _id = req.query.item;
-  const limit = 30;
+  const limit = 15;
   const options = {
     limit: limit,
     page: page

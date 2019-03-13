@@ -20,6 +20,7 @@ const mongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
 const winston = require('winston');
 const helpers = require('view-helpers');
+const ultimatePagination = require('ultimate-pagination');
 const config = require('./');
 const pkg = require('../package.json');
 
@@ -119,6 +120,7 @@ module.exports = function(app, passport) {
     // This could be moved to view-helpers :-)
     app.use(function(req, res, next) {
       res.locals.csrf_token = req.csrfToken();
+      res.locals.paginate = ultimatePagination.getPaginationModel;
       next();
     });
   }
