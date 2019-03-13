@@ -18,8 +18,8 @@ const co = require('co');
 
 exports.cleanup = function(t) {
   co(function*() {
-    yield User.remove();
-    yield Article.remove();
+    yield User.deleteMany();
+    yield Article.deleteMany();
     t.end();
   });
 };

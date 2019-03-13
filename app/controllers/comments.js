@@ -34,8 +34,6 @@ exports.create = async(function*(req, res) {
 
 exports.destroy = async(function*(req, res) {
   yield req.article.removeComment(req.params.commentId);
-  req.flash('info', 'Removed comment');
-  res.redirect('/articles/' + req.article.id);
   respondOrRedirect(
     { req, res },
     `/articles/${req.article.id}`,

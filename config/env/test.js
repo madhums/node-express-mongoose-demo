@@ -5,7 +5,7 @@
  */
 
 module.exports = {
-  db: process.env.MONGODB_URL || 'mongodb://localhost/noobjs_test',
+  db: 'mongodb://mongo:27017/noobjs_test',
   twitter: {
     clientID: process.env.TWITTER_CLIENTID,
     clientSecret: process.env.TWITTER_SECRET,

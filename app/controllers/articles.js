@@ -41,7 +41,7 @@ exports.index = async(function*(req, res) {
   if (_id) options.criteria = { _id };
 
   const articles = yield Article.list(options);
-  const count = yield Article.count();
+  const count = yield Article.countDocuments();
 
   respond(res, 'articles/index', {
     title: 'Articles',

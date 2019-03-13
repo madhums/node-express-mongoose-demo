@@ -57,7 +57,7 @@ test('POST /articles - invalid form - should respond with error', t => {
     .expect(200)
     .expect(/Article title cannot be blank/)
     .end(async err => {
-      const count = await Article.count().exec();
+      const count = await Article.countDocuments().exec();
       t.ifError(err);
       t.same(count, 0, 'Count should be 0');
       t.end();
@@ -74,7 +74,7 @@ test('POST /articles - valid form - should redirect to the new article page', t 
     .expect(302)
     .expect(/Redirecting/)
     .end(async err => {
-      const count = await Article.count().exec();
+      const count = await Article.countDocuments().exec();
       t.ifError(err);
       t.same(count, 1, 'Count should be 1');
       t.end();
