@@ -7,7 +7,7 @@ nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
       li(class=isActive('/articles/new') ? 'active nav-item' : 'nav-item')
         a.nav-link(href="/articles/new", title="new article") New
       - if (req.isAuthenticated())
-        li.nav-item
+        li.nav-item(class=isActive(`/users/${req.user.id}`) && 'active')
           a.nav-link(href="/users/"+req.user.id, title="Profile") Profile
         li.nav-item
           a.nav-link(href="/logout", title="logout") Logout
