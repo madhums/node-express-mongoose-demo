@@ -40,6 +40,7 @@
     "dotenv": "~7.0.0",
     "express": "~4.16.4",
     "express-session": "~1.15.6",
+    "helmet": "~3.16.0",
     "method-override": "~3.0.0",
     "mongoose": "~5.4.19",
     "morgan": "~1.9.1",

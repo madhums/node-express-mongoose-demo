@@ -14,6 +14,7 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const csrf = require('csurf');
 const cors = require('cors');
+const helmet = require('helmet');
 const upload = require('multer')();
 
 const mongoStore = require('connect-mongo')(session);
@@ -31,6 +32,8 @@ const env = process.env.NODE_ENV || 'development';
  */
 
 module.exports = function(app, passport) {
+  app.use(helmet());
+
   // Compression middleware (should be placed before express.static)
   app.use(
     compression({
