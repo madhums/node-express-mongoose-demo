@@ -1,117 +1,96 @@
 
-/* Sticky footer styles
--------------------------------------------------- */
-
-html,
-body {
-  height: 100%;
-  /* The html and body elements cannot have any padding or margin. */
-}
-
-/* Wrapper for page content to push down footer */
-#wrap {
-  min-height: 100%;
-  height: auto;
-  /* Negative indent footer by its height */
-  margin: 0 auto -60px;
-  /* Pad bottom by footer height */
-  padding: 0 0 60px;
-}
-
-/* Set the fixed height of the footer here */
-#footer {
-  height: 60px;
-  background-color: #f5f5f5;
-}
-
-
-/* Custom page CSS
--------------------------------------------------- */
-/* Not required for template or sticky footer method. */
-
-
-.container .text-muted {
-  margin: 20px 0;
-}
-
-#footer > .container {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-/* -----------------------------------------------
-  App styles
-  ------------------------------------------------ */
+/* Show it is fixed to the top */
 
 body {
-  padding-top: 60px;
+  padding-top: 6rem;
 }
 
-.article, .comment {
-  padding: 15px 0;
-  border-bottom: 1px solid #e8e8e8;
-}
+/* floating labels */
 
 .form-signin {
-  max-width: 330px;
+  width: 100%;
+  max-width: 420px;
   padding: 15px;
-  margin: 0 auto;
+  margin: auto;
 }
 
-.error,
-a.error,
-a.error:hover,
-a.error:focus,
-button.error,
-button.error:hover,
-button.error:focus {
-  color: #D9534F;
+.form-label-group {
+  position: relative;
+  margin-bottom: 1rem;
 }
 
-.form-actions {
-  background: #fff;
-  border: 0;
+.form-label-group > input,
+.form-label-group > label {
+  height: 3.125rem;
+  padding: .75rem;
 }
 
-#spacer {
-  display: inline-block;
+.form-label-group > label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  margin-bottom: 0; /* Override default `<label>` margin */
+  line-height: 1.5;
+  color: #495057;
+  pointer-events: none;
+  cursor: text; /* Match the input under the label */
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  transition: all .1s ease-in-out;
 }
 
-.muted {
-  color: #aaa;
+.form-label-group input::-webkit-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input:-ms-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::-ms-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::-moz-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::placeholder {
+  color: transparent;
+}
+
+.form-label-group input:not(:placeholder-shown) {
+  padding-top: 1.25rem;
+  padding-bottom: .25rem;
+}
+
+.form-label-group input:not(:placeholder-shown) ~ label {
+  padding-top: .25rem;
+  padding-bottom: .25rem;
   font-size: 12px;
+  color: #777;
 }
 
-.alert {
-  margin-top: 10px;
+/* Fallback for Edge
+-------------------------------------------------- */
+@supports (-ms-ime-align: auto) {
+  .form-label-group > label {
+    display: none;
+  }
+  .form-label-group input::-ms-input-placeholder {
+    color: #777;
+  }
 }
 
-.navbar-brand {
-  font-size: 14px;
-  color: #000 !important;
-}
-
-.navbar-right > li > a {
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-/**
- * Signup / login
- */
-
-.form-signin input#email {
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-.form-signin input#password {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-.form-signin input[type="text"] {
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+/* Fallback for IE
+-------------------------------------------------- */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .form-label-group > label {
+    display: none;
+  }
+  .form-label-group input:-ms-input-placeholder {
+    color: #777;
+  }
 }

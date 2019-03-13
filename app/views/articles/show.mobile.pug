@@ -6,7 +6,7 @@ block main
 
 block content
   .row
-    .span9
+    .col-sm-9
       p=article.body
       .meta.muted
         - var name = article.user.name ? article.user.name : article.user.username
@@ -15,12 +15,12 @@ block content
         p.muted= formatDate(article.createdAt, "%b %d, %Y at %I:%M %p")
         - if (article.tags)
           .tags
-            - each tag in article.tags.split(',')
+            each tag in article.tags.split(',')
               a.tag(href="/tags/"+tag)
                 i.icon-tags
                 |  #{tag}
               | &nbsp;&nbsp;
-    .span3
+    .col-sm-3
       - if (!article.isNew && article.image && article.image.files && article.image.files.length)
         img(src=article.image.cdnUri + '/mini_' + article.image.files[0])
 
@@ -36,6 +36,6 @@ block content
   p
     br
     h3 Comments
-    - each comment in article.comments
+    each comment in article.comments
       include ../comments/comment
     include ../comments/form

@@ -5,7 +5,7 @@
  */
 
 const Notifier = require('notifier');
-const jade = require('jade');
+const pug = require('pug');
 const config = require('../../config');
 
 /**
@@ -19,7 +19,7 @@ const config = require('../../config');
 
 Notifier.prototype.processTemplate = function(tplPath, locals) {
   locals.filename = tplPath;
-  return jade.renderFile(tplPath, locals);
+  return pug.renderFile(tplPath, locals);
 };
 
 /**

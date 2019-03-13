@@ -1,0 +1,18 @@
+extends auth
+
+block auth
+  form.form-signin(action="/users/session", method="post", role="form")
+    input(type="hidden", name="_csrf", value="#{csrf_token}")
+
+    p.col-sm-offset-2.error= message
+
+    .form-label-group
+      input#email.form-control(type='email' name='email' placeholder='Email address' required='' autofocus='')
+      label(for='email') Email address
+    .form-label-group
+      input#password.form-control(type='password' name='password' placeholder='Password' required='')
+      label(for='password') Password
+    button.btn.btn-lg.btn-primary.btn-block(type='submit') Log in
+    .my-3.text-center
+      | or 
+      a.show-signup(href="/signup") Sign up
