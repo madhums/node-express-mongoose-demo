@@ -1,12 +1,12 @@
 extends ../layouts/default
 
 block main
-  h1= article.title
+  h1= article.title.slice(0, 400)
 
 block content
   .row
     .col-md-8
-      p=article.body
+      p=article.body.slice(0, 1000)
       .meta
         - if (article.user)
           - var name = article.user.name ? article.user.name : article.user.username

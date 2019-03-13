@@ -1,7 +1,7 @@
 article.article
   h3
-    a(href='/articles/'+article._id, title=article.title) #{article.title}
-  p= article.body
+    a(href='/articles/'+article._id, title=article.title) #{article.title.slice(0, 140)}
+  p= article.body.slice(0, 400)
 
   .meta
     span.text-muted= formatDate(article.createdAt)

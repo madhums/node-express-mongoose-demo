@@ -21,12 +21,12 @@ const setTags = tags => tags.split(',');
  */
 
 const ArticleSchema = new Schema({
-  title: { type: String, default: '', trim: true },
-  body: { type: String, default: '', trim: true },
+  title: { type: String, default: '', trim: true, maxlength: 400 },
+  body: { type: String, default: '', trim: true, maxlength: 1000 },
   user: { type: Schema.ObjectId, ref: 'User' },
   comments: [
     {
-      body: { type: String, default: '' },
+      body: { type: String, default: '', maxlength: 1000 },
       user: { type: Schema.ObjectId, ref: 'User' },
       createdAt: { type: Date, default: Date.now }
     }
