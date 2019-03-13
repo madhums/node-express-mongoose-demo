@@ -6,12 +6,6 @@
 
 module.exports = {
   db: process.env.MONGOHQ_URL,
-  facebook: {
-    clientID: process.env.FACEBOOK_CLIENTID,
-    clientSecret: process.env.FACEBOOK_SECRET,
-    callbackURL:
-      'https://nodejs-express-demo.herokuapp.com/auth/facebook/callback'
-  },
   twitter: {
     clientID: process.env.TWITTER_CLIENTID,
     clientSecret: process.env.TWITTER_SECRET,

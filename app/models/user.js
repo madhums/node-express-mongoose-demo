@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const crypto = require('crypto');
 
 const Schema = mongoose.Schema;
-const oAuthTypes = ['github', 'twitter', 'facebook', 'google', 'linkedin'];
+const oAuthTypes = ['github', 'twitter', 'google', 'linkedin'];
 
 /**
  * User Schema
@@ -22,7 +22,6 @@ const UserSchema = new Schema({
   hashed_password: { type: String, default: '' },
   salt: { type: String, default: '' },
   authToken: { type: String, default: '' },
-  facebook: {},
   twitter: {},
   github: {},
   google: {},
