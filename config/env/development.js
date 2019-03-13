@@ -14,7 +14,7 @@ module.exports = {
   twitter: {
     clientID: process.env.TWITTER_CLIENTID,
     clientSecret: process.env.TWITTER_SECRET,
-    callbackURL: 'http://localhost:3000/auth/twitter/callback'
+    callbackURL: 'http://localhost:3000/auth/twitter/callback/'
   },
   github: {
     clientID: process.env.GITHUB_CLIENTID,

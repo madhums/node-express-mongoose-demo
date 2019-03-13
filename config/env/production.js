@@ -16,7 +16,7 @@ module.exports = {
     clientID: process.env.TWITTER_CLIENTID,
     clientSecret: process.env.TWITTER_SECRET,
     callbackURL:
-      'http://nodejs-express-demo.herokuapp.com/auth/twitter/callback'
+      'http://nodejs-express-demo.herokuapp.com/auth/twitter/callback/'
   },
   github: {
     clientID: process.env.GITHUB_CLIENTID,
