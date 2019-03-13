@@ -15,7 +15,7 @@ block content
 
         - if (article.tags)
           p Tags &nbsp;
-            each tag in article.tags.split(',')
+            each tag in article.tags.split(',').slice(0, 10)
               i.text-muted.fa.fa-tag &nbsp;
               a.tag(href="/tags/"+tag)= tag
               | &nbsp;&nbsp;

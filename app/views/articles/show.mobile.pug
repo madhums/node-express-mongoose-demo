@@ -1,41 +1,41 @@
-extends ../layouts/mobile
-
+extends ../layouts/default
 
 block main
-  h1= article.title
+  h1= article.title.slice(0, 400)
 
 block content
   .row
-    .col-sm-9
-      p=article.body
-      .meta.text-muted
-        - var name = article.user.name ? article.user.name : article.user.username
-        p Author -&nbsp;
-          a(href="/users/"+article.user._id)= name
-        p.text-muted= formatDate(article.createdAt, "%b %d, %Y at %I:%M %p")
+    .col-md-8
+      p=article.body.slice(0, 1000)
+      .meta
+        - if (article.user)
+          - var name = article.user.name ? article.user.name : article.user.username
+          p Author :&nbsp;
+            a(href="/users/"+article.user._id)= name
+
         - if (article.tags)
-          .tags
-            each tag in article.tags.split(',')
-              a.tag(href="/tags/"+tag)
-                i.icon-tags
-                |  #{tag}
+          p Tags &nbsp;
+            each tag in article.tags.split(',').slice(0, 10)
+              i.text-muted.fa.fa-tag &nbsp;
+              a.tag(href="/tags/"+tag)= tag
               | &nbsp;&nbsp;
-    .col-sm-3
+
+        p.text-muted= formatDate(article.createdAt, "%b %d, %Y at %I:%M %p")
+
+    .col-md-4
       - if (!article.isNew && article.image && article.image.files && article.image.files.length)
         img(src=article.image.cdnUri + '/mini_' + article.image.files[0])
 
-  p
-    br
-    form.center.form-inline.confirm(action="/articles/"+article.id, method="post")
-      input(type='hidden', name='_csrf', value=csrf_token)
-      a.btn.btn-outline-primary(href='/articles/'+article._id+'/edit', title="edit") Edit
-      | &nbsp;&nbsp;
-      input(type="hidden", name="_method", value="DELETE")
-      button.btn.btn-link.text-danger(type="submit") Delete
+  form(action="/articles/"+article.id, method="post", onsubmit="return confirm('Are you sure?')")
+    input(type='hidden', name='_csrf', value=csrf_token)
+    a.btn.btn-outline-primary(href='/articles/'+article._id+'/edit', title="edit") Edit
+    | &nbsp;
+    input(type="hidden", name="_method", value="DELETE")
+    button.btn.btn-link.text-danger(type="submit") Delete
 
-  p
-    br
-    h3 Comments
-    each comment in article.comments
+  br
+  h3 Comments
+  each comment, index in article.comments
+    div(class=`py-3 ${index && 'border-top'}`)
       include ../comments/comment
-    include ../comments/form
+  include ../comments/form

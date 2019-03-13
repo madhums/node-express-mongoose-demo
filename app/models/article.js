@@ -14,7 +14,7 @@ const notify = require('../mailer');
 const Schema = mongoose.Schema;
 
 const getTags = tags => tags.join(',');
-const setTags = tags => tags.split(',');
+const setTags = tags => tags.split(',').slice(0, 10); // max tags
 
 /**
  * Article Schema
