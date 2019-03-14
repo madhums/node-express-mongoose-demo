@@ -79,8 +79,12 @@ If you make any changes to the file, nodemon should automatically pick up and re
 To run tests
 
 ```sh
-$ docker-compose exec node npm test
+$ docker-compose exec -e MONGODB_URL=mongodb://mongo:27017/noobjs_test node npm test
 ```
+
+Note that we are overriding the environment variable set in `.env` file because we don't want our data erased by the tests.
+
+Note: The difference between exec and run is that, exec executes the command within the running container and run will spin up a new container to run that command. So if you want to run only the tests without docker-compose up, you may do so by running `docker-compose run -e MONGODB_URL=mongodb://mongo:27017/noobjs_test node npm test`
 
 ## License
 
