@@ -5,7 +5,7 @@
  */
 
 module.exports = {
-  db: process.env.MONGOHQ_URL,
+  db: process.env.MONGODB_URL,
   twitter: {
     clientID: process.env.TWITTER_CLIENTID,
     clientSecret: process.env.TWITTER_SECRET,
