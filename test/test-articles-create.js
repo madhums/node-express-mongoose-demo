@@ -54,7 +54,7 @@ test('POST /articles - invalid form - should respond with error', t => {
     .field('title', '')
     .field('body', 'foo')
     .expect('Content-Type', /text/)
-    .expect(200)
+    .expect(422)
     .expect(/Article title cannot be blank/)
     .end(async err => {
       const count = await Article.countDocuments().exec();
