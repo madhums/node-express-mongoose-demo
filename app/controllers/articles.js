@@ -7,7 +7,6 @@
 const mongoose = require('mongoose');
 const { wrap: async } = require('co');
 const only = require('only');
-const { respond, respondOrRedirect } = require('../utils');
 const Article = mongoose.model('Article');
 const assign = Object.assign;
 
@@ -43,7 +42,7 @@ exports.index = async(function*(req, res) {
   const articles = yield Article.list(options);
   const count = yield Article.countDocuments();
 
-  respond(res, 'articles/index', {
+  res.render('articles/index', {
     title: 'Articles',
     articles: articles,
     page: page + 1,
@@ -64,7 +63,6 @@ exports.new = function(req, res) {
 
 /**
  * Create an article
- * Upload an image
  */
 
 exports.create = async(function*(req, res) {
@@ -72,21 +70,14 @@ exports.create = async(function*(req, res) {
   article.user = req.user;
   try {
     yield article.uploadAndSave(req.file);
-    respondOrRedirect({ req, res }, `/articles/${article._id}`, article, {
-      type: 'success',
-      text: 'Successfully created article!'
-    });
+    req.flash('success', 'Successfully created article!');
+    res.redirect(`/articles/${article._id}`);
   } catch (err) {
-    respond(
-      res,
-      'articles/new',
-      {
-        title: article.title || 'New Article',
-        errors: [err.toString()],
-        article
-      },
-      422
-    );
+    res.status(422).render('articles/new', {
+      title: article.title || 'New Article',
+      errors: [err.toString()],
+      article
+    });
   }
 });
 
@@ -110,18 +101,13 @@ exports.update = async(function*(req, res) {
   assign(article, only(req.body, 'title body tags'));
   try {
     yield article.uploadAndSave(req.file);
-    respondOrRedirect({ res }, `/articles/${article._id}`, article);
+    res.redirect(`/articles/${article._id}`);
   } catch (err) {
-    respond(
-      res,
-      'articles/edit',
-      {
-        title: 'Edit ' + article.title,
-        errors: [err.toString()],
-        article
-      },
-      422
-    );
+    res.status(422).render('articles/edit', {
+      title: 'Edit ' + article.title,
+      errors: [err.toString()],
+      article
+    });
   }
 });
 
@@ -130,7 +116,7 @@ exports.update = async(function*(req, res) {
  */
 
 exports.show = function(req, res) {
-  respond(res, 'articles/show', {
+  res.render('articles/show', {
     title: req.article.title,
     article: req.article
   });
@@ -142,13 +128,6 @@ exports.show = function(req, res) {
 
 exports.destroy = async(function*(req, res) {
   yield req.article.remove();
-  respondOrRedirect(
-    { req, res },
-    '/articles',
-    {},
-    {
-      type: 'info',
-      text: 'Deleted successfully'
-    }
-  );
+  req.flash('info', 'Deleted successfully');
+  res.redirect('/articles');
 });
