@@ -17,7 +17,8 @@ module.exports = new GithubStrategy(
   {
     clientID: config.github.clientID,
     clientSecret: config.github.clientSecret,
-    callbackURL: config.github.callbackURL
+    callbackURL: config.github.callbackURL,
+    scope: ['user:email']
   },
   function(accessToken, refreshToken, profile, done) {
     const options = {
