@@ -41,7 +41,7 @@
     "express-session": "~1.15.6",
     "helmet": "~3.16.0",
     "method-override": "~3.0.0",
-    "mongoose": "~5.4.20",
+    "mongoose": "~5.5.0",
     "morgan": "~1.9.1",
     "multer": "~1.4.1",
     "notifier": "~0.2.0",
