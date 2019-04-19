@@ -38,10 +38,10 @@
     "csurf": "~1.9.0",
     "dotenv": "~7.0.0",
     "express": "~4.16.4",
-    "express-session": "~1.15.6",
+    "express-session": "~1.16.1",
     "helmet": "~3.16.0",
     "method-override": "~3.0.0",
-    "mongoose": "~5.5.0",
+    "mongoose": "~5.5.2",
     "morgan": "~1.9.1",
     "multer": "~1.4.1",
     "notifier": "~0.2.0",
@@ -65,8 +65,8 @@
     "eslint-config-prettier": "~4.1.0",
     "eslint-plugin-prettier": "~3.0.1",
     "nodemon": "1.18.11",
-    "npm-check-updates": "~3.1.7",
-    "prettier": "~1.16.4",
+    "npm-check-updates": "~3.1.8",
+    "prettier": "~1.17.0",
     "supertest": "*",
     "tape": "~4.10.1"
   }
