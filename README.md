@@ -2,7 +2,6 @@
 [![Build Status](https://travis-ci.org/madhums/node-express-mongoose-demo.svg?branch=master)](https://travis-ci.org/madhums/node-express-mongoose-demo)
 [![Dependencies](https://img.shields.io/david/madhums/node-express-mongoose-demo.svg?style=flat)](https://david-dm.org/madhums/node-express-mongoose-demo)
 [![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/madhums/node-express-mongoose-demo)
-[![Greenkeeper badge](https://badges.greenkeeper.io/madhums/node-express-mongoose-demo.svg)](https://greenkeeper.io/)
 [![Join Gitter Chat](https://img.shields.io/badge/gitter-join%20chat%20%E2%86%92-brightgreen.svg?style=flat)](https://gitter.im/madhums/node-express-mongoose-demo?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # Nodejs Express Mongoose Demo
