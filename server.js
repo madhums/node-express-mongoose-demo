@@ -52,5 +52,9 @@ function connect() {
     .on('error', console.log)
     .on('disconnected', connect)
     .once('open', listen);
-  return mongoose.connect(config.db, { keepAlive: 1, useNewUrlParser: true });
+  return mongoose.connect(config.db, {
+    keepAlive: 1,
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  });
 }
