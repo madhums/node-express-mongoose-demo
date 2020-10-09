@@ -5,7 +5,7 @@
  */
 
 const mongoose = require('mongoose');
-const crypto = require('crypto');
+const bcrypt = require('bcrypt');
 
 const Schema = mongoose.Schema;
 const oAuthTypes = ['github', 'twitter', 'google', 'linkedin'];
@@ -20,7 +20,6 @@ const UserSchema = new Schema({
   username: { type: String, default: '' },
   provider: { type: String, default: '' },
   hashed_password: { type: String, default: '' },
-  salt: { type: String, default: '' },
   authToken: { type: String, default: '' },
   twitter: {},
   github: {},
@@ -37,7 +36,6 @@ const validatePresenceOf = value => value && value.length;
 UserSchema.virtual('password')
   .set(function(password) {
     this._password = password;
-    this.salt = this.makeSalt();
     this.hashed_password = this.encryptPassword(password);
   })
   .get(function() {
@@ -104,24 +102,13 @@ UserSchema.methods = {
   /**
    * Authenticate - check if the passwords are the same
    *
-   * @param {String} plainText
+   * @param {String} password
    * @return {Boolean}
    * @api public
    */
 
-  authenticate: function(plainText) {
-    return this.encryptPassword(plainText) === this.hashed_password;
-  },
-
-  /**
-   * Make salt
-   *
-   * @return {String}
-   * @api public
-   */
-
-  makeSalt: function() {
-    return Math.round(new Date().valueOf() * Math.random()) + '';
+  authenticate: function(password) {
+    return bcrypt.compareSync(password, this.hashed_password);
   },
 
   /**
@@ -135,10 +122,7 @@ UserSchema.methods = {
   encryptPassword: function(password) {
     if (!password) return '';
     try {
-      return crypto
-        .createHmac('sha1', this.salt)
-        .update(password)
-        .digest('hex');
+      return bcrypt.hashSync(password, 10);
     } catch (err) {
       return '';
     }
