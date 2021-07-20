@@ -10,6 +10,7 @@ const compression = require('compression');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const { OpticMiddleware } = require('@useoptic/express-middleware');
 const methodOverride = require('method-override');
 const csrf = require('csurf');
 const cors = require('cors');
@@ -106,6 +107,9 @@ module.exports = function(app, passport) {
       })
     })
   );
+
+  // auto document API endpoints
+  app.use(OpticMiddleware({ enabled: !!(env !== 'production') }));
 
   // use passport session
   app.use(passport.initialize());
