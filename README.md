@@ -85,6 +85,10 @@ Note that we are overriding the environment variable set in `.env` file because 
 
 Note: The difference between exec and run is that, exec executes the command within the running container and run will spin up a new container to run that command. So if you want to run only the tests without docker-compose up, you may do so by running `docker-compose run -e MONGODB_URL=mongodb://mongo:27017/noobjs_test node npm test`
 
+## API Documentation
+
+To simplify documenting your API, we have included [Optic](https://useoptic.com). To use it, you will need to [install the CLI tool](https://useoptic.com/document/#add-an-optic-specification-to-your-api-project), and then you can use `api exec "npm start"` to start capturing your endpoints as you create them. Once you want to review and add them to your API specification run: `api status -- review`.
+
 ## License
 
 MIT
