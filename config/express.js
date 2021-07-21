@@ -32,7 +32,19 @@ const env = process.env.NODE_ENV || 'development';
  */
 
 module.exports = function(app, passport) {
-  app.use(helmet());
+  app.use(
+    helmet({
+      contentSecurityPolicy: {
+        useDefaults: true,
+        directives: {
+          'script-src': ["'self'", 'code.jquery.com'],
+          'style-src': null,
+          'img-src': ["'self'", 'data:', 'img.shields.io'],
+          'frame-src': ["'self'", 'ghbtns.com']
+        }
+      }
+    })
+  );
   app.use(requireHttps);
 
   // Compression middleware (should be placed before express.static)
