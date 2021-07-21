@@ -18,8 +18,9 @@ services:
       - webnet
     depends_on:
       - mongo
+
   mongo:
-    image: mongo
+    image: mongo:5
     restart: always
     networks:
       - webnet

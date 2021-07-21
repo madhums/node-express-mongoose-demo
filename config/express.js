@@ -16,7 +16,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const upload = require('multer')();
 
-const mongoStore = require('connect-mongo')(session);
+const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
 const winston = require('winston');
 const helpers = require('view-helpers');
@@ -100,8 +100,8 @@ module.exports = function(app, passport) {
       resave: false,
       saveUninitialized: true,
       secret: pkg.name,
-      store: new mongoStore({
-        url: config.db,
+      store: MongoStore.create({
+        mongoUrl: config.db,
         collection: 'sessions'
       })
     })

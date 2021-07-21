@@ -17,7 +17,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">=10.11.0"
+    "node": ">=16.0.0"
   },
   "scripts": {
     "start": "cross-env NODE_ENV=development nodemon server.js",
@@ -27,23 +27,23 @@
     "prod": "pm2-runtime start ecosystem.config.js --env production"
   },
   "dependencies": {
-    "bcrypt": "^5.0.0",
+    "bcrypt": "^5.0.1",
     "body-parser": "~1.19.0",
     "co": "~4.6.0",
     "compression": "~1.7.4",
     "connect-flash": "~0.1.1",
-    "connect-mongo": "~3.2.0",
-    "cookie-parser": "~1.4.4",
+    "connect-mongo": "~4.4.1",
+    "cookie-parser": "~1.4.5",
     "cors": "~2.8.5",
-    "cross-env": "~6.0.3",
-    "csurf": "~1.10.0",
-    "dotenv": "~8.2.0",
+    "cross-env": "~7.0.3",
+    "csurf": "~1.11.0",
+    "dotenv": "~10.0.0",
     "express": "~4.17.1",
-    "express-session": "~1.17.0",
-    "helmet": "~3.21.2",
+    "express-session": "~1.17.2",
+    "helmet": "~4.6.0",
     "method-override": "~3.0.0",
-    "mongoose": "~5.8.4",
-    "morgan": "~1.9.1",
+    "mongoose": "~5.13.3",
+    "morgan": "~1.10.0",
     "multer": "~1.4.2",
     "notifier": "~0.2.0",
     "only": "0.0.2",
@@ -53,22 +53,22 @@
     "passport-linkedin": "~1.0.0",
     "passport-local": "~1.0.0",
     "passport-twitter": "~1.0.4",
-    "pm2": "~4.2.1",
-    "pug": "~2.0.4",
+    "pm2": "~5.1.0",
+    "pug": "~3.0.2",
     "ultimate-pagination": "~1.0.0",
     "view-helpers": "~0.2.0",
-    "winston": "~3.2.1"
+    "winston": "~3.3.3"
   },
   "devDependencies": {
-    "babel-eslint": "~10.0.3",
+    "babel-eslint": "~10.1.0",
     "babel-tape-runner": "~3.0.0",
-    "eslint": "~6.8.0",
-    "eslint-config-prettier": "~6.9.0",
-    "eslint-plugin-prettier": "~3.1.2",
-    "nodemon": "2.0.2",
-    "npm-check-updates": "~4.0.1",
-    "prettier": "~1.19.1",
+    "eslint": "~7.31.0",
+    "eslint-config-prettier": "~8.3.0",
+    "eslint-plugin-prettier": "~3.4.0",
+    "nodemon": "2.0.12",
+    "npm-check-updates": "~11.8.3",
+    "prettier": "~2.3.2",
     "supertest": "*",
-    "tape": "~4.12.1"
+    "tape": "~5.2.2"
   }
 }
