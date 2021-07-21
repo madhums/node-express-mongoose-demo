@@ -22,9 +22,9 @@ const _user = {
 
 test('Clean up', cleanup);
 
-test('Create user', async t => {
+test('Create user', async () => {
   const user = new User(_user);
-  return await user.save(t.end);
+  return await user.save();
 });
 
 test('POST /articles - when not logged in - should redirect to /login', t => {
