@@ -4,3 +4,5 @@ language: node_js
 node_js:
   # - "latest" # figure out how this should work! no example of this in travis ci docs
   - "16.0.0"
+  - "18.13.0"
+  - "19.4.0"
