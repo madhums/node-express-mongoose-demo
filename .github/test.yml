@@ -29,4 +29,4 @@ jobs:
     - run: npm test
       env:
         CI: true
-        
+        NODE_ENV: "test"
