@@ -29,3 +29,11 @@ jobs:
     - run: npm test
       env:
         CI: true
+        TWITTER_CLIENTID: "xxx"
+        TWITTER_SECRET: "xxx"
+        GITHUB_CLIENTID: "xxx"
+        GITHUB_SECRET: "xxx"
+        LINKEDIN_CLIENTID: "xxx"
+        LINKEDIN_SECRET: "xxx"
+        GOOGLE_CLIENTID: "xxx"
+        GOOGLE_SECRET: "xxx"
