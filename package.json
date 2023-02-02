@@ -6,7 +6,8 @@
     "mongoose",
     "mongodb",
     "passport",
-    "demo"
+    "demo",
+    "docker"
   ],
   "version": "4.0.0",
   "private": false,
