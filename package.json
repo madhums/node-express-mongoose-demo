@@ -65,8 +65,8 @@
     "eslint": "~7.31.0",
     "eslint-config-prettier": "~8.3.0",
     "eslint-plugin-prettier": "~3.4.0",
-    "nodemon": "2.0.12",
-    "npm-check-updates": "~11.8.3",
+    "nodemon": "2.0.20",
+    "npm-check-updates": "~16.6.3",
     "prettier": "~2.3.2",
     "supertest": "*",
     "tape": "~5.2.2"
