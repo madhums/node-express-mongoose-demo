@@ -39,7 +39,7 @@ module.exports = function(app, passport) {
         directives: {
           'script-src': ["'self'", 'code.jquery.com'],
           'style-src': ["'self'", "'unsafe-inline'", 'netdna.bootstrapcdn.com'],
-          'img-src': ["'self'", 'data:', 'img.shields.io'],
+          'img-src': ["'self'", 'data:', 'github.com'],
           'frame-src': ["'self'", 'ghbtns.com']
         }
       }
