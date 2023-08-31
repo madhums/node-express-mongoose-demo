@@ -31,7 +31,7 @@ const env = process.env.NODE_ENV || 'development';
  * Expose
  */
 
-module.exports = function(app, passport) {
+module.exports = function (app, passport) {
   app.use(
     helmet({
       contentSecurityPolicy: {
@@ -40,9 +40,9 @@ module.exports = function(app, passport) {
           'script-src': ["'self'", 'code.jquery.com'],
           'style-src': ["'self'", "'unsafe-inline'", 'netdna.bootstrapcdn.com'],
           'img-src': ["'self'", 'data:', 'github.com'],
-          'frame-src': ["'self'", 'ghbtns.com']
-        }
-      }
+          'frame-src': ["'self'", 'ghbtns.com'],
+        },
+      },
     })
   );
   app.use(requireHttps);
@@ -50,15 +50,15 @@ module.exports = function(app, passport) {
   // Compression middleware (should be placed before express.static)
   app.use(
     compression({
-      threshold: 512
+      threshold: 512,
     })
   );
 
   app.use(
     cors({
-      origin: ['http://localhost:3000', 'https://reboil-demo.herokuapp.com'],
+      origin: ['http://localhost:3000', 'https://reboil-demo.fly.dev'],
       optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-      credentials: true
+      credentials: true,
     })
   );
 
@@ -70,8 +70,8 @@ module.exports = function(app, passport) {
   if (env !== 'development') {
     log = {
       stream: {
-        write: message => winston.info(message)
-      }
+        write: (message) => winston.info(message),
+      },
     };
   }
 
@@ -84,7 +84,7 @@ module.exports = function(app, passport) {
   app.set('view engine', 'pug');
 
   // expose package.json to views
-  app.use(function(req, res, next) {
+  app.use(function (req, res, next) {
     res.locals.pkg = pkg;
     res.locals.env = env;
     next();
@@ -95,7 +95,7 @@ module.exports = function(app, passport) {
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(upload.single('image'));
   app.use(
-    methodOverride(function(req) {
+    methodOverride(function (req) {
       if (req.body && typeof req.body === 'object' && '_method' in req.body) {
         // look in urlencoded POST bodies and delete it
         var method = req.body._method;
@@ -114,8 +114,8 @@ module.exports = function(app, passport) {
       secret: pkg.name,
       store: MongoStore.create({
         mongoUrl: config.db,
-        collection: 'sessions'
-      })
+        collection: 'sessions',
+      }),
     })
   );
 
@@ -133,7 +133,7 @@ module.exports = function(app, passport) {
     app.use(csrf());
 
     // This could be moved to view-helpers :-)
-    app.use(function(req, res, next) {
+    app.use(function (req, res, next) {
       res.locals.csrf_token = req.csrfToken();
       res.locals.paginate = ultimatePagination.getPaginationModel;
       next();
