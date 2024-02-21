@@ -53,7 +53,7 @@
     "passport-linkedin": "~1.0.0",
     "passport-local": "~1.0.0",
     "passport-twitter": "^0.1.5",
-    "pm2": "~5.1.0",
+    "pm2": "~5.3.1",
     "pug": "~3.0.2",
     "ultimate-pagination": "~1.0.0",
     "view-helpers": "~0.2.0",
