@@ -47,7 +47,7 @@
     "multer": "~1.4.2",
     "notifier": "^0.2.0",
     "only": "0.0.2",
-    "passport": "~0.4.1",
+    "passport": "~0.6.0",
     "passport-github": "~1.1.0",
     "passport-google-oauth": "~2.0.0",
     "passport-linkedin": "~1.0.0",
