@@ -54,7 +54,7 @@
     "passport-local": "~1.0.0",
     "passport-twitter": "^0.1.5",
     "pm2": "~5.3.1",
-    "pug": "~3.0.2",
+    "pug": "~3.0.3",
     "ultimate-pagination": "~1.0.0",
     "view-helpers": "~0.2.0",
     "winston": "~3.3.3"
