@@ -38,7 +38,7 @@
     "cross-env": "~7.0.3",
     "csurf": "~1.11.0",
     "dotenv": "~10.0.0",
-    "express": "~4.19.2",
+    "express": "~4.21.2",
     "express-session": "~1.17.2",
     "helmet": "~4.6.0",
     "method-override": "~3.0.0",
