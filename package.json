@@ -18,7 +18,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": "18.x"
+    "node": "24.7.0"
   },
   "scripts": {
     "start": "cross-env NODE_ENV=development nodemon server.js",
